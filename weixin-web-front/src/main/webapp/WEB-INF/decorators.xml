@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/sitemesh/">
+  <!-- 定义装饰器要过滤的页面 -->
+  <decorator name="main" page="decorator.jsp">
+    <pattern>/*</pattern>
+  </decorator>
+
+  <!-- 不需要过滤的请求 -->
+  <excludes>
+    <pattern>/test*</pattern>
+    <pattern>/login*</pattern>
+    <pattern>/unauth*</pattern>
+    <pattern>/resources/*</pattern>
+  </excludes>
+
+</decorators>

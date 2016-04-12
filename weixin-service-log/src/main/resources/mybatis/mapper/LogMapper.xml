@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.core.dao.LogDaoMapper">
+  <sql id="tableName">log</sql>
+  <sql id="logColumns">
+    l.id,l.type,l.title,l.remote_addr,l.request_uri,l.method,l.params,
+    l.user_agent,l.exception,l.username,l.begin_date,l.end_date,l.status
+  </sql>
+  <!-- 保存日志 -->
+  <insert id="save" parameterType="Log">
+    INSERT INTO
+      <include refid="tableName"/>(id,type,title,remote_addr,request_uri,method,params,user_agent,exception,username,begin_date,end_date,status)
+    VALUES
+      (#{id},#{type},#{title},#{remoteAddr},#{requestUri},#{method},#{params},
+      #{userAgent},#{exception},#{username},#{beginDate},#{endDate},#{status})
+  </insert>
+
+</mapper>
+

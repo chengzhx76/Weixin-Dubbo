@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Shiro 的Web过滤器 -->
+  <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    <property name="securityManager" ref="securityManager"/>
+    <property name="loginUrl" value="/login"/>
+    <property name="successUrl" value="/index"/>
+    <property name="unauthorizedUrl" value="/unauth"/>
+    <property name="filters">
+      <map>
+        <entry key="authc" value-ref="formAuthenticationFilter"/>
+      </map>
+    </property>
+    <property name="filterChainDefinitions">
+      <value>
+        <!-- 必须通过身份认证方可访问，身份认 证的url必须和过虑器中指定的loginUrl一致 -->
+        /test = anon
+        /checkCaptcha = anon
+        /login = authc
+        /unauth = anon
+        /resources/** = anon
+        /static/** = anon
+        /drawCheckCode = anon
+        /logout = logout
+        /** = user
+      </value>
+    </property>
+  </bean>
+  <!-- 安全管理器 -->
+  <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <property name="realm" ref="userRealm" />
+    <property name="sessionManager" ref="sessionManager"/>
+    <property name="cacheManager" ref="shiroCache"/>
+  </bean>
+
+  <!-- 自定义 realm -->
+  <bean id="userRealm" class="com.cheng.weixin.web.front.security.SystemAuthorizingRealm">
+    <property name="credentialsMatcher" ref="hashMatcher"/>
+  </bean>
+
+  <!-- 加密规则-->
+  <bean id="hashMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+    <property name="hashAlgorithmName" value="SHA-1"/>
+    <property name="hashIterations" value="1024"/>
+    <property name="hashSalted" value="true"/>
+  </bean>
+
+  <!-- 会话管理配置 -->
+  <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+    <property name="sessionDAO" ref="sessionDAO"/>
+    <property name="globalSessionTimeout" value="1800000"/>
+    <property name="sessionIdCookie" ref="sessionIdCookie"/>
+    <property name="sessionIdCookieEnabled" value="true"/>
+  </bean>
+
+  <!-- 会话ID 生成器  -->
+  <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+  <!-- 会话DAO -->
+  <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+    <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
+    <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+    <property name="cacheManager" ref="shiroCache"/>
+  </bean>
+
+  <!-- 会话Cookie 模板  -->
+  <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <property name="name" value="wxsid"/>
+    <property name="httpOnly" value="true"/>
+    <property name="maxAge" value="180000"/>
+  </bean>
+
+  <!-- 定义授权缓存管理器 -->
+  <bean id="shiroCache" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <property name="cacheManager" ref="cacheManagerFactory"/>
+  </bean>
+
+  <bean id="formAuthenticationFilter" class="com.cheng.weixin.web.front.security.WxFormAuthenticationFilter">
+    <property name="usernameParam" value="username" />
+    <property name="passwordParam" value="password" />
+    <!-- <property name="rememberMeParam" value="rememberMe"/> -->
+    <property name="loginUrl" value="/login" />
+  </bean>
+
+  <!-- Shiro 生命周期处理器-->
+  <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>

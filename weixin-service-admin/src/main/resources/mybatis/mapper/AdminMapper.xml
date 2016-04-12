@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.admin.dao.AdminDaoMapper">
+  <sql id="tableName">admin</sql>
+  <sql id="adminColumns">
+    a.id,a.username,a.password,a.realname,a.mobile,a.photo,a.login_ip,a.login_date,
+    a.old_login_ip,a.old_login_date,a.remarks,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="adminIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="username != null and username != ''">username=#{username},</if>
+    <if test="password != null and password != ''">password=#{password},</if>
+    <if test="realname != null and realname != ''">realname=#{realname},</if>
+    <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
+    <if test="photo != null and photo != ''">photo=#{photo},</if>
+    <if test="loginIp != null and loginIp != ''">login_ip=#{loginIp},</if>
+    <if test="loginDate != null and loginDate != ''">login_date=#{loginDate},</if>
+    <if test="oldLoginIp != null and oldLoginIp != ''">old_login_ip=#{oldLoginIp},</if>
+    <if test="oldLoginDate != null and oldLoginDate != ''">old_login_date=#{oldLoginDate},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate}</if>
+    <!-- <if test="status != null and status != ''">status=#{status}</if> -->
+  </sql>
+  <sql id="adminSelector">
+    select
+      <include refid="adminColumns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="adminWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="username != null and username != ''">
+        username = #{username}
+      </if>
+      AND
+      status!='DELETE'
+    </where>
+  </sql>
+
+  <sql id="adminUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="adminIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 根据用户ID或用户名 -->
+  <select id="load" parameterType="String" resultType="Admin">
+    <include refid="adminSelector"/>
+    <include refid="adminWhere"/>
+  </select>
+  <!-- 获取全部用户信息 -->
+  <select id="loadAll" resultType="Admin">
+    <include refid="adminSelector"/>
+    <include refid="adminWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="Admin">
+    UPDATE <include refid="tableName"/>
+    <include refid="adminUpdate"/>
+    <include refid="adminWhere"/>
+  </update>
+
+  <!--&lt;!&ndash; 根据用户名获取用户 &ndash;&gt;-->
+  <!--<select id="loadUserByUsername" parameterType="String" resultType="Admin">-->
+  <!--select-->
+  <!--<include refid="adminColumns"/>-->
+  <!--from-->
+  <!--<include refid="tableName"/> AS a-->
+  <!--WHERE-->
+  <!--a.username=#{username}-->
+  <!--</select>-->
+</mapper>
+

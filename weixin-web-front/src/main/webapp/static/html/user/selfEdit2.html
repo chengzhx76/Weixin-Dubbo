@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息编辑</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+</head>
+<style>
+    .alert {
+        height: 30px;
+        width: 50%;
+        margin: 1px 0 10px 0px;
+        line-height: 1px;
+    }
+    h3 {
+        text-indent: 40px;
+    }
+    .thumbnail {
+        height: 200px;
+        width: 200px;
+    }
+    .form-horizontal {
+        width: 85%;
+    }
+</style>
+<body>
+    <ol class="breadcrumb">
+        <li><a href="index">首页</a></li>
+        <li class="active">个人信息</li>
+    </ol>
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <h3>头像</h3>
+                <div class="thumbnail center-block">
+                    <img src="../../img/logo.jpg" alt="头像" height="200px" width="200px">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <ul id="myInfoTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#myInfo" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">个人信息</a>
+                    </li>
+                    <li role="presentation" class="">
+                        <a href="#modifyPwd" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">修改密码</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="myInfo" aria-labelledby="myInfo-tab">
+                        <div class="alert alert-warning" role="alert"><strong>不需要更改项，不必填写</strong></div>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label">用户名：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="username" value="admin" placeholder="用户名" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="realname" class="col-sm-2 control-label">真实名字：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="realname" placeholder="真实名字">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="col-sm-2 control-label">手机号：</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="phone" placeholder="手机号">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-info">保存</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="modifyPwd" aria-labelledby="modifyPwd-tab">
+                        <div class="alert alert-warning" role="alert"><strong>请先输入旧密码</strong></div>
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="oldPassword" class="col-sm-2 control-label">旧密码：</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="oldPassword" placeholder="旧密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label">密码：</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="password" placeholder="密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password2" class="col-sm-2 control-label">确认密码：</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="password2" placeholder="确认密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-info">更改</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/jquery-1.11.1.min.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+</body>
+</html>
