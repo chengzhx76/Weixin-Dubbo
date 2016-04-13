@@ -3,7 +3,6 @@ package com.cheng.weixin.web.front.interceptor;
 import com.cheng.weixin.commom.utils.DateUtils;
 import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.rpc.log.service.RpcLogService;
-import com.cheng.weixin.rpc.log.model.RequestModel;
 import com.cheng.weixin.web.front.utils.UserUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
