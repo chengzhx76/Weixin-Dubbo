@@ -24,6 +24,10 @@ public class Admin extends DataEntity<Admin> {
     private String oldLoginIp;  // 上次登录IP
     private Date oldLoginDate;  // 上次登录时间
 
+    /** 冗余字段 **/
+    private String newLoginIp;  // 新登录的IP
+
+
     public Admin() {}
 
     public Admin(String id, String username) {
@@ -101,5 +105,13 @@ public class Admin extends DataEntity<Admin> {
 
     public void setOldLoginDate(Date oldLoginDate) {
         this.oldLoginDate = oldLoginDate;
+    }
+
+    public String getNewLoginIp() {
+        return newLoginIp;
+    }
+
+    public void setNewLoginIp(String newLoginIp) {
+        this.newLoginIp = newLoginIp;
     }
 }

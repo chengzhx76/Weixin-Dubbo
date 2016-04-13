@@ -44,6 +44,7 @@ public class AdminService implements RpcAdminService {
         if(admin.getLoginDate() != null) update.setOldLoginDate(admin.getLoginDate());
         // 更新这次登录信息
 //        update.setLoginIp(StringUtils.getRemoteAddr(ServletUtils.getRequest()));// 这里得从Web层传过来
+        update.setLoginIp(admin.getNewLoginIp());
         update.setLoginDate(new Date());
         update.preUpdate();
         adminDao.update(update);

@@ -1,5 +1,6 @@
 package com.cheng.weixin.web.front.security;
 
+import com.cheng.weixin.commom.utils.ServletUtils;
 import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
@@ -94,6 +95,7 @@ public class WxFormAuthenticationFilter extends FormAuthenticationFilter {
         SystemAuthorizingRealm.Principal principal = (SystemAuthorizingRealm.Principal) subject.getPrincipal();
         // 更新登录信息
         Admin admin = adminService.getAdminById(principal.getId());
+        admin.setNewLoginIp(StringUtils.getRemoteAddr(ServletUtils.getRequest()));
         adminService.updateAdminLoginInfo(admin);
         return false;
     }
