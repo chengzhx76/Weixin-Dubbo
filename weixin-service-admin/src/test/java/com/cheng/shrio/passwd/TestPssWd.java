@@ -1,7 +1,7 @@
 package com.cheng.shrio.passwd;
 
 
-import com.cheng.weixin.admin.utils.SystemUtils;
+import com.cheng.weixin.service.admin.utils.SystemUtils;
 
 /**
  * Desc:

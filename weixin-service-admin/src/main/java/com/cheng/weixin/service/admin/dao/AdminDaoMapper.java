@@ -1,4 +1,4 @@
-package com.cheng.weixin.admin.dao;
+package com.cheng.weixin.service.admin.dao;
 
 import com.cheng.weixin.common.core.dao.BaseDaoMapper;
 import com.cheng.weixin.rpc.admin.entity.Admin;

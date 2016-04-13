@@ -6,7 +6,7 @@
     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd ">
 
 	<!-- 实现类 -->
-	<bean id="quartzJob" class="com.cheng.weixin.core.scheduling.RefreshAccessTokenTask"/>
+	<bean id="quartzJob" class="com.cheng.weixin.service.wxtools.scheduling.RefreshAccessTokenTask"/>
 	
 	<!-- bean触发方法配置 -->
 	<bean id="refreshAccessToken" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"

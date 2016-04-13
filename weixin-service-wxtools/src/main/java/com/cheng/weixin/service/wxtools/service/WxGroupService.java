@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.cheng.weixin.rpc.wxtools.response.model.WxGroup;
 import com.cheng.weixin.rpc.wxtools.service.RpcWxGroupService;
+import com.cheng.weixin.service.wxtools.httputils.HttpClientService;
 import com.cheng.weixin.service.wxtools.httputils.HttpUtils;
 import com.cheng.weixin.rpc.wxtools.constant.WeixinUrl;
 import com.cheng.weixin.rpc.wxtools.content.WeixinContent;
@@ -15,11 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service("wxGroupService")
 public class WxGroupService  implements RpcWxGroupService {
 
 	@Autowired
 	protected WeixinUrl weixinUrl;
+	@Autowired
+	private HttpClientService httpClient;
 
 	@Override
 	public WxGroup addGroup(String name) {
@@ -30,7 +33,7 @@ public class WxGroupService  implements RpcWxGroupService {
 		group.put("name", name);
 		parameter.put("group", group);
 		String data = JSON.toJSONString(parameter);
-		String content = HttpUtils.httpPost(url, data);
+		String content = httpClient.doPost(url, data);
 
 		JSONObject repData = JSONObject.parseObject(content);
 		WxGroup repGroup = repData.getObject("group", WxGroup.class);
@@ -40,7 +43,7 @@ public class WxGroupService  implements RpcWxGroupService {
 	@Override
 	public List<WxGroup> getAllGroup() {
 		String url = weixinUrl.QUERY_ALL_GROUP.replace("ACCESS_TOKEN", WeixinContent.getInstance().getAccessToken());
-		String content = HttpUtils.httpGet(url);
+		String content = httpClient.doGet(url);
 		Map<String, List<WxGroup>> repData = JSONObject.parseObject(content, new TypeReference<Map<String, List<WxGroup>>>(){});
 		return repData.get("groups");
 	}
@@ -51,7 +54,7 @@ public class WxGroupService  implements RpcWxGroupService {
 		Map<String, String> parameter = new HashMap<>();
 		parameter.put("openid", openid);
 		String data = JSON.toJSONString(parameter);
-		String content = HttpUtils.httpPost(url, data);
+		String content = httpClient.doPost(url, data);
 
 		JSONObject repData = JSONObject.parseObject(content);
 		return repData.getInteger("groupid");
@@ -63,7 +66,7 @@ public class WxGroupService  implements RpcWxGroupService {
 		Map<String, WxGroup> parameter = new HashMap<>();
 		parameter.put("group", new WxGroup(id, name));
 		String data = JSON.toJSONString(parameter);
-		HttpUtils.httpPost(url, data);
+		httpClient.doPost(url, data);
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class WxGroupService  implements RpcWxGroupService {
 		parameter.put("openid", openid);
 		parameter.put("to_groupid", groupid);
 		String data = JSON.toJSONString(parameter);
-		HttpUtils.httpPost(url, data);
+		httpClient.doPost(url, data);
 	}
 
 	@Override
@@ -84,7 +87,7 @@ public class WxGroupService  implements RpcWxGroupService {
 		parameter.put("to_groupid", groupid);
 		String data = JSON.toJSONString(parameter);
 
-		HttpUtils.httpPost(url, data);
+		httpClient.doPost(url, data);
 	}
 
 	@Override
@@ -94,7 +97,7 @@ public class WxGroupService  implements RpcWxGroupService {
 		parameter.put("group", new WxGroup(id));
 		String data = JSON.toJSONString(parameter);
 
-		HttpUtils.httpPost(url, data);
+		httpClient.doPost(url, data);
 	}
 
 	//@Override

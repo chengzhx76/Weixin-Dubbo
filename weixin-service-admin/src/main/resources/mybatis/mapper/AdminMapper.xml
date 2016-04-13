@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cheng.weixin.admin.dao.AdminDaoMapper">
+<mapper namespace="com.cheng.weixin.service.admin.dao.AdminDaoMapper">
   <sql id="tableName">admin</sql>
   <sql id="adminColumns">
     a.id,a.username,a.password,a.realname,a.mobile,a.photo,a.login_ip,a.login_date,

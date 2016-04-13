@@ -1,6 +1,6 @@
-package com.cheng.weixin.admin.service;
+package com.cheng.weixin.service.admin.service;
 
-import com.cheng.weixin.admin.dao.AdminDaoMapper;
+import com.cheng.weixin.service.admin.dao.AdminDaoMapper;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import org.springframework.beans.factory.annotation.Autowired;

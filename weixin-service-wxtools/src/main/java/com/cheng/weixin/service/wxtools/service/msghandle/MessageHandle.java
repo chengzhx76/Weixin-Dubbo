@@ -29,7 +29,7 @@ import java.util.Map;
  * 消息处理类
  * @author Cheng
  */
-@Component
+@Component("messageHandle")
 public class MessageHandle implements RpcMessageHandleService {
 	private static final Logger log = LoggerFactory.getLogger(MessageHandle.class);
 	

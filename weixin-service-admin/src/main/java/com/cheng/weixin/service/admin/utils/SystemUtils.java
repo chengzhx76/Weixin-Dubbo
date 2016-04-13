@@ -1,6 +1,6 @@
-package com.cheng.weixin.admin.utils;
+package com.cheng.weixin.service.admin.utils;
 
-import com.cheng.weixin.admin.security.Digests;
+import com.cheng.weixin.service.admin.security.Digests;
 import com.cheng.weixin.commom.utils.Encodes;
 
 /**
