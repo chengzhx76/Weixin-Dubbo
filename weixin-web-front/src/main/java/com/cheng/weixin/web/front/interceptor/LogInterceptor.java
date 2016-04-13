@@ -1,9 +1,14 @@
 package com.cheng.weixin.web.front.interceptor;
 
 import com.cheng.weixin.commom.utils.DateUtils;
+import com.cheng.weixin.commom.utils.StringUtils;
+import com.cheng.weixin.rpc.log.service.RpcLogService;
+import com.cheng.weixin.rpc.log.model.RequestModel;
+import com.cheng.weixin.web.front.utils.UserUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,8 +25,8 @@ public class LogInterceptor implements HandlerInterceptor {
 
     private Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
 
-//    @Autowired
-//    private RpcLogService logService;
+    @Autowired
+    private RpcLogService logService;
 
     private ThreadLocal<Long> runTimeThreadLocal = new NamedThreadLocal<>("run time ThreadLocal");
 
@@ -45,7 +50,8 @@ public class LogInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 保存日志
-//        logService.saveLog(request, handler, ex, null, UserUtils.getPrincipal().getUsername());
+        logService.saveLog(StringUtils.getRemoteAddr(request),request.getHeader("user-agent"),request.getRequestURI(),
+                request.getParameterMap(),request.getMethod(),/*handler,*/ ex, null, UserUtils.getPrincipal().getUsername());
 
         if (logger.isDebugEnabled()) {
             long beginTime = runTimeThreadLocal.get(); // 开始时间

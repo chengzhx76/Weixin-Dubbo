@@ -14,8 +14,9 @@
 hs_err_pid*
 
 #忽略的文件及文件夹
-/target/*
-/temp/*
+target
+log
+temp
 .idea
 *.iml
 #rebel.xml

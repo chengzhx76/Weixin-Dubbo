@@ -1,7 +1,6 @@
 package com.cheng.weixin.log.service;
 
 import com.cheng.weixin.commom.utils.Exceptions;
-import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.log.dao.LogDaoMapper;
 import com.cheng.weixin.rpc.log.entity.Log;
 import com.cheng.weixin.rpc.log.enums.LogType;
@@ -9,7 +8,7 @@ import com.cheng.weixin.rpc.log.service.RpcLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 
 /**
@@ -23,36 +22,30 @@ public class LogService implements RpcLogService {
 //    private static LogDaoMapper logDao = SpringContextHolder.getBean(LogDaoMapper.class);
     @Autowired
     private LogDaoMapper logDao;
-    /**
-     * 保存日志
-     * @param request
-     * @param handler
-     * @param ex
-     * @param title
-     * @param useranem
-     */
+
     @Override
-    public void saveLog(HttpServletRequest request, Object handler, Exception ex, String title, String useranem) {
+    public void saveLog(String remoteAddr, String userAgent, String requestUri, Map<String, String[]> params,
+                        String method, /*Object handler,*/ Exception ex, String title, String username) {
         Log log = new Log();
         log.setTitle(title);
         log.setType(ex == null ? LogType.ACCESS : LogType.EXCEPTION);
-        log.setRemoteAddr(StringUtils.getRemoteAddr(request));
-        log.setUserAgent(request.getHeader("user-agent"));
-        log.setRequestUri(request.getRequestURI());
-        log.setParams(request.getParameterMap());
-        log.setMethod(request.getMethod());
-        log.setUsername(useranem);
+        log.setRemoteAddr(remoteAddr);
+        log.setUserAgent(userAgent);
+        log.setRequestUri(requestUri);
+        log.setParams(params);
+        log.setMethod(method);
+        log.setUsername(username);
         // 异步保存日志
-        new Thread(new SaveLogThread(log, handler, ex)).start();
+        new Thread(new SaveLogThread(log, /*handler,*/ ex)).start();
     }
 
     public class SaveLogThread implements Runnable {
         private Log log;
-        private Object handler;
+//        private Object handler;
         private Exception ex;
-        public SaveLogThread(Log log, Object handler, Exception ex) {
+        public SaveLogThread(Log log, /*Object handler,*/ Exception ex) {
             this.log = log;
-            this.handler = handler;
+//            this.handler = handler;
             this.ex = ex;
         }
         @Override
