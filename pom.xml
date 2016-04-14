@@ -39,6 +39,8 @@
       <aspectj.version>1.8.6</aspectj.version>
       <ehcache.version>2.9.0</ehcache.version>
 
+      <jedis.version>2.7.3</jedis.version>
+
       <dubbo.version>2.5.3</dubbo.version>
       <zkclient.version>0.4</zkclient.version>
 
@@ -279,6 +281,13 @@
           <artifactId>aspectjweaver</artifactId>
           <version>${aspectj.version}</version>
         </dependency>
+        <!-- Jedis  Start -->
+        <dependency>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+          <version>${jedis.version}</version>
+        </dependency>
+        <!-- Jedis End -->
         <!-- Dubbo Start -->
         <dependency>
           <groupId>com.alibaba</groupId>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<!-- 构建连接池配置信息 -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${redis.maxTotal}"/>
+	</bean>
+
+	<!-- 定义分片式集群连接池 -->
+	<bean id="jedisPool" class="redis.clients.jedis.ShardedJedisPool" destroy-method="close">
+		<constructor-arg index="0" ref="poolConfig"/>
+		<constructor-arg index="1">
+			<list><!-- 定义集群信息 -->
+				<bean class="redis.clients.jedis.JedisShardInfo">
+					<constructor-arg index="0" value="${redis.node1.host}"/>
+					<constructor-arg index="1" value="${redis.node1.port}"/>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>
