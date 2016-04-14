@@ -25,6 +25,7 @@
       <module>weixin-service-wxtools</module>
       <module>weixin-web-front</module>
       <module>weixin-web-manage</module>
+      <module>weixin-common-redis</module>
     </modules>
 
     <properties>
@@ -429,7 +430,8 @@
             <artifactId>maven-jar-plugin</artifactId>
             <version>${jar.version}</version>
             <configuration>
-              <classesDirectory>target/classes/</classesDirectory>
+              <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+              <outputDirectory>${project.build.directory}</outputDirectory>
               <archive>
                 <!--生成的jar中，不要包含pom.xml和pom.properties这两个文件 -->
                 <addMavenDescriptor>false</addMavenDescriptor>
