@@ -23,7 +23,7 @@
 	<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>
 
 	<!-- 扫描controller（controller层注入） -->
-	<context:component-scan base-package="com.cheng.weixin.web.front.controllers" use-default-filters="false">
+	<context:component-scan base-package="com.cheng.weixin.web.manage.controllers" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
@@ -45,7 +45,7 @@
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/"/>
 			<mvc:exclude-mapping path="/login"/>
-			<bean class="com.cheng.weixin.web.front.interceptor.LogInterceptor" />
+			<bean class="com.cheng.weixin.web.manage.interceptor.LogInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

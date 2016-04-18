@@ -38,7 +38,7 @@
   </bean>
 
   <!-- 自定义 realm -->
-  <bean id="userRealm" class="com.cheng.weixin.web.front.security.SystemAuthorizingRealm">
+  <bean id="userRealm" class="com.cheng.weixin.web.manage.security.SystemAuthorizingRealm">
     <property name="credentialsMatcher" ref="hashMatcher"/>
   </bean>
 
@@ -79,7 +79,7 @@
     <property name="cacheManager" ref="cacheManagerFactory"/>
   </bean>
 
-  <bean id="formAuthenticationFilter" class="com.cheng.weixin.web.front.security.WxFormAuthenticationFilter">
+  <bean id="formAuthenticationFilter" class="com.cheng.weixin.web.manage.security.WxFormAuthenticationFilter">
     <property name="usernameParam" value="username" />
     <property name="passwordParam" value="password" />
     <!-- <property name="rememberMeParam" value="rememberMe"/> -->

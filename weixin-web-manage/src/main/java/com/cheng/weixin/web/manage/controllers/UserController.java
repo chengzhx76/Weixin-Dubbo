@@ -1,7 +1,7 @@
-package com.cheng.weixin.web.front.controllers;
+package com.cheng.weixin.web.manage.controllers;
 
 import com.cheng.weixin.rpc.admin.entity.Admin;
-import com.cheng.weixin.web.front.utils.UserUtils;
+import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

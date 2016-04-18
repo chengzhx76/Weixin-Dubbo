@@ -1,11 +1,11 @@
-package com.cheng.weixin.web.front.security;
+package com.cheng.weixin.web.manage.security;
 
 import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.commom.utils.Encodes;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
-import com.cheng.weixin.web.front.utils.Captcha;
-import com.cheng.weixin.web.front.utils.UserUtils;
+import com.cheng.weixin.web.manage.utils.Captcha;
+import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;

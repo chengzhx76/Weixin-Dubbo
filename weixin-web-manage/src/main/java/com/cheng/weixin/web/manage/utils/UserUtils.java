@@ -1,6 +1,6 @@
-package com.cheng.weixin.web.front.utils;
+package com.cheng.weixin.web.manage.utils;
 
-import com.cheng.weixin.web.front.security.SystemAuthorizingRealm;
+import com.cheng.weixin.web.manage.security.SystemAuthorizingRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;

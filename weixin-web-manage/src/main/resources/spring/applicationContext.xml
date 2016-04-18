@@ -11,7 +11,7 @@
 	<context:annotation-config />
 
 	<!-- 扫描注入  -->
-	<context:component-scan base-package="com.cheng.weixin.web.front" />
+	<context:component-scan base-package="com.cheng.weixin.web.manage" />
 	<context:component-scan base-package="com.cheng.weixin.commom.utils" />
 
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:globalconf.properties,classpath:system.properties"/>

@@ -2,13 +2,13 @@
 <application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
 
 	<classpath>
-		<dir name="D:/Works/idea/Weixin0.1/weixin-web/target/classes">
+		<dir name="D:/Works/idea/Weixin0.1/weixin-msg/target/classes">
 		</dir>
 	</classpath>
 
 	<web>
 		<link target="/">
-			<dir name="D:/Works/idea/Weixin0.1/weixin-web/src/main/webapp">
+			<dir name="D:/Works/idea/Weixin0.1/weixin-msg/src/main/webapp">
 			</dir>
 		</link>
 	</web>

@@ -1,4 +1,4 @@
-package com.cheng.weixin.web.front.controllers;
+package com.cheng.weixin.web.manage.controllers;
 
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import org.slf4j.Logger;

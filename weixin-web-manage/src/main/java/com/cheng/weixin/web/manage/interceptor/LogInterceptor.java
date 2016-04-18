@@ -1,9 +1,9 @@
-package com.cheng.weixin.web.front.interceptor;
+package com.cheng.weixin.web.manage.interceptor;
 
 import com.cheng.weixin.commom.utils.DateUtils;
 import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.rpc.log.service.RpcLogService;
-import com.cheng.weixin.web.front.utils.UserUtils;
+import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

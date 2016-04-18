@@ -1,4 +1,4 @@
-package com.cheng.weixin.web.front.security;
+package com.cheng.weixin.web.manage.security;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.shiro.authc.UsernamePasswordToken;

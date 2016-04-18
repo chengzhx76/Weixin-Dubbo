@@ -1,4 +1,4 @@
-package com.cheng.weixin.web.front.utils;
+package com.cheng.weixin.web.manage.utils;
 
 
 import com.cheng.weixin.commom.utils.CacheUtils;
