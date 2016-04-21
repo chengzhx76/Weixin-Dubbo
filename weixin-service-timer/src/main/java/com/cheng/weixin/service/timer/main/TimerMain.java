@@ -1,6 +1,5 @@
 package com.cheng.weixin.service.timer.main;
 
-import com.cheng.weixin.service.timer.token.RefreshAccessTokenTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -18,24 +17,24 @@ public class TimerMain {
         try {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:/spring/spring-context.xml");
 
-            RefreshAccessTokenTask task = context.getBean(RefreshAccessTokenTask.class);
-            task.test();
+//            RefreshAccessTokenTask task = context.getBean(RefreshAccessTokenTask.class);
+//            task.refreshToken();
 
-//            context.start();
+            context.start();
         } catch (BeansException e) {
             e.printStackTrace();
             log.error("content start error==>" + e);
         }
 
-//        synchronized (TimerMain.class) {
-//            while (true) {
-//                try {
-//                    TimerMain.class.wait();
-//                } catch (InterruptedException e) {
-//                    log.error("synchronized error==>" + e);
-//                }
-//            }
-//        }
+        synchronized (TimerMain.class) {
+            while (true) {
+                try {
+                    TimerMain.class.wait();
+                } catch (InterruptedException e) {
+                    log.error("synchronized error==>" + e);
+                }
+            }
+        }
 
     }
 

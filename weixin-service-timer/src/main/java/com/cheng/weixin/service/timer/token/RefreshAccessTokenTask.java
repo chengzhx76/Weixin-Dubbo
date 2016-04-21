@@ -30,37 +30,36 @@ public class RefreshAccessTokenTask {
 	private RpcRedisService redisService;
 
 
-	public void test() {
-		System.out.println("=======test======");
-	}
-
 
 	public void refreshToken() {
-		log.info("=============================");
-
 		String url = weixinUrl.ACCESS_TOKEN_URL;
 		url = url.replace("APPID", weixinFinalValue.APPID).replace("APPSECRET", weixinFinalValue.APPSECRET);
 		String content = httpClient.doGet(url);
-		log.info("=============================>"+content);
         ErrorEntity err = JSON.parseObject(content, ErrorEntity.class);
-        if(err.getErrcode()!=null && !err.getErrcode().equals("0") && err.getErrmsg()!=null && !err.getErrmsg().equals("ok")) {
-//            throw new WeixinException(Integer.parseInt(err.getErrcode()), err.getErrmsg());
+        if(err.getErrcode()!=null && !err.getErrcode().equals("0")
+				&& err.getErrmsg()!=null && !err.getErrmsg().equals("ok")) {
 			log.error("发生错误，错误码：{}，错误消息：{}，正在重试！", err.getErrcode(), err.getErrmsg());
 			refreshToken();
         }else {
-			System.err.println("Success===>"+content);
 			redisService.set("WEIXIN_ACCESS_TOKEN", content);
 		}
 
+	}
 
-//		try {
+
+//	public void refreshToken() {
+//		Date date = new Date();
+//		System.out.println("-->"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+//		redisService.set(new SimpleDateFormat("HHmmss").format(date), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+//	}
+
+
+	//		try {
 //			AccessToken accessToken = JSON.parseObject(content, AccessToken.class);
 //			WeixinContent.setAccessToken(accessToken.getAccess_token());
 //		} catch (WeixinException err) {
-////			err.printStackTrace();
+//			err.printStackTrace();
 //			log.error("发生错误，错误码：{}，错误消息：{}，正在重试！", err.getCode(), err.getErrorMsg());
 //			refreshToken();
 //		}
-	}
-	
 }
