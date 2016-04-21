@@ -7,16 +7,12 @@
           http://code.alibabatech.com/schema/dubbo
           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-  <dubbo:application name="weixin-service-wxtools"/>
+  <dubbo:application name="weixin-web-timer"/>
 
   <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
 
-  <dubbo:protocol id="mydubbo" name="dubbo" port="20887"/>
+  <dubbo:consumer registry="zk1"/>
 
-  <dubbo:provider registry="zk1" protocol="mydubbo"/>
-
-  <dubbo:service interface="com.cheng.weixin.rpc.wxtools.service.RpcMessageHandleService" ref="messageHandle"/>
-  <dubbo:service interface="com.cheng.weixin.rpc.wxtools.service.RpcWxMenuService" ref="wxMenuService"/>
-  <dubbo:service interface="com.cheng.weixin.rpc.wxtools.service.RpcWxGroupService" ref="wxGroupService"/>
-
+  <dubbo:reference id="httpClientService" interface="com.cheng.weixin.rpc.httpclient.service.RpcHttpClientService"/>
+  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"/>
 </beans>

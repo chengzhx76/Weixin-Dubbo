@@ -24,6 +24,16 @@
       <groupId>redis.clients</groupId>
       <artifactId>jedis</artifactId>
     </dependency>
+    <!-- Dubbo Start -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>dubbo</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.101tec</groupId>
+      <artifactId>zkclient</artifactId>
+    </dependency>
+    <!-- Dubbo End -->
     <!-- Spring begin -->
     <dependency>
       <groupId>org.springframework</groupId>

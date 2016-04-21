@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.wxtools.constant;
+package com.cheng.weixin.common.constant;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -3,12 +3,11 @@ package com.cheng.weixin.service.wxtools.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.cheng.weixin.common.exception.constant.WeixinUrl;
+import com.cheng.weixin.rpc.httpclient.service.RpcHttpClientService;
+import com.cheng.weixin.rpc.wxtools.content.WeixinContent;
 import com.cheng.weixin.rpc.wxtools.response.model.WxGroup;
 import com.cheng.weixin.rpc.wxtools.service.RpcWxGroupService;
-import com.cheng.weixin.service.wxtools.httputils.HttpClientService;
-import com.cheng.weixin.service.wxtools.httputils.HttpUtils;
-import com.cheng.weixin.rpc.wxtools.constant.WeixinUrl;
-import com.cheng.weixin.rpc.wxtools.content.WeixinContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class WxGroupService  implements RpcWxGroupService {
 	@Autowired
 	protected WeixinUrl weixinUrl;
 	@Autowired
-	private HttpClientService httpClient;
+	private RpcHttpClientService httpClient;
 
 	@Override
 	public WxGroup addGroup(String name) {

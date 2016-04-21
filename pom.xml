@@ -30,6 +30,7 @@
       <module>weixin-service-httpclient</module>
       <module>weixin-rpc-httpclient</module>
       <module>weixin-service-timer</module>
+      <module>weixin-common-constant</module>
     </modules>
 
     <properties>
@@ -100,6 +101,11 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-common-entity</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-common-constant</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>

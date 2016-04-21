@@ -26,7 +26,15 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>weixin-common-constant</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>weixin-rpc-wxtools</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>weixin-rpc-httpclient</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.wxtools.exception;
+package com.cheng.weixin.common.exception;
 
 public class WeixinException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

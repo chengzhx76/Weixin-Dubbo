@@ -7,7 +7,7 @@ import com.cheng.weixin.rpc.wxtools.request.model.ImageMessage;
 import com.cheng.weixin.rpc.wxtools.request.model.TextMessage;
 import com.cheng.weixin.rpc.wxtools.request.model.WxImage;
 import com.cheng.weixin.rpc.wxtools.service.RpcMessageHandleService;
-import com.cheng.weixin.rpc.wxtools.exception.MassageException;
+import com.cheng.weixin.common.exception.MassageException;
 import com.cheng.weixin.service.wxtools.utils.XMLUtils;
 import org.apache.commons.io.IOUtils;
 import org.dom4j.Document;

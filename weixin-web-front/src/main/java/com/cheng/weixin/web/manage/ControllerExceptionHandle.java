@@ -1,6 +1,6 @@
 package com.cheng.weixin.web.manage;
 
-import com.cheng.weixin.rpc.wxtools.exception.MassageException;
+import com.cheng.weixin.common.exception.MassageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;

@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.wxtools.exception;
+package com.cheng.weixin.common.exception;
 
 /**
  * 错误消息 包装类

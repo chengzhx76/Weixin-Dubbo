@@ -6,14 +6,14 @@
     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd ">
 
 	<!-- 实现类 -->
-	<bean id="quartzJob" class="com.cheng.weixin.service.wxtools.scheduling.RefreshAccessTokenTask"/>
+	<bean id="refreshAccessTokenTask" class="com.cheng.weixin.service.timer.token.RefreshAccessTokenTask"/>
 	
 	<!-- bean触发方法配置 -->
 	<bean id="refreshAccessToken" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"
-		p:targetObject-ref="quartzJob"
+		p:targetObject-ref="refreshAccessTokenTask"
 		p:targetMethod="refreshToken"/>
 
-	<!-- 时间规则 -->
+	<!-- 时间规则 微信：有效期为7200秒，7000000 一天调用2000次-->
 	<bean id="refreshAccessTokenTime" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean" 
 		p:jobDetail-ref="refreshAccessToken"
 		p:repeatInterval="7000000"/>
@@ -26,8 +26,7 @@
 	 -->
 		
 	 <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
-	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="default"
-				autowire="default" p:autoStartup="true">
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="default" autowire="default" p:autoStartup="true">
 		<property name="triggers">
 			<list>
 				<ref local="refreshAccessTokenTime" />
