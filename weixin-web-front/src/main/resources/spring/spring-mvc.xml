@@ -15,7 +15,7 @@
 	<mvc:annotation-driven />
   
 	<!-- 扫描controller（controller层注入） -->
-	<context:component-scan base-package="com.cheng.weixin.web.manage" use-default-filters="false">
+	<context:component-scan base-package="com.cheng.weixin.web.front" use-default-filters="false">
       <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
       <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>

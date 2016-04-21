@@ -7,14 +7,12 @@
           http://code.alibabatech.com/schema/dubbo
           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-  <dubbo:application name="weixin-service-redis"/>
+  <dubbo:application name="weixin-web-front"/>
 
   <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
 
-  <dubbo:protocol id="mydubbo" name="dubbo" host="192.168.1.103" port="20882"/>
+  <dubbo:consumer registry="zk1"/>
 
-  <dubbo:provider registry="zk1" protocol="mydubbo"/>
-
-  <dubbo:service interface="com.cheng.weixin.rpc.redis.service.RpcRedisService" ref="redisService"/>
-
+  <!--<dubbo:reference id="adminService" interface="com.cheng.weixin.rpc.admin.service.RpcAdminService"/>-->
+  <!--<dubbo:reference id="logService" interface="com.cheng.weixin.rpc.log.service.RpcLogService"/>-->
 </beans>

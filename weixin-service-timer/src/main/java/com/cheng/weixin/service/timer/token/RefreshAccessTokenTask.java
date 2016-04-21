@@ -41,14 +41,14 @@ public class RefreshAccessTokenTask {
 		String url = weixinUrl.ACCESS_TOKEN_URL;
 		url = url.replace("APPID", weixinFinalValue.APPID).replace("APPSECRET", weixinFinalValue.APPSECRET);
 		String content = httpClient.doGet(url);
-
+		log.info("=============================>"+content);
         ErrorEntity err = JSON.parseObject(content, ErrorEntity.class);
         if(err.getErrcode()!=null && !err.getErrcode().equals("0") && err.getErrmsg()!=null && !err.getErrmsg().equals("ok")) {
 //            throw new WeixinException(Integer.parseInt(err.getErrcode()), err.getErrmsg());
 			log.error("发生错误，错误码：{}，错误消息：{}，正在重试！", err.getErrcode(), err.getErrmsg());
 			refreshToken();
         }else {
-			System.err.println("Success===>");
+			System.err.println("Success===>"+content);
 			redisService.set("WEIXIN_ACCESS_TOKEN", content);
 		}
 

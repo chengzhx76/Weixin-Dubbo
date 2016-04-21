@@ -16,7 +16,7 @@
 	<!-- 时间规则 微信：有效期为7200秒，7000000 一天调用2000次-->
 	<bean id="refreshAccessTokenTime" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean" 
 		p:jobDetail-ref="refreshAccessToken"
-		p:repeatInterval="7000000"/>
+		p:repeatInterval="2000"/>
 		
 	<!-- 或者可以这样
 	<bean id="refreshAccessTokenTime" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">

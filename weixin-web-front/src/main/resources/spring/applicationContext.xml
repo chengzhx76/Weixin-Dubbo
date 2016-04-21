@@ -7,17 +7,14 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<!-- 引入配置文件 -->
-	<context:property-placeholder location="classpath:system.properties,redis.properties" />
-
 	<!-- 打开Spring的Annotation支持 -->
 	<context:annotation-config />
 
-
 	<!-- 扫描注入  -->
-	<context:component-scan base-package="com.cheng.weixin.service.redis" />
+	<context:component-scan base-package="com.cheng.weixin.web.front" />
+	<context:component-scan base-package="com.cheng.weixin.common.constant" />
 
-	<!--<import resource="classpath:spring/spring-dubbo-provider.xml"/>-->
-	<import resource="classpath:spring/spring-redis.xml"/>
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:globalconf.properties,classpath:system.properties"/>
 
+	<import resource="classpath:spring/spring-dubbo-consumer.xml"/>
 </beans>
