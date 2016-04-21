@@ -16,6 +16,7 @@
       <module>weixin-rpc-admin</module>
       <module>weixin-rpc-log</module>
       <module>weixin-rpc-wxtools</module>
+      <module>weixin-rpc-redis</module>
       <module>weixin-service-admin</module>
       <module>weixin-service-cart</module>
       <module>weixin-service-item</module>
@@ -23,9 +24,12 @@
       <module>weixin-service-order</module>
       <module>weixin-service-user</module>
       <module>weixin-service-wxtools</module>
+      <module>weixin-service-redis</module>
       <module>weixin-web-front</module>
       <module>weixin-web-manage</module>
-      <module>weixin-common-redis</module>
+      <module>weixin-service-httpclient</module>
+      <module>weixin-rpc-httpclient</module>
+      <module>weixin-service-timer</module>
     </modules>
 
     <properties>
@@ -111,6 +115,16 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-rpc-wxtools</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-redis</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-httpclient</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>

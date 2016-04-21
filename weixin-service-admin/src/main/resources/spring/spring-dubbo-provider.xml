@@ -11,9 +11,8 @@
 
   <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
 
-  <dubbo:protocol id="mydubbo" name="dubbo" port="20886"/>
-  <!--还有一种方法：就是dubbo provider xml文件的注册配置增加host配置。如下-->
-  <!--<dubbo:protocol name="dubbo" host="192.168.60.80" port="20880" />-->
+  <dubbo:protocol id="mydubbo" name="dubbo" host="192.168.1.110" port="20886"/>
+
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
 
   <dubbo:service interface="com.cheng.weixin.rpc.admin.service.RpcAdminService" ref="adminService"/>
