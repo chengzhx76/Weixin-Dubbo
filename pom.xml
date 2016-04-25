@@ -31,6 +31,8 @@
       <module>weixin-rpc-httpclient</module>
       <module>weixin-service-timer</module>
       <module>weixin-common-constant</module>
+      <module>weixin-service-rabbitmq</module>
+      <module>weixin-rpc-rabbitmq</module>
     </modules>
 
     <properties>
@@ -43,6 +45,7 @@
       <shiro-spring.version>1.2.3</shiro-spring.version>
       <aspectj.version>1.8.6</aspectj.version>
       <ehcache.version>2.9.0</ehcache.version>
+      <amqp-client.version>3.4.1</amqp-client.version>
 
       <jedis.version>2.7.3</jedis.version>
 
@@ -70,6 +73,7 @@
       <joda-time.version>2.7</joda-time.version>
       <quartz.version>2.2.1</quartz.version>
       <spring.version>3.2.12.RELEASE</spring.version>
+      <spring-rabbit.version>1.4.0.RELEASE</spring-rabbit.version>
       <mybatis.version>3.2.7</mybatis.version>
       <mybatis.spring.version>1.2.1</mybatis.spring.version>
 
@@ -131,6 +135,11 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-rpc-httpclient</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-rabbitmq</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -393,6 +402,16 @@
           <version>${spring.version}</version>
         </dependency>
         <!-- Spring end -->
+        <dependency>
+          <groupId>org.springframework.amqp</groupId>
+          <artifactId>spring-rabbit</artifactId>
+          <version>${spring-rabbit.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.rabbitmq</groupId>
+          <artifactId>amqp-client</artifactId>
+          <version>${amqp-client.version}</version>
+        </dependency>
         <!-- MyBatis begin -->
         <dependency>
           <groupId>org.mybatis</groupId>
