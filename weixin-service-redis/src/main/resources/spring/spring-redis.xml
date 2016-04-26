@@ -7,19 +7,40 @@
 	<!-- 构建连接池配置信息 -->
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxTotal" value="${redis.maxTotal}"/>
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxWaitMillis" value="${redis.maxWait}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+	</bean>
+	<!-- redis服务器中心 -->
+	<bean id="connectionFactory"  class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
+		<property name="poolConfig" ref="poolConfig" />
+		<property name="port" value="${redis.port}" />
+		<property name="hostName" value="${redis.host}" />
+		<property name="password" value="${redis.password}" />
+		<property name="timeout" value="${redis.timeout}" />
 	</bean>
 
-	<!-- 定义分片式集群连接池 -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="keySerializer" >
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer" >
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+	</bean >
+
+	<!-- 定义分片式集群连接池
 	<bean id="jedisPool" class="redis.clients.jedis.ShardedJedisPool" destroy-method="close">
 		<constructor-arg index="0" ref="poolConfig"/>
 		<constructor-arg index="1">
-			<list><!-- 定义集群信息 -->
+			<list>
 				<bean class="redis.clients.jedis.JedisShardInfo">
 					<constructor-arg index="0" value="${redis.node1.host}"/>
 					<constructor-arg index="1" value="${redis.node1.port}"/>
 				</bean>
 			</list>
 		</constructor-arg>
-	</bean>
+	</bean> -->
 
 </beans>

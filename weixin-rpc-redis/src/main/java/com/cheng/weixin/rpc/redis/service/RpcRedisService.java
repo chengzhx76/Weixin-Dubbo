@@ -8,40 +8,57 @@ package com.cheng.weixin.rpc.redis.service;
 public interface RpcRedisService {
 
     /**
-     * 设置值
+     * 批量删除对应的value
+     *
+     * @param keys
+     */
+    void remove(final String... keys);
+
+    /**
+     * 批量删除key
+     *
+     * @param pattern
+     */
+    void removePattern(final String pattern);
+
+    /**
+     * 删除对应的value
+     *
+     * @param key
+     */
+    void remove(final String key);
+
+    /**
+     * 判断缓存中是否有对应的value
+     *
+     * @param key
+     * @return
+     */
+    boolean exists(final String key);
+
+    /**
+     * 读取缓存
+     *
+     * @param key
+     * @return
+     */
+    Object get(final String key);
+
+    /**
+     * 写入缓存
+     *
      * @param key
      * @param value
      * @return
      */
-    String set(final String key, final String value);
+    boolean set(final String key, Object value);
 
     /**
-     * 设置值和过期时间
+     * 写入缓存 并设置过期时间
      * @param key
      * @param value
-     * @param seconds
+     * @param expireTime
      * @return
      */
-    String set(final String key, final String value, final Integer seconds);
-
-    /**
-     * 设置单独的生存时间
-     * @param key
-     * @param seconds
-     * @return
-     */
-    Long expire(final String key, final Integer seconds);
-    /**
-     * 获取值
-     * @param key
-     * @return
-     */
-    String get(final String key);
-
-    /**
-     * 删除值
-     * @param key
-     * @return
-     */
-    Long del(final String key);
+    boolean set(final String key, Object value, Long expireTime);
 }

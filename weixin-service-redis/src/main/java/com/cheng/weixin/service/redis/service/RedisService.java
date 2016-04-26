@@ -2,9 +2,13 @@ package com.cheng.weixin.service.redis.service;
 
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.ShardedJedis;
-import redis.clients.jedis.ShardedJedisPool;
+
+import java.io.Serializable;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Desc: Redis 服务封装
@@ -15,96 +19,94 @@ import redis.clients.jedis.ShardedJedisPool;
 public class RedisService implements RpcRedisService {
 
     @Autowired
-    private ShardedJedisPool jedisPool;
+    private RedisTemplate<Serializable, Object> redisTemplate;
 
-    private <T> T execute(Function<T, ShardedJedis> function) {
-        ShardedJedis shardedJedis = null;
+    /**
+     * 批量删除对应的value
+     * @param keys
+     */
+    public void remove(final String... keys) {
+        for (String key : keys) {
+            remove(key);
+        }
+    }
+
+    /**
+     * 批量删除key
+     * @param pattern
+     */
+    public void removePattern(final String pattern) {
+        Set<Serializable> keys = redisTemplate.keys(pattern);
+        if (keys.size() > 0) {
+            redisTemplate.delete(keys);
+        }
+    }
+
+    /**
+     * 删除对应的value
+     * @param key
+     */
+    public void remove(final String key) {
+        if (exists(key)) {
+            redisTemplate.delete(key);
+        }
+    }
+
+    /**
+     * 判断缓存中是否有对应的value
+     * @param key
+     * @return
+     */
+    public boolean exists(final String key) {
+        return redisTemplate.hasKey(key);
+    }
+
+    /**
+     * 读取缓存
+     * @param key
+     * @return
+     */
+    public Object get(final String key) {
+        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+        return operations.get(key);
+    }
+
+    /**
+     * 写入缓存
+     * @param key
+     * @param value
+     * @return
+     */
+    public boolean set(final String key, Object value) {
+        boolean result = false;
         try {
-            // 从连接池中获取Jedis分片对象
-            shardedJedis = jedisPool.getResource();
-            return function.callback(shardedJedis);
+            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            operations.set(key, value);
+            result = true;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            // 关闭，检测连接是否有效，有效则放回连接池中，无效则重置状态
-            if (null != shardedJedis) shardedJedis.close();
         }
-        return null;
+        return result;
     }
 
     /**
-     * 设置值
+     * 写入缓存
      * @param key
      * @param value
+     * @param expireTime
      * @return
      */
-    public String set(final String key, final String value) {
-        return this.execute(new Function<String, ShardedJedis>() {
-            @Override
-            public String callback(ShardedJedis shardedJedis) {
-                return shardedJedis.set(key, value);
-            }
-        });
-    }
-
-    /**
-     * 设置值和过期时间
-     * @param key
-     * @param value
-     * @param seconds
-     * @return
-     */
-    public String set(final String key, final String value, final Integer seconds) {
-        return this.execute(new Function<String, ShardedJedis>() {
-            @Override
-            public String callback(ShardedJedis shardedJedis) {
-                String result = shardedJedis.set(key, value);
-                shardedJedis.expire(key, seconds);
-                return result;
-            }
-        });
-    }
-
-    /**
-     * 设置单独的生存时间
-     * @param key
-     * @param seconds
-     * @return
-     */
-    public Long expire(final String key, final Integer seconds) {
-        return this.execute(new Function<Long, ShardedJedis>() {
-            @Override
-            public Long callback(ShardedJedis shardedJedis) {
-                return shardedJedis.expire(key, seconds);
-            }
-        });
-    }
-    /**
-     * 获取值
-     * @param key
-     * @return
-     */
-    public String get(final String key) {
-        return execute(new Function<String, ShardedJedis>() {
-            @Override
-            public String callback(ShardedJedis shardedJedis) {
-                return shardedJedis.get(key);
-            }
-        });
-    }
-
-    /**
-     * 删除值
-     * @param key
-     * @return
-     */
-    public Long del(final String key) {
-        return execute(new Function<Long, ShardedJedis>() {
-            @Override
-            public Long callback(ShardedJedis shardedJedis) {
-                return shardedJedis.del(key);
-            }
-        });
+    public boolean set(final String key, Object value, Long expireTime) {
+        boolean result = false;
+        try {
+            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            operations.set(key, value);
+            redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 }
