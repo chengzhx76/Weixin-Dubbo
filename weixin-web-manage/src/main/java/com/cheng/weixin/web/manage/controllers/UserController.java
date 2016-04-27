@@ -1,11 +1,11 @@
 package com.cheng.weixin.web.manage.controllers;
 
+import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Desc: 用户
@@ -19,10 +19,14 @@ public class UserController extends BaseController  {
      * @param model
      * @return
      */
-    @RequestMapping(value = "myinfo",method = RequestMethod.GET)
-    public String selfInfo(Model model) {
-        Admin admin = adminService.getAdminById(UserUtils.getPrincipal().getId());
-        model.addAttribute("admin", admin);
+    @RequestMapping(value = "myinfo"/*,method = RequestMethod.GET*/)
+    public String selfInfo(Admin admin, Model model) {
+        Admin currentAdmin = UserUtils.getUser();
+        if (StringUtils.isNotBlank(currentAdmin.getUsername())) {
+            currentAdmin.setMobile(admin.getMobile());
+            currentAdmin.setRemarks(admin.getRemarks());
+        }
+        model.addAttribute("admin", currentAdmin);
         return "user/myInfo";
     }
 }

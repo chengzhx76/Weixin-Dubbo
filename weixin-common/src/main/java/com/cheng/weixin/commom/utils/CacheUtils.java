@@ -47,7 +47,7 @@ public class CacheUtils {
      * @param key
      * @return
      */
-    private static Object get(String cacheName, String key) {
+    public static Object get(String cacheName, String key) {
         Element element = getCache(cacheName).get(key);
         return element==null?null : element.getObjectValue();
     }
@@ -58,7 +58,7 @@ public class CacheUtils {
      * @param key
      * @param value
      */
-    private static void put(String cacheName, String key, Object value) {
+    public static void put(String cacheName, String key, Object value) {
         Element element = new Element(key, value);
         getCache(cacheName).put(element);
     }
@@ -68,7 +68,7 @@ public class CacheUtils {
      * @param cacheName
      * @param key
      */
-    private static void remove(String cacheName, String key) {
+    public static void remove(String cacheName, String key) {
         getCache(cacheName).remove(key);
     }
     /**

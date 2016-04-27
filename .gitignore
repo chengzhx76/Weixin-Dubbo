@@ -1,6 +1,6 @@
 #忽略的文件及文件夹
 target
-log
+logs
 temp
 .idea
 *.iml

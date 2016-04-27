@@ -20,8 +20,8 @@
   <rabbit:queue name="WEIXIN-QUEUE-LOG" auto-declare="true"/>
 
   <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="consumer" method="listen" queue-names="WEIXIN-QUEUE-LOG" />
+    <rabbit:listener ref="consumer" method="saveLogs" queue-names="WEIXIN-QUEUE-LOG" />
   </rabbit:listener-container>
 
-  <bean id="consumer" class="com.cheng.test.Foo"></bean>
+  <bean id="consumer" class="com.cheng.weixin.service.log.MqService.LogService"/>
 </beans>
