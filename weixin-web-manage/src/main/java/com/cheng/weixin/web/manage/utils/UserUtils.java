@@ -89,7 +89,7 @@ public class UserUtils {
     public static SystemAuthorizingRealm.Principal getPrincipal() {
         Subject subject = SecurityUtils.getSubject();
         SystemAuthorizingRealm.Principal principal = (SystemAuthorizingRealm.Principal) subject.getPrincipal();
-        if (principal!=null) {
+        if (principal != null) {
             return principal;
         }
         return null;

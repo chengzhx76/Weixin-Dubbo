@@ -32,4 +32,10 @@ public interface RpcAdminService {
      */
     void updateAdminLoginInfo(Admin admin);
 
+    /**
+     * 更新管理员信息
+     * @param admin
+     */
+    void updateAdminInfo(Admin admin);
+
 }

@@ -19,14 +19,19 @@ public class UserController extends BaseController  {
      * @param model
      * @return
      */
-    @RequestMapping(value = "myinfo"/*,method = RequestMethod.GET*/)
-    public String selfInfo(Admin admin, Model model) {
+    @RequestMapping(value = "info"/*,method = RequestMethod.GET*/)
+    public String info(Admin admin, Model model) {
         Admin currentAdmin = UserUtils.getUser();
-        if (StringUtils.isNotBlank(currentAdmin.getUsername())) {
+        if (StringUtils.isNotBlank(admin.getUsername())) {
+            currentAdmin.setUsername(null);
             currentAdmin.setMobile(admin.getMobile());
             currentAdmin.setRemarks(admin.getRemarks());
+            adminService.updateAdminInfo(currentAdmin);
+            model.addAttribute("msg", "更新成功");
+            // 清除缓存
+            UserUtils.clearCache(currentAdmin);
         }
         model.addAttribute("admin", currentAdmin);
-        return "user/myInfo";
+        return "user/info";
     }
 }

@@ -43,16 +43,15 @@ public class AdminService implements RpcAdminService {
         if(admin.getLoginIp() != null) update.setOldLoginIp(admin.getLoginIp());
         if(admin.getLoginDate() != null) update.setOldLoginDate(admin.getLoginDate());
         // 更新这次登录信息
-//        update.setLoginIp(StringUtils.getRemoteAddr(ServletUtils.getRequest()));// 这里得从Web层传过来
         update.setLoginIp(admin.getNewLoginIp());
         update.setLoginDate(new Date());
         update.preUpdate();
         adminDao.update(update);
     }
 
-    //@Override
-    //public BaseDaoMapper<User> getBaseDao() {
-    //    return userDao;
-    //}
-
+    @Override
+    public void updateAdminInfo(Admin admin) {
+        admin.preUpdate();
+        adminDao.update(admin);
+    }
 }
