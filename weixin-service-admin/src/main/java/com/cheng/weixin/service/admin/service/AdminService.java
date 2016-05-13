@@ -54,4 +54,13 @@ public class AdminService implements RpcAdminService {
         admin.preUpdate();
         adminDao.update(admin);
     }
+
+    @Override
+    public void updatePasswdById(String id, String newPasswd) {
+        Admin updatePwd = new Admin();
+        updatePwd.setId(id);
+        updatePwd.setPassword(newPasswd);
+        updatePwd.preUpdate();
+        adminDao.update(updatePwd);
+    }
 }

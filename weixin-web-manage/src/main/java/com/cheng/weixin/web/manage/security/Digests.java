@@ -1,4 +1,4 @@
-package com.cheng.weixin.service.admin.security;
+package com.cheng.weixin.web.manage.security;
 
 
 import com.cheng.weixin.commom.utils.Exceptions;

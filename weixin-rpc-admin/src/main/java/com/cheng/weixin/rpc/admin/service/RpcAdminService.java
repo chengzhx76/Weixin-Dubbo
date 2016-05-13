@@ -38,4 +38,10 @@ public interface RpcAdminService {
      */
     void updateAdminInfo(Admin admin);
 
+    /**
+     * 根据管理员ID更新密码
+     * @param id
+     */
+    void updatePasswdById(String id, String newPasswd);
+
 }

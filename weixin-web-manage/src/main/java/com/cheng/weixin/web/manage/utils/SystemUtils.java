@@ -1,7 +1,7 @@
-package com.cheng.weixin.service.admin.utils;
+package com.cheng.weixin.web.manage.utils;
 
-import com.cheng.weixin.service.admin.security.Digests;
 import com.cheng.weixin.commom.utils.Encodes;
+import com.cheng.weixin.web.manage.security.Digests;
 
 /**
  * Desc: 系统工具类 密码的加密、验证
