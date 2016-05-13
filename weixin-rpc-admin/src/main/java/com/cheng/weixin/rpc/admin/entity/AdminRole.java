@@ -9,23 +9,23 @@ import com.cheng.common.entity.DataEntity;
  */
 public class AdminRole extends DataEntity<AdminRole> {
     /** 用户ID **/
-    private int userId;
+    private String userId;
     /** 角色ID **/
-    private int roleId;
+    private String roleId;
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public int getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 }

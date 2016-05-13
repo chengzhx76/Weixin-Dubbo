@@ -9,23 +9,23 @@ import com.cheng.common.entity.DataEntity;
  */
 public class RolePermission extends DataEntity<RolePermission> {
     /** 角色ID **/
-    private int roleId;
+    private String roleId;
     /** 权限ID **/
-    private int permissionId;
+    private String permissionId;
 
-    public int getRoleId() {
+    public String getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(String roleId) {
         this.roleId = roleId;
     }
 
-    public int getPermissionId() {
+    public String getPermissionId() {
         return permissionId;
     }
 
-    public void setPermissionId(int permissionId) {
+    public void setPermissionId(String permissionId) {
         this.permissionId = permissionId;
     }
 }
