@@ -11,10 +11,8 @@ public class Permission extends DataEntity<Permission> {
     private String parentId;     // 父资源ID
     private String resourceUrl;  // 链接
     private int priority;        // 优先权排序
-    /** 资源名 **/
-    private String name;
-    /** 权限代码 **/
-    private String precode;
+    private String name;         // 资源名
+    private String precode;      // 权限代码
 
     public String getParentId() {
         return parentId;
