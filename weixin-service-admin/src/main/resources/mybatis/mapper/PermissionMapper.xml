@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.service.admin.dao.PermissionDaoMapper">
+  <sql id="tableName">permission</sql>
+  <sql id="columns">
+    p.id,p.name,p.precode,p.remarks,p.create_date,p.update_date,p.status
+  </sql>
+  <sql id="ifCondition">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="username != null and username != ''">name=#{name},</if>
+    <if test="password != null and password != ''">precode=#{precode},</if>
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate}</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="selector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS p
+  </sql>
+
+  <sql id="whereCondition">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="username != null and username != ''">
+        username = #{username}
+      </if>
+      AND
+        status = #{status}
+    </where>
+  </sql>
+
+  <sql id="updateCondition">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="ifCondition"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+  <select id="load" parameterType="String" resultType="Permission">
+    <include refid="selector"/>
+    <include refid="whereCondition"/>
+  </select>
+
+  <select id="loadAll" resultType="Permission">
+    <include refid="selector"/>
+    <include refid="whereCondition"/>
+  </select>
+
+  <update id="update" parameterType="Permission">
+    UPDATE <include refid="tableName"/>
+    <include refid="updateCondition"/>
+    <include refid="whereCondition"/>
+  </update>
+
+  <!--&lt;!&ndash; 根据用户名获取用户 &ndash;&gt;-->
+  <!--<select id="loadUserByUsername" parameterType="String" resultType="Admin">-->
+  <!--select-->
+  <!--<include refid="adminColumns"/>-->
+  <!--from-->
+  <!--<include refid="tableName"/> AS a-->
+  <!--WHERE-->
+  <!--a.username=#{username}-->
+  <!--</select>-->
+</mapper>
+
