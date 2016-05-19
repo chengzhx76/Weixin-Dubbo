@@ -8,6 +8,7 @@ import com.cheng.weixin.web.manage.utils.Captcha;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -59,8 +60,9 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     }
     // 授权
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        Admin admin = adminService.getAdminByUsername((String) principals.getPrimaryPrincipal());
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         System.out.println("=======AuthorizationInfo=======");
 
         return null;

@@ -3,11 +3,14 @@ package com.cheng.weixin.web.manage.utils;
 import com.cheng.weixin.commom.utils.CacheUtils;
 import com.cheng.weixin.commom.utils.SpringContextHolder;
 import com.cheng.weixin.rpc.admin.entity.Admin;
+import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import com.cheng.weixin.web.manage.security.SystemAuthorizingRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+
+import java.util.List;
 
 /**
  * Desc: 用户工具
@@ -81,6 +84,13 @@ public class UserUtils {
         }
         return new Admin();
     }
+
+    public static List<Permission> getPermissions() {
+        Admin admin = getUser();
+
+        return null;
+    }
+
 
     /**
      * 获取当前登陆者对象

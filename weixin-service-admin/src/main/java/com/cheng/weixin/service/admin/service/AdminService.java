@@ -21,7 +21,9 @@ public class AdminService implements RpcAdminService {
     public AdminDaoMapper adminDao;
     @Override
     public Admin getAdminByUsername(String username) {
-        return adminDao.load(new Admin(null, username));
+        Admin admin = adminDao.load(new Admin(null, username));
+
+        return admin;
     }
 
     @Override
