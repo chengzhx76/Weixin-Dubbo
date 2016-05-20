@@ -38,8 +38,14 @@
       <if test="username != null and username != ''">
         username = #{username}
       </if>
-      AND
-      status!='DELETE'
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
     </where>
   </sql>
 

@@ -114,4 +114,13 @@ public class Admin extends DataEntity<Admin> {
     public void setNewLoginIp(String newLoginIp) {
         this.newLoginIp = newLoginIp;
     }
+
+    /** 判断是否是超级管理员 **/
+    public boolean isSuperAdmin() {
+        return isSuperAdmin(this.getId());
+    }
+
+    public static boolean isSuperAdmin(String id) {
+        return id != null && "1".equals(id);
+    }
 }

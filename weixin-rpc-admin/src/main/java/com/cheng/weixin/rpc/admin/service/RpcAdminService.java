@@ -2,6 +2,7 @@ package com.cheng.weixin.rpc.admin.service;
 
 
 import com.cheng.weixin.rpc.admin.entity.Admin;
+import com.cheng.weixin.rpc.admin.entity.Permission;
 
 import java.util.List;
 
@@ -43,5 +44,18 @@ public interface RpcAdminService {
      * @param id
      */
     void updatePasswdById(String id, String newPasswd);
+
+    /**
+     * 根据管理员ID获取当前管理员的所有权限
+     * @param aid
+     * @return
+     */
+    List<Permission> getPermissionByAdminId(String aid);
+
+    /**
+     * 获取全部的权限
+     * @return
+     */
+    List<Permission> getAllPermissions();
 
 }

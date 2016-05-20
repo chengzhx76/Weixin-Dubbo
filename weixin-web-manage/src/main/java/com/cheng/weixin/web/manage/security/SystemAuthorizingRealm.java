@@ -2,7 +2,9 @@ package com.cheng.weixin.web.manage.security;
 
 import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.commom.utils.Encodes;
+import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
+import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import com.cheng.weixin.web.manage.utils.Captcha;
 import com.cheng.weixin.web.manage.utils.UserUtils;
@@ -15,6 +17,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Desc: 登录认证与授权
@@ -60,10 +63,19 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     }
     // 授权
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        Admin admin = adminService.getAdminByUsername((String) principals.getPrimaryPrincipal());
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("=======AuthorizationInfo=======");
+        Admin admin = adminService.getAdminByUsername((String) principalCollection.getPrimaryPrincipal());
+        if (admin != null) {
+            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+            // 添加基于Permissionde权限
+            List<Permission> principals = UserUtils.getPermissions();
+            for (Permission permission : principals) {
+                if (StringUtils.isNotBlank(permission.getPrecode())) {
+                    info.addStringPermission(permission.getPrecode());
+                }
+            }
+        }
 
         return null;
     }

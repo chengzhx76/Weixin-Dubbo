@@ -8,8 +8,8 @@
   </sql>
   <sql id="ifCondition">
     <if test="id != null and id != ''">id=#{id},</if>
-    <if test="username != null and username != ''">name=#{name},</if>
-    <if test="password != null and password != ''">precode=#{precode},</if>
+    <if test="name != null and name != ''">name=#{name},</if>
+    <if test="precode != null and precode != ''">precode=#{precode},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate}</if>
@@ -27,11 +27,14 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
-      <if test="username != null and username != ''">
-        username = #{username}
-      </if>
-      AND
-        status = #{status}
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status = 'NORMAL'
+        </otherwise>
+      </choose>
     </where>
   </sql>
 
@@ -58,14 +61,15 @@
     <include refid="whereCondition"/>
   </update>
 
-  <!--&lt;!&ndash; 根据用户名获取用户 &ndash;&gt;-->
-  <!--<select id="loadUserByUsername" parameterType="String" resultType="Admin">-->
-  <!--select-->
-  <!--<include refid="adminColumns"/>-->
-  <!--from-->
-  <!--<include refid="tableName"/> AS a-->
-  <!--WHERE-->
-  <!--a.username=#{username}-->
-  <!--</select>-->
+  <!-- 根据管理员ID获取该管理员的权限 -->
+  <select id="loadByAdminId" parameterType="String" resultType="Permission">
+    <include refid="selector"/>
+    JOIN role_permission rp ON rp.permission_id = p.id
+    JOIN role r ON r.id = rp.role_id
+    JOIN admin_role ar ON ar.role_id = r.id
+    JOIN admin a ON a.id = ar.user_id
+    WHERE a.id = #{userId} AND p.status = 'NORMAL' AND r.status = 'NORMAL' AND a.status = 'NORMAL'
+  </select>
+
 </mapper>
 

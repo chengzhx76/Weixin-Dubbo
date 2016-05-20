@@ -1,8 +1,10 @@
 package com.cheng.weixin.service.admin.service;
 
+import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.service.admin.dao.AdminDaoMapper;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
+import com.cheng.weixin.service.admin.dao.PermissionDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,12 @@ public class AdminService implements RpcAdminService {
 
     @Autowired
     public AdminDaoMapper adminDao;
+    @Autowired
+    public PermissionDaoMapper permissionDao;
+
     @Override
     public Admin getAdminByUsername(String username) {
         Admin admin = adminDao.load(new Admin(null, username));
-
         return admin;
     }
 
@@ -64,5 +68,15 @@ public class AdminService implements RpcAdminService {
         updatePwd.setPassword(newPasswd);
         updatePwd.preUpdate();
         adminDao.update(updatePwd);
+    }
+
+    @Override
+    public List<Permission> getPermissionByAdminId(String aid) {
+        return permissionDao.loadByAdminId(aid);
+    }
+
+    @Override
+    public List<Permission> getAllPermissions() {
+        return permissionDao.loadAll();
     }
 }

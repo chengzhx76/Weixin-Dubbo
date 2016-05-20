@@ -21,9 +21,12 @@ public class UserUtils {
 
     private static RpcAdminService adminService = SpringContextHolder.getBean(RpcAdminService.class);
 
-    public static final String ADMIN_CACHE = "adminCache";
-    public static final String ADMIN_CACHE_ID_ = "id_";
-    public static final String ADMIN_LOGIN_NAME_ = "login_name_";
+    private static final String ADMIN_CACHE = "adminCache";
+    private static final String ADMIN_CACHE_ID_ = "id_";
+    private static final String ADMIN_LOGIN_NAME_ = "login_name_";
+
+    //private static final String CACHE_ROLE_LIST = "roleList";
+    private static final String CACHE_PERMISSION_LIST = "permissionList";
 
     /**
      * 根据ID获取用户
@@ -70,6 +73,11 @@ public class UserUtils {
         CacheUtils.remove(ADMIN_CACHE, ADMIN_LOGIN_NAME_+admin.getUsername());
     }
 
+    public static void clearCache() {
+        removeCache(CACHE_PERMISSION_LIST);
+        clearCache(getUser());
+    }
+
     /**
      * 获取当前用户
      * @return
@@ -85,10 +93,24 @@ public class UserUtils {
         return new Admin();
     }
 
+    /**
+     * 获取管理员资源权限
+     * @return
+     */
     public static List<Permission> getPermissions() {
-        Admin admin = getUser();
-
-        return null;
+        List<Permission> permissions = (List<Permission>) getCache(CACHE_PERMISSION_LIST);
+        if (permissions == null) {
+            Admin admin = getUser();
+            if (admin.isSuperAdmin()) {
+                // 获取全部资源权限
+                permissions = adminService.getAllPermissions();
+            } else {
+                // 获取当前管理员的所属权限
+                permissions = adminService.getPermissionByAdminId(admin.getId());
+            }
+            putCache(CACHE_PERMISSION_LIST, permissions);
+        }
+        return permissions;
     }
 
 
@@ -117,4 +139,43 @@ public class UserUtils {
         }
         return session;
     }
+
+    // =====================用户缓存（对于经常变动的缓存放到Session里，用户退出后缓存丢失）================
+    /**
+     * 根据Key获取缓存的数据
+     * @param key
+     * @return
+     */
+    public static Object getCache(String key) {
+        return getCache(key, null);
+    }
+
+    /**
+     * 根据Key获取缓存的数据，如果没有则返回默认值
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public static Object getCache(String key, Object defaultValue) {
+        Object obj = getSession().getAttribute(key);
+        return obj == null ? defaultValue : obj;
+    }
+
+    /**
+     * 添加缓存
+     * @param key
+     * @param value
+     */
+    public static void putCache(String key, Object value) {
+        getSession().setAttribute(key, value);
+    }
+
+    /**
+     * 根据Key移除缓存
+     * @param key
+     */
+    public static void removeCache(String key) {
+        getSession().removeAttribute(key);
+    }
+
 }
