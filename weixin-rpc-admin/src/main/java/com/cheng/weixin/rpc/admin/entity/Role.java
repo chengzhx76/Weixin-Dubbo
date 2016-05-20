@@ -12,6 +12,8 @@ public class Role extends DataEntity<Role> {
 
     private String enname; // 英文名字，也是角色
 
+    private Admin admin;   // 当前用户的角色
+
     public String getName() {
         return name;
     }
@@ -26,6 +28,15 @@ public class Role extends DataEntity<Role> {
 
     public Role setEnname(String enname) {
         this.enname = enname;
+        return this;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public Role setAdmin(Admin admin) {
+        this.admin = admin;
         return this;
     }
 }

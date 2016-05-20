@@ -4,6 +4,7 @@ import com.cheng.weixin.commom.utils.CacheUtils;
 import com.cheng.weixin.commom.utils.SpringContextHolder;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.Permission;
+import com.cheng.weixin.rpc.admin.entity.Role;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import com.cheng.weixin.web.manage.security.SystemAuthorizingRealm;
 import org.apache.shiro.SecurityUtils;
@@ -25,7 +26,7 @@ public class UserUtils {
     private static final String ADMIN_CACHE_ID_ = "id_";
     private static final String ADMIN_LOGIN_NAME_ = "login_name_";
 
-    //private static final String CACHE_ROLE_LIST = "roleList";
+    private static final String CACHE_ROLE_LIST = "roleList";
     private static final String CACHE_PERMISSION_LIST = "permissionList";
 
     /**
@@ -58,6 +59,7 @@ public class UserUtils {
             if (admin == null) {
                 return null;
             }
+            admin.setRoles(adminService.getRolesByAdminId(admin.getId()));
             CacheUtils.put(ADMIN_CACHE, ADMIN_LOGIN_NAME_+admin.getId(), admin);
             CacheUtils.put(ADMIN_CACHE, ADMIN_CACHE_ID_+admin.getUsername(), admin);
         }
@@ -92,11 +94,32 @@ public class UserUtils {
         }
         return new Admin();
     }
+    /**
+     * 获取管理员角色
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static List<Role> getRoles() {
+        List<Role> roles = (List<Role>) getCache(CACHE_ROLE_LIST);
+        if (roles == null) {
+            Admin admin = getUser();
+            if (admin.isSuperAdmin()) {
+                // 获取全部资源角色
+                roles = adminService.getAllRoles();
+            } else {
+                // 获取当前管理员的所属角色
+                roles = adminService.getRolesByAdminId(admin.getId());
+            }
+            putCache(CACHE_ROLE_LIST, roles);
+        }
+        return roles;
+    }
 
     /**
      * 获取管理员资源权限
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static List<Permission> getPermissions() {
         List<Permission> permissions = (List<Permission>) getCache(CACHE_PERMISSION_LIST);
         if (permissions == null) {

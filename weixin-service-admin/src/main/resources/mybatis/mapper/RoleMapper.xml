@@ -9,7 +9,7 @@
   <sql id="ifCondition">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="name != null and name != ''">name=#{name},</if>
-    <if test="enname != null and enname != ''">precode=#{precode},</if>
+    <if test="enname != null and enname != ''">enname=#{enname},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate}</if>
@@ -62,6 +62,13 @@
     <include refid="whereCondition"/>
   </update>
 
+  <!-- 根据管理员ID获取该管理员的角色 -->
+  <select id="loadByAdminId" parameterType="String" resultType="Role">
+    <include refid="selector"/>
+    JOIN admin_role ar ON ar.role_id = r.id
+    JOIN admin a ON a.id = ar.user_id
+    WHERE a.id = #{adminId} AND p.status = 'NORMAL' AND r.status = 'NORMAL' AND a.status = 'NORMAL'
+  </select>
 
 </mapper>
 

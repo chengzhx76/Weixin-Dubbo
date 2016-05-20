@@ -3,6 +3,7 @@ package com.cheng.weixin.rpc.admin.entity;
 import com.cheng.common.entity.DataEntity;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户实体
@@ -23,6 +24,8 @@ public class Admin extends DataEntity<Admin> {
     private Date loginDate;     // 登录时间
     private String oldLoginIp;  // 上次登录IP
     private Date oldLoginDate;  // 上次登录时间
+
+    private List<Role> roles;   // 角色
 
     /** 冗余字段 **/
     private String newLoginIp;  // 新登录的IP
@@ -105,6 +108,15 @@ public class Admin extends DataEntity<Admin> {
 
     public void setOldLoginDate(Date oldLoginDate) {
         this.oldLoginDate = oldLoginDate;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public Admin setRoles(List<Role> roles) {
+        this.roles = roles;
+        return this;
     }
 
     public String getNewLoginIp() {

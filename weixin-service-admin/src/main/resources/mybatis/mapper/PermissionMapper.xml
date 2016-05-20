@@ -68,7 +68,7 @@
     JOIN role r ON r.id = rp.role_id
     JOIN admin_role ar ON ar.role_id = r.id
     JOIN admin a ON a.id = ar.user_id
-    WHERE a.id = #{userId} AND p.status = 'NORMAL' AND r.status = 'NORMAL' AND a.status = 'NORMAL'
+    WHERE a.id = #{adminId} AND p.status = 'NORMAL' AND r.status = 'NORMAL' AND a.status = 'NORMAL'
   </select>
 
 </mapper>
