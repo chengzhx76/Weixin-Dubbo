@@ -51,7 +51,7 @@ public class UserUtils {
      * @param username 用户名
      * @return 用户对象
      */
-    public static Admin getByUsername(String username) {
+    public static Admin getAdminByUsername(String username) {
         Admin admin = (Admin) CacheUtils.get(ADMIN_CACHE, ADMIN_LOGIN_NAME_ + username);
         if (admin == null) {
             admin = adminService.getAdminByUsername(username);

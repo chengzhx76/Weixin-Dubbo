@@ -50,7 +50,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             }
         }
         // 校验用户名
-        Admin admin = adminService.getAdminByUsername(token.getUsername());
+        Admin admin = UserUtils.getAdminByUsername(token.getUsername());
         if(admin != null) {
             if(admin.getStatus().equals(Status.LOCKED)) {
                 throw new LockedAccountException("msg:该帐号已禁止登录.");
@@ -65,7 +65,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         System.out.println("=======AuthorizationInfo=======");
-        Admin admin = adminService.getAdminByUsername((String) principalCollection.getPrimaryPrincipal());
+        Admin admin = UserUtils.getAdminByUsername((String) principalCollection.getPrimaryPrincipal());
         if (admin != null) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             // 添加基于Permissionde权限

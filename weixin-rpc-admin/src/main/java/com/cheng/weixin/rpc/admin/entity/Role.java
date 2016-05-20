@@ -10,11 +10,22 @@ public class Role extends DataEntity<Role> {
     /** 角色名字 **/
     private String name;
 
+    private String enname; // 英文名字，也是角色
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEnname() {
+        return enname;
+    }
+
+    public Role setEnname(String enname) {
+        this.enname = enname;
+        return this;
     }
 }

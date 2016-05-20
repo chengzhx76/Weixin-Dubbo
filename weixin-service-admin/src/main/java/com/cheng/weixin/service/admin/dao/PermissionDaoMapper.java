@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Desc: 管理员mapper
+ * Desc: 资源权限mapper
  * Author: Cheng
  * Date: 2016/1/28 0028
  */
