@@ -41,6 +41,7 @@ public class UserUtils {
             if (admin == null) {
                 return null;
             }
+            admin.setRoles(adminService.getRolesByAdminId(admin.getId()));
             CacheUtils.put(ADMIN_CACHE, ADMIN_LOGIN_NAME_+admin.getId(), admin);
             CacheUtils.put(ADMIN_CACHE, ADMIN_CACHE_ID_+admin.getUsername(), admin);
         }
@@ -77,6 +78,7 @@ public class UserUtils {
 
     public static void clearCache() {
         removeCache(CACHE_PERMISSION_LIST);
+        removeCache(CACHE_ROLE_LIST);
         clearCache(getUser());
     }
 
@@ -135,7 +137,6 @@ public class UserUtils {
         }
         return permissions;
     }
-
 
     /**
      * 获取当前登陆者对象

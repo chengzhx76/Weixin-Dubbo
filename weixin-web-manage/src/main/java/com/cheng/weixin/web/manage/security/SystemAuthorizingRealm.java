@@ -2,10 +2,13 @@ package com.cheng.weixin.web.manage.security;
 
 import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.commom.utils.Encodes;
+import com.cheng.weixin.commom.utils.ServletUtils;
 import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.Permission;
+import com.cheng.weixin.rpc.admin.entity.Role;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
+import com.cheng.weixin.rpc.log.service.RpcLogService;
 import com.cheng.weixin.web.manage.utils.Captcha;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.apache.shiro.authc.*;
@@ -16,6 +19,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,6 +31,9 @@ import java.util.List;
 public class SystemAuthorizingRealm extends AuthorizingRealm {
     @Autowired
     private RpcAdminService adminService;
+    @Autowired
+    private RpcLogService logService;
+
     // 返回一个唯一的Realm名字
     @Override
     public String getName() {
@@ -75,6 +82,14 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
                     info.addStringPermission(permission.getPrecode());
                 }
             }
+            for (Role role : admin.getRoles()) {
+                info.addRole(role.getEnname());
+            }
+            // 保存日志
+            HttpServletRequest request = ServletUtils.getRequest();
+            logService.saveLog(StringUtils.getRemoteAddr(request),request.getHeader("user-agent"),request.getRequestURI(),
+                    request.getParameterMap(),request.getMethod(), null, "系统登录", UserUtils.getPrincipal().getUsername());
+            return info;
         }
 
         return null;

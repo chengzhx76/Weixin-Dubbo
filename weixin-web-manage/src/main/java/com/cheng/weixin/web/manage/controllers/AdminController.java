@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Date: 2016/3/28 0028
  */
 @Controller
-public class UserController extends BaseController  {
+public class AdminController extends BaseController  {
     /**
-     * 获取当前登录者的信息&跟新密码
+     * 获取当前登录者的信息&更新用户信息
      * @param model
      * @return
      */
