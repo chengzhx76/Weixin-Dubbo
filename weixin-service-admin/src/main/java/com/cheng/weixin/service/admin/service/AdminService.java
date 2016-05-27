@@ -72,6 +72,7 @@ public class AdminService implements RpcAdminService {
             PageInfo<Admin> adminPageInfo = new PageInfo<>(admins);
             Page<Admin> adminPage = new Page<>();
             BeanUtils.copyProperties(adminPage, adminPageInfo);
+            adminPage.setList(admins);
             return adminPage;
         } catch (IllegalAccessException e) {
             e.printStackTrace();

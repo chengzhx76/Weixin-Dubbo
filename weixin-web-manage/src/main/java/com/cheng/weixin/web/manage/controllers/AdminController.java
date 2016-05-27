@@ -2,6 +2,7 @@ package com.cheng.weixin.web.manage.controllers;
 
 import com.cheng.weixin.commom.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
+import com.cheng.weixin.rpc.admin.model.Page;
 import com.cheng.weixin.web.manage.utils.SystemUtils;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.springframework.stereotype.Controller;
@@ -77,6 +78,19 @@ public class AdminController extends BaseController  {
         adminService.add(admin);
         addMessage(model, "msg", "添加用户" + admin.getUsername() + "成功！");
         return "redirect:admin/list";
+    }
+
+    /**
+     * 获取用户列表
+     * @param model
+     * @param pageNum 当前页
+     * @return
+     */
+    @RequestMapping(value = "list", method = RequestMethod.GET)
+    public String list(Model model, int pageNum) {
+        Page<Admin> admins = adminService.findAdminAll(pageNum, 10);
+        model.addAttribute("admins", admins);
+        return "list";
     }
 
     /**
