@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Desc: 用户
@@ -29,12 +30,12 @@ public class AdminController extends BaseController  {
             currentAdmin.setMobile(admin.getMobile());
             currentAdmin.setRemarks(admin.getRemarks());
             adminService.updateAdminInfo(currentAdmin);
-            model.addAttribute("msg", "更新成功！");
+            addMessage(model, "msg", "更新成功！");
             // 清除缓存
             UserUtils.clearCache(currentAdmin);
         }
         model.addAttribute("admin", currentAdmin);
-        return "user/info";
+        return "admin/info";
     }
 
     /**
@@ -50,14 +51,46 @@ public class AdminController extends BaseController  {
         if (StringUtils.isNoneBlank(oldPasswd, newPasswd)) {
             if (SystemUtils.validatePassword(oldPasswd, currentAdmin.getPassword())) {
                 adminService.updatePasswdById(currentAdmin.getId(), newPasswd);
-                model.addAttribute("msg", "修改密码成功！");
+                addMessage(model, "msg", "修改密码成功！");
                 // 清除缓存
                 UserUtils.clearCache(currentAdmin);
             }else {
-                model.addAttribute("msg", "修改密码失败，旧密码错误！");
+                addMessage(model, "msg", "修改密码失败，旧密码错误！");
             }
         }
         model.addAttribute("admin", currentAdmin);
-        return "user/info";
+        return "admin/info";
+    }
+
+    /**
+     * 保存用户
+     * @param model
+     * @param admin
+     * @return
+     */
+    @RequestMapping(value = "save", method = RequestMethod.POST)
+    public String save(Model model, Admin admin) {
+        if(checkUserName(admin.getUsername())) {
+            addMessage(model, "msg", "添加用户" + admin.getUsername() + "失败，用户名已存在！");
+        }
+        admin.setPassword(SystemUtils.entryptPassword("abc1234"));
+        adminService.add(admin);
+        addMessage(model, "msg", "添加用户" + admin.getUsername() + "成功！");
+        return "redirect:admin/list";
+    }
+
+    /**
+     * 检查用户名是否存在
+     * @param userName
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "checkName")
+    public boolean checkUserName(String userName) {
+        Admin admin = adminService.getAdminByUsername(userName);
+        if (admin == null) {
+            return true;
+        }
+        return false;
     }
 }

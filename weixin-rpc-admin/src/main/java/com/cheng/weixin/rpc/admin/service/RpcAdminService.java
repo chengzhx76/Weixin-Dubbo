@@ -4,6 +4,7 @@ package com.cheng.weixin.rpc.admin.service;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.entity.Role;
+import com.cheng.weixin.rpc.admin.model.Page;
 
 import java.util.List;
 
@@ -13,6 +14,11 @@ import java.util.List;
  * Date: 2016/1/28 0028
  */
 public interface RpcAdminService {
+    /**
+     * 增加管理员
+     * @param admin
+     */
+    void add(Admin admin);
 
     Admin getAdminById(String id);
     /**
@@ -26,7 +32,15 @@ public interface RpcAdminService {
      * 获取所有的用户
      * @return
      */
-    List<Admin> findAdminAll();
+    List<Admin> getAdminAll();
+
+    /**
+     * 分页获取所有管理员
+     * @param pageNum 当前页
+     * @param pageSize 每页显示多少
+     * @return
+     */
+    Page<Admin> findAdminAll(int pageNum, int pageSize);
 
     /**
      * 更新管理员登录信息

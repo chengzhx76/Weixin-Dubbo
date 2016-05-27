@@ -15,7 +15,7 @@ public interface RpcLogService {
      * @param requestUri 操作的URI
      * @param params 操作提交的数据
      * @param method 操作的方式 GET或POST
-//     * @param handler // 里面有内容不支持序列换；需要在前端把值取出来 传过来 TODO 以后实现
+//     * @param handler // 里面有内容不支持序列化；需要在前端把值取出来 传过来 TODO 以后实现
      * @param ex 异常信息
      * @param title 标题
      * @param username 操作人用户名

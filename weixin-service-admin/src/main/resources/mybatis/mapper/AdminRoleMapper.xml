@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.service.admin.dao.AdminRoleDaoMapper">
+  <sql id="tableName">admin_role</sql>
+  <sql id="insertColumns">
+    admin_id,role_id
+  </sql>
+  <sql id="ifCondition">
+    <if test="admin_id != null and admin_id != ''">admin_id=#{admin_id},</if>
+    <if test="role_id != null and role_id != ''">role_id=#{role_id},</if>
+  </sql>
+
+  <sql id="whereCondition">
+    <where>
+      <if test="admin_id != null and admin_id != ''">
+        admin_id = #{admin_id}
+      </if>
+      <if test="role_id != null and role_id != ''">
+        role_id = #{role_id}
+      </if>
+    </where>
+  </sql>
+
+  <sql id="updateCondition">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="ifCondition"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <!-- 更新 -->
+  <update id="update" parameterType="AdminRole">
+    UPDATE <include refid="tableName"/>
+    <include refid="updateCondition"/>
+    <include refid="whereCondition"/>
+  </update>
+
+  <!-- 插入新数据 -->
+  <insert id="save" parameterType="AdminRole">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="ifCondition"/>
+  </insert>
+
+  <!-- 批量插入 -->
+  <insert id="saves" parameterType="list">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <foreach collection="roles" item="role" index="index" open="(" separator="," close=")">
+      #{role.adminId},#{role.roleId}
+    </foreach>
+  </insert>
+
+</mapper>
+

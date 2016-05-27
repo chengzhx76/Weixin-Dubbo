@@ -26,6 +26,12 @@ public interface BaseDaoMapper<T> {
      */
     int save(T entity);
     /**
+     * 保存实体
+     * @param entities
+     * @return
+     */
+    int saves(List<T> entities);
+    /**
      * 更新数据
      * @param entity
      * @return

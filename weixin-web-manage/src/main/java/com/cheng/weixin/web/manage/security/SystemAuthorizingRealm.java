@@ -82,6 +82,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
                     info.addStringPermission(permission.getPrecode());
                 }
             }
+            // 添加用户角色信息
             for (Role role : admin.getRoles()) {
                 info.addRole(role.getEnname());
             }

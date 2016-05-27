@@ -3,9 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cheng.weixin.service.admin.dao.AdminDaoMapper">
   <sql id="tableName">admin</sql>
-  <sql id="adminColumns">
+  <sql id="columns">
     a.id,a.username,a.password,a.realname,a.mobile,a.photo,a.login_ip,a.login_date,
     a.old_login_ip,a.old_login_date,a.remarks,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="insertColumns">
+    id,username,password,realname,mobile,photo,login_ip,login_date,
+    old_login_ip,old_login_date,remarks,create_date,update_date,status
   </sql>
   <sql id="adminIf">
     <if test="id != null and id != ''">id=#{id},</if>
@@ -20,12 +24,12 @@
     <if test="oldLoginDate != null and oldLoginDate != ''">old_login_date=#{oldLoginDate},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
-    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate}</if>
-    <!-- <if test="status != null and status != ''">status=#{status}</if> -->
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
   </sql>
   <sql id="adminSelector">
     select
-      <include refid="adminColumns"/>
+      <include refid="columns"/>
     from
       <include refid="tableName"/> AS a
   </sql>
@@ -74,6 +78,16 @@
     <include refid="adminUpdate"/>
     <include refid="adminWhere"/>
   </update>
+  <!-- 插入新管理员 -->
+  <insert id="save" parameterType="Admin">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="adminIf"/>
+  </insert>
 
   <!--&lt;!&ndash; 根据用户名获取用户 &ndash;&gt;-->
   <!--<select id="loadUserByUsername" parameterType="String" resultType="Admin">-->

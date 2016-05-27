@@ -1,15 +1,23 @@
 package com.cheng.weixin.service.admin.service;
 
 import com.cheng.weixin.rpc.admin.entity.Admin;
+import com.cheng.weixin.rpc.admin.entity.AdminRole;
 import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.entity.Role;
+import com.cheng.weixin.rpc.admin.model.Page;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import com.cheng.weixin.service.admin.dao.AdminDaoMapper;
+import com.cheng.weixin.service.admin.dao.AdminRoleDaoMapper;
 import com.cheng.weixin.service.admin.dao.PermissionDaoMapper;
 import com.cheng.weixin.service.admin.dao.RoleDaoMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,11 +30,27 @@ import java.util.List;
 public class AdminService implements RpcAdminService {
 
     @Autowired
-    public AdminDaoMapper adminDao;
+    private AdminDaoMapper adminDao;
     @Autowired
-    public PermissionDaoMapper permissionDao;
+    private PermissionDaoMapper permissionDao;
     @Autowired
-    public RoleDaoMapper roleDaoMapper;
+    private RoleDaoMapper roleDao;
+    @Autowired
+    private AdminRoleDaoMapper adminRoleDao;
+
+    @Override
+    public void add(Admin admin) {
+        adminDao.save(admin);
+        List<Role> roles = admin.getRoles();
+        List<AdminRole> adminRoles = new ArrayList<>();
+        for (Role role : roles) {
+            if (roleDao.load(new Role(role.getId())) == null) {
+                throw new IllegalArgumentException("没有该角色！"+role.getId());
+            }
+            adminRoles.add(new AdminRole(admin.getId(), role.getId()));
+        }
+        adminRoleDao.saves(adminRoles);
+    }
 
     @Override
     public Admin getAdminByUsername(String username) {
@@ -35,8 +59,26 @@ public class AdminService implements RpcAdminService {
     }
 
     @Override
-    public List<Admin> findAdminAll() {
+    public List<Admin> getAdminAll() {
         return adminDao.loadAll();
+    }
+
+    @Override
+    public Page<Admin> findAdminAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Admin> admins = adminDao.loadAll();
+
+        try {
+            PageInfo<Admin> adminPageInfo = new PageInfo<>(admins);
+            Page<Admin> adminPage = new Page<>();
+            BeanUtils.copyProperties(adminPage, adminPageInfo);
+            return adminPage;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -76,12 +118,12 @@ public class AdminService implements RpcAdminService {
 
     @Override
     public List<Role> getAllRoles() {
-        return roleDaoMapper.loadAll();
+        return roleDao.loadAll();
     }
 
     @Override
     public List<Role> getRolesByAdminId(String aid) {
-        return roleDaoMapper.loadByAdminId(aid);
+        return roleDao.loadByAdminId(aid);
     }
 
     @Override

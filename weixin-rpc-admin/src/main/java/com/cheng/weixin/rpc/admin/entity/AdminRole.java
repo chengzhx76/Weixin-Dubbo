@@ -13,6 +13,14 @@ public class AdminRole extends DataEntity<AdminRole> {
     /** 角色ID **/
     private String roleId;
 
+    public AdminRole() {
+    }
+
+    public AdminRole(String adminId, String roleId) {
+        this.adminId = adminId;
+        this.roleId = roleId;
+    }
+
     public String getAdminId() {
         return adminId;
     }

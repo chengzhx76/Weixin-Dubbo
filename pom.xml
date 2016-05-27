@@ -70,8 +70,11 @@
       <commons-lang3.version>3.3.2</commons-lang3.version>
       <commons-codec.version>1.9</commons-codec.version>
       <commons-io.version>2.4</commons-io.version>
+      <commons-beanutils.version>1.8.3</commons-beanutils.version>
       <guava.version>18.0</guava.version>
+      <pagehelper.version>4.0.1</pagehelper.version>
       <joda-time.version>2.7</joda-time.version>
+
       <quartz.version>2.2.1</quartz.version>
       <spring.version>3.2.12.RELEASE</spring.version>
       <spring-rabbit.version>1.4.0.RELEASE</spring-rabbit.version>
@@ -247,6 +250,11 @@
           <version>${commons-io.version}</version>
         </dependency>
         <dependency>
+          <groupId>commons-beanutils</groupId>
+          <artifactId>commons-beanutils</artifactId>
+          <version>${commons-beanutils.version}</version>
+        </dependency>
+        <dependency>
           <groupId>joda-time</groupId>
           <artifactId>joda-time</artifactId>
           <version>${joda-time.version}</version>
@@ -257,6 +265,10 @@
           <version>${guava.version}</version>
         </dependency>
         <dependency>
+          <groupId>com.github.pagehelper</groupId>
+          <artifactId>pagehelper</artifactId>
+          <version>${pagehelper.version}</version>
+        </dependency>        <dependency>
           <groupId>org.apache.httpcomponents</groupId>
           <artifactId>httpclient</artifactId>
           <version>${http.version}</version>

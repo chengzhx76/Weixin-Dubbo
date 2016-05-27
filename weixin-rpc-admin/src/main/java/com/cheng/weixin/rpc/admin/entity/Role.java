@@ -14,6 +14,13 @@ public class Role extends DataEntity<Role> {
 
     private Admin admin;   // 当前用户的角色
 
+    public Role() {
+    }
+
+    public Role(String id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
