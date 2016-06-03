@@ -33,6 +33,7 @@
       <module>weixin-common-constant</module>
       <module>weixin-service-rabbitmq</module>
       <module>weixin-rpc-rabbitmq</module>
+      <module>weixin-rpc-user</module>
     </modules>
 
     <properties>
