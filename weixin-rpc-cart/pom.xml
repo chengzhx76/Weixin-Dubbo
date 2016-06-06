@@ -11,5 +11,11 @@
 
   <artifactId>weixin-rpc-cart</artifactId>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.cheng</groupId>
+      <artifactId>weixin-common-entity</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>
