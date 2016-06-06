@@ -1,7 +1,7 @@
 package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.user.Enum.Sex;
+import com.cheng.weixin.rpc.user.enumType.Sex;
 
 import java.util.Date;
 

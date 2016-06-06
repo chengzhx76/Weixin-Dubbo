@@ -1,7 +1,7 @@
 package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.user.Enum.BehaviorType;
+import com.cheng.weixin.rpc.user.enumType.BehaviorType;
 
 /**
  * Desc: 该表主要为：积分记录、现金账户记录、券记录中的收入和支出服务。

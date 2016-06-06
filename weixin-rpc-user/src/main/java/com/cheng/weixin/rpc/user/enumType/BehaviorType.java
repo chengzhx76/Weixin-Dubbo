@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.user.Enum;
+package com.cheng.weixin.rpc.user.enumType;
 
 /**
  * Desc: 操作类型 积分 现金 券

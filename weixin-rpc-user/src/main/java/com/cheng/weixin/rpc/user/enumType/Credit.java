@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.user.Enum;
+package com.cheng.weixin.rpc.user.enumType;
 
 /**
  * Desc: 信用等级 划分为五个等级：良好、较好、一般、较差、差
