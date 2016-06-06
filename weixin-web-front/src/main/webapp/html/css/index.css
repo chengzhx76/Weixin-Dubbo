@@ -1,0 +1,24 @@
+body {
+  background: #F0EFF5;
+}
+.header .notify {
+  height: 38px;
+  margin-top: 18px;
+  background: #FFFFFF;
+  border-top: solid 1px #A9A9A9;
+  border-bottom: solid 1px #A9A9A9;
+}
+.header .notify .icon {
+  height: 38px;
+  background: blue;
+  float: left;
+}
+.header .notify .notify-text {
+  height: 38px;
+  line-height: 38px;
+  font-family: '黑体', '微软雅黑';
+  color: black;
+  font-size: 16px;
+  padding-left: 10px;
+  float: left;
+}

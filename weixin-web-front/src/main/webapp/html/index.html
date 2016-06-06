@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>首页</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/weui.min.css">
+  <link rel="stylesheet" href="css/jquery-weui.css">
+  <link rel="stylesheet" href="css/index.css">
+  <!--<link rel="stylesheet" href="css/demos.css">-->
+  <style>
+    .swiper-container {
+      width: 100%;
+    }
+    .swiper-container .swiper-slide {
+      height:200px;
+      background: red;
+    }
+    .swiper-container img {
+      height: 200px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body ontouchstart>
+  <div class="header">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="imgs/swiper-1.jpg"/></div>
+        <div class="swiper-slide"><img src="imgs/swiper-2.jpg"/></div>
+        <div class="swiper-slide"><img src="imgs/swiper-3.jpg"/></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="notify">
+      <div class="icon">通知图标</div>
+      <div class="notify-text">微信端上线了，敬请使用 ~ ~</div>
+    </div>
+  </div>
+  <div class="content">
+    content
+  </div>
+  <div class="footer">
+    footer
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="js/jquery-2.1.4.js"></script>
+  <script src="js/jquery-weui.js"></script>
+  <script src="js/swiper.js"></script>
+  <script>
+    $(".swiper-container").swiper({
+      loop: true,
+      autoplay: 3000
+    });
+  </script>
+</body>
+</html>
