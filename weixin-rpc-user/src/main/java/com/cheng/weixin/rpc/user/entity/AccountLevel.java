@@ -10,10 +10,13 @@ import com.cheng.common.entity.DataEntity;
  */
 public class AccountLevel extends DataEntity<AccountLevel> {
     private int accountId;
-    private int level;
+    private String name;
     private int needRonusPoint;
-    private int totalRonusPoint;
+    private int onusPointEveryLevel;
     private double reductPercent;
+    private String consumeScale;
+    private int freeFrequency;
+    private boolean isEnable;
 
     public int getAccountId() {
         return accountId;
@@ -21,14 +24,6 @@ public class AccountLevel extends DataEntity<AccountLevel> {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     public int getNeedRonusPoint() {
@@ -39,12 +34,44 @@ public class AccountLevel extends DataEntity<AccountLevel> {
         this.needRonusPoint = needRonusPoint;
     }
 
-    public int getTotalRonusPoint() {
-        return totalRonusPoint;
+    public String getName() {
+        return name;
     }
 
-    public void setTotalRonusPoint(int totalRonusPoint) {
-        this.totalRonusPoint = totalRonusPoint;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getOnusPointEveryLevel() {
+        return onusPointEveryLevel;
+    }
+
+    public void setOnusPointEveryLevel(int onusPointEveryLevel) {
+        this.onusPointEveryLevel = onusPointEveryLevel;
+    }
+
+    public int getFreeFrequency() {
+        return freeFrequency;
+    }
+
+    public void setFreeFrequency(int freeFrequency) {
+        this.freeFrequency = freeFrequency;
+    }
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
+    }
+
+    public String getConsumeScale() {
+        return consumeScale;
+    }
+
+    public void setConsumeScale(String consumeScale) {
+        this.consumeScale = consumeScale;
     }
 
     public double getReductPercent() {

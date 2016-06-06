@@ -1,7 +1,6 @@
 package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.user.Enum.Credit;
 import com.cheng.weixin.rpc.user.Enum.Sex;
 
 import java.util.Date;
@@ -20,7 +19,6 @@ public class Member extends DataEntity<Member> {
     private String idcard;
     private Sex sex;
     private Date birthday;
-    private Credit credit;
     private int regionProvinceId;
     private int regionCityId;
     private int regionCountryId;
@@ -156,13 +154,5 @@ public class Member extends DataEntity<Member> {
 
     public void setHobby(String hobby) {
         this.hobby = hobby;
-    }
-
-    public Credit getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Credit credit) {
-        this.credit = credit;
     }
 }

@@ -34,6 +34,7 @@
       <module>weixin-service-rabbitmq</module>
       <module>weixin-rpc-rabbitmq</module>
       <module>weixin-rpc-user</module>
+      <module>weixin-rpc-item</module>
     </modules>
 
     <properties>
