@@ -6,44 +6,104 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="css/weui.min.css">
-  <link rel="stylesheet" href="css/jquery-weui.css">
+  <link rel="stylesheet" href="css/weui.css"/>
+  <link rel="stylesheet" href="css/weui2.css"/>
+  <script src="js/zepto.min.js"></script>
+  <script src="js/swipe.js"></script>
+
   <link rel="stylesheet" href="css/index.css">
-  <!--<link rel="stylesheet" href="css/demos.css">-->
-  <style>
-    .swiper-container {
-      width: 100%;
-    }
-    .swiper-container .swiper-slide {
-      height:200px;
-      background: red;
-    }
-    .swiper-container img {
-      height: 200px;
-      width: 100%;
-    }
-  </style>
 </head>
 <body ontouchstart>
-
   <header class="header">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="imgs/swiper-1.jpg"/></div>
-        <div class="swiper-slide"><img src="imgs/swiper-2.jpg"/></div>
-        <div class="swiper-slide"><img src="imgs/swiper-3.jpg"/></div>
+
+    <div class="slide" id="slideshow">
+      <ul>
+        <li>
+          <a href="#"><img src="images/swiper-1.jpg" alt=""></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/swiper-2.jpg" alt=""></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/swiper-3.jpg" alt=""></a>
+        </li>
+      </ul>
+      <div class="dot">
+        <span></span><span></span><span></span>
       </div>
-      <div class="swiper-pagination"></div>
     </div>
+
     <div class="notify">
-      <div class="icon">通知图标</div>
-      <div class="notify-text">微信端上线了，敬请使用 ~ ~</div>
+      <div class="icon icon-31"></div>
+      <div class="slide notify-text" id="notify-txt">
+        <ul>
+          <li>
+            <div class='txt'>微信端上线了，敬请使用 ~ ~</div>
+          </li>
+          <li>
+            <div class='txt'>兑换【饿了么】畅享美食红包 消耗20金币</div>
+          </li>
+        </ul>
+      </div>
     </div>
   </header>
 
-  <section class="content">
-    content
-  </section>
+  <article class="weui_article content">
+    <!--<div class="weui_cells_title">带图标、说明的列表项</div>-->
+    <h1>商品列表</h1>
+    <div class="bd">
+      <div class="row">
+        <div class="col-33 ui-border">
+          <figure>
+            <a href="javascript:;"><img src="images/zm.jpg" width="110" height="105"></a>
+            <figcaption>
+              <strong class="title">蒸馍</strong>
+              <!--<em class="desc">0.25g/个</em>-->
+              <div class="info">
+                <span class="price">
+                  ￥<strong>0.5</strong>
+                </span>
+                <span id="add-1" class="icon icon-78"></span>
+              </div>
+              <div class="type">推荐</div>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-33 ui-border">
+          <figure>
+            <a href="javascript:;"><img src="images/hj.jpg" width="110" height="105"></a>
+            <figcaption>
+              <strong class="title">蒸馍</strong>
+              <!--<em class="desc">0.25g/个</em>-->
+              <div class="info">
+                <span class="price">
+                  ￥<strong>0.5</strong>
+                </span>
+                <span id="add-2" class="icon icon-78"></span>
+              </div>
+              <div class="type">花卷</div>
+            </figcaption>
+          </figure>
+        </div>
+        <div class="col-33 ui-border">
+          <figure>
+            <a href="javascript:;"><img src="images/tb.jpg" width="110" height="105"></a>
+            <figcaption>
+              <strong class="title">糖包</strong>
+              <!--<em class="desc">0.25g/个</em>-->
+              <div class="info">
+                <span class="price">
+                  ￥<strong>0.5</strong>
+                </span>
+                <span id="add-3" class="icon icon-78"></span>
+              </div>
+              <div class="type">推荐</div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </article>
 
   <footer class="footer">
     <nav>
@@ -72,14 +132,29 @@
 
 
 
-  <script src="js/jquery-2.1.4.js"></script>
-  <script src="js/jquery-weui.js"></script>
-  <script src="js/swiper.js"></script>
   <script>
-    $(".swiper-container").swiper({
-      loop: true,
-      autoplay: 3000
+    $(function () {
+      $('#slideshow').swipeSlide({
+        autoSwipe: true,//自动切换默认是
+        speed: 3000,//速度默认4000
+        continuousScroll: true,//默认否
+        transitionType: 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
+        lazyLoad: true,//懒加载默认否
+        firstCallback: function (i, sum, me) {
+          me.find('.dot').children().first().addClass('cur');
+        },
+        callback: function (i, sum, me) {
+          me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
+      });
+      $('#notify-txt').swipeSlide({
+        autoSwipe: true,//自动切换默认是
+        speed: 5000,//速度默认4000
+        continuousScroll: true,//默认否
+        transitionType: 'ease-in'
+      });
     });
   </script>
+  <script src="js/example.js"></script>
 </body>
 </html>

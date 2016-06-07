@@ -1,9 +1,18 @@
 body {
+  font-size: 12px;
+  color: #969696;
+  font-family: 'Helvetica Neue',STHeitiSC-Light,arial,sans-serif;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
   margin: 0;
   padding: 0;
-  font-size: 12px;
-  font-family: '黑体', '微软雅黑';
-  background: #F0EFF5;
 }
 .header .notify {
   height: 38px;
@@ -13,18 +22,95 @@ body {
 }
 .header .notify .icon {
   height: 28px;
-  width: 60px;
-  margin-top: 5px;
-  background: #86ff9c;
+  width: 38px;
   float: left;
   border-right: solid 1px #A9A9A9;
+  font-size: 24px;
+  line-height: 28px;
+  margin: 5px 0;
+  padding-left: 12px;
+  color:#FF6600;
+  -webkit-transition: font-size 0.25s ease-out 0s;
+  -moz-transition: font-size 0.25s ease-out 0s;
+  transition: font-size 0.25s ease-out 0s;
 }
 .header .notify .notify-text {
   height: 38px;
   line-height: 38px;
   color: black;
   font-size: 16px;
-  padding-left: 10px;
+  text-indent: 10px;
+}
+.content {
+  margin-top: 10px;
+  background: #ffffff;
+}
+.content figure {
+  display: block;
+  /*border: solid 1px #D9D9D9;*/
+  position: relative;
+}
+.content figure a {
+  /*width: 110px;*/
+  display: block;
+  height: 105px;
+}
+.content figure a img {
+  height: 100%;
+  width: 100%;
+  vertical-align: middle;
+}
+.content figure figcaption {
+  /*background: darkblue;*/
+}
+.content figure figcaption .title {
+  height: 24px;
+  font-size: 20px;
+  color: #333;
+  font-weight: normal;
+  letter-spacing: 1px;
+  text-indent: 5px;
+  display: block;
+}
+.content figure figcaption .desc {
+  height: 16px;
+  font-size: 10px;
+  font-style: normal;
+  display: block;
+  /*background: gold;*/
+}
+.content figure figcaption .info {
+  height: 38px;
+}
+.content figure figcaption .info .price {
+  height: 38px;
+  width: 50px;
+  font-size: 18px;
+  line-height: 40px;
+  color: #EF4F4F;
+  display: block;
   float: left;
-  background: red;
+  margin-left: 2px;
+}
+.content figure figcaption .info .price strong {
+  padding-top: 6px;
+  font-size: 20px;
+  font-weight: normal;
+}
+.content figure figcaption .info .icon {
+  font-size: 24px;
+  color:#EF4F4F;
+  float: right;
+  display: block;
+  margin-top: 2px;
+  margin-right: 10px;
+}
+.content figure figcaption .type {
+  color: #FFF;
+  font-size: 12px;
+  padding: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FF6600;
 }
