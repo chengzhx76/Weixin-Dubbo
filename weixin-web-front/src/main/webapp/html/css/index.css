@@ -1,7 +1,7 @@
 body {
   font-size: 12px;
   color: #969696;
-  font-family: 'Helvetica Neue',STHeitiSC-Light,arial,sans-serif;
+  font-family: Helvetica,Droidsansfallback;
   background: #F0EFF5;
 }
 ul, li {
@@ -47,11 +47,10 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content figure {
   display: block;
-  /*border: solid 1px #D9D9D9;*/
+  border: solid 1px #EFEFEF;
   position: relative;
 }
 .content figure a {
-  /*width: 110px;*/
   display: block;
   height: 105px;
 }
@@ -80,13 +79,14 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   /*background: gold;*/
 }
 .content figure figcaption .info {
-  height: 38px;
+  height: 30px;
+  /*background: darkblue;*/
 }
 .content figure figcaption .info .price {
   height: 38px;
   width: 50px;
-  font-size: 18px;
-  line-height: 40px;
+  font-size: 16px;
+  line-height: 35px;
   color: #EF4F4F;
   display: block;
   float: left;
@@ -94,16 +94,15 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content figure figcaption .info .price strong {
   padding-top: 6px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
 }
 .content figure figcaption .info .icon {
-  font-size: 24px;
+  font-size: 22px;
   color:#EF4F4F;
   float: right;
   display: block;
-  margin-top: 2px;
-  margin-right: 10px;
+  margin-right: 6px;
 }
 .content figure figcaption .type {
   color: #FFF;
