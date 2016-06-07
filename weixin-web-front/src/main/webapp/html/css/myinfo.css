@@ -1,0 +1,74 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  height: 120px;
+  background: #FF6600;
+}
+.header .avatar {
+  height: 80px;
+  width: 80px;
+  float: left;
+  margin-top: 20px;
+  margin-left: 20px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: #65ffd7;
+
+}
+.header .info {
+  height: 75px;
+  width: 140px;
+  font-size: 16px;
+  color: #ffffff;
+  margin-top: 20px;
+  margin-left: 10px;
+  float: left;
+  background: darkblue;
+}
+.header .info .nickname {
+  height: 25px;
+  line-height: 25px;
+  background: darkcyan;
+}
+.header .info .phone {
+  height: 25px;
+  line-height: 25px;
+  background: darkgray;
+}
+.header .info .level {
+  height: 25px;
+  line-height: 25px;
+  background: chartreuse;
+}
+.header .edit {
+  height: 35px;
+  width: 100px;
+  margin-top: 40px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  float: right;
+  background: firebrick;
+}
+.header .edit a {
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 35px;
+  text-align: center;
+  display: block;
+}
