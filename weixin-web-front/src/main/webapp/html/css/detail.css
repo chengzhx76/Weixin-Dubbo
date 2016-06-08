@@ -14,7 +14,9 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   margin: 0;
   padding: 0;
 }
-
+body {
+  position:relative;
+}
 .header .slide {
   height:220px;
 }
@@ -50,13 +52,13 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   float: left;
   font-style: normal;
 }
-.header .arrti .info .title .attach .comment {
+.header .arrti .info .title .attach .feedback-rate {
   height: 20px;
   line-height: 25px;
   display: block;
   float: left;
   font-style: normal;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 .header .arrti .collect {
   height: 48px;
@@ -106,8 +108,8 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .header .arrti .operate .price {
   height: 15px;
-  font-size: 12px;
-  margin-top: 15px;
+  font-size: 14px;
+  margin-top: 12px;
   display: block;
   float: left;
   margin-left: 6px;
@@ -149,5 +151,190 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   background:  url('../icon/11.png') no-repeat top center;
   background-size: contain;
 }
+.comment {
+  width: 100%;
+  background: #ffffff;
+}
+.comment .title {
+  height: 30px;
+  color: #3B3B3B;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 5px;
+  font-weight: normal;
+}
+.comment .total {
+  height: 20px;
+  margin-left: 5px;
+  margin-bottom: 8px;
+}
+.comment .total .comm {
+  height: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 14px;
+  float: left;
+  color: #AAAAAA;
+  text-indent: 5px;
+}
+.comment .total .comm .f-red {
+  font-style: normal;
+  margin-left: 3px;
+}
+.comment .total .count-comm {
+  height: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 12px;
+  float: left;
+  margin-left: 15px;
+  color: #AAAAAA;
+}
+.comment .weui_cell {
+  clear: both;
+}
+.comment .weui_cell .buyer {
+  height: 20px;
+  width: 100%;
+}
+
+.comment .weui_cell .buyer .avatar {
+  height: 24px;
+  width: 24px;
+  display: block;
+  float: left;
+}
+.comment .weui_cell .buyer .avatar img {
+  border-radius: 3px;
+}
+.comment .weui_cell .buyer .phone {
+  height: 20px;
+  line-height: 20px;
+  color: #9B9B9B;
+  font-size: 14px;
+  display: block;
+  float: left;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-top: 2px;
+}
+.comment .weui_cell .buyer .level {
+  height: 20px;
+  width: 20px;
+  margin-top: 2px;
+  display: block;
+  float: left;
+  text-indent: -999px;
+
+}
+.level-0 {
+  background: url('../icon/level-0.png') no-repeat left center;
+  background-size: contain;
+}
+.comment .weui_cell .buyer .date {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  display: block;
+  float:right;
+  font-style: normal;
+  margin-right: 10px;
+}
+.comment .weui_cell .comm {
+  margin-top: 8px;
+  min-height: 25px;
+}
+.comment .weui_cell .comm .comm-buyer {
+  font-size: 18px;
+  min-height: 30px;
+  line-height: 30px;
+  color: #434343;
+}
+.comment .weui_cell .comm .comm-reply {
+  min-height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  text-indent: 3px;
+  color: #EF4F4F;
+}
+.comment .more {
+  height: 28px;
+  width: 120px;
+  line-height: 28px;
+  font-size: 14px;
+  text-align: center;
+  border: solid 1px #FF651F;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #FF651F;
+  margin:0 auto;
+  margin-bottom: 20px;
+}
+
+.footer {
+  height: 45px;
+  width:100%;
+  position:fixed;
+  left:0;
+  bottom:0;
+  border-top: solid 1px #CCCCCC;
+  background: #F3F3F3;
+  /*background: darkolivegreen;*/
+}
+.footer .main {
+  height: 45px;
+}
+.footer .main .sell {
+  height: 45px;
+  font-size: 20px;
+  color: #FF6600;
+  line-height: 45px;
+  text-align: center;
+  width: 20%;
+  float: left;
+  /*background: salmon;*/
+}
+.footer .main .desc {
+  height: 45px;
+  width: 40%;
+  float: left;
+  margin-left: 5px;
+  /*background: saddlebrown;*/
+}
+.footer .main .desc .note {
+  height: 25px;
+  line-height: 30px;
+  /*background: silver;*/
+}
+.footer .main .desc .note .count {
+  font-size: 14px;
+}
+.footer .main .desc .note .state {
+  font-size: 12px;
+}
+.footer .main .desc .leaflet {
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  display: block;
+  font-style: normal;
+  /*background: firebrick;*/
+}
+.footer .main .btn {
+  height: 45px;
+  width: 25%;
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 45px;
+  text-align: center;
+  float: right;
+  background: #FF5A1E;
+}
+
+
+
+
+
+
 
 
