@@ -1,0 +1,153 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+.header .slide {
+  height:220px;
+}
+.header .arrti {
+  height: 102px;
+  background: #ffffff;
+}
+.header .arrti .info {
+  height: 60px;
+  margin-left: 5px;
+}
+.header .arrti .info .title {
+  height: 50px;
+  width: 85%;
+  float: left;
+}
+.header .arrti .info .title .name {
+  height: 30px;
+  line-height: 40px;
+  font-size: 18px;
+  font-weight: normal;
+  color: #434343;
+  display: block;
+}
+.header .arrti .info .title .attach {
+  height: 20px;
+  margin-left: 2px;
+}
+.header .arrti .info .title .attach .sales {
+  height: 20px;
+  line-height: 25px;
+  display: block;
+  float: left;
+  font-style: normal;
+}
+.header .arrti .info .title .attach .comment {
+  height: 20px;
+  line-height: 25px;
+  display: block;
+  float: left;
+  font-style: normal;
+  margin-left: 5px;
+}
+.header .arrti .collect {
+  height: 48px;
+  margin-top: 2px;
+  width: 13%;
+  float: right;
+  border-left: solid 1px #CCCCCC;
+  /*background: firebrick;*/
+}
+
+.header .arrti .collect .icon {
+  height: 28px;
+  color: #FF6600;
+  display: block;
+  font-size: 24px;
+  text-align: center;
+  /*background: rebeccapurple;*/
+}
+.header .arrti .collect .c-txt {
+  color: #666666;
+  font-size: 14px;
+  display: block;
+  margin-top: 2px;
+  text-align: center;
+}
+
+.header .arrti .operate {
+  height: 30px;
+  margin-top: 2px;
+  margin-left: 5px;
+}
+.header .arrti .operate .picon {
+  height: 20px;
+  margin-top: 6px;
+  font-size: 18px;
+  display: block;
+  float: left;
+  color: #EF4F4F;
+}
+.header .arrti .operate .sell {
+  font-size: 20px;
+  margin-top: 2px;
+  font-size: 22px;
+  display: block;
+  float: left;
+  color: #EF4F4F;
+}
+.header .arrti .operate .price {
+  height: 15px;
+  font-size: 12px;
+  margin-top: 15px;
+  display: block;
+  float: left;
+  margin-left: 6px;
+  text-decoration:line-through;
+}
+
+.header .arrti .operate .num {
+  height: 30px;
+  float: right;
+  margin-top: 2px;
+  margin-right: 15px;
+}
+.header .arrti .operate .num .count {
+  height: 30px;
+  line-height: 35px;
+  margin-left: 3px;
+  margin-right: 5px;
+  display: block;
+  float: left;
+  color: #3e3e3e;
+  font-size: 20px;
+
+}
+.header .arrti .operate .num .icon {
+  height: 30px;
+  line-height: 35px;
+  color: #FF6600;
+  display: block;
+  float: left;
+  font-size: 24px;
+  text-align: center;
+}
+.header .arrti .operate .num .subtract {
+  height: 29px;
+  width: 29px;
+  margin-top: 1px;
+  float: left;
+  text-indent: -999px;
+  background:  url('../icon/11.png') no-repeat top center;
+  background-size: contain;
+}
+
+

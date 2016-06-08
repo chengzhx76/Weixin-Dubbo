@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>详情</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/weui.css"/>
+  <link rel="stylesheet" href="css/weui2.css"/>
+  <script src="js/zepto.min.js"></script>
+  <script src="js/swipe.js"></script>
+
+  <link rel="stylesheet" href="css/detail.css">
+</head>
+<body ontouchstart>
+  <header class="header">
+    <div class="slide" id="slideshow">
+      <ul>
+        <li><a href="#"><img src="images/swiper-1.jpg" alt=""></a></li>
+        <li><a href="#"><img src="images/swiper-2.jpg" alt=""></a></li>
+        <li><a href="#"><img src="images/swiper-3.jpg" alt=""></a></li>
+      </ul>
+      <div class="dot"><span></span><span></span><span></span></div>
+    </div>
+    <div class="arrti">
+
+      <div class="info">
+        <div class="title">
+          <strong class="name">大蒸馍 —— 无添加剂-绿色</strong>
+          <div class="attach">
+            <em class="sales">月售112个</em>
+            <em class="comment">好评率97%</em>
+          </div>
+        </div>
+        <div class="collect">
+          <span class="icon icon-74"></span>
+          <span class="c-txt">收藏</span>
+        </div>
+      </div>
+
+      <div class="operate">
+        <span class="picon">￥</span><span class="sell">0.5</span>
+        <span class="price">￥0.5</span>
+        <div class="num">
+          <span class="subtract">-</span>
+          <span class="count">1</span>
+          <span class="add icon icon-78"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <article class="weui_article content">
+
+  </article>
+
+  <footer>
+    <nav>
+
+    </nav>
+  </footer>
+  <script>
+    $(function () {
+      $('#slideshow').swipeSlide({
+        autoSwipe: true,//自动切换默认是
+        speed: 3000,//速度默认4000
+        continuousScroll: true,//默认否
+        transitionType: 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
+        lazyLoad: true,//懒加载默认否
+        firstCallback: function (i, sum, me) {
+          me.find('.dot').children().first().addClass('cur');
+        },
+        callback: function (i, sum, me) {
+          me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
+      });
+    });
+  </script>
+  <script src="js/example.js"></script>
+</body>
+</html>
