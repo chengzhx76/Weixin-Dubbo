@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>结算</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="style/weui.css"/>
+  <link rel="stylesheet" href="css/weui2.css"/>
+  <script src="js/zepto.min.js"></script>
+  <script src="js/swipe.js"></script>
+
+  <link rel="stylesheet" href="css/payment.css">
+</head>
+<body ontouchstart>
+  <article class="content">
+    <section class="addr">
+      <h1 class="title">收货信息</h1>
+      <div class="main">
+        <div class="weui_panel weui_panel_access detail">
+          <a class="weui_panel_ft m-addr" href="javascript:void(0);">
+            <div class="name-phone">
+              <div class="name">
+                <i class="icon icon-80"></i>
+                <span>张三</span>
+              </div>
+              <div class="phone">
+                <i class="icon icon-95"></i>
+                <span>18600536683</span>
+              </div>
+            </div>
+            <div class="d-addr">
+              刘楼张三家
+            </div>
+          </a>
+          <a class="weui_panel_ft m-date" href="javascript:void(0);">
+            <div class="desc">
+              收货时间
+            </div>
+            <div class="d-date">
+              请选择时间
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="pay">
+      <h1 class="title">支付方式</h1>
+      <div class="main">
+        <div class="detail">
+          <div class="weui_cells weui_cells_radio weixin">
+            <label class="weui_cell weui_check_label" for="x11">
+              <div class="weui_cell_bd weui_cell_primary">
+                <i class="icon icon-17"></i>
+                <p>微信支付（推荐）</p>
+              </div>
+              <div class="weui_cell_ft" >
+                <input type="radio" class="weui_check" name="radio1" id="x11">
+                <span class="weui_icon_checked"></span>
+
+              </div>
+            </label>
+          </div>
+          <div class="weui_panel weui_panel_access">
+            <a class="weui_panel_ft" href="javascript:void(0);">更多</a>
+          </div>
+          <div class="more">
+            <div class="weui_cells weui_cells_radio ali">
+              <label class="weui_cell weui_check_label" for="x22">
+                <div class="weui_cell_bd weui_cell_primary">
+                  <i class="icon icon-1"></i>
+                  <p>支付宝</p>
+                </div>
+                <div class="weui_cell_ft">
+                  <input type="radio" class="weui_check" name="radio1" id="x22">
+                  <span class="weui_icon_checked"></span>
+                </div>
+              </label>
+            </div>
+            <div class="weui_cells weui_cells_radio hdfk">
+              <label class="weui_cell weui_check_label" for="x33">
+                <div class="weui_cell_bd weui_cell_primary">
+                  <i class="icon icon-5"></i>
+                  <p>货到付款</p>
+                </div>
+                <div class="weui_cell_ft">
+                  <input type="radio" class="weui_check" name="radio1" id="x33">
+                  <span class="weui_icon_checked"></span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="point">
+      <div class="weui_cells weui_cells_form">
+        <div class="weui_cell weui_cell_switch">
+          <div class="txt weui_cell_hd weui_cell_primary">
+            <div class="txt">积分</div>
+            <div class="total">
+              共 <span>112</span> 积分
+            </div>
+          </div>
+          <div class="weui_cell_ft">
+            <input class="weui_switch" type="checkbox" checked/>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="remark">
+      <div class="weui_cell">
+        <div class="weui_cell_bd weui_cell_primary">
+          <textarea class="weui_textarea" placeholder="订单备注（60字以内）" rows="3"></textarea>
+          <div class="weui_textarea_counter"><span id='textarea_num'>剩余60字</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cost">
+      <h1 class="title">费用明细</h1>
+      <div class="main">
+        <div class="item-list weui_panel weui_panel_access">
+          <a class="weui_panel_ft" href="javascript:void(0);">
+            <div class="imgs">
+              <img src="xx.jpg">
+              <img src="xx.jpg">
+            </div>
+            <div class="omit">
+              <i class="dot"></i>
+              <i class="dot"></i>
+              <i class="dot"></i>
+            </div>
+            <div class="count">
+              共<span>5</span>件
+            </div>
+          </a>
+        </div>
+        <div class="amount">
+          <div class="m-wrap">
+            <div class="a-product">
+              <span class="txt">商品金额</span>
+              <em class="price">￥6.50</em>
+            </div>
+            <div class="a-transport">
+              <span class="txt">运费</span>
+              <em class="price">￥0.50</em>
+            </div>
+            <div class="a-point">
+              <span class="txt">积分抵销</span>
+              <em class="price">-￥0.00</em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </article>
+
+  <footer class="footer">
+    <div class="main">
+      <div class="price"><span class="txt">应付金额:￥</span><span class="total">5.50元</span></div>
+      <div class="submit">去付款</div>
+    </div>
+  </footer>
+  <script>
+    $(function(){
+      $(".weui_textarea").on("input paste" , function(){
+        var num_left=60-$(this).val().length;
+        if(num_left<0){
+          $("#textarea_num").text("超过"+(-num_left)+"字");
+          $("#textarea_num").css("color","#E44443");
+        }else{
+          $("#textarea_num").text("剩余"+(num_left)+"字");
+          $("#textarea_num").css("color","#999999");
+        }
+      });
+    })
+  </script>
+</body>
+</html>
