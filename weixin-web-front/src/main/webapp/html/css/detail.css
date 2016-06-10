@@ -60,7 +60,7 @@ body {
   font-style: normal;
   margin-left: 15px;
 }
-.header .arrti .collect {
+.header .arrti .detail {
   height: 48px;
   margin-top: 2px;
   width: 13%;
@@ -69,15 +69,15 @@ body {
   /*background: firebrick;*/
 }
 
-.header .arrti .collect .icon {
+.header .arrti .detail .icon {
   height: 28px;
-  color: #FF6600;
+  color: #8b7f0f;
   display: block;
   font-size: 24px;
   text-align: center;
   /*background: rebeccapurple;*/
 }
-.header .arrti .collect .c-txt {
+.header .arrti .detail .d-txt {
   color: #666666;
   font-size: 14px;
   display: block;
@@ -153,6 +153,7 @@ body {
 }
 .comment {
   width: 100%;
+  margin-bottom: 45px;
   background: #ffffff;
 }
 .comment .title {
@@ -205,7 +206,7 @@ body {
   float: left;
 }
 .comment .weui_cell .buyer .avatar img {
-  border-radius: 3px;
+  border-radius: 100%;
 }
 .comment .weui_cell .buyer .phone {
   height: 20px;
@@ -225,7 +226,6 @@ body {
   display: block;
   float: left;
   text-indent: -999px;
-
 }
 .level-0 {
   background: url('../icon/level-0.png') no-repeat left center;
@@ -290,15 +290,17 @@ body {
   color: #FF6600;
   line-height: 45px;
   text-align: center;
-  width: 20%;
   float: left;
+  padding-left: 5px;
+  padding-right: 5px;
   /*background: salmon;*/
 }
 .footer .main .desc {
   height: 45px;
-  width: 40%;
+  /*width: 40%;*/
   float: left;
-  margin-left: 5px;
+  padding-left: 4px;
+  padding-right: 2px;
   /*background: saddlebrown;*/
 }
 .footer .main .desc .note {
@@ -321,13 +323,64 @@ body {
   /*background: firebrick;*/
 }
 .footer .main .btn {
+  float: right;
+  background: fuchsia;
+}
+.footer .main .btn .collect {
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: darkkhaki;
+}
+.footer .main .btn .collect .icon {
+  height: 25px;
+  color: #FF6600;
+  display: block;
+  font-size: 22px;
+  text-align: center;
+}
+
+.footer .main .btn .collect .c-txt {
+  color: #666666;
+  font-size: 14px;
+  display: block;
+  margin-top: 2px;
+  text-align: center;
+}
+.header .arrti .collect {
+  /*height: 48px;*/
+  /*margin-top: 2px;*/
+  /*width: 13%;*/
+  /*float: right;*/
+  /*border-left: solid 1px #CCCCCC;*/
+  /*background: firebrick;*/
+}
+
+/*.header .arrti .collect .icon {
+  height: 28px;
+  color: #FF6600;
+  display: block;
+  font-size: 24px;
+  text-align: center;
+  !*background: rebeccapurple;*!
+}
+.header .arrti .collect .c-txt {
+  color: #666666;
+  font-size: 14px;
+  display: block;
+  margin-top: 2px;
+  text-align: center;
+}*/
+
+
+.footer .main .btn .add {
   height: 45px;
-  width: 25%;
   font-size: 18px;
   color: #ffffff;
   line-height: 45px;
   text-align: center;
-  float: right;
+  float: left;
+  padding-left: 5px;
   background: #FF5A1E;
 }
 

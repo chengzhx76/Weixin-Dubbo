@@ -2,6 +2,7 @@ body {
   font-size: 12px;
   color: #969696;
   font-family: Helvetica,Droidsansfallback;
+  position:relative;
   background: #F0EFF5;
 }
 ul, li {
@@ -119,4 +120,51 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 
 .into {
   margin-top: 60px;
+  margin-bottom: 70px;
 }
+
+
+.cart {
+  height: 65px;
+  width: 65px;
+  margin: 0 auto;
+  display: block;
+  position:fixed;
+  left:0px;
+  right: 0px;
+  /*bottom: 16px;*/
+  bottom: 10px;
+  border-top: solid 1px #cccccc;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  /*border-radius: 50%;*/
+  background: #F7F7FA;
+}
+.cart .c-icon {
+  height: 53px;
+  width: 53px;
+  margin: 0 auto;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #FF5A1E;
+}
+.cart .c-icon .icon {
+  height: 40px;
+  width: 100%;
+  font-size: 36px;
+  color: #ffffff;
+  display: block;
+  text-align: center;
+}
+.cart .c-txt {
+  height: 22px;
+  width: 100%;
+  line-height: 25px;
+  color: #9E9E9F;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+}
+
+
+
