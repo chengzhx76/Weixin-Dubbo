@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商城</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="style/weui.css"/>
+    <script src="js/zepto.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#main").load("load1.html");
+            $("#btn1").click(function() {
+                $("#main").load("load1.html",function(response, status, xhr){
+//                    alert(response+" "+status+" "+xhr);
+                });
+            });
+            $("#btn2").click(function() {
+                $("#main").load("load2.html",function(response, status, xhr){
+//                    alert(response+" "+status+" "+xhr);
+                });
+            });
+        });
+    </script>
+    <style>
+        body {
+        }
+        .header {
+            height: 40px;
+            background: darkkhaki;
+        }
+        .main {
+            min-height:600px;
+            background: floralwhite;
+        }
+        .main .nav {
+            height: 500px;
+            width: 20%;
+            float: left;
+            background: salmon;
+        }
+        .main .nav .product {
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            display: block;
+            width: 100%;
+            background: darkorange;
+        }
+        .main .nav .product-2 {
+            background: #cccccc;
+        }
+        .main .content {
+            height: 500px;
+            width: 80%;
+            float: right;
+            background: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+
+    </header>
+    <div class="main">
+        <aside class="nav">
+            <a id="btn1" class="product product-1" href="javascript:void(0);">1</a>
+            <a id="btn2" class="product product-2" href="javascript:void(0);">2</a>
+        </aside>
+        <section id="main" class="content">content</section>
+    </div>
+
+</body>
+</html>

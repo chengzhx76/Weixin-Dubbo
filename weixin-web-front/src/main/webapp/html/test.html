@@ -5,23 +5,23 @@
     <title>列表</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="style/weui.css"/>
-    <script src="zepto.min.js"></script>
+    <script src="js/zepto.min.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#main").load("load.html",function(response, status, xhr){
+//                alert(response+" "+status+" "+xhr);
+            });
+        });
+    </script>
 </head>
 
 <body ontouchstart>
 <div class="main">
-    <div class="weui_cells weui_cells_radio">
-        <label class="weui_cell weui_check_label" for="x11">
-            <div class="weui_cell_bd weui_cell_primary">
-                <p>微信支付（推荐）</p>
-            </div>
-            <div class="weui_cell_ft">
-                <input type="radio" class="weui_check" name="radio1" id="x11">
-                <span class="weui_icon_checked"></span>
-            </div>
-        </label>
+    <div id="main" class="main">
+
     </div>
 </div>
 </body>
+
 </html>
