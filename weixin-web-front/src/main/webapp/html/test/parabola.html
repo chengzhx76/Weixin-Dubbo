@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="zepto.js"></script>
+  <script src="parabola.js"></script>
+  <style>
+    .boll {
+      position: absolute;
+      left: 100px;
+      top: 350px;
+      border-radius: 50px;
+      width: 50px;
+      height: 50px;
+      background: red;
+    }
+
+    .target {
+      position: absolute;
+      left: 600px;
+      top: 180px;
+      border-radius: 50px;
+      width: 50px;
+      height: 50px;
+      background: #CDCDCD;
+    }
+  </style>
+</head>
+<body>
+<div class="btns" style="margin-top:20px">
+  <a href="#" id="reset">重置</a>
+  <a href="#" id="run">开始运动</a>
+  <a href="#" id="stop">停止运动</a>
+  <a href="#" id="setOptions">设置配置参数</a>
+</div>
+<div id="boll" class="boll"></div>
+<div id="target" class="target"></div>
+
+<script>
+  var bool = new Parabola({
+    el: "#boll",
+    offset: [500, 100],
+    duration: 500,
+    curvature: 0.005,
+    callback: function () {
+      // alert("完成后回调")
+    },
+    stepCallback: function (x, y) {
+
+      $("<div>").appendTo("body").css({
+        "position": "absolute",
+        "top": this.$elTop + y + 'px',
+        "left": this.$elLeft + x + 'px',
+        "background-color": "#CDCDCD",
+        "width": "5px",
+        "height": "5px",
+        "border-radius": "5px"
+      });
+
+    }
+  });
+
+  $("#reset").click(function (event) {
+    event.preventDefault();
+    bool.reset();
+  });
+  $("#run").click(function (event) {
+    event.preventDefault();
+    bool.start();
+  });
+  $("#stop").click(function (event) {
+    event.preventDefault();
+    bool.stop();
+  });
+  $("#setOptions").click(function (event) {
+    event.preventDefault();
+    bool.setOptions({
+      targetEl: $("#target"),
+      curvature: 0.001,
+      duration: 1000
+    });
+  });
+
+</script>
+</body>
+</html>
