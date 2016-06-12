@@ -1,74 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>商城</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <link rel="stylesheet" href="style/weui.css"/>
-    <script src="js/zepto.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#main").load("load1.html");
-            $("#btn1").click(function() {
-                $("#main").load("load1.html",function(response, status, xhr){
-//                    alert(response+" "+status+" "+xhr);
-                });
-            });
-            $("#btn2").click(function() {
-                $("#main").load("load2.html",function(response, status, xhr){
-//                    alert(response+" "+status+" "+xhr);
-                });
-            });
-        });
-    </script>
-    <style>
-        body {
-        }
-        .header {
-            height: 40px;
-            background: darkkhaki;
-        }
-        .main {
-            min-height:600px;
-            background: floralwhite;
-        }
-        .main .nav {
-            height: 500px;
-            width: 20%;
-            float: left;
-            background: salmon;
-        }
-        .main .nav .product {
-            height: 60px;
-            line-height: 60px;
-            text-align: center;
-            display: block;
-            width: 100%;
-            background: darkorange;
-        }
-        .main .nav .product-2 {
-            background: #cccccc;
-        }
-        .main .content {
-            height: 500px;
-            width: 80%;
-            float: right;
-            background: darkcyan;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>商城</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <link rel="stylesheet" href="style/weui.css"/>
+  <link rel="stylesheet" href="css/weui2.css"/>
+  <link rel="stylesheet" href="css/mall.css"/>
+  <link rel="stylesheet" href="css/load.css"/>
+  <script src="js/zepto.min.js"></script>
 </head>
 <body>
-    <header class="header">
+<header class="header">
+  欢迎光临！
+</header>
+<div class="main">
+  <aside class="nav">
+    <a id="btn1" class="product product-1 active" href="javascript:void(0);">特惠主食</a>
+    <a id="btn2" class="product product-2" href="javascript:void(0);">粮油调味</a>
+    <a id="btn3" class="product product-3" href="javascript:void(0);">日用清洁</a>
+    <a id="btn4" class="product product-4" href="javascript:void(0);">手机充值</a>
 
-    </header>
-    <div class="main">
-        <aside class="nav">
-            <a id="btn1" class="product product-1" href="javascript:void(0);">1</a>
-            <a id="btn2" class="product product-2" href="javascript:void(0);">2</a>
-        </aside>
-        <section id="main" class="content">content</section>
-    </div>
+  </aside>
+  <section id="main" class="content">content</section>
+</div>
+<footer class=" weui_tab tab-bottom" style="height:55px;">
+  <nav class="weui_tabbar">
+    <a href="javascript:;" class="weui_tabbar_item">
+      <div class="weui_tabbar_icon">
+        <img src="icon/icon_nav_button.png" alt="">
+      </div>
+      <p class="weui_tabbar_label">首页</p>
+    </a>
+    <a href="javascript:;" class="weui_tabbar_item weui_bar_item_on">
+      <div class="weui_tabbar_icon">
+        <img src="icon/icon_nav_msg.png" alt="">
+      </div>
+      <p class="weui_tabbar_label">商城</p>
+    </a>
+    <a href="javascript:;" class="weui_tabbar_item">
+      <!--<div class="weui_tabbar_icon">-->
+      <!--<img src="icon/icon_nav_cell.png" alt="">-->
+      <!--</div>-->
+      <!--<p class="weui_tabbar_label">购物车</p>-->
+    </a>
+    <a href="javascript:;" class="weui_tabbar_item">
+      <div class="weui_tabbar_icon">
+        <img src="icon/icon_nav_article.png" alt="">
+      </div>
+      <p class="weui_tabbar_label">订单</p>
+    </a>
+    <a href="javascript:;" class="weui_tabbar_item">
+      <div class="weui_tabbar_icon">
+        <img src="icon/icon_nav_cell.png" alt="">
+      </div>
+      <p class="weui_tabbar_label">我</p>
+    </a>
+  </nav>
+</footer>
+
+<a href="javascript:;" class="cart">
+  <div class="c-icon">
+    <i class="icon icon-83"></i>
+  </div>
+  <!--<p class="c-txt">购物车</p>-->
+</a>
 
 </body>
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#main").load("load1.html");
+    $("#btn1").click(function () {
+      $("#main").load("load1.html", function (response, status, xhr) {
+//                    alert(response+" "+status+" "+xhr);
+      });
+    });
+    $("#btn2").click(function () {
+      $("#main").load("load2.html", function (response, status, xhr) {
+//                    alert(response+" "+status+" "+xhr);
+      });
+    });
+  });
+</script>
 </html>
