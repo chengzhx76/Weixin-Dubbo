@@ -580,9 +580,10 @@ a:active {
 .bd.spacing {
     padding: 0 15px;
 }
- .bd {
-            padding: 0 15px;
-        }
+
+.bd {
+  padding: 0 15px;
+}
 .button_sp_area {
 	padding:10px 0;
 	width:60%;

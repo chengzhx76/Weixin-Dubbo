@@ -18,6 +18,13 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .header .slide {
   height: 160px;
 }
+.header .slide .dot span{
+  background: #ffffff;
+}
+.header .slide .dot .cur{
+  background-color:#FF5A1E;
+  border: 1px solid #FF5A1E;
+}
 .header .notify {
   height: 38px;
   background: #FFFFFF;
@@ -48,6 +55,9 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .content {
   margin-top: 10px;
   background: #ffffff;
+}
+.content .bd {
+  padding: 0 2px;
 }
 .content figure {
   display: block;

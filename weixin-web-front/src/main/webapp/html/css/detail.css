@@ -20,6 +20,13 @@ body {
 .header .slide {
   height:220px;
 }
+.header .slide .dot span{
+  background: #ffffff;
+}
+.header .slide .dot .cur{
+  background-color:#FF5A1E;
+  border: 1px solid #FF5A1E;
+}
 .header .arrti {
   height: 102px;
   background: #ffffff;
