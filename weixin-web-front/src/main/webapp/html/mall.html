@@ -20,19 +20,18 @@
     <a id="btn2" class="product product-2" href="javascript:void(0);">粮油调味</a>
     <a id="btn3" class="product product-3" href="javascript:void(0);">日用清洁</a>
     <a id="btn4" class="product product-4" href="javascript:void(0);">手机充值</a>
-
   </aside>
   <section id="main" class="content">content</section>
 </div>
 <footer class=" weui_tab tab-bottom" style="height:55px;">
   <nav class="weui_tabbar">
-    <a href="javascript:;" class="weui_tabbar_item">
+    <a href="index.html" class="weui_tabbar_item">
       <div class="weui_tabbar_icon">
         <img src="icon/icon_nav_button.png" alt="">
       </div>
       <p class="weui_tabbar_label">首页</p>
     </a>
-    <a href="javascript:;" class="weui_tabbar_item weui_bar_item_on">
+    <a href="mall.html" class="weui_tabbar_item weui_bar_item_on">
       <div class="weui_tabbar_icon">
         <img src="icon/icon_nav_msg.png" alt="">
       </div>
@@ -44,13 +43,13 @@
       <!--</div>-->
       <!--<p class="weui_tabbar_label">购物车</p>-->
     </a>
-    <a href="javascript:;" class="weui_tabbar_item">
+    <a href="javascript:;" class="alert weui_tabbar_item">
       <div class="weui_tabbar_icon">
         <img src="icon/icon_nav_article.png" alt="">
       </div>
       <p class="weui_tabbar_label">订单</p>
     </a>
-    <a href="javascript:;" class="weui_tabbar_item">
+    <a href="myinfo.html" class="weui_tabbar_item">
       <div class="weui_tabbar_icon">
         <img src="icon/icon_nav_cell.png" alt="">
       </div>
@@ -58,8 +57,7 @@
     </a>
   </nav>
 </footer>
-
-<a href="javascript:;" class="cart">
+<a href="javascript:;" class="alert cart">
   <div class="c-icon">
     <i class="icon icon-83"></i>
   </div>
@@ -81,6 +79,10 @@
       $("#main").load("load2.html", function (response, status, xhr) {
 //                    alert(response+" "+status+" "+xhr);
       });
+    });
+
+    $(".alert").click(function(){
+      alert("还没做！");
     });
   });
 </script>

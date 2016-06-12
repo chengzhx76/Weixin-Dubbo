@@ -193,6 +193,7 @@ body {
 }
 .comment .weui_cell {
   clear: both;
+  display: block;
 }
 .comment .weui_cell .buyer {
   height: 20px;
@@ -324,9 +325,10 @@ body {
 }
 .footer .main .btn {
   float: right;
-  background: fuchsia;
+  /*background: fuchsia;*/
 }
 .footer .main .btn .collect {
+  height: 48px;
   float: left;
   padding-left: 5px;
   padding-right: 5px;
@@ -337,6 +339,7 @@ body {
   color: #FF6600;
   display: block;
   font-size: 22px;
+  margin-top: -3px;
   text-align: center;
 }
 

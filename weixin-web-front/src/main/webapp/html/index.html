@@ -53,7 +53,7 @@
       <div class="row">
         <div class="col-33">
           <figure>
-            <a href="javascript:;"><img src="images/zm.jpg" width="110" height="105"></a>
+            <a href="detail.html"><img src="images/zm.jpg" width="110" height="105"></a>
             <figcaption>
               <strong class="title">蒸馍</strong>
               <!--<em class="desc">0.25g/个</em>-->
@@ -69,7 +69,7 @@
         </div>
         <div class="col-33">
           <figure>
-            <a href="javascript:;"><img src="images/hj.jpg" width="110" height="105"></a>
+            <a href="detail.html"><img src="images/hj.jpg" width="110" height="105"></a>
             <figcaption>
               <strong class="title">花卷</strong>
               <!--<em class="desc">0.25g/个</em>-->
@@ -79,13 +79,13 @@
                 </span>
                 <span id="add-2" class="icon icon-78"></span>
               </div>
-              <div class="type">推荐</div>
+              <div class="tag">推荐</div>
             </figcaption>
           </figure>
         </div>
         <div class="col-33">
           <figure>
-            <a href="javascript:;"><img src="images/tb.jpg" width="110" height="105"></a>
+            <a href="detail.html"><img src="images/tb.jpg" width="110" height="105"></a>
             <figcaption>
               <strong class="title">糖包</strong>
               <!--<em class="desc">0.25g/个</em>-->
@@ -95,7 +95,7 @@
                 </span>
                 <span id="add-3" class="icon icon-78"></span>
               </div>
-              <div class="type">推荐</div>
+              <div class="tag">推荐</div>
             </figcaption>
           </figure>
         </div>
@@ -104,18 +104,18 @@
   </article>
 
   <div class="bd spacing">
-    <a href="javascript:;" class="into weui_btn bg-orange">进入商城</a>
+    <a href="mall.html" class="into weui_btn bg-orange">进入商城</a>
   </div>
 
   <footer class=" weui_tab tab-bottom" style="height:55px;">
     <nav class="weui_tabbar">
-      <a href="javascript:;" class="weui_tabbar_item weui_bar_item_on">
+      <a href="index.html" class="weui_tabbar_item weui_bar_item_on">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_button.png" alt="">
         </div>
         <p class="weui_tabbar_label">首页</p>
       </a>
-      <a href="javascript:;" class="weui_tabbar_item">
+      <a href="mall.html" class="weui_tabbar_item">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_msg.png" alt="">
         </div>
@@ -123,17 +123,17 @@
       </a>
       <a href="javascript:;" class="weui_tabbar_item">
         <!--<div class="weui_tabbar_icon">-->
-          <!--<img src="icon/icon_nav_cell.png" alt="">-->
+        <!--<img src="icon/icon_nav_cell.png" alt="">-->
         <!--</div>-->
         <!--<p class="weui_tabbar_label">购物车</p>-->
       </a>
-      <a href="javascript:;" class="weui_tabbar_item">
+      <a href="javascript:;" class="alert weui_tabbar_item">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_article.png" alt="">
         </div>
         <p class="weui_tabbar_label">订单</p>
       </a>
-      <a href="javascript:;" class="weui_tabbar_item">
+      <a href="myinfo.html" class="weui_tabbar_item weui_bar_item_on">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_cell.png" alt="">
         </div>
@@ -141,7 +141,7 @@
       </a>
     </nav>
   </footer>
-  <a href="javascript:;" class="cart">
+  <a href="javascript:;" class="alert cart">
     <div class="c-icon">
       <i class="icon icon-83"></i>
     </div>
@@ -167,6 +167,10 @@
         speed: 5000,//速度默认4000
         continuousScroll: true,//默认否
         transitionType: 'ease-in'
+      });
+
+      $(".alert").click(function(){
+        alert("还没做！");
       });
     });
   </script>

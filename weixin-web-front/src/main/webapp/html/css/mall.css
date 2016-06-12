@@ -36,6 +36,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   height: 50px;
   font-size: 14px;
   color: #464546;
+  letter-spacing: 1px;
   line-height: 50px;
   text-align: center;
   display: block;

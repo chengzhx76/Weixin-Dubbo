@@ -182,36 +182,33 @@
     </section>
   </article>
 
-
-
-
-  <footer class="footer weui_tab tab-bottom" style="height:55px;">
+  <footer class=" weui_tab tab-bottom" style="height:55px;">
     <nav class="weui_tabbar">
-      <a href="javascript:;" class="weui_tabbar_item">
+      <a href="index.html" class="weui_tabbar_item">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_button.png" alt="">
         </div>
         <p class="weui_tabbar_label">首页</p>
       </a>
-      <a href="javascript:;" class="weui_tabbar_item">
+      <a href="mall.html" class="weui_tabbar_item">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_msg.png" alt="">
         </div>
         <p class="weui_tabbar_label">商城</p>
       </a>
       <a href="javascript:;" class="weui_tabbar_item">
-        <!--<div class="weui_tabbar_icon">
-          <img src="icon/icon_nav_cell.png" alt="">
-        </div>
-        <p class="weui_tabbar_label">购物车</p>-->
+        <!--<div class="weui_tabbar_icon">-->
+        <!--<img src="icon/icon_nav_cell.png" alt="">-->
+        <!--</div>-->
+        <!--<p class="weui_tabbar_label">购物车</p>-->
       </a>
-      <a href="javascript:;" class="weui_tabbar_item">
+      <a href="javascript:;" class="alert weui_tabbar_item">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_article.png" alt="">
         </div>
         <p class="weui_tabbar_label">订单</p>
       </a>
-      <a href="javascript:;" class="weui_tabbar_item weui_bar_item_on">
+      <a href="myinfo.html" class="weui_tabbar_item weui_bar_item_on">
         <div class="weui_tabbar_icon">
           <img src="icon/icon_nav_cell.png" alt="">
         </div>
@@ -219,14 +216,18 @@
       </a>
     </nav>
   </footer>
-  <a href="javascript:;" class="cart">
+  <a class="alert cart" href="javascript:;">
     <div class="c-icon">
       <i class="icon icon-83"></i>
     </div>
     <!--<p class="c-txt">购物车</p>-->
   </a>
   <script>
-
+    $(function(){
+        $(".alert").click(function(){
+          alert("还没做！");
+        });
+    });
   </script>
   <script src="js/example.js"></script>
 </body>
