@@ -95,7 +95,7 @@
               <!--<em class="desc">0.25g/个</em>-->
               <div class="info">
                 <span class="price">
-                  ￥<strong>0.5</strong>
+                  ￥<strong>0.6</strong>
                 </span>
                 <span class="add icon icon-78"></span>
               </div>
@@ -185,6 +185,7 @@
       $(".add").click(function (event) {
         event.preventDefault();
         var imgSrc = $(this).parents(".item").children('.pic').children('img').attr('src');
+        var price = $(this).siblings(".price").children("strong").text();
         var imgObj = $('<img src="' + imgSrc + '">').appendTo("body").css({
           "width": "30px",
           "height": "30px",
@@ -196,7 +197,8 @@
         var bool = new Parabola({
           el: imgObj,
           callback: function () {
-
+//            alert(data);
+            console.log(price);
           },
           stepCallback: function (x, y) {
             /*$("<div>").appendTo("body").css({

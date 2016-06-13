@@ -40,7 +40,6 @@ Parabola.prototype = {
 		this.duration = this.opts.duration;
 		// 抛物线曲率
 		this.curvature = this.opts.curvature;
-		
 		// 计时器
 		this.timerId = null;
 		/*
