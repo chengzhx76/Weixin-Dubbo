@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/weui2.css"/>
   <script src="js/zepto.min.js"></script>
   <script src="js/swipe.js"></script>
+  <script src="js/parabola.js"></script>
 
   <link rel="stylesheet" href="css/index.css">
 </head>
@@ -49,11 +50,14 @@
 
   <article class="weui_article content">
     <h1>商品列表</h1>
+    <!--<div id="boll" class="boll">-->
+      <!--<img src="test/1.jpg" style="height: 100px;width: 100px">-->
+    <!--</div>-->
     <div class="bd">
       <div class="row">
         <div class="col-33">
-          <figure>
-            <a href="detail.html"><img src="images/zm.jpg" width="110" height="105"></a>
+          <figure class="item">
+            <a class="pic" href="detail.html"><img src="images/zm.jpg" width="110" height="105"></a>
             <figcaption>
               <strong class="title">蒸馍</strong>
               <!--<em class="desc">0.25g/个</em>-->
@@ -61,15 +65,15 @@
                 <span class="price">
                   ￥<strong>0.5</strong>
                 </span>
-                <span id="add-1" class="icon icon-78"></span>
+                <span class="add icon icon-78"></span>
               </div>
               <div class="tag">推荐</div>
             </figcaption>
           </figure>
         </div>
         <div class="col-33">
-          <figure>
-            <a href="detail.html"><img src="images/hj.jpg" width="110" height="105"></a>
+          <figure class="item">
+            <a class="pic" href="detail.html"><img src="images/hj.jpg" width="110" height="105"></a>
             <figcaption>
               <strong class="title">花卷</strong>
               <!--<em class="desc">0.25g/个</em>-->
@@ -77,15 +81,15 @@
                 <span class="price">
                   ￥<strong>0.5</strong>
                 </span>
-                <span id="add-2" class="icon icon-78"></span>
+                <span class="add icon icon-78"></span>
               </div>
               <div class="tag">推荐</div>
             </figcaption>
           </figure>
         </div>
         <div class="col-33">
-          <figure>
-            <a href="detail.html"><img src="images/tb.jpg" width="110" height="105"></a>
+          <figure class="item">
+            <a class="pic" href="detail.html"><img src="images/tb.jpg" width="110" height="105"></a>
             <figcaption>
               <strong class="title">糖包</strong>
               <!--<em class="desc">0.25g/个</em>-->
@@ -93,7 +97,7 @@
                 <span class="price">
                   ￥<strong>0.5</strong>
                 </span>
-                <span id="add-3" class="icon icon-78"></span>
+                <span class="add icon icon-78"></span>
               </div>
               <div class="tag">推荐</div>
             </figcaption>
@@ -107,7 +111,7 @@
     <a href="mall.html" class="into weui_btn bg-orange">进入商城</a>
   </div>
 
-  <footer class=" weui_tab tab-bottom" style="height:55px;">
+  <footer class="weui_tab tab-bottom" style="height:55px;">
     <nav class="weui_tabbar">
       <a href="index.html" class="weui_tabbar_item weui_bar_item_on">
         <div class="weui_tabbar_icon">
@@ -141,7 +145,7 @@
       </a>
     </nav>
   </footer>
-  <a href="javascript:;" class="alert cart">
+  <a id="shopCart" href="javascript:;" class="alert cart">
     <div class="c-icon">
       <i class="icon icon-83"></i>
     </div>
@@ -149,6 +153,10 @@
   </a>
   <script>
     $(function () {
+      $(".add").click(function () {
+//        var imgSrc = $(this).parents(".good").children('.pic').children('img').attr('src');
+//        alert(imgSrc);
+      });
       $('#slideshow').swipeSlide({
         autoSwipe: true,//自动切换默认是
         speed: 3000,//速度默认4000
@@ -172,6 +180,51 @@
       $(".alert").click(function(){
         alert("还没做！");
       });
+
+      // 购买
+      $(".add").click(function (event) {
+        event.preventDefault();
+        var imgSrc = $(this).parents(".item").children('.pic').children('img').attr('src');
+        var imgObj = $('<img src="' + imgSrc + '">').appendTo("body").css({
+          "width": "30px",
+          "height": "30px",
+          "border-radius": "50px",
+          "position": "absolute",
+          "top": toInteger($(this).offset().top) + toInteger($(this).css("width"))/2-15,
+          "left": toInteger($(this).offset().left)+ toInteger($(this).css("height"))/2-15,
+        });
+        var bool = new Parabola({
+          el: imgObj,
+          callback: function () {
+
+          },
+          stepCallback: function (x, y) {
+            /*$("<div>").appendTo("body").css({
+             "position": "absolute",
+             "top": this.$elTop + y + 'px',
+             "left": this.$elLeft + x + 'px',
+             "background-color": "#CDCDCD",
+             "width": "5px",
+             "height": "5px",
+             "border-radius": "5px"
+             });*/
+          }
+        });
+        // 设置配置参数
+        bool.setOptions({
+          targetEl: $("#shopCart"),
+          curvature: 0.01,
+          duration: 600
+        });
+        // 开始运动
+        bool.start();
+      });
+
+      function toInteger(text){
+        text = parseInt(text);
+        return isFinite(text) ? text : 0;
+      }
+
     });
   </script>
   <script src="js/example.js"></script>

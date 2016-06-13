@@ -132,22 +132,18 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   margin-top: 60px;
   margin-bottom: 70px;
 }
-
-
 .cart {
   height: 65px;
   width: 65px;
   margin: 0 auto;
   display: block;
   position:fixed;
-  left:0px;
-  right: 0px;
-  /*bottom: 16px;*/
+  left:0;
+  right: 0;
   bottom: 10px;
   border-top: solid 1px #cccccc;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
-  /*border-radius: 50%;*/
   background: #F7F7FA;
 }
 .cart .c-icon {
