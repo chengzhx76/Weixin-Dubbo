@@ -145,12 +145,18 @@
       </a>
     </nav>
   </footer>
-  <a id="shopCart" href="javascript:;" class="alert cart">
-    <div class="c-icon">
-      <i class="icon icon-83"></i>
-    </div>
-    <!--<p class="c-txt">购物车</p>-->
-  </a>
+
+  <div class="shop-cart">
+    <span class="total-price">总价:￥<strong>2</strong></span>
+    <a id="cart" href="javascript:;" class="alert cart">
+      <div class="c-icon">
+        <i class="icon icon-83"></i>
+      </div>
+      <!--<p class="c-txt">购物车</p>-->
+    </a>
+  </div>
+
+
   <script>
     $(function () {
       $(".add").click(function () {
@@ -213,7 +219,7 @@
         });
         // 设置配置参数
         bool.setOptions({
-          targetEl: $("#shopCart"),
+          targetEl: $("#cart"),
           curvature: 0.01,
           duration: 600
         });

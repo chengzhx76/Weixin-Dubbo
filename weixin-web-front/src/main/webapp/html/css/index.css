@@ -132,21 +132,43 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   margin-top: 60px;
   margin-bottom: 70px;
 }
-.cart {
+.shop-cart {
+  height: 76px;
+  width: 70px;
+  margin: 0 auto;
+  position:fixed;
+  left:0;
+  right: 0;
+  bottom: 0;
+  /*background: darkcyan;*/
+}
+.shop-cart .total-price {
+  height: 20px;
+  width: 80px;
+  /*margin: 0 auto;*/
+  position: absolute;
+  line-height: 20px;
+  left:56px;
+  /*!*right: -10px;*!*/
+  bottom: 64px;
+  color: #FF6600;
+  border: solid 1px #FF6600;
+  border-radius: 5px;
+  background: #ffffff;
+  text-align: center;
+}
+.shop-cart .cart {
   height: 65px;
   width: 65px;
   margin: 0 auto;
   display: block;
-  position:fixed;
-  left:0;
-  right: 0;
-  bottom: 10px;
+
   border-top: solid 1px #cccccc;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
   background: #F7F7FA;
 }
-.cart .c-icon {
+.shop-cart .cart .c-icon {
   height: 53px;
   width: 53px;
   margin: 0 auto;
@@ -154,7 +176,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   border-radius: 50%;
   background: #FF5A1E;
 }
-.cart .c-icon .icon {
+.shop-cart .cart .c-icon .icon {
   height: 40px;
   width: 100%;
   font-size: 36px;
@@ -162,7 +184,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   display: block;
   text-align: center;
 }
-.cart .c-txt {
+.shop-cart .cart .c-txt {
   height: 22px;
   width: 100%;
   line-height: 25px;
