@@ -1,0 +1,224 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  position:relative;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  background: #ffffff;
+}
+.main .deliver-date {
+  height: 24px;
+  color: #6D6D6D;
+  font-size: 14px;
+  line-height: 24px;
+  margin-left: 10px;
+  /*background: darkcyan;*/
+}
+.main .list {
+  /*height: 200px;*/
+  margin: 0 15px;
+  border-bottom: solid 1px #F1F1F1;
+  /*background: darkcyan;*/
+}
+
+.main .list .item {
+  height: 110px;
+  border-top: solid 1px #F1F1F1;
+  position: relative;
+  /*background: bisque;*/
+}
+.main .list .no-all {
+  height: 110px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FAFAFA;
+  filter:alpha(opacity=0.4);
+  -moz-opacity:0.4;
+  opacity:0.4;
+}
+.main .list .item .pic {
+  height: 90px;
+  width: 95px;
+  margin-top: 10px;
+  float: left;
+  position: relative;
+}
+.main .list .item .pic .no {
+  height: 90px;
+  width: 95px;
+  color: #FFF;
+  font-size: 12px;
+  text-align: center;
+  line-height: 90px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: black;
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  opacity:0.5;
+  border-radius: 3px;
+}
+.main .list .item .pic img {
+  height: 90px;
+  width: 95px;
+  border-radius: 3px;
+}
+.main .list .item .detail {
+  height: 90px;
+  float: left;
+  margin-top: 6px;
+  margin-left: 8px;
+}
+
+.main .list .item .detail .info {
+  height: 72px;
+  color: #C0C0C0;
+  /*background: darkblue;*/
+}
+.main .list .item .detail .info .title {
+  height: 20px;
+  font-size: 18px;
+  line-height: 20px;
+  color: #3E3E3E;
+  display: block;
+  font-weight: normal;
+  /*background: darkseagreen;*/
+}
+.main .list .item .detail .info .desc {
+  height: 22px;
+  line-height: 22px;
+  display: block;
+  font-size: 12px;
+  font-style: normal;
+  color: #A2A2A2;
+  /*background: darkseagreen;*/
+}
+
+.main .list .item .detail .info .price {
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color: #FF5E23;
+}
+.main .list .item .detail .info .price strong {
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.main .list .item .buy {
+  height: 40px;
+  margin-top: 60px;
+  margin-right: 10px;
+  float: right;
+  /*background: darkseagreen;*/
+}
+.main .list .item .buy .icon {
+  height: 40px;
+  display: block;
+  float: left;
+
+  font-size: 26px;
+  line-height: 40px;
+  text-align: center;
+  /*background: darkcyan;*/
+}
+.main .list .item .buy .normal{
+  color: #FF5A1E;
+}
+.main .list .item .buy .invalid{
+  color: #CDCDCD;
+}
+.main .list .item .buy .count {
+  height: 40px;
+  display: block;
+  float: left;
+  font-size: 22px;
+  line-height: 42px;
+  text-align: center;
+  padding: 0 4px;
+  color: #010101;
+  /*background: saddlebrown;*/
+}
+.main .list .hint {
+  height: 20px;
+  line-height: 20px;
+  border-top: solid 1px #F1F1F1;
+  /*background: sandybrown;*/
+}
+.main .list .hint .price {
+  color: #6D6D6D;
+}
+.main .list .hint .remark {
+  color: #FF5A1E;
+}
+.footer {
+  height: 45px;
+  width:100%;
+  position:fixed;
+  left:0;
+  bottom:0;
+  border-top: solid 1px #CCCCCC;
+  background: #F3F3F3;
+}
+.footer .main {
+  height: 45px;
+}
+.footer .main .sell {
+  height: 45px;
+  float: left;
+  padding-left: 5px;
+}
+.footer .main .sell .price {
+  height: 45px;
+  line-height: 45px;
+  color: #797979;
+  font-size: 18px;
+  text-align: center;
+  display: block;
+  float: left;
+}
+.footer .main .sell .price .cost {
+  color: #FF6600;
+}
+.footer .main .sell .desc {
+  height: 45px;
+  line-height: 45px;
+  font-size: 16px;
+  color: #FF6600;
+  text-align: center;
+  display: block;
+  float: left;
+}
+.footer .main .desc {
+  height: 45px;
+  /*width: 40%;*/
+  float: left;
+  padding-left: 4px;
+  padding-right: 2px;
+}
+.footer .main .add {
+  height: 45px;
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 45px;
+  text-align: center;
+  float: right;
+  padding: 0 12px;
+  background: #FF5A1E;
+}

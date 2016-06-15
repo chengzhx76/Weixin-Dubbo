@@ -287,7 +287,6 @@ body {
   bottom:0;
   border-top: solid 1px #CCCCCC;
   background: #F3F3F3;
-  /*background: darkolivegreen;*/
 }
 .footer .main {
   height: 45px;
@@ -357,32 +356,6 @@ body {
   margin-top: 2px;
   text-align: center;
 }
-.header .arrti .collect {
-  /*height: 48px;*/
-  /*margin-top: 2px;*/
-  /*width: 13%;*/
-  /*float: right;*/
-  /*border-left: solid 1px #CCCCCC;*/
-  /*background: firebrick;*/
-}
-
-/*.header .arrti .collect .icon {
-  height: 28px;
-  color: #FF6600;
-  display: block;
-  font-size: 24px;
-  text-align: center;
-  !*background: rebeccapurple;*!
-}
-.header .arrti .collect .c-txt {
-  color: #666666;
-  font-size: 14px;
-  display: block;
-  margin-top: 2px;
-  text-align: center;
-}*/
-
-
 .footer .main .btn .add {
   height: 45px;
   font-size: 18px;
