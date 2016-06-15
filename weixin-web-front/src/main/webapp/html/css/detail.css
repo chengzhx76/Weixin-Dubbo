@@ -288,10 +288,10 @@ body {
   border-top: solid 1px #CCCCCC;
   background: #F3F3F3;
 }
-.footer .main {
+.footer .f-main {
   height: 45px;
 }
-.footer .main .sell {
+.footer .f-main .sell {
   height: 45px;
   font-size: 20px;
   color: #FF6600;
@@ -302,7 +302,7 @@ body {
   padding-right: 5px;
   /*background: salmon;*/
 }
-.footer .main .desc {
+.footer .f-main .desc {
   height: 45px;
   /*width: 40%;*/
   float: left;
@@ -310,18 +310,18 @@ body {
   padding-right: 2px;
   /*background: saddlebrown;*/
 }
-.footer .main .desc .note {
+.footer .f-main .desc .note {
   height: 25px;
   line-height: 30px;
   /*background: silver;*/
 }
-.footer .main .desc .note .count {
+.footer .f-main .desc .note .count {
   font-size: 14px;
 }
-.footer .main .desc .note .state {
+.footer .f-main .desc .note .state {
   font-size: 12px;
 }
-.footer .main .desc .leaflet {
+.footer .f-main .desc .leaflet {
   height: 20px;
   line-height: 20px;
   font-size: 12px;
@@ -329,18 +329,18 @@ body {
   font-style: normal;
   /*background: firebrick;*/
 }
-.footer .main .btn {
+.footer .f-main .btn {
   float: right;
   /*background: fuchsia;*/
 }
-.footer .main .btn .collect {
+.footer .f-main .btn .collect {
   height: 48px;
   float: left;
   padding-left: 5px;
   padding-right: 5px;
   background: darkkhaki;
 }
-.footer .main .btn .collect .icon {
+.footer .f-main .btn .collect .icon {
   height: 25px;
   color: #FF6600;
   display: block;
@@ -349,14 +349,14 @@ body {
   text-align: center;
 }
 
-.footer .main .btn .collect .c-txt {
+.footer .f-main .btn .collect .c-txt {
   color: #666666;
   font-size: 14px;
   display: block;
   margin-top: 2px;
   text-align: center;
 }
-.footer .main .btn .add {
+.footer .f-main .btn .add {
   height: 45px;
   font-size: 18px;
   color: #ffffff;

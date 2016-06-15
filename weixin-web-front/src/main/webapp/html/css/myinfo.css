@@ -83,7 +83,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .header .edit {
   height: 35px;
-  width: 80px;
+  width: 75px;
   margin-top: 40px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;

@@ -173,19 +173,19 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   position:fixed;
   left:0;
   bottom:0;
-  border-top: solid 1px #CCCCCC;
+  border-top: solid 1px #EFEFEF;
   background: #F3F3F3;
 }
-.footer .main {
-  height: 45px;
+.footer .f-main {
+  height: 50px;
 }
-.footer .main .sell {
-  height: 45px;
+.footer .f-main .sell {
+  height: 50px;
   float: left;
   padding-left: 5px;
 }
-.footer .main .sell .price {
-  height: 45px;
+.footer .f-main .sell .price {
+  height: 50px;
   line-height: 45px;
   color: #797979;
   font-size: 18px;
@@ -193,11 +193,11 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   display: block;
   float: left;
 }
-.footer .main .sell .price .cost {
+.footer .f-main .sell .price .cost {
   color: #FF6600;
 }
-.footer .main .sell .desc {
-  height: 45px;
+.footer .f-main .sell .desc {
+  height: 50px;
   line-height: 45px;
   font-size: 16px;
   color: #FF6600;
@@ -205,20 +205,24 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   display: block;
   float: left;
 }
-.footer .main .desc {
-  height: 45px;
+.footer .f-main .desc {
+  height: 50px;
   /*width: 40%;*/
   float: left;
   padding-left: 4px;
   padding-right: 2px;
 }
-.footer .main .add {
-  height: 45px;
+.footer .f-main .submit {
+  height: 50px;
+}
+.footer .f-main .submit a {
+  height: 50px;
+  display: block;
   font-size: 18px;
   color: #ffffff;
   line-height: 45px;
   text-align: center;
   float: right;
-  padding: 0 12px;
+  padding: 0 15px;
   background: #FF5A1E;
 }

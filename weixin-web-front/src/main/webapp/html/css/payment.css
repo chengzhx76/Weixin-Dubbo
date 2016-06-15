@@ -40,11 +40,14 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   margin-right: 5px;
   padding-left: 2px;
 }
+.content .addr .main .detail .weui_panel_ft:before {
+  left: 0;
+}
 .content .addr .main .detail .weui_panel_ft {
   padding: 5px 10px 5px 0;
   border-top: none;
-  border-bottom: 1px solid #E5E5E5;
 }
+
 .content .addr .main .detail .m-addr {
   min-height: 60px;
 }
@@ -134,6 +137,9 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .content .pay .main .weui_cells {
   margin-top: 0;
 }
+.content .pay .main .weui_cells:after {
+  border-bottom: none;
+}
 .content .pay .main .weui_cells .weui_cell {
   padding-left: 0;
   padding-top: 12px;
@@ -151,16 +157,18 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content .pay .main .weui_panel {
   margin-top: 0;
+  margin-left: 10px;
 }
 .content .pay .main .weui_panel .weui_panel_ft {
   padding: 6px 10px 6px 0;
-  margin-left: 10px;
   border-top: none;
-  border-bottom: 1px solid #E5E5E5;
+  /*border-bottom: 1px solid #E5E5E5;*/
   color: #383838;
   font-size: 16px;
 }
-
+.content .pay .main .weui_panel .weui_panel_ft:before {
+  border-top: none;
+}
 .content .pay .main .weixin .icon {
   float: left;
   color: #04BE02;
@@ -173,6 +181,14 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .content .pay .main .more {
   margin-left: 20px;
 }
+.content .pay .main .more .weui_cells:before {
+  border-top: none;
+
+}
+.content .pay .main .more .weui_cells:after {
+  border-bottom: 1px solid #D9D9D9;
+}
+
 .content .pay .main .more .icon {
   float: left;
   font-size: 20px;
@@ -187,14 +203,18 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .content .pay .main .more .hdfk .icon {
   color: #FF6600;
 }
-
+.content .point:before {
+  border-top: none;
+}
+.content .point:before {
+  border-bottom: none;
+}
 .content .point .txt {
   font-size: 18px;
   color: #606060;
   float: left;
 }
 .content .point .total {
-
   margin-left: 10px;
   float: left;
 }
@@ -308,16 +328,17 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   position:fixed;
   left:0;
   bottom:0;
-  border-top: solid 1px #CCCCCC;
-  background: #F3F3F3;
+  border-top: solid 1px #EFEFEF;
+  background: #EFEFEF;
   /*background: darkolivegreen;*/
 }
-.footer .main {
+.footer .f-main {
   height: 45px;
 }
-.footer .main .price {
+.footer .f-main .price {
   height: 45px;
-  font-size: 20px;
+  font-size: 18px;
+  color: #797979;
   line-height: 45px;
   text-align: center;
   float: left;
@@ -325,14 +346,14 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   padding-right: 5px;
   /*background: salmon;*/
 }
-.footer .main .price .txt {
-  color: #4C4C4C;
-}
-.footer .main .price .total {
+.footer .f-main .price .total {
   color: #FF6600;
   margin-left: 5px;
 }
-.footer .main .submit {
+.footer .f-main .pay {
+  height: 45px;
+}
+.footer .f-main .pay a {
   height: 45px;
   font-size: 18px;
   color: #ffffff;
