@@ -182,9 +182,10 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   padding: 0 3px;
   position: fixed;
   line-height: 20px;
-  left:180px;
+  left:50%;
   bottom: 64px;
   color: #FF6600;
+  margin-left: 20px;
   border: solid 1px #FF6600;
   border-radius: 5px;
   background: #ffffff;
