@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/weui2.css"/>
   <link rel="stylesheet" href="css/mall.css"/>
   <link rel="stylesheet" href="css/load.css"/>
-  <script src="js/zepto.min.js"></script>
+  <script src="js/lib/zepto.min.js"></script>
 </head>
 <body>
 <header class="header">
@@ -43,7 +43,7 @@
       <!--</div>-->
       <!--<p class="weui_tabbar_label">购物车</p>-->
     </a>
-    <a href="javascript:;" class="alert weui_tabbar_item">
+    <a href="order.html" class="weui_tabbar_item">
       <div class="weui_tabbar_icon">
         <img src="icon/icon_nav_article.png" alt="">
       </div>
@@ -58,7 +58,6 @@
   </nav>
 </footer>
 <div class="shop-cart">
-  <span class="total-price">总价:￥<strong>2</strong></span>
   <a id="cart" href="javascript:;" class="alert cart">
     <div class="c-icon">
       <i class="icon icon-83"></i>
@@ -66,27 +65,8 @@
     <!--<p class="c-txt">购物车</p>-->
   </a>
 </div>
-
+<span class="total-price">总价：￥<strong>0</strong></span>
 </body>
-
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $("#main").load("load1.html");
-    $("#btn1").click(function () {
-      $("#main").load("load1.html", function (response, status, xhr) {
-//                    alert(response+" "+status+" "+xhr);
-      });
-    });
-    $("#btn2").click(function () {
-      $("#main").load("load2.html", function (response, status, xhr) {
-//                    alert(response+" "+status+" "+xhr);
-      });
-    });
-
-    $(".alert").click(function(){
-      alert("还没做！");
-    });
-  });
-</script>
+<script src="js/lib/zepto.min.js"></script>
+<script src="js/mall.js"></script>
 </html>

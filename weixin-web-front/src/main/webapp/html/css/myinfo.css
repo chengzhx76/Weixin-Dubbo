@@ -340,27 +340,12 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   bottom: 0;
   /*background: darkcyan;*/
 }
-.shop-cart .total-price {
-  height: 20px;
-  width: 80px;
-  /*margin: 0 auto;*/
-  position: absolute;
-  line-height: 20px;
-  left:56px;
-  /*!*right: -10px;*!*/
-  bottom: 64px;
-  color: #FF6600;
-  border: solid 1px #FF6600;
-  border-radius: 5px;
-  background: #ffffff;
-  text-align: center;
-}
+
 .shop-cart .cart {
   height: 65px;
   width: 65px;
   margin: 0 auto;
   display: block;
-
   border-top: solid 1px #cccccc;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
@@ -389,6 +374,19 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   color: #9E9E9F;
   font-size: 15px;
   display: block;
+  text-align: center;
+}
+.total-price {
+  /*height: 20px;*/
+  padding: 0 3px;
+  position: absolute;
+  line-height: 20px;
+  left:180px;
+  bottom: 64px;
+  color: #FF6600;
+  border: solid 1px #FF6600;
+  border-radius: 5px;
+  background: #ffffff;
   text-align: center;
 }
 

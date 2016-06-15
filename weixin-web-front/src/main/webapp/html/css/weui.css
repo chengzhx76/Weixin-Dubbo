@@ -1087,12 +1087,12 @@ input.weui_btn_plain_default {
 }
 .weui_panel_ft {
   padding: 10px 15px 12px;
-  color: #999999;
+  /*color: #999999;by Cheng*/
   font-size: 14px;
   position: relative;
 }
 .weui_panel_ft:before {
-  content: " ";
+  /*content: " "; by Cheng*/
   position: absolute;
   left: 0;
   top: 0;
@@ -1108,7 +1108,7 @@ input.weui_btn_plain_default {
 }
 .weui_panel_access .weui_panel_ft {
   display: block;
-  color: #586C94;
+  /*color: #586C94; by cheng*/
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .weui_panel_access .weui_panel_ft:active {
