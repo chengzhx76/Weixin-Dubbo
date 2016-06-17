@@ -11,5 +11,10 @@
 
   <artifactId>weixin-rpc-system</artifactId>
 
-
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>weixin-common-entity</artifactId>
+    </dependency>
+  </dependencies>
 </project>
