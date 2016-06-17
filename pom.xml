@@ -36,6 +36,9 @@
       <module>weixin-rpc-item</module>
       <module>weixin-rpc-order</module>
       <module>weixin-rpc-cart</module>
+      <module>weixin-rpc-promotion</module>
+      <module>weixin-rpc-comment</module>
+      <module>weixin-rpc-system</module>
 
     </modules>
 

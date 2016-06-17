@@ -13,8 +13,6 @@ public class Product extends DataEntity<Product> {
     private String keywords;
     private int productTypeId;
     private boolean isAlive;
-    private int warehouseId;
-    private int supplierId;
     private int modifyAdminId;
 
     public String getName() {
@@ -55,22 +53,6 @@ public class Product extends DataEntity<Product> {
 
     public void setAlive(boolean alive) {
         isAlive = alive;
-    }
-
-    public int getWarehouseId() {
-        return warehouseId;
-    }
-
-    public void setWarehouseId(int warehouseId) {
-        this.warehouseId = warehouseId;
-    }
-
-    public int getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(int supplierId) {
-        this.supplierId = supplierId;
     }
 
     public int getModifyAdminId() {
