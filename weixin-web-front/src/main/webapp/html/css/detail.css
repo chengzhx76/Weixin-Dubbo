@@ -285,7 +285,7 @@ body {
   position:fixed;
   left:0;
   bottom:0;
-  border-top: solid 1px #CCCCCC;
+  border-top: solid 1px #EFEFEF;
   background: #F3F3F3;
 }
 .footer .f-main {
@@ -300,20 +300,16 @@ body {
   float: left;
   padding-left: 5px;
   padding-right: 5px;
-  /*background: salmon;*/
 }
 .footer .f-main .desc {
   height: 45px;
-  /*width: 40%;*/
   float: left;
   padding-left: 4px;
   padding-right: 2px;
-  /*background: saddlebrown;*/
 }
 .footer .f-main .desc .note {
   height: 25px;
   line-height: 30px;
-  /*background: silver;*/
 }
 .footer .f-main .desc .note .count {
   font-size: 14px;
@@ -358,15 +354,18 @@ body {
 }
 .footer .f-main .btn .add {
   height: 45px;
+  float: left;
+}
+.footer .f-main .btn .add a {
+  height: 45px;
   font-size: 18px;
   color: #ffffff;
   line-height: 45px;
   text-align: center;
-  float: left;
-  padding-left: 5px;
+  display: block;
+  padding: 0 5px;
   background: #FF5A1E;
 }
-
 
 
 

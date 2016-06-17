@@ -18,15 +18,11 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>weixin-common-core</artifactId>
+      <artifactId>weixin-common-service</artifactId>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>weixin-common-config</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>weixin-common-constant</artifactId>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>

@@ -11,7 +11,7 @@
     <modules>
       <module>weixin-common</module>
       <module>weixin-common-config</module>
-      <module>weixin-common-core</module>
+      <module>weixin-common-service</module>
       <module>weixin-common-entity</module>
       <module>weixin-rpc-admin</module>
       <module>weixin-rpc-log</module>
@@ -30,13 +30,13 @@
       <module>weixin-service-httpclient</module>
       <module>weixin-rpc-httpclient</module>
       <module>weixin-service-timer</module>
-      <module>weixin-common-constant</module>
       <module>weixin-service-rabbitmq</module>
       <module>weixin-rpc-rabbitmq</module>
       <module>weixin-rpc-user</module>
       <module>weixin-rpc-item</module>
       <module>weixin-rpc-order</module>
       <module>weixin-rpc-cart</module>
+
     </modules>
 
     <properties>
@@ -107,17 +107,12 @@
         </dependency>
         <dependency>
           <groupId>${project.groupId}</groupId>
-          <artifactId>weixin-common-core</artifactId>
+          <artifactId>weixin-common-service</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-common-entity</artifactId>
-          <version>${project.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>${project.groupId}</groupId>
-          <artifactId>weixin-common-constant</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>

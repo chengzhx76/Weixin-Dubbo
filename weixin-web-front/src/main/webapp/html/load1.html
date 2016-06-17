@@ -53,3 +53,62 @@
     </figcaption>
   </figure>
 </div>
+<script>
+  // 购买
+  $(".add").click(function (event) {
+    event.preventDefault();
+    var obj = $(this);
+
+    if($(".total-price").hide()) {
+      $(".total-price").show();
+      addPrice(obj);
+    }else {
+      addPrice(obj);
+    }
+
+    var imgSrc = obj.parents(".item").children('.pic').children('img').attr('src');
+    var imgObj = $('<img src="' + imgSrc + '">').appendTo("body").css({
+      "width": "30px",
+      "height": "30px",
+      "border-radius": "50px",
+      "position": "absolute",
+      "top": toInteger(obj.offset().top) + toInteger(obj.css("width"))/2-15,
+      "left": toInteger(obj.offset().left)+ toInteger(obj.css("height"))/2-15,
+    });
+    var bool = new Parabola({
+      el: imgObj,
+      callback: function () {
+
+      },
+      stepCallback: function (x, y) {
+      }
+    });
+    // 设置配置参数
+    bool.setOptions({
+      targetEl: $("#cart"),
+      curvature: 0.01,
+      duration: 600
+    });
+    // 开始运动
+    bool.start();
+  });
+
+  // 添加金额
+  function addPrice(obj) {
+    var price = obj.parent().prev(".price").children("strong").text();
+    var totalPrice = $(".total-price").children("strong").text();
+    var tp = 0;
+    if(totalPrice=="") {
+      tp = 0 + parseFloat(price);
+    }else {
+      tp = parseFloat(totalPrice)+parseFloat(price);
+    }
+    $(".total-price").children("strong").text(tp.toFixed(1));
+  }
+
+  // 转换成Int类型
+  function toInteger(text){
+    text = parseInt(text);
+    return isFinite(text) ? text : 0;
+  }
+</script>

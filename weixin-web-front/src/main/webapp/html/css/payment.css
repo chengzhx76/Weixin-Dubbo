@@ -34,7 +34,6 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   /*height: 110px;*/
   background: #ffffff;
  }
-
 .content .addr .main .detail {
   margin-left: 10px;
   margin-right: 5px;
@@ -47,7 +46,6 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   padding: 5px 10px 5px 0;
   border-top: none;
 }
-
 .content .addr .main .detail .m-addr {
   min-height: 60px;
 }
