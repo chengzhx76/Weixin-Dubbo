@@ -18,9 +18,29 @@ public class Comment extends DataEntity<Comment> {
     private int useful;
     private int useless;
     private String parentId;
+    private double productScore;
+    private double deliveryScore;
     private Date reviewTime;
     private int reviewStatus;
     private String reviewResult;
+
+    public double getProductScore() {
+        return productScore;
+    }
+
+    public Comment setProductScore(double productScore) {
+        this.productScore = productScore;
+        return this;
+    }
+
+    public double getDeliveryScore() {
+        return deliveryScore;
+    }
+
+    public Comment setDeliveryScore(double deliveryScore) {
+        this.deliveryScore = deliveryScore;
+        return this;
+    }
 
     public String getOrderDetailId() {
         return orderDetailId;
