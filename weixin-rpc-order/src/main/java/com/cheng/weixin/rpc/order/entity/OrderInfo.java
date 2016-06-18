@@ -18,13 +18,14 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal amountPayable;
     private BigDecimal amountPaid;
     private BigDecimal salePriceTotal;
-
     private String consignee;
     private String mobile;
     private String address;
     private int deliveryTimeId;
     private int payId;
     private int deliveryTypeId;
+    private String arayacakAddress;
+    private String arayacakDeliveryTimeId;
     private String province;
     private String city;
     private String country;
@@ -49,6 +50,24 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal cashReducePrice;
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
+
+    public String getArayacakAddress() {
+        return arayacakAddress;
+    }
+
+    public OrderInfo setArayacakAddress(String arayacakAddress) {
+        this.arayacakAddress = arayacakAddress;
+        return this;
+    }
+
+    public String getArayacakDeliveryTimeId() {
+        return arayacakDeliveryTimeId;
+    }
+
+    public OrderInfo setArayacakDeliveryTimeId(String arayacakDeliveryTimeId) {
+        this.arayacakDeliveryTimeId = arayacakDeliveryTimeId;
+        return this;
+    }
 
     public int getAccountId() {
         return accountId;

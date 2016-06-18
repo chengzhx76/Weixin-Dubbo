@@ -7,6 +7,7 @@ import com.cheng.common.entity.DataEntity;
  * Author: 光灿
  * Date: 2016/6/17
  */
+@Deprecated
 public class PictureResourceType extends DataEntity<PictureResourceType> {
     private String name;
 
