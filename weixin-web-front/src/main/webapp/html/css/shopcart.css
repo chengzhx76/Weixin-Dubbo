@@ -33,10 +33,29 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   border-bottom: solid 1px #F1F1F1;
   /*background: darkcyan;*/
 }
-
+.main .list .weui_cells {
+  margin-top: 1px;
+}
+.main .list .weui_cells:after {
+  border-bottom: none;
+}
+.main .list .weui_cells .weui_cell {
+  height: 30px;
+  width: 7%;
+  padding: 0;
+  float: left;
+  margin-top: 40px;
+}
+.main .list .weui_cells .weui_cell_bd {
+  width: 93%;
+  float: left;
+}
+.main .list .weui_cells .weui_cell:active {
+  background: #ffffff;
+}
 .main .list .item {
   height: 110px;
-  border-top: solid 1px #F1F1F1;
+  /*border-top: solid 1px #F1F1F1;*/
   position: relative;
   /*background: bisque;*/
 }
@@ -168,52 +187,78 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   color: #FF5A1E;
 }
 .footer {
-  height: 45px;
+  height: 50px;
   width:100%;
   position:fixed;
   left:0;
   bottom:0;
   border-top: solid 1px #EFEFEF;
-  background: #F3F3F3;
+  background: #ffffff;
 }
 .footer .f-main {
   height: 50px;
 }
+.footer .f-main .weui_cells {
+  margin-top: 3px;
+  float: left;
+}
+.footer .f-main .weui_cells p {
+  padding-top: 1px;
+}
+.footer .f-main .weui_cells .weui_cell:active {
+  background-color: #ffffff;
+}
+.footer .f-main .weui_cells:before {
+  border-top: none;
+}
+.footer .f-main .weui_cells:after {
+  border-bottom: none;
+}
 .footer .f-main .sell {
   height: 50px;
-  float: left;
-  padding-left: 5px;
+  margin-right: 5px;
+  padding: 0 8px;
+  float: right;
 }
 .footer .f-main .sell .price {
-  height: 50px;
-  line-height: 45px;
-  color: #797979;
-  font-size: 18px;
+  height: 28px;
   text-align: center;
+}
+.footer .f-main .sell .price .txt {
+  height: 28px;
+  line-height: 30px;
+  color: #797979;
+  font-size: 16px;
   display: block;
   float: left;
 }
 .footer .f-main .sell .price .cost {
+  height: 28px;
+  line-height: 30px;
+  font-size: 18px;
   color: #FF6600;
-}
-.footer .f-main .sell .desc {
-  height: 50px;
-  line-height: 45px;
-  font-size: 16px;
-  color: #FF6600;
-  text-align: center;
   display: block;
   float: left;
 }
-.footer .f-main .desc {
+.footer .f-main .sell .desc {
+  height: 22px;
+  line-height: 10px;
+  font-size: 12px;
+  text-align: right;
+  display: block;
+  color: #C0C0C0;
+}
+/*.footer .f-main .desc {
   height: 50px;
-  /*width: 40%;*/
+  !*width: 40%;*!
   float: left;
   padding-left: 4px;
   padding-right: 2px;
-}
+  background: darkcyan;
+}*/
 .footer .f-main .submit {
   height: 50px;
+  float: right;
 }
 .footer .f-main .submit a {
   height: 50px;
@@ -222,7 +267,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   color: #ffffff;
   line-height: 45px;
   text-align: center;
-  float: right;
+
   padding: 0 15px;
   background: #FF5A1E;
 }

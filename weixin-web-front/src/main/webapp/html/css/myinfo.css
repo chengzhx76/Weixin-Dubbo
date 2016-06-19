@@ -229,6 +229,14 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   height: 85px;
   margin-top: 10px;
 }
+.content .asset .money {
+  display: block; /* 兼容Weui框架 */
+}
+.content .asset .ui-reddot:after {
+  position: absolute;
+  right: 10px;
+  top: 3px;
+}
 .content .asset .surplus {
   height: 30px;
   width: 100%;
@@ -327,8 +335,12 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   font-size: 18px;
   color: #FF723E;
 }
-.fooder {
-  /*position:relative;*/
+.footer .weui_tabbar .weui_tabbar_item .icon {
+  display: block;
+  height: 100px;
+  width: 100%;
+  font-size: 26px;
+  line-height: 25px;
 }
 .shop-cart {
   height: 76px;

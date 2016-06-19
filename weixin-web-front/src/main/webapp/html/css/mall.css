@@ -54,6 +54,13 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   border-left: solid 1px #F0EFF4;
   margin-left: -1px;
 }
+.footer .weui_tabbar .weui_tabbar_item .icon {
+  display: block;
+  height: 100px;
+  width: 100%;
+  font-size: 26px;
+  line-height: 25px;
+}
 .shop-cart {
   height: 76px;
   width: 70px;

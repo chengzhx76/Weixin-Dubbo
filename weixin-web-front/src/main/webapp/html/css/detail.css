@@ -154,9 +154,6 @@ body {
   width: 29px;
   margin-top: 1px;
   float: left;
-  text-indent: -999px;
-  background:  url('../icon/11.png') no-repeat top center;
-  background-size: contain;
 }
 .comment {
   width: 100%;
