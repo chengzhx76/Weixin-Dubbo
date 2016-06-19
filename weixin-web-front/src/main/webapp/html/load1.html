@@ -67,7 +67,7 @@
 
     $.each($('.add'), function(key,val) {
       var addObj = $(val);
-      addObj.css('margin-right','10px').css('font-size','30px');
+      addObj.css('margin-right','9px').css('font-size','30px');
     });
 
     // 购买
@@ -77,11 +77,8 @@
       addCount(obj);
       if ($(".total-price").hide()) {
         $(".total-price").show();
-        addPrice(obj);
-      } else {
-        addPrice(obj);
       }
-
+      addPrice(obj);
       putCart(obj);
     });
     // 放入购物车动画效果
@@ -120,10 +117,8 @@
       subPrice(obj);
     });
 
-
     // 添加金额
     function addPrice(obj) {
-      console.log("==========addPrice==========");
       var price = obj.parent().prev(".price").children("strong").text();
       var totalPrice = $(".total-price").children("strong").text();
       var tp = 0;
@@ -143,16 +138,14 @@
       if (totalPrice >= price) {
         tp = totalPrice - price;
       }
-      if (tp > 0) {
-        $(".total-price").children("strong").text(tp.toFixed(1));
-      } else {
+      if (tp <= 0) {
         $(".total-price").hide();
       }
+      $(".total-price").children("strong").text(tp.toFixed(1));
     }
 
     // 添加数量
     function addCount(obj) {
-      console.log("==========addCount==========");
       var numObj = obj.siblings('.count');
       var num = parseInt(numObj.text());
       num += 1;
@@ -183,7 +176,7 @@
         obj.siblings('.count').hide();
         obj.siblings('.add').animate({marginRight:'10px','fontSize':'30px'},'fast');
       }
-    }
+    };
 
     // 转换成Int类型
     function toInteger(text) {
