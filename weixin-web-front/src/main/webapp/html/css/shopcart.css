@@ -45,9 +45,10 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   padding: 0;
   float: left;
   margin-top: 40px;
+  margin-right: 8px;
 }
 .main .list .weui_cells .weui_cell_bd {
-  width: 93%;
+  width: 90%;
   float: left;
 }
 .main .list .weui_cells .weui_cell:active {

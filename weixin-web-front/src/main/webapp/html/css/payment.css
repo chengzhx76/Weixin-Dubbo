@@ -43,11 +43,11 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   left: 0;
 }
 .content .addr .main .detail .weui_panel_ft {
-  padding: 5px 10px 5px 0;
+  padding: 2px 10px 2px 0;
   border-top: none;
 }
 .content .addr .main .detail .m-addr {
-  min-height: 60px;
+  /*min-height: 60px;*/
 }
 .content .addr .main .detail .m-addr .name-phone {
   height: 30px;
@@ -68,7 +68,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   height: 30px;
   font-size: 18px;
   display: inline-block;
-  line-height: 30px;
+  line-height: 32px;
 }
 
 .content .addr .main .detail .m-addr .name-phone .phone {
@@ -91,10 +91,9 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content .addr .main .detail .m-addr .d-addr {
   height: 30px;
-  font-size: 18px;
+  font-size: 16px;
   clear: both;
-  line-height: 25px;
-  line-height: 30px;
+  line-height: 38px;
 }
 .content .addr .main .detail .m-date {
   height: 30px;
@@ -140,18 +139,17 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content .pay .main .weui_cells .weui_cell {
   padding-left: 0;
-  padding-top: 12px;
-  padding-bottom: 8px;
+  padding-top: 8px;
+  padding-bottom: 3px;
   line-height: 170%;
 }
 .content .pay .main .detail {
   margin-right: 5px;
 }
 .content .pay .main .weixin {
-  margin-left: 10px;
+  margin-left: 12px;
   margin-right: 5px;
-  padding-left: 2px;
-  font-size: 18px;
+  font-size: 16px;
 }
 .content .pay .main .weui_panel {
   margin-top: 0;
@@ -181,7 +179,6 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content .pay .main .more .weui_cells:before {
   border-top: none;
-
 }
 .content .pay .main .more .weui_cells:after {
   border-bottom: 1px solid #D9D9D9;
@@ -201,32 +198,85 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .content .pay .main .more .hdfk .icon {
   color: #FF6600;
 }
-.content .point:before {
+.content .assets:before {
   border-top: none;
 }
-.content .point:before {
+.content .assets:before {
   border-bottom: none;
 }
-.content .point .txt {
-  font-size: 18px;
+.content .assets .weui_cell_switch {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.content .assets .weui_cell:before {
+  border-top: none;
+}
+.content .assets .txt {
+  font-size: 16px;
   color: #606060;
   float: left;
 }
-.content .point .total {
+.content .assets .total {
   margin-left: 10px;
   float: left;
 }
-.content .point .total {
-  font-size: 16px;
+.content .assets .total {
+  font-size: 14px;
   color: #ACACAC;
   padding-top: 2px;
+}
+.content .assets .weui_panel {
+  height: 40px;
+  margin-top: 0;
+}
+.content .assets .weui_panel .weui_panel_ft {
+  height: 40px;
+  padding: 0;
+}
+.content .assets .weui_panel .weui_panel_ft .menu {
+  height: 40px;
+  float: left;
+  margin-left: 15px;
+}
+.content .assets .weui_panel .weui_panel_ft .menu .title {
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+  color: #606060;
+  display: block;
+  float: left;
+}
+.content .assets .weui_panel .weui_panel_ft .menu .note {
+  height: 17px;
+  font-size: 12px;
+  background: #EF4F4F;
+  display: block;
+  padding: 1px;
+  color: #F3F3F3;
+  margin-top: 9px;
+  margin-left: 3px;
+  float: left;
+  border-radius: 2px;
+}
+.content .assets .weui_panel .weui_panel_ft .msg {
+  height: 40px;
+  line-height: 40px;
+  float: right;
+  margin-right: 30px;
+  color: #CDCDCD;
 }
 .content .remark {
   background: #ffffff;
   margin-top: 20px;
+  height: 85px;
+
 }
 .content .remark .weui_cell {
   padding: 10px 10px;
+}
+.content .remark .weui_cell .weui_textarea {
+  height: 52px;
+  font-size: 14px;
 }
 .content .cost {
 
