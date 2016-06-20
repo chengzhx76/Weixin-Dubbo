@@ -200,7 +200,8 @@ $(function () {
                 return product;
             }
         }).get();
-        var totalPrice = parseFloat($('#amount').text().trim());
+        //var totalPrice = parseFloat($('#amount').text().trim());
+        var totalPrice = 0;
         $(products).each(function(index, value) {
             totalPrice += value.amount;
         });
