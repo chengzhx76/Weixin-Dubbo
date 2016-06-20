@@ -122,15 +122,29 @@ $(function () {
         }
     });
 
+    // 小计金额
+    function addSubtotal(totalPrice) {
+        $('#cost').text(totalPrice.toFixed(1));
+        if (totalPrice >= 5) {
+            $('#remark').html("运费已免");
+        }else if(totalPrice == 0) {
+            $('#remark').html("没有选择商品哦");
+        }else {
+            $('#remark').html("还差"+(5-totalPrice)+"可免运费");
+        }
+    };
+
     // 增加单个商品的所有价格
     function addSingleAllPrice(amount, totalPrice) {
         totalPrice += amount;
         $('#amount').text(totalPrice.toFixed(1));
+        addSubtotal(totalPrice);
     }
     // 减少单个商品的所有价格
     function subSingleAllPrice(amount, totalPrice) {
         totalPrice -= amount;
         $('#amount').text(totalPrice.toFixed(1));
+        addSubtotal(totalPrice);
     }
 
     // 添加数量
@@ -173,9 +187,9 @@ $(function () {
     function addSinglePrice(obj) {
         var totalPrice = parseFloat($('#amount').text().trim());
         var price = parseFloat(obj.parents('.weui_cells').find('.detail .price strong').text().trim());
-        //var count = obj.prev().text();
         totalPrice += price;
         $('#amount').text(totalPrice.toFixed(1));
+        addSubtotal(totalPrice);
     }
     // 减少单个商品金额
     function subSinglePrice(obj) {
@@ -186,6 +200,7 @@ $(function () {
             if (totalPrice > 0) {
                 totalPrice -= price;
                 $('#amount').text(totalPrice.toFixed(1));
+                addSubtotal(totalPrice);
             }
         //}
     };
@@ -206,6 +221,7 @@ $(function () {
             totalPrice += value.amount;
         });
         $('#amount').text(totalPrice.toFixed(1));
+        addSubtotal(totalPrice);
     };
 
     // 添加金额
@@ -224,5 +240,6 @@ $(function () {
             totalPrice -= value.amount;
         });
         $('#amount').text(totalPrice.toFixed(1));
+        addSubtotal(totalPrice);
     };
 });
