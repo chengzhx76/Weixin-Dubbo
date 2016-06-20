@@ -1,5 +1,6 @@
 package com.cheng.weixin.rpc.promotion;
 
+
 import com.cheng.common.entity.DataEntity;
 
 /**

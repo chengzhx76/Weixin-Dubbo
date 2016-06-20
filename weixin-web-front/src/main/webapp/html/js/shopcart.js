@@ -18,8 +18,33 @@ $(function () {
         if (!isCheckbox) {
             obj.parents('.weui_cells').find("input[type='checkbox']").prop("checked",true);
         }
+        var num = parseInt(obj.next('.count').text());
+        if (num >= 999) { // 最多支持购买999个
+            return;
+        }
         addCount(obj);
         addSinglePrice(obj);
+    });
+
+    // 减少事件
+    $(".sub").click(function () {
+        var obj = $(this);
+        var num = parseInt(obj.next('.count').text());
+        if (num <= 0) {
+            return;
+        }
+        var isCheckbox = obj.parents('.weui_cells').find("input[type='checkbox']").is(':checked');
+        if (num != 1) {
+            if (!isCheckbox) {
+                obj.parents('.weui_cells').find("input[type='checkbox']").prop("checked",true);
+            }
+        }else if (num == 1){
+            if (isCheckbox) {
+                obj.parents('.weui_cells').find("input[type='checkbox']").prop("checked",false);
+            }
+        }
+        subCount(obj);
+        subSinglePrice(obj);
     });
 
     // 全选
@@ -49,11 +74,27 @@ $(function () {
         var num = parseInt(numObj.text());
         num += 1;
         numObj.text(num);
-        //if (num > 0) {
-        //    obj.animate({marginRight:'8px','fontSize':'28px'},'fast');
-        //    obj.siblings('.count').show();
-        //    obj.siblings('.sub').show();
-        //}
+    };
+    // 减少数量
+    function subCount(obj) {
+        var numObj = obj.next('.count');
+        var num = parseInt(numObj.text());
+        if (num > 1) {
+            num -= 1;
+            numObj.text(num);
+        }else if (num == 1) {
+            $.confirm("您确定要删除吗?", "确认删除?", function () {
+                obj.parents('.weui_cells').fadeOut("200", function (){
+                    $(this).remove();
+                });
+                num -= 1;
+                numObj.text(num);
+                //$.toast("删除成功!");
+            }, function () {
+                //取消操作
+            });
+
+        }
     };
     // 添加单个商品金额
     function addSinglePrice(obj) {
@@ -63,8 +104,15 @@ $(function () {
         totalPrice += price;
         $('#amount').text(totalPrice.toFixed(1));
     }
-
-
+    // 减少单个商品金额
+    function subSinglePrice(obj) {
+        var totalPrice = parseFloat($('#amount').text().trim());
+        var price = parseFloat(obj.parents('.weui_cells').find('.detail .price strong').text().trim());
+        if (totalPrice > 0) {
+            totalPrice -= price;
+            $('#amount').text(totalPrice.toFixed(1));
+        }
+    };
     // 添加金额
     function addTotalPrice() {
         var products = $(".list input[type='checkbox']").map(function(index, value){

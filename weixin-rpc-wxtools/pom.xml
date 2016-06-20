@@ -13,7 +13,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
+      <groupId>com.cheng</groupId>
       <artifactId>weixin-common-entity</artifactId>
     </dependency>
     <dependency>

@@ -9,11 +9,11 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>weixin-rpc-ticket</artifactId>
+  <artifactId>weixin-rpc-prometion</artifactId>
 
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
+      <groupId>com.cheng</groupId>
       <artifactId>weixin-common-entity</artifactId>
     </dependency>
   </dependencies>
