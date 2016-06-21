@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
  * Date: 2016/6/21
  */
 @RestController
-//@Controller
 public class IndexController extends BaseController {
-
 
     @RequestMapping(value = "v1/index")
     public ResponseEntity<Response> index() {
 
-        return setSuccess();
+        return success();
     }
 
 }
