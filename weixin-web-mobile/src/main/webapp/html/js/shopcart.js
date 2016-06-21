@@ -21,16 +21,6 @@ $(function () {
         var isDisabled = obj.find("input[type='checkbox']").is(':disabled');
         if(isDisabled) return;
 
-        // 如果全部商品已勾选 则全部全选按钮勾上
-
-        //$(".list input[type='checkbox']").each(function(index, value){
-        //    if (!$(value).is(':disabled')) {
-        //
-        //
-        //    }
-        //});
-
-
         // 全选是否勾选
         var isSelfCheckbox = obj.find("input[type='checkbox']").prop('checked');
         if (isSelfCheckbox) {
@@ -42,14 +32,10 @@ $(function () {
         }
 
         // 总金额的+/-
-        var price = obj.parents('.weui_cells').find('.detail .price strong').text();
-        var count = obj.parents('.weui_cells').find('.count').text();
-        var amount = parseFloat(price.trim()) * parseInt(count.trim());
-        var totalPrice = parseFloat($('#amount').text().trim());
         if (!obj.find("input[type='checkbox']").prop('checked')) {
-            addSingleAllPrice(amount, totalPrice);
+            addSingleAllPrice(obj);
         }else {
-            subSingleAllPrice(amount, totalPrice);
+            subSingleAllPrice(obj);
         }
     });
 
@@ -70,10 +56,7 @@ $(function () {
         var isCheckbox = obj.parents('.weui_cells').find("input[type='checkbox']").is(':checked');
         if (!isCheckbox) {
             obj.parents('.weui_cells').find("input[type='checkbox']").prop("checked",true);
-            var totalPrice = parseFloat($('#amount').text().trim());
-            var price = parseFloat(obj.parents('.weui_cells').find('.detail .price strong').text().trim());
-            totalPrice += price * num;
-            $('#amount').text(totalPrice.toFixed(1));
+            addSingleAllPrice(obj);
         }
 
         addCount(obj);
@@ -96,6 +79,7 @@ $(function () {
             var isCheckbox = obj.parents('.weui_cells').find("input[type='checkbox']").is(':checked');
             if (!isCheckbox) {
                 obj.parents('.weui_cells').find("input[type='checkbox']").prop("checked",true);
+                addSingleAllPrice(obj);
             }
         }
         subCountAndSinglePrice(obj);
@@ -135,18 +119,27 @@ $(function () {
     };
 
     // 增加单个商品的所有价格
-    function addSingleAllPrice(amount, totalPrice) {
+    function addSingleAllPrice(obj) {
+        var price = obj.parents('.weui_cells').find('.detail .price strong').text();
+        var count = obj.parents('.weui_cells').find('.count').text();
+        var amount = parseFloat(price.trim()) * parseInt(count.trim());
+        var totalPrice = parseFloat($('#amount').text().trim());
+
         totalPrice += amount;
         $('#amount').text(totalPrice.toFixed(1));
         addSubtotal(totalPrice);
     }
     // 减少单个商品的所有价格
-    function subSingleAllPrice(amount, totalPrice) {
+    function subSingleAllPrice(obj) {
+        var price = obj.parents('.weui_cells').find('.detail .price strong').text();
+        var count = obj.parents('.weui_cells').find('.count').text();
+        var amount = parseFloat(price.trim()) * parseInt(count.trim());
+        var totalPrice = parseFloat($('#amount').text().trim());
+
         totalPrice -= amount;
         $('#amount').text(totalPrice.toFixed(1));
         addSubtotal(totalPrice);
     }
-
     // 添加数量
     function addCount(obj) {
         var numObj = obj.siblings('.count');
@@ -181,7 +174,6 @@ $(function () {
                 //取消操作
             });
         }
-
     };
     // 添加单个商品金额
     function addSinglePrice(obj) {
@@ -193,16 +185,14 @@ $(function () {
     }
     // 减少单个商品金额
     function subSinglePrice(obj) {
-        var num = obj.next('.count').text();
+        var num = parseInt(obj.next('.count').text());
         var totalPrice = parseFloat($('#amount').text().trim());
         var price = parseFloat(obj.parents('.weui_cells').find('.detail .price strong').text().trim());
-        //if (num != 1) {
-            if (totalPrice > 0) {
-                totalPrice -= price;
-                $('#amount').text(totalPrice.toFixed(1));
-                addSubtotal(totalPrice);
-            }
-        //}
+        if (totalPrice > 0) {
+            totalPrice -= price;
+            $('#amount').text(totalPrice.toFixed(1));
+            addSubtotal(totalPrice);
+        }
     };
     // 添加金额
     function addTotalPrice() {
@@ -224,7 +214,7 @@ $(function () {
         addSubtotal(totalPrice);
     };
 
-    // 添加金额
+    // 减少金额
     function subTotalPrice() {
         var products = $(".list input[type='checkbox']").map(function(index, value){
             if (!$(value).is(':disabled')) {

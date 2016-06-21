@@ -16,6 +16,7 @@
       <module>weixin-rpc-admin</module>
       <module>weixin-rpc-log</module>
       <module>weixin-rpc-wxtools</module>
+      <module>weixin-rpc-promotion</module>
       <module>weixin-rpc-redis</module>
       <module>weixin-rpc-httpclient</module>
       <module>weixin-rpc-rabbitmq</module>
@@ -38,7 +39,6 @@
       <module>weixin-service-rabbitmq</module>
       <module>weixin-web-manage</module>
       <module>weixin-web-mobile</module>
-      <module>weixin-rpc-promotion</module>
     </modules>
 
     <properties>

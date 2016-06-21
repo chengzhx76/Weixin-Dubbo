@@ -6,9 +6,9 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>weixin-web-moblie</artifactId>
+  <artifactId>weixin-web-mobile</artifactId>
   <packaging>war</packaging>
-  <name>weixin-web-moblie</name>
+  <name>weixin-web-mobile</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
