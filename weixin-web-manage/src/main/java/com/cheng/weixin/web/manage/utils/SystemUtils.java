@@ -1,6 +1,6 @@
 package com.cheng.weixin.web.manage.utils;
 
-import com.cheng.weixin.commom.utils.Encodes;
+import com.cheng.weixin.common.utils.Encodes;
 import com.cheng.weixin.web.manage.security.Digests;
 
 /**

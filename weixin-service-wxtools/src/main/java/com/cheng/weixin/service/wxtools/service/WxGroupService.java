@@ -3,7 +3,7 @@ package com.cheng.weixin.service.wxtools.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.cheng.weixin.commom.constant.weixin.WeixinUrl;
+import com.cheng.weixin.common.constant.weixin.WeixinUrl;
 import com.cheng.weixin.rpc.httpclient.service.RpcHttpClientService;
 import com.cheng.weixin.rpc.wxtools.content.WeixinContent;
 import com.cheng.weixin.rpc.wxtools.response.model.WxGroup;

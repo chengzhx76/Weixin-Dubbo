@@ -1,7 +1,7 @@
 package com.cheng.weixin.web.manage.security;
 
 
-import com.cheng.weixin.commom.utils.Exceptions;
+import com.cheng.weixin.common.utils.Exceptions;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

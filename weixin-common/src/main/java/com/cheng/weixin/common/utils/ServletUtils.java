@@ -1,4 +1,4 @@
-package com.cheng.weixin.commom.utils;
+package com.cheng.weixin.common.utils;
 
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;

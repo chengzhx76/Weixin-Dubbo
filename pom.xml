@@ -17,6 +17,14 @@
       <module>weixin-rpc-log</module>
       <module>weixin-rpc-wxtools</module>
       <module>weixin-rpc-redis</module>
+      <module>weixin-rpc-httpclient</module>
+      <module>weixin-rpc-rabbitmq</module>
+      <module>weixin-rpc-user</module>
+      <module>weixin-rpc-item</module>
+      <module>weixin-rpc-order</module>
+      <module>weixin-rpc-cart</module>
+      <module>weixin-rpc-comment</module>
+      <module>weixin-rpc-system</module>
       <module>weixin-service-admin</module>
       <module>weixin-service-cart</module>
       <module>weixin-service-item</module>
@@ -25,32 +33,15 @@
       <module>weixin-service-user</module>
       <module>weixin-service-wxtools</module>
       <module>weixin-service-redis</module>
-      <module>weixin-web-front</module>
-      <module>weixin-web-manage</module>
       <module>weixin-service-httpclient</module>
-      <module>weixin-rpc-httpclient</module>
       <module>weixin-service-timer</module>
       <module>weixin-service-rabbitmq</module>
-      <module>weixin-rpc-rabbitmq</module>
-      <module>weixin-rpc-user</module>
-      <module>weixin-rpc-item</module>
-      <module>weixin-rpc-order</module>
-      <module>weixin-rpc-cart</module>
-      <module>weixin-rpc-promotion</module>
-      <module>weixin-rpc-comment</module>
-      <module>weixin-rpc-system</module>
+      <module>weixin-web-manage</module>
       <module>weixin-web-mobile</module>
-
+      <module>weixin-rpc-promotion</module>
     </modules>
-  <dependencies>
-    <dependency>
-      <groupId>com.cheng</groupId>
-      <artifactId>weixin-common-entity</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
 
-  <properties>
+    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <junit.version>4.10</junit.version>
       <http.version>4.3.3</http.version>
@@ -64,7 +55,6 @@
 
       <spring-data-redis.version>1.6.1.RELEASE</spring-data-redis.version>
       <jedis.version>2.7.3</jedis.version>
-
       <dubbo.version>2.5.3</dubbo.version>
       <zkclient.version>0.4</zkclient.version>
 
@@ -73,11 +63,9 @@
       <jsp.version>2.2</jsp.version>
       <el.version>3.0.0</el.version>
       <sitemesh.version>2.4.2</sitemesh.version>
-
       <logging.version>1.1.3</logging.version>
       <log4j.version>1.2.17</log4j.version>
       <slf4j.version>1.7.7</slf4j.version>
-
       <dom4j.version>1.6.1</dom4j.version>
       <xstream.version>1.4.7</xstream.version>
       <fastjson.version>1.1.41</fastjson.version>
@@ -89,13 +77,11 @@
       <guava.version>18.0</guava.version>
       <pagehelper.version>4.0.1</pagehelper.version>
       <joda-time.version>2.7</joda-time.version>
-
       <quartz.version>2.2.1</quartz.version>
-      <spring.version>3.2.12.RELEASE</spring.version>
+      <spring.version>4.1.6.RELEASE</spring.version>
       <spring-rabbit.version>1.4.0.RELEASE</spring-rabbit.version>
       <mybatis.version>3.2.7</mybatis.version>
       <mybatis.spring.version>1.2.1</mybatis.spring.version>
-
       <source.version>2.4</source.version>
       <compiler.version>3.1</compiler.version>
       <dependency.version>2.1</dependency.version>
@@ -166,7 +152,7 @@
           <groupId>javax.servlet</groupId>
           <artifactId>javax.servlet-api</artifactId>
           <version>${servlet.version}</version>
-          <!--<scope>provided</scope>-->
+          <scope>provided</scope>
         </dependency>
         <dependency>
           <groupId>jstl</groupId>

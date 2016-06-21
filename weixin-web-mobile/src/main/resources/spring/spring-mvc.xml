@@ -1,29 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:p="http://www.springframework.org/schema/p"
-  	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="
-    http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.2.xsd
-    http://www.springframework.org/schema/mvc
-    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 	<!-- 支持注解 -->
 	<mvc:annotation-driven />
-  
+
+	<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>
+
 	<!-- 扫描controller（controller层注入） -->
-	<context:component-scan base-package="com.cheng.weixin.web.front" use-default-filters="false">
+	<context:component-scan base-package="com.cheng.weixin.web.mobile" use-default-filters="false">
       <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
       <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 
-	<!-- 对模型视图添加前后缀 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  <!-- 避免IE在ajax请求时，返回json出现下载 -->
+  <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    <property name="supportedMediaTypes">
+      <list>
+        <value>text/html;charset=UTF-8</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+    <property name="messageConverters">
+      <list>
+        <ref bean="jacksonMessageConverter" />
+      </list>
+    </property>
+  </bean>
+
+  <!-- 对模型视图添加前后缀 -->
+	<!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 	  <property name="prefix" value="/WEB-INF/views/"/>
 	  <property name="suffix" value=".jsp"/>
-	</bean>
+	</bean>-->
+
 </beans>
+

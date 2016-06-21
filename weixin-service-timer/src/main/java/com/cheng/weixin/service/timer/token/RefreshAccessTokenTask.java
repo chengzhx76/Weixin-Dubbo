@@ -1,9 +1,9 @@
 package com.cheng.weixin.service.timer.token;
 
 import com.alibaba.fastjson.JSON;
-import com.cheng.weixin.commom.constant.weixin.WeixinFinalValue;
-import com.cheng.weixin.commom.constant.weixin.WeixinUrl;
-import com.cheng.weixin.commom.exception.ErrorEntity;
+import com.cheng.weixin.common.constant.weixin.WeixinFinalValue;
+import com.cheng.weixin.common.constant.weixin.WeixinUrl;
+import com.cheng.weixin.common.exception.ErrorEntity;
 import com.cheng.weixin.rpc.httpclient.service.RpcHttpClientService;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import org.slf4j.Logger;

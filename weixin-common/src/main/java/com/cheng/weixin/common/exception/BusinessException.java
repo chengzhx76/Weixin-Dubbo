@@ -1,4 +1,4 @@
-package com.cheng.weixin.commom.exception;
+package com.cheng.weixin.common.exception;
 
 public class BusinessException extends RuntimeException {
 

@@ -1,6 +1,6 @@
 package com.cheng.weixin.web.manage.controllers;
 
-import com.cheng.weixin.commom.utils.StringUtils;
+import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.model.Page;
 import com.cheng.weixin.web.manage.utils.SystemUtils;

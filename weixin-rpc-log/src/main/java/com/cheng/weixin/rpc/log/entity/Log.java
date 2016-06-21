@@ -1,7 +1,7 @@
 package com.cheng.weixin.rpc.log.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.commom.utils.StringUtils;
+import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.log.enums.LogType;
 
 import java.util.Date;

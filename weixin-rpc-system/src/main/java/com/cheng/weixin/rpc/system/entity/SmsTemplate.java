@@ -3,9 +3,9 @@ package com.cheng.weixin.rpc.system.entity;
 import com.cheng.common.entity.DataEntity;
 
 /**
- * Desc: 短信模板
- * Author: 光灿
- * Date: 2016/6/17
+ * Desc:
+ * Author: cheng
+ * Date: 2016/6/21
  */
 public class SmsTemplate extends DataEntity<SmsTemplate> {
     private String name;

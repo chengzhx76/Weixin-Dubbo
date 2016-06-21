@@ -1,7 +1,7 @@
 package com.cheng.weixin.web.manage.utils;
 
-import com.cheng.weixin.commom.utils.CacheUtils;
-import com.cheng.weixin.commom.utils.SpringContextHolder;
+import com.cheng.weixin.common.utils.CacheUtils;
+import com.cheng.weixin.common.utils.SpringContextHolder;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.entity.Role;

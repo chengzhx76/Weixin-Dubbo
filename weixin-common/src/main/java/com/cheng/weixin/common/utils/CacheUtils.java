@@ -1,4 +1,4 @@
-package com.cheng.weixin.commom.utils;
+package com.cheng.weixin.common.utils;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;

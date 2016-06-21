@@ -1,7 +1,7 @@
 package com.cheng.common.entity;
 
 
-import com.cheng.weixin.commom.utils.IdGen;
+import com.cheng.weixin.common.utils.IdGen;
 import com.cheng.common.entity.enums.Status;
 
 import java.util.Date;

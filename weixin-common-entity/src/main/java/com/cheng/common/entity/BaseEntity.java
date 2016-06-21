@@ -1,7 +1,7 @@
 package com.cheng.common.entity;
 
 
-import com.cheng.weixin.commom.utils.StringUtils;
+import com.cheng.weixin.common.utils.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;

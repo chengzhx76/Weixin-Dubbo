@@ -1,7 +1,7 @@
 package com.cheng.weixin.web.manage.security;
 
-import com.cheng.weixin.commom.utils.ServletUtils;
-import com.cheng.weixin.commom.utils.StringUtils;
+import com.cheng.weixin.common.utils.ServletUtils;
+import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import org.apache.shiro.authc.AuthenticationException;

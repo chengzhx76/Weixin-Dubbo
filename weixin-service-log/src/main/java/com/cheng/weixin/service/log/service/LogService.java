@@ -1,7 +1,7 @@
 package com.cheng.weixin.service.log.service;
 
-import com.cheng.weixin.commom.utils.Exceptions;
-import com.cheng.weixin.commom.utils.StringUtils;
+import com.cheng.weixin.common.utils.Exceptions;
+import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.log.entity.Log;
 import com.cheng.weixin.rpc.log.enums.LogType;
 import com.cheng.weixin.rpc.log.service.RpcLogService;
