@@ -39,6 +39,7 @@
       <module>weixin-rpc-promotion</module>
       <module>weixin-rpc-comment</module>
       <module>weixin-rpc-system</module>
+      <module>weixin-web-mobile</module>
 
     </modules>
   <dependencies>
