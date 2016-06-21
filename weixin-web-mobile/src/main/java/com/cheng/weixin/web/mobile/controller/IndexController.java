@@ -15,7 +15,6 @@ public class IndexController extends BaseController {
 
     @RequestMapping(value = "v1/index")
     public ResponseEntity<Response> index() {
-
         return success();
     }
 
