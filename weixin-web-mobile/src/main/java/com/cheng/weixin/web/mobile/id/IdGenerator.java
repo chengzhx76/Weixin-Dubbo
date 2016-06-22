@@ -92,7 +92,7 @@ public class IdGenerator {
     }
 
 
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         IdGenerator worker2 = new IdGenerator(2);
         System.out.println(worker2.nextId());
     }
