@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
@@ -9,10 +8,10 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.2.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
-	<!-- 支持注解 -->
-	<mvc:annotation-driven />
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
+  <mvc:annotation-driven />
+	<!-- 支持注解 -->
 	<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>
 
 	<!-- 扫描controller（controller层注入） -->
@@ -21,22 +20,29 @@
       <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 
-  <!-- 避免IE在ajax请求时，返回json出现下载 -->
-  <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    <property name="supportedMediaTypes">
-      <list>
-        <value>text/html;charset=UTF-8</value>
-      </list>
-    </property>
+  <!-- JSON 日期格式转换 -->
+  <bean id="objectMapper" class="com.cheng.weixin.web.mobile.json.CustomObjectMapper" init-method="init">
+    <property name="camelCaseToLowerCaseWithUnderscores" value="false"/>
+    <property name="dateFormatPattern" value="yyyy-MM-dd HH:mm:ss"/>
   </bean>
-
-  <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-    <property name="messageConverters">
-      <list>
-        <ref bean="jacksonMessageConverter" />
-      </list>
-    </property>
-  </bean>
+    <!-- JSONP 的支持 -->
+    <mvc:annotation-driven>
+      <mvc:message-converters register-defaults="false">
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+          <constructor-arg index="0" value="UTF-8"/>
+        </bean>
+        <bean class="com.cheng.weixin.web.mobile.json.JsonpHttpMessageConverter">
+          <property name="objectMapper" ref="objectMapper"/>
+          <property name="supportedMediaTypes">
+            <list>
+              <value>application/json;charset=UTF-8</value>
+              <value>text/html;charset=UTF-8</value>
+            </list>
+          </property>
+          <property name="callbackName" value="callback"/>
+        </bean>
+      </mvc:message-converters>
+    </mvc:annotation-driven>
 
   <!-- 对模型视图添加前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -44,6 +50,14 @@
 	  <property name="prefix" value="/WEB-INF/views/"/>
 	  <property name="suffix" value=".jsp"/>
 	</bean>
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/**" />
+      <mvc:exclude-mapping path="/v1/login"/>
+      <bean class="com.cheng.weixin.web.mobile.interceptor.LogInterceptor" />
+    </mvc:interceptor>
+  </mvc:interceptors>
 
 </beans>
 
