@@ -54,6 +54,7 @@
 	  <property name="suffix" value=".jsp"/>
 	</bean>
 
+  <!-- 日志拦截管理器 -->
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/**" />
@@ -62,7 +63,7 @@
     </mvc:interceptor>
   </mvc:interceptors>
 
-
+  <!-- Token 认证管理器 交由redis管理token -->
   <bean id="tokenManager" class="com.cheng.weixin.web.mobile.security.impl.RedisTokenManager">
       <!--<property name="database" value="15"/>-->
       <property name="seconds" value="3600"/>
@@ -73,6 +74,7 @@
     <property name="tokenName" value="X-Token"/>
   </bean>
 
+  <!-- Token 认证拦截器 -->
   <aop:config>
     <aop:aspect ref="securityAspect">
       <aop:around method="execute" pointcut="@annotation(org.springframework.web.bind.annotation.RequestMapping)"/>

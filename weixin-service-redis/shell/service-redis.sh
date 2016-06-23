@@ -1,13 +1,13 @@
 #!/bin/sh
 
 ## java env
-export JAVA_HOME=/usr/local/jdk1.7.0_45
+export JAVA_HOME=/usr/jdk/jdk1.7.0_45
 export JRE_HOME=$JAVA_HOME/jre
 
 ## service name
 APP_NAME=redis
 
-SERVICE_DIR=/home/wusc/edu/service/$APP_NAME
+SERVICE_DIR=/usr/cheng/service/$APP_NAME
 SERVICE_NAME=weixin-service-$APP_NAME
 JAR_NAME=$SERVICE_NAME\.jar
 PID=$SERVICE_NAME\.pid

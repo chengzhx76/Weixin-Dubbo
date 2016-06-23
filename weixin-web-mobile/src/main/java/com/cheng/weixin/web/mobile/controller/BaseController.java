@@ -71,4 +71,29 @@ public abstract class BaseController {
         return ResponseEntity.ok(new Response(code.value(), success, message, data));
     }
 
+
+
+
+
+
+
+
+    /** 异常处理 */
+    //@ExceptionHandler(RuntimeException.class)
+    //public void exceptionHandler(HttpServletResponse response, Exception ex) throws Exception {
+    //    logger.error("OH,MY GOD! SOME ERRORS OCCURED! AS FOLLOWS :", ex);
+    //    ModelMap modelMap = new ModelMap();
+    //    if (ex instanceof BaseException) {
+    //        ((BaseException) ex).handler(modelMap);
+    //    } else if (ex instanceof IllegalArgumentException) {
+    //        new IllegalParameterException(ex.getMessage()).handler(modelMap);
+    //    } else {
+    //        setModelMap(modelMap, HttpCode.INTERNAL_SERVER_ERROR);
+    //    }
+    //    response.setContentType("application/json;charset=UTF-8");
+    //    byte[] bytes = JSON.toJSONBytes(modelMap, SerializerFeature.DisableCircularReferenceDetect);
+    //    response.getOutputStream().write(bytes);
+    //}
+
+
 }
