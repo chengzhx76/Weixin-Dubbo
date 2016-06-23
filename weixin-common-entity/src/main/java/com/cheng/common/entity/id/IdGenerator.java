@@ -1,4 +1,4 @@
-package com.cheng.weixin.web.mobile.id;
+package com.cheng.common.entity.id;
 
 /**
  * Desc: http://cloudate.net/?p=575

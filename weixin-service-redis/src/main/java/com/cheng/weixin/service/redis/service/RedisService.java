@@ -25,6 +25,7 @@ public class RedisService implements RpcRedisService {
      * 批量删除对应的value
      * @param keys
      */
+    @Override
     public void remove(final String... keys) {
         for (String key : keys) {
             remove(key);
@@ -35,6 +36,7 @@ public class RedisService implements RpcRedisService {
      * 批量删除key
      * @param pattern
      */
+    @Override
     public void removePattern(final String pattern) {
         Set<Serializable> keys = redisTemplate.keys(pattern);
         if (keys.size() > 0) {
@@ -46,6 +48,7 @@ public class RedisService implements RpcRedisService {
      * 删除对应的value
      * @param key
      */
+    @Override
     public void remove(final String key) {
         if (exists(key)) {
             redisTemplate.delete(key);
@@ -57,6 +60,7 @@ public class RedisService implements RpcRedisService {
      * @param key
      * @return
      */
+    @Override
     public boolean exists(final String key) {
         return redisTemplate.hasKey(key);
     }
@@ -66,8 +70,10 @@ public class RedisService implements RpcRedisService {
      * @param key
      * @return
      */
+    @Override
     public Object get(final String key) {
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+
         return operations.get(key);
     }
 
@@ -77,6 +83,7 @@ public class RedisService implements RpcRedisService {
      * @param value
      * @return
      */
+    @Override
     public boolean set(final String key, Object value) {
         boolean result = false;
         try {
@@ -96,6 +103,7 @@ public class RedisService implements RpcRedisService {
      * @param expireTime
      * @return
      */
+    @Override
     public boolean set(final String key, Object value, Long expireTime) {
         boolean result = false;
         try {
@@ -109,4 +117,21 @@ public class RedisService implements RpcRedisService {
         return result;
     }
 
+    /**
+     * 根据Key刷新超时时间
+     * @param key
+     * @param expireTime
+     * @return
+     */
+    @Override
+    public boolean flushExpireTime(final String key, Long expireTime) {
+        boolean result = false;
+        try {
+            redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

@@ -61,4 +61,11 @@ public interface RpcRedisService {
      * @return
      */
     boolean set(final String key, Object value, Long expireTime);
+    /**
+     * 根据Key刷新超时时间
+     * @param key
+     * @param expireTime
+     * @return
+     */
+    boolean flushExpireTime(final String key, Long expireTime);
 }

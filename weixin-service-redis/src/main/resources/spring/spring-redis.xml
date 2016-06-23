@@ -16,8 +16,9 @@
 		<property name="poolConfig" ref="poolConfig" />
 		<property name="port" value="${redis.port}" />
 		<property name="hostName" value="${redis.host}" />
-		<property name="password" value="${redis.password}" />
+		<!--<property name="password" value="${redis.password}" />-->
 		<property name="timeout" value="${redis.timeout}" />
+		<property name="database" value="1"/>
 	</bean>
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >

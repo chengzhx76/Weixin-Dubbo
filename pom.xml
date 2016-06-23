@@ -92,6 +92,7 @@
 
     <dependencyManagement>
       <dependencies>
+        <!-- commons -->
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-common</artifactId>
@@ -112,6 +113,8 @@
           <artifactId>weixin-common-entity</artifactId>
           <version>${project.version}</version>
         </dependency>
+
+        <!-- RPC -->
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-rpc-admin</artifactId>
@@ -142,11 +145,20 @@
           <artifactId>weixin-rpc-rabbitmq</artifactId>
           <version>${project.version}</version>
         </dependency>
+
+        <!-- Junit -->
         <dependency>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
           <version>${junit.version}</version>
           <scope>test</scope>
+        </dependency>
+        <!-- Servlet -->
+        <dependency>
+          <groupId>javax.servlet.jsp</groupId>
+          <artifactId>jsp-api</artifactId>
+          <version>${jsp.version}</version>
+          <scope>provided</scope>
         </dependency>
         <dependency>
           <groupId>javax.servlet</groupId>
@@ -155,31 +167,22 @@
           <scope>provided</scope>
         </dependency>
         <dependency>
-          <groupId>jstl</groupId>
-          <artifactId>jstl</artifactId>
-          <version>${jstl.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>javax.servlet.jsp</groupId>
-          <artifactId>jsp-api</artifactId>
-          <version>${jsp.version}</version>
-          <scope>provided</scope>
-        </dependency>
-        <dependency>
           <groupId>javax.el</groupId>
           <artifactId>javax.el-api</artifactId>
           <version>${el.version}</version>
         </dependency>
         <dependency>
+          <groupId>jstl</groupId>
+          <artifactId>jstl</artifactId>
+          <version>${jstl.version}</version>
+        </dependency>
+        <!-- Sitemesh -->
+        <dependency>
           <groupId>opensymphony</groupId>
           <artifactId>sitemesh</artifactId>
           <version>${sitemesh.version}</version>
         </dependency>
-        <dependency>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-          <version>${logging.version}</version>
-        </dependency>
+        <!-- log4J -->
         <dependency>
           <groupId>log4j</groupId>
           <artifactId>log4j</artifactId>
@@ -195,6 +198,12 @@
           <artifactId>slf4j-log4j12</artifactId>
           <version>${slf4j.version}</version>
         </dependency>
+        <dependency>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+          <version>${logging.version}</version>
+        </dependency>
+        <!-- Json && Xml-->
         <dependency>
           <groupId>dom4j</groupId>
           <artifactId>dom4j</artifactId>
@@ -225,11 +234,8 @@
           <artifactId>jackson-annotations</artifactId>
           <version>${jackson.version}</version>
         </dependency>
-        <dependency>
-          <groupId>net.sf.ehcache</groupId>
-          <artifactId>ehcache</artifactId>
-          <version>${ehcache.version}</version>
-        </dependency>
+
+        <!-- Tools -->
         <dependency>
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-lang3</artifactId>
@@ -260,11 +266,14 @@
           <artifactId>guava</artifactId>
           <version>${guava.version}</version>
         </dependency>
+        <!-- Pagehelper -->
         <dependency>
           <groupId>com.github.pagehelper</groupId>
           <artifactId>pagehelper</artifactId>
           <version>${pagehelper.version}</version>
-        </dependency>        <dependency>
+        </dependency>
+        <!-- HttpClien -->
+        <dependency>
           <groupId>org.apache.httpcomponents</groupId>
           <artifactId>httpclient</artifactId>
           <version>${http.version}</version>
@@ -274,21 +283,25 @@
           <artifactId>httpmime</artifactId>
           <version>${http.version}</version>
         </dependency>
+        <!-- scheduler -->
         <dependency>
           <groupId>org.quartz-scheduler</groupId>
           <artifactId>quartz</artifactId>
           <version>${quartz.version}</version>
         </dependency>
+        <!-- MYSQL -->
         <dependency>
           <groupId>mysql</groupId>
           <artifactId>mysql-connector-java</artifactId>
           <version>${mysql.version}</version>
         </dependency>
+        <!-- Druid -->
         <dependency>
           <groupId>com.alibaba</groupId>
           <artifactId>druid</artifactId>
           <version>${druid.version}</version>
         </dependency>
+        <!-- shiro -->
         <dependency>
           <groupId>org.apache.shiro</groupId>
           <artifactId>shiro-core</artifactId>
@@ -309,6 +322,13 @@
           <artifactId>shiro-ehcache</artifactId>
           <version>${shrio.version}</version>
         </dependency>
+        <!-- ehcache -->
+        <dependency>
+          <groupId>net.sf.ehcache</groupId>
+          <artifactId>ehcache</artifactId>
+          <version>${ehcache.version}</version>
+        </dependency>
+        <!-- AspectJ -->
         <dependency>
           <groupId>org.aspectj</groupId>
           <artifactId>aspectjrt</artifactId>
@@ -319,18 +339,6 @@
           <artifactId>aspectjweaver</artifactId>
           <version>${aspectj.version}</version>
         </dependency>
-        <!-- Jedis  Start -->
-        <dependency>
-          <groupId>org.springframework.data</groupId>
-          <artifactId>spring-data-redis</artifactId>
-          <version>${spring-data-redis.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>redis.clients</groupId>
-          <artifactId>jedis</artifactId>
-          <version>${jedis.version}</version>
-        </dependency>
-        <!-- Jedis End -->
         <!-- Dubbo Start -->
         <dependency>
           <groupId>com.alibaba</groupId>
@@ -348,7 +356,28 @@
           <artifactId>zkclient</artifactId>
           <version>${zkclient.version}</version>
         </dependency>
-        <!-- Dubbo End -->
+        <!-- AMQP -->
+        <dependency>
+          <groupId>org.springframework.amqp</groupId>
+          <artifactId>spring-rabbit</artifactId>
+          <version>${spring-rabbit.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.rabbitmq</groupId>
+          <artifactId>amqp-client</artifactId>
+          <version>${amqp-client.version}</version>
+        </dependency>
+        <!-- Jedis -->
+        <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-redis</artifactId>
+          <version>${spring-data-redis.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+          <version>${jedis.version}</version>
+        </dependency>
         <!-- Spring begin -->
         <dependency>
           <groupId>org.springframework</groupId>
@@ -416,16 +445,6 @@
           <version>${spring.version}</version>
         </dependency>
         <!-- Spring end -->
-        <dependency>
-          <groupId>org.springframework.amqp</groupId>
-          <artifactId>spring-rabbit</artifactId>
-          <version>${spring-rabbit.version}</version>
-        </dependency>
-        <dependency>
-          <groupId>com.rabbitmq</groupId>
-          <artifactId>amqp-client</artifactId>
-          <version>${amqp-client.version}</version>
-        </dependency>
         <!-- MyBatis begin -->
         <dependency>
           <groupId>org.mybatis</groupId>

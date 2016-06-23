@@ -11,10 +11,10 @@
 	<context:annotation-config />
 
 	<!-- 扫描注入  -->
-	<!--<context:component-scan base-package="com.cheng.weixin.web.mobile">
+	<context:component-scan base-package="com.cheng.weixin.web.mobile">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-	</context:component-scan>-->
+	</context:component-scan>
 
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:globalconf.properties,classpath:system.properties"/>
 

@@ -3,12 +3,15 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
   <mvc:annotation-driven />
 	<!-- 支持注解 -->
@@ -58,6 +61,23 @@
       <bean class="com.cheng.weixin.web.mobile.interceptor.LogInterceptor" />
     </mvc:interceptor>
   </mvc:interceptors>
+
+
+  <bean id="tokenManager" class="com.cheng.weixin.web.mobile.security.impl.RedisTokenManager">
+      <!--<property name="database" value="15"/>-->
+      <property name="seconds" value="3600"/>
+  </bean>
+
+  <bean id="securityAspect" class="com.cheng.weixin.web.mobile.security.SecurityAspect">
+    <property name="tokenManager" ref="tokenManager"/>
+    <property name="tokenName" value="X-Token"/>
+  </bean>
+
+  <aop:config>
+    <aop:aspect ref="securityAspect">
+      <aop:around method="execute" pointcut="@annotation(org.springframework.web.bind.annotation.RequestMapping)"/>
+    </aop:aspect>
+  </aop:config>
 
 </beans>
 

@@ -1,4 +1,4 @@
-package com.cheng.weixin.common.utils;
+package com.cheng.common.entity.id;
 
 import java.util.UUID;
 

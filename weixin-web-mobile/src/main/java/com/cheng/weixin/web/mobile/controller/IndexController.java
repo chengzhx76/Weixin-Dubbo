@@ -3,6 +3,7 @@ package com.cheng.weixin.web.mobile.controller;
 import com.cheng.weixin.web.mobile.model.Book;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.model.User;
+import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +50,7 @@ public class IndexController extends BaseController {
 
         return success(user);
     }
-
+    @IgnoreSecurity
     @RequestMapping(value = "v1/login")
     public ResponseEntity<Response> login() {
         return failure();

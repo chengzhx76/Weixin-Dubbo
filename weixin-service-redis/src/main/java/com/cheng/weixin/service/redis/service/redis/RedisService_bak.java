@@ -7,10 +7,9 @@ package com.cheng.weixin.service.redis.service.redis;
  */
 public class RedisService_bak /*implements RpcRedisService*/ {
 
-/*
+    /*
     @Autowired
     private ShardedJedisPool jedisPool;
-
 
     private <T> T execute(Function<T, ShardedJedis> function) {
         ShardedJedis shardedJedis = null;
@@ -25,26 +24,21 @@ public class RedisService_bak /*implements RpcRedisService*/ {
             if (null != shardedJedis) shardedJedis.close();
         }
         return null;
-    }
-
-    */
+    }*/
 /**
      * 设置值
      * @param key
      * @param value
      * @return
-     *//*
-
-    public String set(final String key, final String value) {
+     */
+    /*public String set(final String key, final String value) {
         return this.execute(new Function<String, ShardedJedis>() {
             @Override
             public String callback(ShardedJedis shardedJedis) {
                 return shardedJedis.set(key, value);
             }
         });
-    }
-
-    */
+    }*/
 /**
      * 设置值和过期时间
      * @param key
