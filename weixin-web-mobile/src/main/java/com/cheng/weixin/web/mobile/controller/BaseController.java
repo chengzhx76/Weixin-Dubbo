@@ -1,7 +1,5 @@
 package com.cheng.weixin.web.mobile.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.web.mobile.exception.BaseException;
 import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
 import com.cheng.weixin.web.mobile.exception.message.HttpCode;
@@ -79,7 +77,7 @@ public abstract class BaseController {
     }
 
     @ExceptionHandler(Exception.class)
-    public void exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws IOException {
+    public ResponseEntity<Response> exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws IOException {
         logger.error("发生异常==> ", ex);
         Meta meta = new Meta();
         if (ex instanceof BaseException) {
@@ -92,7 +90,9 @@ public abstract class BaseController {
             meta.setMsg(HttpCode.INTERNAL_SERVER_ERROR.msg());
         }
 
-        String callbackParam = request.getParameter("callback");
+        return ResponseEntity.ok(new Response(meta.getCode(), meta.isSuccess(), meta.getMsg(), null));
+
+        /*String callbackParam = request.getParameter("callback");
         response.setContentType("application/json;charset=UTF-8");
         String data = JSON.toJSONString(new Response(meta.getCode(), meta.isSuccess(), meta.getMsg(), ""));
         if(StringUtils.isNotBlank(callbackParam)) {
@@ -100,6 +100,6 @@ public abstract class BaseController {
         }
         response.getWriter().write(data);
         response.getWriter().flush();
-        response.getWriter().close();
+        response.getWriter().close();*/
     }
 }

@@ -42,6 +42,7 @@
         <property name="supportedMediaTypes">
           <list>
             <value>application/json;charset=UTF-8</value>
+            <value>application/javascript;charset=UTF-8</value>
             <value>text/html;charset=UTF-8</value>
           </list>
         </property>

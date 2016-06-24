@@ -5,7 +5,7 @@ package com.cheng.dubbo.consumer.test;
  * Author: cheng
  * Date: 2016/6/24
  */
-public class Test {
+public class TestAll {
 
     @org.junit.Test
     public void test01() {

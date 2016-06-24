@@ -39,8 +39,10 @@ public class RedisTokenManager implements TokenManager {
     @Override
     public boolean checkToken(String token) {
         boolean result = redisService.exists(token);
-        if (seconds != 0) {
-            redisService.flushExpireTime(token, seconds);
+        if(result) {
+            if (seconds != 0) {
+                redisService.flushExpireTime(token, seconds);
+            }
         }
         return result;
     }

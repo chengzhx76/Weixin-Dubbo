@@ -22,13 +22,16 @@ public class ConsumerTest {
 
     @Test
     public void test01() {
-        String data = (String) redisService.get("122");
+        //String data = (String) redisService.get("122");
 
         //System.out.println(redisService.set("122","测试!"));
 
 
 
+        //boolean result = redisService.exists("122");
         boolean result = redisService.exists("122");
+
+
 
         System.out.println("=======> "+result);
     }
