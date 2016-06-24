@@ -78,10 +78,7 @@ public abstract class BaseController {
         return ResponseEntity.ok(new Response(code, success, message, data));
     }
 
-
-
-
-    @ExceptionHandler(RuntimeException.class)
+    @ExceptionHandler(Exception.class)
     public void exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws IOException {
         logger.error("发生异常==> ", ex);
         Meta meta = new Meta();
@@ -99,7 +96,7 @@ public abstract class BaseController {
         response.setContentType("application/json;charset=UTF-8");
         String data = JSON.toJSONString(new Response(meta.getCode(), meta.isSuccess(), meta.getMsg(), ""));
         if(StringUtils.isNotBlank(callbackParam)) {
-            data =callbackParam+"("+ data +")";
+            data = callbackParam+"("+ data +")";
         }
         response.getWriter().write(data);
         response.getWriter().flush();

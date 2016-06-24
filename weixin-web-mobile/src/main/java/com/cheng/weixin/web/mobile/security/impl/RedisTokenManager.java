@@ -17,16 +17,9 @@ public class RedisTokenManager implements TokenManager {
     @Autowired
     private RpcRedisService redisService;
 
-    //private static final int DEFAULT_DATABASE = 0;
     private static final long DEFAULT_SECONDS = 0;
 
-    //private int database = DEFAULT_DATABASE;
     private long seconds = DEFAULT_SECONDS;
-
-
-  /*  public void setDatabase(int database) {
-        this.database = database;
-    }*/
 
     public void setSeconds(int seconds) {
         this.seconds = seconds;
