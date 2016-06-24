@@ -1,5 +1,6 @@
 package com.cheng.weixin.web.mobile.controller;
 
+import com.cheng.weixin.web.mobile.exception.TokenException;
 import com.cheng.weixin.web.mobile.model.Book;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.model.User;
@@ -54,5 +55,30 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "v1/login")
     public ResponseEntity<Response> login() {
         return failure();
+    }
+
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/login2")
+    public ResponseEntity<Response> login2() {
+        return success();
+    }
+
+
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/test")
+    public ResponseEntity<Response> test() {
+        throw new RuntimeException("===RuntimeException===");
+    }
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/test2")
+    public ResponseEntity<Response> test2() throws Exception {
+
+        throw new Exception("===Exception===");
+    }
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/test3")
+    public ResponseEntity<Response> test3() throws Exception {
+
+        throw new TokenException("===TokenException===");
     }
 }

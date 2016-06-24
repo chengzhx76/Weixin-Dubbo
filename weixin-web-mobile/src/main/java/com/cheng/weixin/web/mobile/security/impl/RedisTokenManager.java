@@ -40,7 +40,6 @@ public class RedisTokenManager implements TokenManager {
         } else {
             redisService.set(token, username);
         }
-        logger.info("==========createToken===========");
         return token;
     }
 
@@ -50,7 +49,6 @@ public class RedisTokenManager implements TokenManager {
         if (seconds != 0) {
             redisService.flushExpireTime(token, seconds);
         }
-        logger.info("==========createToken===========");
         return result;
     }
 }

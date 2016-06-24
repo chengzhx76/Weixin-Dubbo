@@ -14,6 +14,9 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
   <mvc:annotation-driven />
+
+  <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
+  <mvc:default-servlet-handler />
 	<!-- 支持注解 -->
 	<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>
 
@@ -29,23 +32,23 @@
     <property name="dateFormatPattern" value="yyyy-MM-dd HH:mm:ss"/>
   </bean>
     <!-- JSONP 的支持 -->
-    <mvc:annotation-driven>
-      <mvc:message-converters register-defaults="false">
-        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-          <constructor-arg index="0" value="UTF-8"/>
-        </bean>
-        <bean class="com.cheng.weixin.web.mobile.json.JsonpHttpMessageConverter">
-          <property name="objectMapper" ref="objectMapper"/>
-          <property name="supportedMediaTypes">
-            <list>
-              <value>application/json;charset=UTF-8</value>
-              <value>text/html;charset=UTF-8</value>
-            </list>
-          </property>
-          <property name="callbackName" value="callback"/>
-        </bean>
-      </mvc:message-converters>
-    </mvc:annotation-driven>
+  <mvc:annotation-driven>
+    <mvc:message-converters register-defaults="false">
+      <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg index="0" value="UTF-8"/>
+      </bean>
+      <bean class="com.cheng.weixin.web.mobile.json.JsonpHttpMessageConverter">
+        <property name="objectMapper" ref="objectMapper"/>
+        <property name="supportedMediaTypes">
+          <list>
+            <value>application/json;charset=UTF-8</value>
+            <value>text/html;charset=UTF-8</value>
+          </list>
+        </property>
+        <property name="callbackName" value="callback"/>
+      </bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
 
   <!-- 对模型视图添加前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

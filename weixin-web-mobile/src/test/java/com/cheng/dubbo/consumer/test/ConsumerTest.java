@@ -26,6 +26,10 @@ public class ConsumerTest {
 
         //System.out.println(redisService.set("122","测试!"));
 
-        System.out.println("=======> "+data);
+
+
+        boolean result = redisService.exists("122");
+
+        System.out.println("=======> "+result);
     }
 }

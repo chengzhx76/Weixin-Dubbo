@@ -1,4 +1,6 @@
-package com.cheng.weixin.web.mobile.model.enumType;
+package com.cheng.weixin.web.mobile.exception.message;
+
+import com.cheng.weixin.web.mobile.i18n.Resources;
 
 /**
  * Desc: Ajax 请求时的自定义查询状态码，主要参考Http状态码，但并不完全对应
@@ -43,7 +45,7 @@ public enum HttpCode {
         return this.value;
     }
     public String msg() {
-        return this.value+"";
+        return Resources.getMessage("HTTPCODE_" + this.value);
     }
 
     public String toString() {
