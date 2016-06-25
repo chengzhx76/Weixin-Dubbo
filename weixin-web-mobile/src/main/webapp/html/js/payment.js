@@ -12,4 +12,8 @@ $(function(){
             $("#textarea_num").css("color","#999999");
         }
     });
+    $(".more-pay").hide();
+    $("#more").click(function(){
+        $(".more-pay").fadeToggle('fast');
+    });
 })

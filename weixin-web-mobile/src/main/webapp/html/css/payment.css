@@ -98,7 +98,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .content .addr .main .detail .m-date {
   height: 30px;
 }
-.content .addr .main .detail .m-date .desc {
+/*.content .addr .main .detail .m-date .desc {
   height: 30px;
   line-height: 30px;
   float: left;
@@ -110,6 +110,25 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   margin-right: 80px;
   float: right;
   font-size: 16px;
+}*/
+
+.content .addr .main .detail .m-date .weui_cell_hd {
+  height: 30px;
+  line-height: 30px;
+  float: left;
+  font-size: 16px;
+  /*background: darkcyan;*/
+}
+.content .addr .main .detail .m-date .weui_cell_bd {
+  height: 30px;
+  line-height: 30px;
+  float: right;
+  font-size: 16px;
+  margin-right: 70px;
+}
+/* 弹框字居中 */
+.weui_cell_bd p {
+  text-align: center;
 }
 
 .content .pay .title {
@@ -124,12 +143,14 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   /*height: 110px;*/
   background: #ffffff;
 }
-
+.weui_cells_radio .weui_check + .weui_icon_checked:before {
+  content: '\EA01';
+  font-size: 22px;
+  color: #cccccc;
+}
 .weui_cells_radio .weui_check:checked + .weui_icon_checked:before {
-  display: block;
   content: '\EA06';
-  color: #09BB07;
-  font-size: 23px;
+  font-size: 22px;
 }
 .content .pay .main .weui_cells {
   margin-top: 0;
@@ -174,17 +195,17 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   line-height: 30px;
   margin-right: 5px;
 }
-.content .pay .main .more {
+.content .pay .main .more-pay {
   margin-left: 20px;
 }
-.content .pay .main .more .weui_cells:before {
+.content .pay .main .more-pay .weui_cells:before {
   border-top: none;
 }
-.content .pay .main .more .weui_cells:after {
+.content .pay .main .more-pay .weui_cells:after {
   border-bottom: 1px solid #D9D9D9;
 }
 
-.content .pay .main .more .icon {
+.content .pay .main .more-pay .icon {
   float: left;
   font-size: 20px;
   display: inline-block;
@@ -192,10 +213,10 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   line-height: 30px;
   margin-right: 5px;
 }
-.content .pay .main .more .ali .icon {
+.content .pay .main .more-pay .ali .icon {
   color: #00AAEF;
 }
-.content .pay .main .more .hdfk .icon {
+.content .pay .main .more-pay .hdfk .icon {
   color: #FF6600;
 }
 .content .assets:before {

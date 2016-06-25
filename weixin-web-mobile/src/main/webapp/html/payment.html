@@ -31,13 +31,19 @@
               刘楼张三家
             </div>
           </a>
-          <a class="weui_panel_ft m-date" href="javascript:void(0);">
-            <div class="desc">
+          <a id='slect-data' class="weui_panel_ft m-date" href="javascript:void(0);">
+            <!--<div class="desc">
               收货时间
             </div>
             <div class="d-date">
               请选择时间
-            </div>
+            </div>-->
+              <div class="weui_cell_hd">
+                <label for="" class="">送货时间</label>
+              </div>
+              <div class="weui_cell_bd weui_cell_primary">
+                <input class="weui_input" type="text" value="请选择送货时间"/>
+              </div>
           </a>
         </div>
       </div>
@@ -52,7 +58,7 @@
             <label class="weui_cell weui_check_label" for="x11">
               <div class="weui_cell_bd weui_cell_primary">
                 <i class="icon icon-14"></i>
-                <p>微信支付（推荐）</p>
+                <san>微信支付（推荐）</san>
               </div>
               <div class="weui_cell_ft" >
                 <input type="radio" class="weui_check" name="radio1" id="x11" checked>
@@ -61,14 +67,14 @@
             </label>
           </div>
           <div class="weui_panel weui_panel_access">
-            <a class="weui_panel_ft" href="javascript:void(0);">更多</a>
+            <a id="more" class="weui_panel_ft" href="javascript:void(0);">更多</a>
           </div>
-          <div class="more">
+          <div class="more-pay">
             <div class="weui_cells weui_cells_radio ali">
               <label class="weui_cell weui_check_label" for="x22">
                 <div class="weui_cell_bd weui_cell_primary">
                   <i class="icon icon-11"></i>
-                  <p>支付宝</p>
+                  <san>支付宝</san>
                 </div>
                 <div class="weui_cell_ft">
                   <input type="radio" class="weui_check" name="radio1" id="x22">
@@ -80,7 +86,7 @@
               <label class="weui_cell weui_check_label" for="x33">
                 <div class="weui_cell_bd weui_cell_primary">
                   <i class="icon icon-5"></i>
-                  <p>货到付款</p>
+                  <san>货到付款</san>
                 </div>
                 <div class="weui_cell_ft">
                   <input type="radio" class="weui_check" name="radio1" id="x33">
@@ -90,9 +96,7 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </section>
 
     <section class="assets">
@@ -181,4 +185,25 @@
 </body>
 <script src="js/lib/zepto.min.js"></script>
 <script src="js/payment.js"></script>
+<script src="js/example.js"></script>
+<script src="js/lib/picker.js"></script>
+<script>
+  $("#slect-data").select({
+    title: "送货时间",
+    items: [
+      {
+        title: "今日配送 10:30 - 18:00",
+        value: "001",
+      },
+      {
+        title: "明日配送 10:30 - 18:00",
+        value: "002",
+      }
+    ],
+    onChange: function (d) {
+      $('.weui_input').val(d.titles);
+//      $.alert("你选择了" + d.values + d.titles);
+    }
+  });
+</script>
 </html>

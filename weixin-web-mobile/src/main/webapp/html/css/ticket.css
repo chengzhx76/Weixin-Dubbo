@@ -1,0 +1,128 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+.weui_cells_radio .weui_check + .weui_icon_checked:before {
+  content: '\EA01';
+  font-size: 22px;
+  color: #cccccc;
+}
+.weui_cells_radio .weui_check:checked + .weui_icon_checked:before {
+  content: '\EA06';
+  font-size: 22px;
+}
+.main .weui_cells {
+  margin-top: 0;
+}
+.main .weui_cells:before {
+  border-top: none;
+}
+.main .weui_cells:after {
+  border-bottom: none;
+}
+
+.main .item {
+  height: 120px;
+  margin-top: 10px;
+  background: #ffffff;
+}
+.main .list .item .weui_cell {
+  padding: 0;
+}
+.main .item .weui_cell_ft {
+  margin-top: 35px;
+}
+.main .list .item label {
+  display: block;
+}
+.main .list .item .title {
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 18px;
+  background: darkcyan;
+}
+.main .list .item .radio {
+  height: 25px;
+  width: 25px;
+  float: left;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+/*.main .list .item .info {*/
+  /*height: 60px;*/
+  /*!*width: 100%;*!*/
+  /*float: left;*/
+  /*display: block;*/
+  /*background: darkgreen;*/
+/*}*/
+.main .list .item .price {
+  height: 55px;
+  color: #FF6600;
+  /*background: darkgrey;*/
+  float: left;
+}
+.main .list .item .price .p-icon {
+  height: 55px;
+  line-height: 90px;
+  font-size: 18px;
+  display: block;
+  float: left;
+}
+.main .list .item .price .anmout {
+  height: 55px;
+  font-size: 40px;
+  line-height: 65px;
+  display: block;
+  float: left;
+}
+.main .list .item  .rule {
+  height: 55px;
+  line-height: 60px;
+  float: right;
+  padding: 0 8px;
+  margin-right: 8px;
+  color: #333;
+  /*background: darkgreen;*/
+}
+.main .list .item .validity {
+  height: 30px;
+  font-size: 14px;
+  line-height: 30px;
+  text-indent: 10px;
+  /*background: salmon;*/
+  clear: both;
+  border-top: dashed 1px #F0EFF5;;
+}
+
+
+/*.main .item:before {*/
+/*content: " ";*/
+/*position: absolute;*/
+/*left: 0;*/
+/*top: 0;*/
+/*width: 100%;*/
+/*height: 1px;*/
+/*border-top: 1px solid #D9D9D9;*/
+/*color: #D9D9D9;*/
+/*-webkit-transform-origin: 0 0;*/
+/*transform-origin: 0 0;*/
+/*-webkit-transform: scaleY(0.5);*/
+/*transform: scaleY(0.5);*/
+/*}*/
+
+
+
