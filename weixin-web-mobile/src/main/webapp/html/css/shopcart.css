@@ -140,23 +140,22 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   font-weight: normal;
   font-size: 18px;
 }
-
 .main .list .item .buy {
   height: 40px;
   margin-top: 60px;
   margin-right: 10px;
   float: right;
-  /*background: darkseagreen;*/
 }
 .main .list .item .buy .icon {
   height: 40px;
   display: block;
   float: left;
-
-  font-size: 26px;
+  font-size: 32px;
   line-height: 40px;
   text-align: center;
-  /*background: darkcyan;*/
+}
+.main .list .item .buy .sub {
+  color: #CDCDCD;
 }
 .main .list .item .buy .normal{
   color: #FF5A1E;
@@ -168,10 +167,10 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   height: 40px;
   display: block;
   float: left;
-  font-size: 22px;
+  font-size: 28px;
   line-height: 42px;
   text-align: center;
-  padding: 0 4px;
+  padding: 0 6px;
   color: #010101;
   /*background: saddlebrown;*/
 }

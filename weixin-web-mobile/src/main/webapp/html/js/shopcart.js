@@ -156,7 +156,7 @@ $(function () {
             numObj.text(num);
             subSinglePrice(obj);
         }else if (num == 1) {
-            $.confirm("您确定要删除吗?", "确认删除?", function () {
+            $.confirm("您确定要删除吗?", "删除确认", function () {
                 subSinglePrice(obj);
                 obj.parents('.weui_cells').fadeOut("200", function (){
                     $(this).remove();
