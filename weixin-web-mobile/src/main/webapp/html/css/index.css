@@ -62,6 +62,10 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 .content .bd {
   padding: 0 2px;
 }
+.content .bd .row .col-33 {
+  width: 32.333333333333332%;
+  margin-left: 1%;
+}
 .content figure {
   display: block;
   border: solid 1px #EFEFEF;
@@ -92,34 +96,59 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   height: 16px;
   font-size: 10px;
   font-style: normal;
+  margin-top: 4px;
+  margin-left: 8px;
   display: block;
   /*background: gold;*/
 }
 .content figure figcaption .info {
   height: 30px;
-  /*background: darkblue;*/
+  margin-top: 7px;
+  position: relative;
 }
 .content figure figcaption .info .price {
-  height: 38px;
-  width: 50px;
+  height: 20px;
   font-size: 16px;
-  line-height: 35px;
+  line-height: 20px;
   color: #EF4F4F;
   display: block;
   float: left;
-  margin-left: 2px;
+  padding: 0 5px;
+  margin-top: 7px;
+
+
 }
 .content figure figcaption .info .price strong {
   padding-top: 6px;
   font-size: 18px;
   font-weight: normal;
 }
-.content figure figcaption .info .icon {
-  font-size: 22px;
-  color:#EF4F4F;
+.content figure figcaption .info .buy {
+  height: 30px;
   float: right;
-  display: block;
-  margin-right: 6px;
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+}
+.content figure figcaption .info .buy .count {
+  height: 30px;
+  font-size: 26px;
+  color: #3B3B3B;
+  line-height: 10px;
+  padding: 0 3px;
+
+}
+.content figure figcaption .info .buy .icon {
+  height: 30px;
+  line-height: 30px;
+  font-size: 28px;
+  display: inline-block;
+}
+.content figure figcaption .info .buy .add {
+  color:#EF4F4F;
+}
+.content figure figcaption .info .buy .sub {
+  color:#cccccc;
 }
 .content figure figcaption .tag {
   color: #FFF;

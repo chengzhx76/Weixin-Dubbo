@@ -11,6 +11,11 @@ $(function () {
         $(this).addClass("tab-red");
         $("section").hide();
         var activeTab = $(this).find("a").attr("href");
+        if(activeTab == '#since') {
+            $('.footer').hide();
+        }else {
+            $('.footer').show();
+        }
         $(activeTab).fadeIn();
         return false;
     });
