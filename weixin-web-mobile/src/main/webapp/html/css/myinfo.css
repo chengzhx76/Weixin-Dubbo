@@ -81,21 +81,69 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   float: left;
   margin-left: 5px;
 }
-.header .edit {
+
+.header .interact {
+  height: 120px;
+  width: 100px;
+  float: right;
+}
+.header .interact .sett-msg {
+  height: 30px;
+  margin-top: 10px;
+
+}
+.header .interact .sett-msg .setting {
+  height: 30px;
+  width: 50px;
+  font-size: 18px;
+  line-height: 30px;
+  display: block;
+  float: left;
+  color: #ffffff;
+}
+.header .interact .sett-msg .msg {
+  height: 30px;
+  width: 40px;
+  padding-left: 10px;
+  position: relative;
+  display: block;
+  float: right;
+}
+.header .interact .sett-msg .msg .activate {
+  height: 7px;
+  width: 7px;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  background: red;
+  display: inline-block;
+  border: solid 1px #ffffff;
+  z-index: 999;
+}
+.header .interact .sett-msg .msg .icon {
+  height: 30px;
+  line-height: 30px;
+  font-size: 26px;
+  color: #ffffff;
+}
+.header .interact .sign {
   height: 35px;
-  width: 75px;
-  margin-top: 40px;
+  width: 65px;
+  margin-top: 15px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   float: right;
   background: #FF7840;
 }
-.header .edit a {
-  font-size: 14px;
+.header .sign a {
+  font-size: 16px;
   color: #ffffff;
   line-height: 35px;
   text-align: center;
   display: block;
+  word-spacing:8px;
+  letter-spacing: 2px;
 }
 .content {
 
