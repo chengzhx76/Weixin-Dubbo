@@ -132,16 +132,16 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content figure figcaption .info .buy .count {
   height: 30px;
-  font-size: 26px;
+  font-size: 24px;
   color: #3B3B3B;
   line-height: 10px;
-  padding: 0 3px;
+  padding: 0 2px;
 
 }
 .content figure figcaption .info .buy .icon {
   height: 30px;
   line-height: 30px;
-  font-size: 28px;
+  font-size: 26px;
   display: inline-block;
 }
 .content figure figcaption .info .buy .add {

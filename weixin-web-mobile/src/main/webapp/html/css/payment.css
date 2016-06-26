@@ -16,6 +16,21 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   margin: 0;
   padding: 0;
 }
+.weui_dialog_hd {
+  display: none;
+}
+.weui_dialog_bd {
+  height: 30px;
+  line-height: 50px;
+  font-size: 18px;
+}
+.weui_dialog_ft a {
+  color: #FF6600;
+}
+header .weui-header {
+  background: #ffffff;
+  border-bottom: solid 1px #cccccc;
+}
 .content {
   margin-bottom: 35px;
 }
@@ -194,6 +209,9 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   height: 30px;
   line-height: 30px;
   margin-right: 5px;
+}
+.content .pay .main .detail .more:after {
+  border-width: 0 2px 2px 0;
 }
 .content .pay .main .more-pay {
   margin-left: 20px;

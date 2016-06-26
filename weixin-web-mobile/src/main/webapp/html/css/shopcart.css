@@ -15,7 +15,10 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   margin: 0;
   padding: 0;
 }
-
+header .weui-header {
+  background: #ffffff;
+  border-bottom: solid 1px #cccccc;
+}
 .main {
   background: #ffffff;
 }

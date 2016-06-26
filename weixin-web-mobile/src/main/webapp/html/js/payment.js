@@ -15,5 +15,26 @@ $(function(){
     $(".more-pay").hide();
     $("#more").click(function(){
         $(".more-pay").fadeToggle('fast');
+        var isHas = $(this).hasClass('more');
+        if (isHas) {
+            $(this).removeClass('more');
+        } else {
+            $(this).addClass('more');
+        }
     });
-})
+
+    $('#back').click(function(){
+        $.modal({
+            //title: "支付方式",
+            text: "你真的不要下单尝尝吗？",
+            buttons: [
+                { text: "我在想想", onClick: function(){}},
+                { text: "不再考虑了", onClick: function(){
+                    window.location.href="shopcart.html";
+                }},
+            ]
+        });
+    });
+
+
+});

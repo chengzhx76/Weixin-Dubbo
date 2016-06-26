@@ -11,6 +11,18 @@
   <link rel="stylesheet" href="css/payment.css">
 </head>
 <body ontouchstart>
+  <header class="header">
+    <div class="weui-header ">
+      <div class="weui-header-left">
+        <!--href="shopcart.html"-->
+        <a id="back" class="icon icon-109 f-orange"></a>
+      </div>
+      <h1 class="weui-header-title f-orange">订单确认</h1>
+      <div class="weui-header-right">
+        <!--<a class="icon icon-108 f-orange"></a>-->
+      </div>
+    </div>
+  </header>
   <article class="content">
     <section class="addr">
       <h1 class="title">收货信息</h1>
@@ -102,7 +114,7 @@
     <section class="assets">
       <div class="weui_cells weui_cells_form">
         <div class="weui_panel weui_panel_access">
-          <a class="weui_panel_ft" href="javascript:void(0);">
+          <a class="weui_panel_ft" href="ticket.html">
             <div class="menu">
               <span class="title">优惠券</span>
               <span class="note">1张可用</span>
@@ -138,7 +150,7 @@
       <h1 class="title">费用明细</h1>
       <div class="main">
         <div class="item-list weui_panel weui_panel_access">
-          <a class="weui_panel_ft" href="javascript:void(0);">
+          <a class="weui_panel_ft" href="list.html">
             <div class="imgs">
               <img src="xx.jpg">
               <img src="xx.jpg">
@@ -184,9 +196,9 @@
   </footer>
 </body>
 <script src="js/lib/zepto.min.js"></script>
-<script src="js/payment.js"></script>
-<script src="js/example.js"></script>
 <script src="js/lib/picker.js"></script>
+<script src="js/example.js"></script>
+<script src="js/payment.js"></script>
 <script>
   $("#slect-data").select({
     title: "送货时间",

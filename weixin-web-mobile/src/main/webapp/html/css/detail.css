@@ -17,6 +17,19 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 body {
   position:relative;
 }
+.header .back {
+  content: " ";
+  height: 30px;
+  width: 30px;
+  position: fixed;
+  left: 20px;
+  top: 10px;
+  z-index: 999;
+  display: block;
+  background: url(../icon/back.png) no-repeat top center;
+  background-size:contain;
+  border-radius: 50%;
+}
 .header .slide {
   height:220px;
 }
