@@ -36,31 +36,6 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
     private String timestampName;
     private Long minRequestIntervalTime; // 允许的最小请求间隔
 
-
-    public void setTokenName(String tokenName) {
-        if (StringUtils.isEmpty(tokenName)) {
-            tokenName = DEFAULT_TOKEN_NAME;
-        }
-        this.tokenName = tokenName;
-    }
-    public void setAppKeyName(String appKeyName) {
-        if (StringUtils.isEmpty(appKeyName)) {
-            appKeyName = DEFAULT_APP_KEY_NAME;
-        }
-        this.appKeyName = appKeyName;
-    }
-    public void setTimestamp(String timestampName) {
-        if (StringUtils.isEmpty(timestampName)) {
-            timestampName = DEFAULT_TIME_STAMP_NAME;
-        }
-        this.timestampName = timestampName;
-    }
-    public void setMinRequestIntervalTime(Long minRequestIntervalTime) {
-        if (minRequestIntervalTime != null) {
-            minRequestIntervalTime = DEFAULT_REQUEST_TIME_INTERVAL;
-        }
-        this.minRequestIntervalTime = minRequestIntervalTime;
-    }
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String timestamp = request.getParameter(timestampName);
@@ -97,12 +72,7 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
 
         String signParam = request.getParameter("sign");//接受签名
 
-        logger.info(signParam);
-        String pa = sb.toString();
-        logger.info(pa);
-        String sign = Digests.md5(pa);
-        logger.info(sign);
-
+        String sign = Digests.md5(sb.toString());
         if (signParam.equals(sign)) {
             // 去redis查看是否有sign这个值；如果有则返回fase；否则没有返回true 并存储到redis里
             boolean isexist = redisService.exists(sign);
@@ -117,5 +87,30 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         return true;
+    }
+
+    public void setTokenName(String tokenName) {
+        if (StringUtils.isEmpty(tokenName)) {
+            tokenName = DEFAULT_TOKEN_NAME;
+        }
+        this.tokenName = tokenName;
+    }
+    public void setAppKeyName(String appKeyName) {
+        if (StringUtils.isEmpty(appKeyName)) {
+            appKeyName = DEFAULT_APP_KEY_NAME;
+        }
+        this.appKeyName = appKeyName;
+    }
+    public void setTimestamp(String timestampName) {
+        if (StringUtils.isEmpty(timestampName)) {
+            timestampName = DEFAULT_TIME_STAMP_NAME;
+        }
+        this.timestampName = timestampName;
+    }
+    public void setMinRequestIntervalTime(Long minRequestIntervalTime) {
+        if (minRequestIntervalTime != null) {
+            minRequestIntervalTime = DEFAULT_REQUEST_TIME_INTERVAL;
+        }
+        this.minRequestIntervalTime = minRequestIntervalTime;
     }
 }
