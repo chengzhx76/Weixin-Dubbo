@@ -21,6 +21,7 @@ header .weui-header {
 }
 .main {
   background: #ffffff;
+  margin-bottom: 70px;
 }
 .main .deliver-date {
   height: 24px;

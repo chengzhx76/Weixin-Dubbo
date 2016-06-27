@@ -1,6 +1,6 @@
 package com.cheng.weixin.web.mobile.security.impl;
 
-import com.cheng.weixin.common.utils.CodecUtil;
+import com.cheng.weixin.common.security.CodecUtil;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.web.mobile.security.TokenManager;
 

@@ -1,7 +1,7 @@
 package com.cheng.weixin.web.manage.security;
 
 import com.cheng.common.entity.enums.Status;
-import com.cheng.weixin.common.utils.Encodes;
+import com.cheng.weixin.common.security.Encodes;
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;

@@ -1,8 +1,12 @@
-package com.cheng.weixin.web.manage.security;
+package com.cheng.weixin.common.security;
 
 
 import com.cheng.weixin.common.utils.Exceptions;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -18,6 +22,8 @@ public class Digests {
     private static final String SHA1 = "SHA-1";
     private static final String MD5 = "MD5";
 
+    public static final String CHARSET = "UTF-8";
+
     private static SecureRandom random = new SecureRandom();
 
     /**
@@ -30,10 +36,27 @@ public class Digests {
         random.nextBytes(bytes);
         return bytes;
     }
-
+    /**
+     * 对输入字符串进行md5散列，基于MD5算法的单向加密
+     */
+    public static String md5(String strSrc) throws UnsupportedEncodingException {
+        return  Encodes.encodeHex(md5(strSrc.getBytes(CHARSET)));
+    }
+    public static byte[] md5(byte[] input) {
+        return digest(input, MD5, null, 1);
+    }
+    public static byte[] md5(byte[] input, int iterations) {
+        return digest(input, MD5, null, iterations);
+    }
     /**
      * 对输入字符串进行sha1散列.
      */
+    /**
+     * 将字符串 SHA 加密
+     */
+    public static String sha1(String str) throws UnsupportedEncodingException {
+        return Encodes.encodeHex(md5(str.getBytes(CHARSET)));
+    }
     public static byte[] sha1(byte[] input) {
         return digest(input, SHA1, null, 1);
     }
@@ -67,7 +90,38 @@ public class Digests {
             }
             return result;
         } catch (NoSuchAlgorithmException e) {
-            //e.printStackTrace();
+            throw Exceptions.unchecked(e);
+        }
+    }
+
+    /**
+     * 对文件进行md5散列.
+     */
+    public static byte[] md5(InputStream input) throws IOException {
+        return digest(input, MD5);
+    }
+
+    /**
+     * 对文件进行sha1散列.
+     */
+    public static byte[] sha1(InputStream input) throws IOException {
+        return digest(input, SHA1);
+    }
+
+    private static byte[] digest(InputStream input, String algorithm) throws IOException {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+            int bufferLength = 8 * 1024;
+            byte[] buffer = new byte[bufferLength];
+            int read = input.read(buffer, 0, bufferLength);
+
+            while (read > -1) {
+                messageDigest.update(buffer, 0, read);
+                read = input.read(buffer, 0, bufferLength);
+            }
+
+            return messageDigest.digest();
+        } catch (GeneralSecurityException e) {
             throw Exceptions.unchecked(e);
         }
     }

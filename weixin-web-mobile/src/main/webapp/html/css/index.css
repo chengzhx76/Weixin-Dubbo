@@ -61,9 +61,13 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
 }
 .content .bd {
   padding: 0 2px;
+  /*margin-left: 5px;*/
+}
+.content .bd .row {
+  margin-left: 0;
 }
 .content .bd .row .col-33 {
-  width: 32.333333333333332%;
+  width: 32%;
   margin-left: 1%;
 }
 .content figure {

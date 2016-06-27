@@ -114,7 +114,7 @@ body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcap
   width: 7px;
   border-radius: 50%;
   position: absolute;
-  top: 1px;
+  top: 0;
   right: 10px;
   background: red;
   display: inline-block;

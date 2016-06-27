@@ -59,12 +59,21 @@
 	  <property name="suffix" value=".jsp"/>
 	</bean>
 
-  <!-- 日志拦截管理器 -->
   <mvc:interceptors>
+    <!-- 日志拦截管理器 -->
     <mvc:interceptor>
       <mvc:mapping path="/**" />
       <mvc:exclude-mapping path="/v1/login"/>
       <bean class="com.cheng.weixin.web.mobile.interceptor.LogInterceptor" />
+    </mvc:interceptor>
+    <!-- 恶意请求拦截器 -->
+    <mvc:interceptor>
+      <mvc:mapping path="/**" />
+      <bean class="com.cheng.weixin.web.mobile.interceptor.MaliciousRequestInterceptor">
+        <property name="appKeyName" value="X-AppKey"/>
+        <property name="tokenName" value="X-Token"/>
+        <property name="timestamp" value="5 * 60 * 1000L"/>
+      </bean>
     </mvc:interceptor>
   </mvc:interceptors>
 

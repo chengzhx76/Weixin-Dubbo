@@ -2,6 +2,7 @@ package com.cheng.weixin.web.mobile.json;
 
 import com.cheng.weixin.common.utils.StringUtils;
 import com.fasterxml.jackson.core.JsonEncoding;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -44,7 +45,8 @@ public class JsonpHttpMessageConverter extends MappingJackson2HttpMessageConvert
         }else {
             JsonEncoding encoding = getJsonEncoding(outputMessage.getHeaders().getContentType());
             try {
-                String result = callbackParam + "(" + super.getObjectMapper().writeValueAsString(object) +")";
+                //String result = callbackParam + "(" + super.getObjectMapper().writeValueAsString(object) +")";
+                String result = getObjectMapper().writeValueAsString(new JSONPObject(callbackParam, object));
                 IOUtils.write(result, outputMessage.getBody(), encoding.getJavaName());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -56,4 +58,6 @@ public class JsonpHttpMessageConverter extends MappingJackson2HttpMessageConvert
     public void setCallbackName(String callbackName) {
         this.callbackName = callbackName;
     }
+
+
 }
