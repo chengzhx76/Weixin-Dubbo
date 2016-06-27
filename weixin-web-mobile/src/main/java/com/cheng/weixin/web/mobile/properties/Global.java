@@ -14,7 +14,7 @@ public class Global {
 
 	static{
 		Properties properties = Properties.getInstance();
-		APPSECRET = properties.getValue("app");
+		APPSECRET = properties.getValue("wxclient");
 
 	}
 	

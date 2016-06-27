@@ -72,7 +72,8 @@
       <bean class="com.cheng.weixin.web.mobile.interceptor.MaliciousRequestInterceptor">
         <property name="appKeyName" value="X-AppKey"/>
         <property name="tokenName" value="X-Token"/>
-        <property name="timestamp" value="5 * 60 * 1000L"/>
+        <property name="timestamp" value="timestamp"/>
+        <property name="minRequestIntervalTime" value="300000"/>
       </bean>
     </mvc:interceptor>
   </mvc:interceptors>

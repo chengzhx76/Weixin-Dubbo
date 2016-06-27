@@ -24,7 +24,7 @@ public class ConsumerTest {
     public void test01() {
         //String data = (String) redisService.get("122");
 
-        //System.out.println(redisService.set("122","测试!"));
+        System.out.println(redisService.set("122","chengzhx76"));
 
 
 

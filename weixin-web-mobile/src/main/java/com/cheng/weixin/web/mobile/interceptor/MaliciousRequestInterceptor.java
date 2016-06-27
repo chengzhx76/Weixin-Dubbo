@@ -3,6 +3,7 @@ package com.cheng.weixin.web.mobile.interceptor;
 import com.cheng.weixin.common.security.Digests;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
+import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
 import com.cheng.weixin.web.mobile.exception.message.HttpCode;
 import com.cheng.weixin.web.mobile.properties.Properties;
 import org.slf4j.Logger;
@@ -54,7 +55,7 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
         }
         this.timestampName = timestampName;
     }
-    public void setTimestamp(Long minRequestIntervalTime) {
+    public void setMinRequestIntervalTime(Long minRequestIntervalTime) {
         if (minRequestIntervalTime != null) {
             minRequestIntervalTime = DEFAULT_REQUEST_TIME_INTERVAL;
         }
@@ -63,6 +64,11 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String timestamp = request.getParameter(timestampName);
+        String appKey = request.getHeader(appKeyName);
+        if(StringUtils.isAnyBlank(timestamp, appKey)) {
+            throw new IllegalParameterException(HttpCode.BAD_REQUEST.msg());
+        }
+
         // 请求时间超过5分钟
         if (StringUtils.isNotBlank(timestamp)) {
             long differ = System.currentTimeMillis() - Long.parseLong(timestamp);
@@ -72,8 +78,8 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
                 return false;
             }
         }
+
         // 是否是已授权的APP请求
-        String appKey = request.getHeader(appKeyName);
         Properties properties = Properties.getInstance();
         String appSecret = properties.getValue(appKey);
         if(StringUtils.isBlank(appSecret)) {
@@ -81,20 +87,35 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
             return false;
         }
         // 验证签名
+        StringBuilder sb = new StringBuilder();
+        sb.append(timestamp);
+        sb.append(appSecret);
         String token = request.getHeader(tokenName);
+        if (StringUtils.isNotBlank(token)) sb.append(token);
         String parameter = request.getParameter("param");//接受参数
+        if (StringUtils.isNotBlank(parameter)) sb.append(parameter);
+
         String signParam = request.getParameter("sign");//接受签名
-        String sign = Digests.md5(timestamp+token+appKey+parameter);
+
+        logger.info(signParam);
+        String pa = sb.toString();
+        logger.info(pa);
+        String sign = Digests.md5(pa);
+        logger.info(sign);
+
         if (signParam.equals(sign)) {
             // 去redis查看是否有sign这个值；如果有则返回fase；否则没有返回true 并存储到redis里
             boolean isexist = redisService.exists(sign);
             if (isexist) {
+                response.setStatus(HttpCode.FORBIDDEN.value());
                 return false;
+            }else {
+                redisService.set(sign, "sign", 300L);
             }
         }else {
+            response.setStatus(HttpCode.FORBIDDEN.value());
             return false;
         }
-
         return true;
     }
 }
