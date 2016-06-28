@@ -20,6 +20,11 @@ public interface RpcAdminService {
      */
     void add(Admin admin);
 
+    /**
+     * 根据ID获取用户
+     * @param id
+     * @return
+     */
     Admin getAdminById(String id);
     /**
      * 根据用户名获取用户

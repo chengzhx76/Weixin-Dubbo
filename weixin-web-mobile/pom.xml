@@ -28,6 +28,14 @@
       <artifactId>weixin-rpc-redis</artifactId>
     </dependency>
     <dependency>
+      <groupId>${parent.groupId}</groupId>
+      <artifactId>weixin-rpc-cart</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${parent.groupId}</groupId>
+      <artifactId>weixin-rpc-item</artifactId>
+    </dependency>
+    <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
     </dependency>

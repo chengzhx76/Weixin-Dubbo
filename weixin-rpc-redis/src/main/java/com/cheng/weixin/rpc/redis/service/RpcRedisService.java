@@ -1,5 +1,7 @@
 package com.cheng.weixin.rpc.redis.service;
 
+import java.util.Set;
+
 /**
  * Desc: redis接口服务
  * Author: Cheng
@@ -68,4 +70,28 @@ public interface RpcRedisService {
      * @return
      */
     boolean flushExpireTime(final String key, Long expireTime);
+
+    /**
+     * 增加数量
+     * @param key
+     * @param field
+     * @param value
+     */
+    void add(String key, String field ,String value);
+
+    /**
+     * 根据key获取所有的Field
+     * @param key
+     * @return
+     */
+    Set<String> getFields(String key);
+
+    /**
+     * 查看该字段是否已有
+     * @param key
+     * @param field
+     * @return
+     */
+    boolean exists(String key, String field);
+
 }

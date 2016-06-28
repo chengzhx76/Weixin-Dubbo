@@ -21,8 +21,8 @@ import java.util.List;
 @RestController
 public class IndexController extends BaseController {
 
-    @RequestMapping(value = "v1/index")
-    public ResponseEntity<Response> index() {
+    @RequestMapping(value = "v1/index1")
+    public ResponseEntity<Response> index1() {
 
         User user = new User();
         //user.setAge(21);
@@ -53,7 +53,7 @@ public class IndexController extends BaseController {
     }
     @IgnoreSecurity
     @RequestMapping(value = "v1/login")
-    public ResponseEntity<Response> login() {
+    public ResponseEntity<Response> login1() {
         return failure();
     }
 
@@ -66,7 +66,7 @@ public class IndexController extends BaseController {
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/test")
-    public ResponseEntity<Response> test() {
+    public ResponseEntity<Response> test1() {
         throw new RuntimeException("===RuntimeException===");
     }
     @IgnoreSecurity
@@ -81,4 +81,29 @@ public class IndexController extends BaseController {
 
         throw new TokenException("===TokenException===");
     }
+
+
+    public ResponseEntity<Response> indexHeader() {
+
+
+        return null;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

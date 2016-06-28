@@ -8,15 +8,19 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/6
  */
 public class Picture extends DataEntity<Picture> {
-    private int productId;
+    private String productId;
     private String pictureUrl;
     private boolean isDefault;
 
-    public int getProductId() {
+    public Picture() {}
+    public Picture(String productId) {
+        this.productId = productId;
+    }
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

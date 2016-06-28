@@ -2,6 +2,8 @@ package com.cheng.weixin.rpc.item.entity;
 
 import com.cheng.common.entity.DataEntity;
 
+import java.math.BigDecimal;
+
 /**
  * Desc: 商品
  * Author: cheng
@@ -9,11 +11,19 @@ import com.cheng.common.entity.DataEntity;
  */
 public class Product extends DataEntity<Product> {
     private String name;
+    private BigDecimal marketPrice;
+    private BigDecimal salePrice;
     private String no;
     private String keywords;
     private int productTypeId;
     private boolean isAlive;
     private int modifyAdminId;
+
+    public Product() {}
+
+    public Product(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -61,5 +71,21 @@ public class Product extends DataEntity<Product> {
 
     public void setModifyAdminId(int modifyAdminId) {
         this.modifyAdminId = modifyAdminId;
+    }
+
+    public BigDecimal getMarketPrice() {
+        return marketPrice;
+    }
+
+    public void setMarketPrice(BigDecimal marketPrice) {
+        this.marketPrice = marketPrice;
+    }
+
+    public BigDecimal getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(BigDecimal salePrice) {
+        this.salePrice = salePrice;
     }
 }

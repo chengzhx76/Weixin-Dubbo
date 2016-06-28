@@ -2,6 +2,7 @@ package com.cheng.weixin.service.redis.service;
 
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -133,5 +134,40 @@ public class RedisService implements RpcRedisService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public void add(String key, String field ,String value) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        if (value != null) {
+            hashOps.put(field, value);
+        }else {
+            hashOps.increment(field, 1);
+        }
+    }
+
+    /**
+     * 根据key获取所有的Field
+     *
+     * @param key
+     * @return
+     */
+    @Override
+    public Set<String> getFields(String key) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        return hashOps.keys();
+    }
+
+    /**
+     * 查看该字段是否已有
+     *
+     * @param key
+     * @param field
+     * @return
+     */
+    @Override
+    public boolean exists(String key, String field) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        return hashOps.hasKey(field);
     }
 }

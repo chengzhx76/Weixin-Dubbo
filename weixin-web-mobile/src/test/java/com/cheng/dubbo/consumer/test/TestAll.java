@@ -36,6 +36,7 @@ public class TestAll {
 
         System.out.println(Digests.md5(param));
     }
+
     @Test
     public void test04() throws UnsupportedEncodingException {
         String param = "1228358c427e15ec4244c86111dceee696a";

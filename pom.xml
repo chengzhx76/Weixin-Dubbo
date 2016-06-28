@@ -145,7 +145,16 @@
           <artifactId>weixin-rpc-rabbitmq</artifactId>
           <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-cart</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-item</artifactId>
+          <version>${project.version}</version>
+        </dependency>
         <!-- Junit -->
         <dependency>
           <groupId>junit</groupId>
