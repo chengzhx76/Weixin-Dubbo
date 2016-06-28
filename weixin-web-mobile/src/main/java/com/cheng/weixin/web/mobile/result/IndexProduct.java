@@ -1,5 +1,9 @@
 package com.cheng.weixin.web.mobile.result;
 
+import com.cheng.weixin.common.utils.BigDecimalFormat;
+
+import java.math.BigDecimal;
+
 /**
  * Desc: 首页商品信息
  * Author: cheng
@@ -31,8 +35,8 @@ public class IndexProduct {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPrice(BigDecimal price) {
+        this.price = BigDecimalFormat.format(price);
     }
 
     public String getPicLink() {

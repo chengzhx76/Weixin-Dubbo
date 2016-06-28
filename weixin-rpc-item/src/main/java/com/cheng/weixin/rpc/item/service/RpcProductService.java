@@ -2,6 +2,8 @@ package com.cheng.weixin.rpc.item.service;
 
 import com.cheng.weixin.rpc.item.entity.Product;
 
+import java.util.List;
+
 /**
  * Desc: 商品
  * Author: cheng
@@ -15,5 +17,11 @@ public interface RpcProductService {
      * @return
      */
     Product getById(String id);
+
+    /**
+     * 获取首页的商品
+     * @return
+     */
+    List<Product> getIndex();
 
 }

@@ -4,7 +4,7 @@
 <mapper namespace="com.cheng.weixin.service.item.dao.ProductDaoMapper">
   <sql id="tableName">product</sql>
   <sql id="columns">
-    p.id,p.name,p.market_price,p.sale_price,p.no,p.key_words,p.product_type_id,p.is_alive,
+    p.id,p.name,p.market_price,p.sale_price,p.no,p.key_words,p.product_type_id,p.is_alive,p.is_index
     p.modify_admin_id,p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
@@ -20,6 +20,7 @@
     <if test="keywords != null and keywords != ''">key_words=#{keywords},</if>
     <if test="productTypeId != null and productTypeId != ''">product_type_id=#{productTypeId},</if>
     <if test="isAlive != null and isAlive != ''">is_alive=#{isAlive},</if>
+    <if test="isIndex != null and isIndex != ''">is_index=#{isIndex},</if>
     <if test="modifyAdminId != null and modifyAdminId != ''">modify_admin_id=#{modifyAdminId},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
@@ -37,6 +38,9 @@
     <where>
       <if test="id != null and id != ''">
         id = #{id}
+      </if>
+      <if test="isIndex != null and isIndex != ''">
+        is_index = #{isIndex}
       </if>
       <choose>
         <when test="status != null and status !=''">
@@ -62,7 +66,7 @@
     <include refid="productSelector"/>
     <include refid="productWhere"/>
   </select>
-  <!-- 获取全部用户信息 -->
+  <!-- 获取全部信息 -->
   <select id="loadAll" resultType="Product">
     <include refid="productSelector"/>
     <include refid="productWhere"/>
@@ -84,5 +88,12 @@
     VALUES
     <include refid="productIf"/>
   </insert>
+
+  <!-- ======================================== -->
+  <!-- 获取首页的商品 -->
+  <select id="loadIndex" parameterType="Product" resultType="Product">
+    <include refid="productSelector"/>
+    <include refid="productWhere"/>
+  </select>
 </mapper>
 

@@ -6,6 +6,8 @@ import com.cheng.weixin.service.item.dao.ProductDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Desc:
  * Author: cheng
@@ -24,5 +26,10 @@ public class ProductService implements RpcProductService {
     @Override
     public Product getById(String id) {
         return productDao.load(new Product(id));
+    }
+
+    @Override
+    public List<Product> getIndex() {
+        return productDao.loadIndex();
     }
 }

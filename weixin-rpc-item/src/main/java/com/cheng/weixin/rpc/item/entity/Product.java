@@ -18,12 +18,28 @@ public class Product extends DataEntity<Product> {
     private int productTypeId;
     private boolean isAlive;
     private int modifyAdminId;
+    private boolean isIndex;
+
 
     public Product() {}
 
     public Product(String id) {
+        super();
         this.id = id;
     }
+    public Product(String id, boolean isIndex) {
+        super();
+        this.id = id;
+        this.isIndex = isIndex;
+    }
+    public boolean isIndex() {
+        return isIndex;
+    }
+
+    public void setIndex(boolean index) {
+        isIndex = index;
+    }
+
 
     public String getName() {
         return name;

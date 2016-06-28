@@ -1,10 +1,12 @@
 package com.cheng.weixin.web.mobile.controller;
 
-import com.cheng.weixin.web.mobile.exception.TokenException;
 import com.cheng.weixin.web.mobile.model.Book;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.model.User;
+import com.cheng.weixin.web.mobile.result.Index;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
+import com.cheng.weixin.web.mobile.service.IndexService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,8 @@ import java.util.List;
  */
 @RestController
 public class IndexController extends BaseController {
+    @Autowired
+    private IndexService indexService;
 
     @RequestMapping(value = "v1/index1")
     public ResponseEntity<Response> index1() {
@@ -51,42 +55,17 @@ public class IndexController extends BaseController {
 
         return success(user);
     }
-    @IgnoreSecurity
+
     @RequestMapping(value = "v1/login")
     public ResponseEntity<Response> login1() {
         return failure();
     }
 
     @IgnoreSecurity
-    @RequestMapping(value = "v1/login2")
-    public ResponseEntity<Response> login2() {
-        return success();
-    }
-
-
-    @IgnoreSecurity
-    @RequestMapping(value = "v1/test")
-    public ResponseEntity<Response> test1() {
-        throw new RuntimeException("===RuntimeException===");
-    }
-    @IgnoreSecurity
-    @RequestMapping(value = "v1/test2")
-    public ResponseEntity<Response> test2() throws Exception {
-
-        throw new Exception("===Exception===");
-    }
-    @IgnoreSecurity
-    @RequestMapping(value = "v1/test3")
-    public ResponseEntity<Response> test3() throws Exception {
-
-        throw new TokenException("===TokenException===");
-    }
-
-
-    public ResponseEntity<Response> indexHeader() {
-
-
-        return null;
+    @RequestMapping(value = "v1/index")
+    public ResponseEntity<Response> index() {
+        Index index = indexService.getIndexInfo("1");
+        return success(index);
     }
 
 

@@ -1,13 +1,13 @@
 package com.cheng.weixin.web.mobile.result;
 
 /**
- * Desc: 首页图片信息
+ * Desc: 通知
  * Author: cheng
  * Date: 2016/6/28
  */
-public class Image {
+public class IndexNotice {
     private String id;
-    private String urlLink;
+    private String content;
     private String hrefLink;
 
     public String getId() {
@@ -18,12 +18,12 @@ public class Image {
         this.id = id;
     }
 
-    public String getUrlLink() {
-        return urlLink;
+    public String getContent() {
+        return content;
     }
 
-    public void setUrlLink(String urlLink) {
-        this.urlLink = urlLink;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getHrefLink() {
