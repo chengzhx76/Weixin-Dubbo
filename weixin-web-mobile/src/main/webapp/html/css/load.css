@@ -39,9 +39,9 @@
 }
 .load .item .detail .info {
   width: 100%;
-  height: 20px;
-  /*padding-left: 10px;*/
+  height: 40px;
   margin-left: 10px;
+  position: relative;
 }
 
 .load .item .detail .info .price {
@@ -56,16 +56,17 @@
   font-size: 24px;
 }
 .load .item .detail .info .buy {
-  background: 40px;
-  float: right;
-  margin-right: 20px;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
+  right: 15px;
 }
 .load .item .detail .info .buy .icon {
   height: 40px;
   display: block;
   float: right;
   line-height: 30px;
-  font-size: 32px;
+  font-size: 28px;
 }
 .load .item .detail .info .buy .count {
   height: 40px;
@@ -74,10 +75,9 @@
   font-size: 22px;
   line-height: 30px;
   color: #8b7f0f;
-  padding: 0 8px;
+  padding: 0 4px;
 }
 .load .item .detail .info .buy .sub {
-  /*margin-left: 5px;*/
   color: #cccccc;
 }
 .load .item .detail .info .buy .add {

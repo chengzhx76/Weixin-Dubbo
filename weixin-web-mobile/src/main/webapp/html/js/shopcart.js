@@ -49,7 +49,7 @@ $(function () {
 
         var num = parseInt(obj.prev('.count').text());
         if (num >= 999) { // 最多支持购买999个
-            $.alert("商品不能超过999个","提示");
+            $.alert("商品不能超过"+num+"个","提示");
             return;
         }
         // 该商品是否已勾选

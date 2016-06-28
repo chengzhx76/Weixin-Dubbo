@@ -113,7 +113,7 @@ header .weui-header {
 .main .list .item .detail .info {
   height: 72px;
   color: #C0C0C0;
-  /*background: darkblue;*/
+  position: relative;
 }
 .main .list .item .detail .info .title {
   height: 20px;
@@ -146,15 +146,15 @@ header .weui-header {
 }
 .main .list .item .buy {
   height: 40px;
-  margin-top: 60px;
-  margin-right: 10px;
-  float: right;
+  position: absolute;
+  bottom: 0;
+  right: 5px;
 }
 .main .list .item .buy .icon {
   height: 40px;
   display: block;
   float: left;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 40px;
   text-align: center;
 }

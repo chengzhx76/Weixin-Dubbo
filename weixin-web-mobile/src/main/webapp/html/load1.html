@@ -67,7 +67,7 @@
 
     $.each($('.add'), function(key,val) {
       var addObj = $(val);
-      addObj.css('margin-right','9px').css('font-size','32px');
+      addObj.css('margin-right','9px').css('font-size','30px');
     });
 
     // 购买
@@ -152,7 +152,7 @@
       numObj.text(num);
       if (num > 0) {
 //        obj.removeAttr("style")
-        obj.animate({marginRight:'8px','fontSize':'32px'},'fast');
+        obj.animate({marginRight:'8px','fontSize':'30px'},'fast');
         obj.siblings('.count').show();
         obj.siblings('.sub').show();
       }
@@ -169,12 +169,12 @@
           obj.hide();
           obj.siblings('.count').hide();
 //          obj.siblings('.add').css('margin-right','10px').css('font-size','30px');
-          obj.siblings('.add').animate({marginRight:'10px','fontSize':'32px'},'fast');
+          obj.siblings('.add').animate({marginRight:'10px','fontSize':'30px'},'fast');
         }
       } else {
         obj.hide();
         obj.siblings('.count').hide();
-        obj.siblings('.add').animate({marginRight:'10px','fontSize':'32px'},'fast');
+        obj.siblings('.add').animate({marginRight:'10px','fontSize':'30px'},'fast');
       }
     };
 
