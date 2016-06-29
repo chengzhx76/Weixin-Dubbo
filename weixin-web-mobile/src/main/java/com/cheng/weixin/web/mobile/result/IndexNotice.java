@@ -8,7 +8,7 @@ package com.cheng.weixin.web.mobile.result;
 public class IndexNotice {
     private String id;
     private String content;
-    private String hrefLink;
+    private String linkUrl;
 
     public String getId() {
         return id;
@@ -26,11 +26,11 @@ public class IndexNotice {
         this.content = content;
     }
 
-    public String getHrefLink() {
-        return hrefLink;
+    public String getLinkUrl() {
+        return linkUrl;
     }
 
-    public void setHrefLink(String hrefLink) {
-        this.hrefLink = hrefLink;
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
     }
 }

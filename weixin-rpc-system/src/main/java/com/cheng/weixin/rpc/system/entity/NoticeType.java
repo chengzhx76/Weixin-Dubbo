@@ -7,6 +7,8 @@ import com.cheng.common.entity.DataEntity;
  * Author: 光灿
  * Date: 2016/6/18
  */
-public class NoticeResourceType extends DataEntity<NoticeResourceType> {
+@Deprecated
+public class NoticeType extends DataEntity<NoticeType> {
     private String name;
+    private String type;
 }

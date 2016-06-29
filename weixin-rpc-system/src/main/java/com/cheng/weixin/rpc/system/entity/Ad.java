@@ -2,8 +2,6 @@ package com.cheng.weixin.rpc.system.entity;
 
 import com.cheng.common.entity.DataEntity;
 
-import java.util.Date;
-
 /**
  * Desc: 广告资源
  * Author: 光灿
@@ -15,8 +13,6 @@ public class Ad extends DataEntity<Ad> {
     private String linkUrl;
     private int width;
     private int height;
-    private Date countdown;
-    private String descriptity;
     private int priority;
     private boolean isEnable;
 
@@ -62,24 +58,6 @@ public class Ad extends DataEntity<Ad> {
 
     public Ad setHeight(int height) {
         this.height = height;
-        return this;
-    }
-
-    public Date getCountdown() {
-        return countdown;
-    }
-
-    public Ad setCountdown(Date countdown) {
-        this.countdown = countdown;
-        return this;
-    }
-
-    public String getDescriptity() {
-        return descriptity;
-    }
-
-    public Ad setDescriptity(String descriptity) {
-        this.descriptity = descriptity;
         return this;
     }
 
