@@ -48,7 +48,7 @@
 
 	<!-- spring与mybatis整合配置，扫描所有dao -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:basePackage="com.cheng.weixin.service.admin.dao"
+		p:basePackage="com.cheng.weixin.service.item.dao"
 		p:sqlSessionFactoryBeanName="sqlSessionFactory" />
 
 	<!-- 对数据源进行事务管理 -->

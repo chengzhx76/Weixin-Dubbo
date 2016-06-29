@@ -66,7 +66,7 @@
       <mvc:exclude-mapping path="/v1/login"/>
       <bean class="com.cheng.weixin.web.mobile.interceptor.LogInterceptor" />
     </mvc:interceptor>
-    <!-- 恶意请求拦截器 -->
+    <!-- 恶意请求拦截器
     <mvc:interceptor>
       <mvc:mapping path="/**" />
       <bean class="com.cheng.weixin.web.mobile.interceptor.MaliciousRequestInterceptor">
@@ -75,7 +75,7 @@
         <property name="timestamp" value="timestamp"/>
         <property name="minRequestIntervalTime" value="300000"/>
       </bean>
-    </mvc:interceptor>
+    </mvc:interceptor> -->
   </mvc:interceptors>
 
 

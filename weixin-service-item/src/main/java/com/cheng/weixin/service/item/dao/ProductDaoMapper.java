@@ -2,6 +2,7 @@ package com.cheng.weixin.service.item.dao;
 
 import com.cheng.weixin.common.core.dao.BaseDaoMapper;
 import com.cheng.weixin.rpc.item.entity.Product;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
  * Author: cheng
  * Date: 2016/6/28
  */
+@Repository
 public interface ProductDaoMapper extends BaseDaoMapper<Product> {
     /**
      * 获取首页的商品

@@ -1,6 +1,7 @@
 package com.cheng.dubbo.consumer.test;
 
-import com.cheng.weixin.rpc.redis.service.RpcRedisService;
+import com.cheng.weixin.rpc.item.entity.Product;
+import com.cheng.weixin.rpc.item.service.RpcProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,22 +18,35 @@ import javax.annotation.Resource;
 @ContextConfiguration(locations = { "classpath*:spring-dubbo-consumer.xml",
         "classpath*:applicationContext.xml"})
 public class ConsumerTest {
+    //@Resource
+    //private RpcRedisService redisService;
+    //@Resource
+    //private RpcCartService cartService;
     @Resource
-    private RpcRedisService redisService;
+    private RpcProductService productService;
+
+    //@Test
+    //public void test01() {
+    //    //String data = (String) redisService.get("122");
+    //    //System.out.println(redisService.set("122","chengzhx76"));
+    //    boolean result = redisService.exists("122");
+    //    System.out.println("=======> "+result);
+    //}
+
+    //@Test
+    //public void testCart() {
+    //    //cartService.addProductCount("1","1",1);
+    //
+    //    Set<String> productIds = cartService.getProductIds("1");
+    //    for (String productId : productIds) {
+    //        System.out.println("=======> "+productId);
+    //    }
+    //}
 
     @Test
-    public void test01() {
-        //String data = (String) redisService.get("122");
-
-        System.out.println(redisService.set("122","chengzhx76"));
-
-
-
-        //boolean result = redisService.exists("122");
-        boolean result = redisService.exists("122");
-
-
-
-        System.out.println("=======> "+result);
+    public void testProduct() {
+        Product product = productService.getById("1");
+        System.out.println("============> "+ product);
     }
+
 }

@@ -14,4 +14,6 @@
   <dubbo:consumer registry="zk1"/>
 
   <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"/>
+  <dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService"/>
+  <dubbo:reference id="cartService" interface="com.cheng.weixin.rpc.cart.service.RpcCartService"/>
 </beans>

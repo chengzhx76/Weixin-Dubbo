@@ -3,6 +3,7 @@ package com.cheng.weixin.rpc.item.entity;
 import com.cheng.common.entity.DataEntity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Desc: 商品
@@ -20,6 +21,9 @@ public class Product extends DataEntity<Product> {
     private int modifyAdminId;
     private boolean isIndex;
 
+    private List<Picture> pictures;
+
+
 
     public Product() {}
 
@@ -32,6 +36,15 @@ public class Product extends DataEntity<Product> {
         this.id = id;
         this.isIndex = isIndex;
     }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
     public boolean isIndex() {
         return isIndex;
     }

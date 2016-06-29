@@ -39,6 +39,7 @@ public class IndexService {
             indexProduct.setId(product.getId());
             indexProduct.setName(product.getName());
             indexProduct.setPrice(product.getSalePrice());
+            indexProduct.setPicLink(product.getPictures().get(0).getPictureUrl());
             indexProducts.add(indexProduct);
         }
 

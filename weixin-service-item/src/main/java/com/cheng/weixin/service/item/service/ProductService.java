@@ -1,7 +1,9 @@
 package com.cheng.weixin.service.item.service;
 
+import com.cheng.weixin.rpc.item.entity.Picture;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
+import com.cheng.weixin.service.item.dao.PictureDaoMapper;
 import com.cheng.weixin.service.item.dao.ProductDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import java.util.List;
 public class ProductService implements RpcProductService {
     @Autowired
     private ProductDaoMapper productDao;
+    @Autowired
+    private PictureDaoMapper pictureDao;
 
     /**
      * 根据ID获取商品
@@ -28,8 +32,14 @@ public class ProductService implements RpcProductService {
         return productDao.load(new Product(id));
     }
 
+
     @Override
     public List<Product> getIndex() {
-        return productDao.loadIndex();
+        List<Product> products = productDao.loadIndex();
+        for (Product product : products) {
+            List<Picture> pictures = pictureDao.loadSingleProdut(new Picture(product.getId()));
+            product.setPictures(pictures);
+        }
+        return products;
     }
 }

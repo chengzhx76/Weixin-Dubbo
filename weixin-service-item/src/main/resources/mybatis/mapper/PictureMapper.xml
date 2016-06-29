@@ -4,11 +4,10 @@
 <mapper namespace="com.cheng.weixin.service.item.dao.PictureDaoMapper">
   <sql id="tableName">picture</sql>
   <sql id="columns">
-    p.id,p.productId,p.pictureUrl,p.isDefault,p.remarks,p.create_date,p.update_date,p.status
+    p.id,p.product_id,p.picture_url,p.is_default,p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
-    id,name,marketPrice,salePrice,no,keywords,productTypeId,login_date,
-    old_login_ip,old_login_date,remarks,create_date,update_date,status
+    id,product_id,picture_url,is_default,remarks,create_date,update_date,status
   </sql>
   <sql id="pictureIf">
     <if test="id != null and id != ''">id=#{id},</if>
@@ -24,7 +23,7 @@
     select
       <include refid="columns"/>
     from
-      <include refid="tableName"/> AS a
+      <include refid="tableName"/> AS p
   </sql>
 
   <sql id="pictureWhere">
@@ -54,7 +53,7 @@
 
 <!-- =================================================================== -->
 
-  <!-- 根据商品ID获取所有的图片 -->
+  <!-- 根据ID获取图片 -->
   <select id="load" parameterType="Picture" resultType="Picture">
     <include refid="pictureSelector"/>
     <include refid="pictureWhere"/>
@@ -81,5 +80,12 @@
     VALUES
     <include refid="pictureIf"/>
   </insert>
+
+  <!-- =================================================================== -->
+  <!-- 根据商品ID获取所有的图片 -->
+  <select id="loadSingleProdut" parameterType="Picture" resultType="Picture">
+    <include refid="pictureSelector"/>
+    <include refid="pictureWhere"/>
+  </select>
 </mapper>
 
