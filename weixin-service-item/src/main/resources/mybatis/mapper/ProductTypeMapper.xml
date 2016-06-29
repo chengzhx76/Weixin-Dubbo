@@ -4,15 +4,14 @@
 <mapper namespace="com.cheng.weixin.service.item.dao.ProductTypeDaoMapper">
   <sql id="tableName">product</sql>
   <sql id="columns">
-    p.id,p.name,p.type,p.remarks,p.create_date,p.update_date,p.status
+    p.id,p.name,p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
-    id,name,type,remarks,create_date,update_date,status
+    id,name,remarks,create_date,update_date,status
   </sql>
   <sql id="productTypeIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="name != null and name != ''">name=#{name},</if>
-    <if test="type != null and type != ''">type=#{type},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -66,7 +65,7 @@
     <include refid="productTypeUpdate"/>
     <include refid="productTypeWhere"/>
   </update>
-  <!-- 插入新管理员 -->
+  <!-- 插入 -->
   <insert id="save" parameterType="ProductType">
     INSERT INTO
     <include refid="tableName"/>

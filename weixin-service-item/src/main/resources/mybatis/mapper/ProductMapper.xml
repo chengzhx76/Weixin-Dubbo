@@ -78,7 +78,7 @@
     <include refid="productUpdate"/>
     <include refid="productWhere"/>
   </update>
-  <!-- 插入新管理员 -->
+  <!-- 插入 -->
   <insert id="save" parameterType="Product">
     INSERT INTO
     <include refid="tableName"/>
