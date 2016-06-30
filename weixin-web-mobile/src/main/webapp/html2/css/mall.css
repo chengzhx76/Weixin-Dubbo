@@ -1,0 +1,122 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  background: #ffffff;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  height: 39px;
+  line-height: 39px;
+  font-size: 24px;
+  text-indent: 10px;
+  color: #FF713D;
+  border-bottom: solid 1px #cccccc;
+  background: #FFFFFF;
+}
+.main {
+  /*min-height:600px;*/
+  /*background: #ffffff;*/
+}
+.main .nav {
+  /*height: 500px;*/
+  width: 20%;
+  float: left;
+}
+.main .nav .product {
+  height: 50px;
+  font-size: 14px;
+  color: #464546;
+  letter-spacing: 1px;
+  line-height: 50px;
+  text-align: center;
+  display: block;
+  width: 100%;
+  background: #F0EFF4;
+}
+.main .nav .active {
+  color: #FF5E23;
+  background: #FFFFFF;
+}
+.main .content {
+  height: 330px;
+  width: 80%;
+  float: right;
+  border-left: solid 1px #F0EFF4;
+  margin-left: -1px;
+}
+.footer .weui_tabbar .weui_tabbar_item .icon {
+  display: block;
+  height: 100px;
+  width: 100%;
+  font-size: 26px;
+  line-height: 25px;
+}
+.shop-cart {
+  height: 76px;
+  width: 70px;
+  margin: 0 auto;
+  position:fixed;
+  left:0;
+  right: 0;
+  bottom: 0;
+  /*background: darkcyan;*/
+}
+
+.shop-cart .cart {
+  height: 65px;
+  width: 65px;
+  margin: 0 auto;
+  display: block;
+  border-top: solid 1px #cccccc;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  background: #F7F7FA;
+}
+.shop-cart .cart .c-icon {
+  height: 53px;
+  width: 53px;
+  margin: 0 auto;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #FF5A1E;
+}
+.shop-cart .cart .c-icon .icon {
+  height: 40px;
+  width: 100%;
+  font-size: 36px;
+  color: #ffffff;
+  display: block;
+  text-align: center;
+}
+.shop-cart .cart .c-txt {
+  height: 22px;
+  width: 100%;
+  line-height: 25px;
+  color: #9E9E9F;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+}
+.total-price {
+  padding: 0 3px;
+  position: fixed;
+  line-height: 20px;
+  left:50%;
+  bottom: 64px;
+  color: #FF6600;
+  margin-left: 22px;
+  border: solid 1px #FF6600;
+  border-radius: 5px;
+  background: #ffffff;
+  text-align: center;
+}

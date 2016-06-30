@@ -1,0 +1,385 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+body {
+  position:relative;
+}
+.header .back {
+  content: " ";
+  height: 30px;
+  width: 30px;
+  position: fixed;
+  left: 20px;
+  top: 10px;
+  z-index: 999;
+  display: block;
+  background: url(../icon/back.png) no-repeat top center;
+  background-size:contain;
+  border-radius: 50%;
+}
+.header .slide {
+  height:220px;
+}
+.header .slide .dot span{
+  background: #ffffff;
+}
+.header .slide .dot .cur{
+  background-color:#FF5A1E;
+  border: 1px solid #FF5A1E;
+}
+.header .arrti {
+  height: 102px;
+  background: #ffffff;
+}
+.header .arrti .info {
+  height: 60px;
+  margin-left: 5px;
+}
+.header .arrti .info .title {
+  height: 50px;
+  width: 85%;
+  float: left;
+}
+.header .arrti .info .title .name {
+  height: 30px;
+  line-height: 40px;
+  font-size: 18px;
+  font-weight: normal;
+  color: #434343;
+  display: block;
+}
+.header .arrti .info .title .attach {
+  height: 20px;
+  margin-left: 2px;
+}
+.header .arrti .info .title .attach .sales {
+  height: 20px;
+  line-height: 25px;
+  display: block;
+  float: left;
+  font-style: normal;
+}
+.header .arrti .info .title .attach .feedback-rate {
+  height: 20px;
+  line-height: 25px;
+  display: block;
+  float: left;
+  font-style: normal;
+  margin-left: 15px;
+}
+.header .arrti .detail {
+  height: 48px;
+  margin-top: 2px;
+  width: 13%;
+  float: right;
+  border-left: solid 1px #CCCCCC;
+  /*background: firebrick;*/
+}
+
+.header .arrti .detail .icon {
+  height: 28px;
+  color: #8b7f0f;
+  display: block;
+  font-size: 28px;
+  text-align: center;
+  /*background: rebeccapurple;*/
+}
+.header .arrti .detail .d-txt {
+  color: #666666;
+  font-size: 14px;
+  display: block;
+  margin-top: 2px;
+  text-align: center;
+}
+
+.header .arrti .operate {
+  height: 30px;
+  margin-top: 2px;
+  margin-left: 5px;
+}
+.header .arrti .operate .picon {
+  height: 20px;
+  margin-top: 6px;
+  font-size: 18px;
+  display: block;
+  float: left;
+  color: #EF4F4F;
+}
+.header .arrti .operate .sell {
+  font-size: 20px;
+  margin-top: 2px;
+  font-size: 22px;
+  display: block;
+  float: left;
+  color: #EF4F4F;
+}
+.header .arrti .operate .price {
+  height: 15px;
+  font-size: 14px;
+  margin-top: 12px;
+  display: block;
+  float: left;
+  margin-left: 6px;
+  text-decoration:line-through;
+}
+
+.header .arrti .operate .num {
+  height: 30px;
+  float: right;
+  margin-top: 2px;
+  margin-right: 15px;
+}
+.header .arrti .operate .num .count {
+  height: 30px;
+  line-height: 35px;
+  margin-left: 3px;
+  margin-right: 5px;
+  display: block;
+  float: left;
+  color: #3e3e3e;
+  font-size: 20px;
+
+}
+.header .arrti .operate .num .icon {
+  height: 30px;
+  line-height: 35px;
+  color: #FF6600;
+  display: block;
+  float: left;
+  font-size: 24px;
+  text-align: center;
+}
+.header .arrti .operate .num .subtract {
+  height: 29px;
+  width: 29px;
+  margin-top: 1px;
+  float: left;
+}
+.comment {
+  width: 100%;
+  margin-bottom: 45px;
+  background: #ffffff;
+}
+.comment .title {
+  height: 30px;
+  color: #3B3B3B;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 5px;
+  font-weight: normal;
+}
+.comment .total {
+  height: 20px;
+  margin-left: 5px;
+  margin-bottom: 8px;
+}
+.comment .total .comm {
+  height: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 14px;
+  float: left;
+  color: #AAAAAA;
+  text-indent: 5px;
+}
+.comment .total .comm .f-red {
+  font-style: normal;
+  margin-left: 3px;
+}
+.comment .total .count-comm {
+  height: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 12px;
+  float: left;
+  margin-left: 15px;
+  color: #AAAAAA;
+}
+.comment .weui_cell {
+  clear: both;
+  display: block;
+}
+.comment .weui_cell .buyer {
+  height: 20px;
+  width: 100%;
+}
+
+.comment .weui_cell .buyer .avatar {
+  height: 24px;
+  width: 24px;
+  display: block;
+  float: left;
+}
+.comment .weui_cell .buyer .avatar img {
+  border-radius: 100%;
+}
+.comment .weui_cell .buyer .phone {
+  height: 20px;
+  line-height: 20px;
+  color: #9B9B9B;
+  font-size: 14px;
+  display: block;
+  float: left;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-top: 2px;
+}
+.comment .weui_cell .buyer .level {
+  height: 20px;
+  width: 20px;
+  margin-top: 2px;
+  display: block;
+  float: left;
+  text-indent: -999px;
+}
+.level-0 {
+  background: url('../icon/level-0.png') no-repeat left center;
+  background-size: contain;
+}
+.comment .weui_cell .buyer .date {
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  display: block;
+  float:right;
+  font-style: normal;
+  margin-right: 10px;
+}
+.comment .weui_cell .comm {
+  margin-top: 8px;
+  min-height: 25px;
+}
+.comment .weui_cell .comm .comm-buyer {
+  font-size: 18px;
+  min-height: 30px;
+  line-height: 30px;
+  color: #434343;
+}
+.comment .weui_cell .comm .comm-reply {
+  min-height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  text-indent: 3px;
+  color: #EF4F4F;
+}
+.comment .more {
+  height: 28px;
+  width: 120px;
+  line-height: 28px;
+  font-size: 14px;
+  text-align: center;
+  border: solid 1px #FF651F;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #FF651F;
+  margin:0 auto;
+  margin-bottom: 20px;
+}
+
+.footer {
+  height: 45px;
+  width:100%;
+  position:fixed;
+  left:0;
+  bottom:0;
+  border-top: solid 1px #EFEFEF;
+  background: #F3F3F3;
+}
+.footer .f-main {
+  height: 45px;
+}
+.footer .f-main .sell {
+  height: 45px;
+  font-size: 20px;
+  color: #FF6600;
+  line-height: 45px;
+  text-align: center;
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.footer .f-main .desc {
+  height: 45px;
+  float: left;
+  padding-left: 4px;
+  padding-right: 2px;
+}
+.footer .f-main .desc .note {
+  height: 25px;
+  line-height: 30px;
+}
+.footer .f-main .desc .note .count {
+  font-size: 14px;
+}
+.footer .f-main .desc .note .state {
+  font-size: 12px;
+}
+.footer .f-main .desc .leaflet {
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  display: block;
+  font-style: normal;
+  /*background: firebrick;*/
+}
+.footer .f-main .btn {
+  float: right;
+  /*background: fuchsia;*/
+}
+.footer .f-main .btn .collect {
+  height: 48px;
+  float: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  background: darkkhaki;
+}
+.footer .f-main .btn .collect .icon {
+  height: 25px;
+  color: #FF6600;
+  display: block;
+  font-size: 22px;
+  margin-top: -3px;
+  text-align: center;
+}
+
+.footer .f-main .btn .collect .c-txt {
+  color: #666666;
+  font-size: 14px;
+  display: block;
+  margin-top: 2px;
+  text-align: center;
+}
+.footer .f-main .btn .add {
+  height: 45px;
+  float: left;
+}
+.footer .f-main .btn .add a {
+  height: 45px;
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 45px;
+  text-align: center;
+  display: block;
+  padding: 0 5px;
+  background: #FF5A1E;
+}
+
+
+
+
+
+
+

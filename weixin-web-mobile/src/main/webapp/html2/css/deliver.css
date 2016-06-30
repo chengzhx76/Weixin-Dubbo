@@ -1,0 +1,267 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  position:relative;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+
+
+.header a {
+  color: #ef4f4f;
+}
+.main {
+  height: 100%;
+}
+.main .home-delivery {
+  /*height: 100px;*/
+}
+.main .home-delivery .now-location {
+  height: 50px;
+  border-bottom: solid 1px #cccccc;
+  background: #ffffff;
+}
+.main .home-delivery .now-location .txt {
+  height: 50px;
+  line-height: 50px;
+  text-indent: 10px;
+  font-size: 18px;
+  color: #333;
+  display: block;
+  float: left;
+}
+.main .home-delivery .now-location .icon {
+  height: 50px;
+  display: block;
+  line-height: 50px;
+  font-size: 22px;
+  margin-right: 25px;
+  float: right;
+  color: #FF6600;
+}
+.main .home-delivery .address-list {
+  background: #ffffff;
+}
+.main .home-delivery .address-list .item {
+  height: 65px;
+  position: relative;
+}
+.main .home-delivery .address-list .item .activate {
+  height: 65px;
+  width: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FF6600;
+}
+.main .home-delivery .address-list .item .a-main {
+  height: 65px;
+  margin-left: 14px;
+  margin-right: 10px;
+  border-bottom: solid 1px #cccccc;
+
+}
+.main .home-delivery .address-list .item .a-left {
+  height: 65px;
+  width: 80%;
+  float: left;
+}
+.main .home-delivery .address-list .item .a-left .a-top {
+  height: 28px;
+  margin-left: 10px;
+  font-size: 16px;
+  color: #8c8c8c;
+  line-height: 30px;
+}
+.main .home-delivery .address-list .item .a-left .a-top .name {
+  height: 28px;
+  display: block;
+  float: left;
+}
+.main .home-delivery .address-list .item .a-left .a-top .sex {
+  height: 28px;
+  display: block;
+  float: left;
+ }
+.main .home-delivery .address-list .item .a-left .a-top .phone {
+  height: 28px;
+  display: block;
+  float: left;
+  padding-left: 8px;
+}
+.main .home-delivery .address-list .item .a-left .bottom {
+  height: 37px;
+  margin-left: 10px;
+}
+.main .home-delivery .address-list .item .a-left .bottom .tag {
+  /*height: 20px;*/
+  font-size: 16px;
+  padding: 0 4px;
+  color: #ffffff;
+  background: darkorange;
+  border-radius: 2px;
+  margin-top: 5px;
+  display: block;
+  float: left;
+}
+.main .home-delivery .address-list .item .a-left .bottom .addr {
+  height: 37px;
+  font-size: 16px;
+  line-height: 37px;
+  color: #333;
+  text-indent: 6px;
+  display: block;
+  float: left;
+}
+.main .home-delivery .address-list .item .a-right {
+  height: 52px;
+  width: 19%;
+  float: right;
+  margin-top: 7px;
+  border-left: solid 1px #cccccc;
+  /*text-align: center;*/
+  line-height: 52px;
+  text-indent: 18px;
+}
+.main .home-delivery .address-list .item .a-right .icon {
+  font-size: 22px;
+  /*color: #8c8c8c;*/
+}
+.main .since {
+  /*height: 500px;*/
+  height: 100%;
+}
+.main .since .now-city {
+  height: 50px;
+  border-bottom: solid 1px #cccccc;
+  background: #ffffff;
+}
+.main .since .now-city .txt {
+  height: 50px;
+  line-height: 50px;
+  text-indent: 10px;
+  float: left;
+  font-size: 18px;
+}
+.main .since .now-city .city {
+  height: 50px;
+  line-height: 50px;
+  text-indent: 10px;
+  float: left;
+  font-size: 18px;
+  margin-left: 60px;
+  color: #FF6600;
+}
+.main .since .now-city .city .icon {
+  font-size: 26px;
+  display: block;
+  height: 50px;
+  float: left;
+}
+.main .since .now-city .city .c-name {
+  display: block;
+  height: 50px;
+  line-height: 52px;
+  float: left;
+}
+.main .since .main-city {
+  height: 100%;
+}
+.main .since .main-city .left {
+  height: 100%;
+  width: 30%;
+  float: left;
+  display: block;
+  background: #f0f0f0;
+}
+.main .since .main-city .left .c-item {
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  font-size: 18px;
+  color: #FF6600;
+  border-bottom: solid 1px #cccccc;
+  position: relative;
+  background: #ffffff;
+}
+.main .since .main-city .left .c-item .activate {
+  height: 55px;
+  width: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #FF6600;
+}
+.main .since .main-city .right {
+  height: 100%;
+  width: 70%;
+  float: right;
+  display: block;
+  background: #ffffff;
+}
+.main .since .main-city .right .a-item {
+  height: 55px;
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-bottom: solid 1px #cccccc;
+}
+.main .since .main-city .right .a-item .addr-decs {
+  height: 55px;
+  width: 70%;
+  float: left;
+}
+.main .since .main-city .right .a-item .addr-decs .txt {
+  height: 32px;
+  line-height: 40px;
+  display: block;
+  font-size: 18px;
+  color: #333;
+}
+.main .since .main-city .right .a-item .addr-decs .distance {
+  height: 23px;
+  display: block;
+  line-height: 23px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.main .since .main-city .right .a-item .a-icon {
+  height: 55px;
+  width: 20%;
+  float: right;
+  margin-right: 2px;
+}
+.main .since .main-city .right .a-item .a-icon .icon {
+  height: 55px;
+  line-height: 70px;
+  color: #FF6600;
+  font-size: 26px;
+}
+.footer {
+  height: 50px;
+  width: 100%;
+  background: #EF4F4F;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.footer .txt {
+  height: 50px;
+  width: 100%;
+  font-size: 18px;
+  color: #ffffff;
+  line-height: 50px;
+  text-align: center;
+  display: block;
+}
+

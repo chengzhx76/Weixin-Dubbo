@@ -1,0 +1,129 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+header .weui-header {
+  background: #ffffff;
+  border-bottom: solid 1px #cccccc;
+}
+.weui_cells_radio .weui_check + .weui_icon_checked:before {
+  content: '\EA01';
+  font-size: 22px;
+  color: #cccccc;
+}
+.weui_cells_radio .weui_check:checked + .weui_icon_checked:before {
+  content: '\EA06';
+  font-size: 22px;
+}
+.main .weui_cells {
+  background: #F0EFF5;
+  margin-top: 0;
+}
+.main .weui_cells:before {
+  border-top: none;
+}
+.main .weui_cells:after {
+  border-bottom: none;
+}
+
+.main .item {
+  height: 120px;
+  margin-top: 10px;
+  background: #ffffff;
+}
+.main .list .item .weui_cell {
+  padding: 0;
+}
+.main .item .weui_cell_ft {
+  margin-top: 35px;
+}
+.main .list .item label {
+  display: block;
+}
+.main .list .item .title {
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 18px;
+
+}
+.main .list .item .radio {
+  height: 25px;
+  width: 25px;
+  float: left;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+/*.main .list .item .info {*/
+  /*height: 60px;*/
+  /*!*width: 100%;*!*/
+  /*float: left;*/
+  /*display: block;*/
+  /*background: darkgreen;*/
+/*}*/
+.main .list .item .price {
+  height: 55px;
+  float: left;
+}
+.main .list .item .price .p-icon {
+  height: 55px;
+  line-height: 90px;
+  font-size: 18px;
+  display: block;
+  float: left;
+}
+.main .list .item .price .anmout {
+  height: 55px;
+  font-size: 40px;
+  line-height: 65px;
+  display: block;
+  float: left;
+}
+.main .list .item  .rule {
+  height: 55px;
+  line-height: 60px;
+  float: right;
+  padding: 0 8px;
+  margin-right: 8px;
+  color: #333;
+  /*background: darkgreen;*/
+}
+.main .list .item .validity {
+  height: 30px;
+  font-size: 14px;
+  line-height: 30px;
+  text-indent: 10px;
+  /*background: salmon;*/
+  clear: both;
+  border-top: dashed 1px #F0EFF5;;
+}
+
+
+.main .list .item .invalid {
+  background: #8c8c8c;
+}
+.main .list .item .normal {
+  background: darkcyan;
+}
+
+.main .list .item .p-invalid {
+  color: #8c8c8c;;
+}
+.main .list .item .p-normal {
+  color: #FF6600;
+}
+
+

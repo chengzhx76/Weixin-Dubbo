@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>送货地址</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/weui.css"/>
+  <link rel="stylesheet" href="css/weui2.css"/>
+  <link rel="stylesheet" href="css/deliver.css">
+</head>
+<body ontouchstart>
+<header class="header">
+  <div class="weui_tab_red" style="height:44px;"><!--tab-fixed添加顶部-->
+    <div class="weui_navbar" style="height:44px;">
+      <div class="weui_navbar_item"><a href="#home-delivery">送货上门</a></div>
+      <div class="weui_navbar_item"><a href="#since">自提点自提</a></div>
+    </div>
+  </div>
+</header>
+
+<article class="main">
+
+  <section id="home-delivery" class="home-delivery ">
+    <div class="now-location">
+      <span class="txt">定位到当前位置</span>
+      <i class="icon icon-18"></i>
+    </div>
+    <ul class="address-list">
+      <li class="item">
+        <span class="activate"></span>
+        <div class="a-main">
+          <a href="payment.html">
+            <div class="a-left">
+              <div class="a-top">
+                <span class="name">接口</span>
+                <span class="sex">（女士）</span>
+                <span class="phone">18600536683</span>
+              </div>
+              <div class="bottom">
+                <span class="tag">其他</span>
+                <span class="addr">三元桥</span>
+              </div>
+            </div>
+          </a>
+          <div class="a-right">
+            <i class="icon icon-116"></i>
+          </div>
+        </div>
+      </li>
+      <li class="item">
+        <span class="no-activate"></span>
+        <div class="a-main">
+          <a href="payment.html">
+            <div class="a-left">
+              <div class="a-top">
+                <span class="name">接口</span>
+                <span class="sex">（女士）</span>
+                <span class="phone">18600536683</span>
+              </div>
+              <div class="bottom">
+                <span class="tag">家</span>
+                <span class="addr">海淀区上地上地嘉园</span>
+              </div>
+            </div>
+          </a>
+          <div class="a-right">
+            <i class="icon icon-116"></i>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+  <section id="since" class="since">
+    <div class="now-city">
+      <div class="txt">当前城市：</div>
+      <div class="city">
+        <i class="icon icon-69"></i>
+        <span class="c-name">成武县</span>
+      </div>
+    </div>
+    <div class="main-city">
+      <ul class="left city-list">
+        <li class="c-item">
+          <span class="activate"></span>
+          <div class="city">孙寺镇</div>
+        </li>
+      </ul>
+      <ul class="right addr-list">
+        <li class="a-item">
+          <a href="payment.html">
+            <div class="addr-decs">
+              <span class="txt">刘楼村</span>
+              <span class="distance"><span>8.3</span>km</span>
+            </div>
+          </a>
+          <div class="a-icon">
+            <span class="icon icon-40"></span>
+          </div>
+        </li>
+        <li class="a-item">
+          <a href="payment.html">
+            <div class="addr-decs">
+              <span class="txt">刘楼村2</span>
+              <span class="distance"><span>8.3</span>km</span>
+            </div>
+          </a>
+          <div class="a-icon">
+            <span class="icon icon-40"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+</article>
+<footer class="footer">
+  <a href="javascript:;" class="txt">新建收货地址</a>
+</footer>
+</body>
+<script src="js/lib/zepto.min.js"></script>
+<script src="js/deliver.js"></script>
+<script src="js/example.js"></script>
+</html>

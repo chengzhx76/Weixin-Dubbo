@@ -1,0 +1,82 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+header .weui-header {
+  background: #ffffff;
+  border-bottom: solid 1px #cccccc;
+}
+.main {
+  background: #ffffff;
+}
+.main .list .item {
+  height: 120px;
+  border-bottom: solid 1px #cccccc;
+}
+.main .list .item .pic {
+  height: 95px;
+  width: 95px;
+  border: solid 1px #cccccc;
+  float: left;
+  margin-top: 11px;
+  margin-left: 10px;
+}
+.main .list .item .pic img {
+  height: 95px;
+  width: 95px;
+}
+.main .list .item .detail {
+  height: 97px;
+  width: 97px;
+  margin-top: 11px;
+  margin-left: 5px;
+  float: left;
+}
+.main .list .item .detail .title {
+  height: 30px;
+  font-size: 18px;
+  line-height: 30px;
+  color: #3B3B3B;
+  font-weight: normal;
+  display: block;
+}
+.main .list .item .detail .desc {
+  height: 25px;
+  line-height: 25px;
+  font-size: 14px;
+  font-style: normal;
+  color: #8c8c8c;
+  display: block;
+}
+.main .list .item .detail .price {
+  height: 30px;
+  color: #FF6600;
+  font-size: 14px;
+  line-height: 30px;
+  margin-top: 12px;
+}
+.main .list .item .detail .price strong {
+  font-size: 18px;
+}
+.main .list .item .num {
+  height: 20px;
+  float: right;
+  margin-top: 90px;
+  margin-right: 15px;
+  display: block;
+  font-size: 18px;
+  color: #8c8c8c;
+  line-height: 20px;
+}

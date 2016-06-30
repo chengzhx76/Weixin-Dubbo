@@ -3,25 +3,6 @@
  */
 $(function () {
 
-    //jsonp模式：进入该页，请求数据
-    $.ajax({
-        type: 'get',
-        async: false,
-        url: server_url + 'v1/index',
-        contentType: 'application/json',
-        dataType: "jsonp",
-        jsonp: "callback",
-        jsonpCallback: "handler",
-        success: function(data, status, xhr) {
-            console.log(data);
-            console.log(status);
-            console.log(xhr);
-        },
-        error: function(xhr, errorType, error) {
-            console.log(error);
-        },
-    });
-
     $('.sub').hide();
     $('.count').hide();
 
@@ -31,6 +12,26 @@ $(function () {
     }else {
         $(".total-price").hide();
     }
+
+    $('#slideshow').swipeSlide({
+        autoSwipe: true,//自动切换默认是
+        speed: 3000,//速度默认4000
+        continuousScroll: true,//默认否
+        transitionType: 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
+        lazyLoad: true,//懒加载默认否
+        firstCallback: function (i, sum, me) {
+            me.find('.dot').children().first().addClass('cur');
+        },
+        callback: function (i, sum, me) {
+            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
+    });
+    $('#notify-txt').swipeSlide({
+        autoSwipe: true,//自动切换默认是
+        speed: 5000,//速度默认4000
+        continuousScroll: true,//默认否
+        transitionType: 'ease-in'
+    });
 
     // 购买
     $(".add").click(function (event) {
@@ -72,7 +73,6 @@ $(function () {
         // 开始运动
         bool.start();
     });
-
     // 减少操作
     $(".sub").click(function () {
         var $sub = $(this);
@@ -80,35 +80,26 @@ $(function () {
         subPrice($sub);
     });
 
-});
 
-function handler(data) {
-    var header = template('header-temp', data);
-    $('.header-wrap').html(header);
-
-    //var content = template('content-temp', data);
-    //$('.content').html(content);
-
-    $('#slideshow').swipeSlide({
-        autoSwipe: true,//自动切换默认是
-        speed: 3000,//速度默认4000
-        continuousScroll: true,//默认否
-        transitionType: 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
-        lazyLoad: true,//懒加载默认否
-        firstCallback: function (i, sum, me) {
-            me.find('.dot').children().first().addClass('cur');
+    //jsonp模式：进入该页，请求数据
+    $.ajax({
+        type: 'get',
+        async: false,
+        url: server_url + 'v1/index',
+        contentType: 'application/json',
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "handler",
+        success: function(data, status, xhr) {
+            console.log(data);
+            console.log(status);
+            console.log(xhr);
         },
-        callback: function (i, sum, me) {
-            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
-        }
+        error: function(xhr, errorType, error) {
+            console.log(error);
+        },
     });
-    $('#notify-txt').swipeSlide({
-        autoSwipe: true,//自动切换默认是
-        speed: 5000,//速度默认4000
-        continuousScroll: true,//默认否
-        transitionType: 'ease-in'
-    });
-}
+});
 
 // 添加数量
 function addCount(obj) {
@@ -127,7 +118,6 @@ function addCount(obj) {
         "background":"#EF4F4F"
     }).children('strong').css("font-size","14px");
 }
-
 // 减少数量
 function subCount(obj) {
     var count = parseInt(obj.next().text());
@@ -147,7 +137,6 @@ function addPrice(obj) {
     totalPrice += price;
     $(".total-price").children("strong").text(totalPrice.toFixed(1));
 }
-
 // 减少金额
 function subPrice(obj) {
     var price = parseFloat(obj.parent().siblings(".price").children("strong").text());
@@ -159,9 +148,14 @@ function subPrice(obj) {
     $(".total-price").children("strong").text(totalPrice.toFixed(1));
 }
 
+
 // 转换成Int类型
 function toInteger(text){
     text = parseInt(text);
     return isFinite(text) ? text : 0;
 }
 
+
+function handler(data) {
+    console.log(data.data.totalPirce);
+}

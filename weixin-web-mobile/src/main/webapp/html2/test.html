@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>列表</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <script src="js/lib/zepto.min.js"></script>
+    <script src="js/lib/serverUrl.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+          $("#btn").click(function () {
+            $.ajax({
+              type: 'get',
+              async: false,
+              url: server_url + 'v1/index',
+              contentType:"application/json",
+              data: {
+                token: '122'
+              },
+              dataType: "jsonp",
+              jsonp: "callback",
+              jsonpCallback: "handler",
+
+              success: function (xhr, status, data) {
+                console.log('success==> xhr：' + xhr + ' | status：' + status + ' | data：' + data);
+              },
+              error: function (xhr, errorType, error) {
+                console.log('error==> xhr：' + xhr + ' | errorType：' + errorType + ' | error：' + error);
+              },
+              complete: function (xhr, status) {
+                console.log('complete==> xhr：' + xhr + ' | status：' + status);
+              }
+            });
+          });
+
+        });
+
+        function handler(data) {
+            console.log(data);
+        };
+
+    </script>
+</head>
+
+<body ontouchstart>
+<div class="main">
+    <button id="btn">ajax</button>
+</div>
+</body>
+
+</html>

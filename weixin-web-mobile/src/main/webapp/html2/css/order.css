@@ -1,0 +1,237 @@
+body {
+  font-size: 12px;
+  color: #969696;
+  font-family: Helvetica,Droidsansfallback;
+  position:relative;
+  background: #F0EFF5;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #6E6E6E;
+}
+body, h1, h2, h3, h4, h5, h6, p, div, ul, li, a, button, section, figure, figcaption {
+  margin: 0;
+  padding: 0;
+}
+header .weui-header {
+  background: #ffffff;
+  border-bottom: solid 1px #cccccc;
+}
+.main {
+  margin-bottom: 70px;
+}
+.main .order {
+  margin-bottom: 10px;
+  background: #ffffff;
+}
+/* 订单失效 */
+.main .invalid {
+  color: #C8C8C8;
+}
+/* 订单正常 */
+.main .normal {
+  color: #6E6E6E;
+}
+.main .order .order-warp {
+  margin: 0 8px;
+  height: 152px;
+
+}
+.main .order .info {
+  height: 35px;
+  font-size: 14px;
+  line-height: 35px;
+  padding: 0 3px;
+}
+.main .order .info .date {
+  float: left;
+}
+.main .order .info .date .icon {
+  height: 35px;
+  font-size: 20px;
+  line-height: 34px;
+}
+.main .order .info .date .detail {
+  margin-left: 2px;
+}
+.main .order .info .num {
+  font-size: 12px;
+  float: right;
+}
+.main .order .info .num-normal {
+  color: #AAAAAA;
+}
+
+.main .order .info .num em {
+  font-style: normal;
+}
+.main .order .weui_panel_access {
+  height: 80px;
+  display: block;
+  border-bottom: solid 1px #EFEFEF;
+  border-top: solid 1px #EFEFEF;
+  padding: 0 3px;
+}
+.main .order .weui_panel_access:active {
+  color: #6E6E6E;
+   background-color: #ECECEC;
+ }
+.main .order .weui_panel_access .weui_panel_ft {
+  height: 35px;
+  line-height: 35px;
+  font-size: 15px;
+  padding: 0;
+}
+.main .order .weui_panel_access .schedule .flow {
+  height: 32px;
+  float: left;
+}
+.main .order .weui_panel_access .schedule .flow .icons {
+  height: 16px;
+}
+.main .order .weui_panel_access .schedule .start .icons {
+  margin-left: 15px;
+}
+.main .order .weui_panel_access .schedule .flow .icons .s-icon {
+  height: 15px;
+  color: #C8C8C8;
+  line-height: 10px;
+  font-size: 16px;
+  display: block;
+  float: left;
+}
+.main .order .weui_panel_access .schedule .flow .icons .s-icon-l {
+  margin-left: 2px;
+}
+.main .order .weui_panel_access .schedule .flow .icons .bg-icon {
+  height: 8px;
+  width: 8px;
+  display: block;
+  float: left;
+  margin-top: 5px;
+  border-radius: 50px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+.main .order .weui_panel_access .schedule .flow .icons .bg-icon-invalid {
+  background: #C8C8C8;
+}
+.main .order .weui_panel_access .schedule .flow .icons .bg-icon-normal {
+  background: #FF6C04;
+}
+.main .order .weui_panel_access .schedule .flow .status {
+  font-size: 9px;
+  display: block;
+  height: 10px;
+  padding-left: 2px;
+  text-align: center;
+}
+.main .order .weui_panel_access .schedule .flow .s-normal {
+  color: #FF6C04;
+}
+.main .order .weui_panel_access .schedule .end .status {
+  width: 40px;
+}
+.main .order .buy-info {
+  height: 32px;
+  padding: 0 3px;
+}
+.main .order .buy-info .price {
+  display: block;
+  height: 32px;
+  line-height: 32px;
+  float: left;
+  font-size: 18px;
+}
+.main .order .buy-info .comment {
+  display: block;
+  margin-top: 5px;
+  height: 20px;
+  line-height: 20px;
+  float: right;
+  margin-right: 5px;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+.main .order .buy-info .comment-invalid {
+  border: solid 1px #B9B9B9;
+  background: #C8C8C8;
+  color: #ffffff;
+}
+.main .order .buy-info .comment-normal {
+  border: solid 1px #FF8153;
+  color: #FF8153;
+}
+.footer .weui_tabbar .weui_tabbar_item {
+  color: #00AAEF;
+}
+.footer .weui_tabbar .weui_tabbar_item .icon {
+  display: block;
+  height: 100px;
+  width: 100%;
+  font-size: 26px;
+  line-height: 25px;
+}
+.shop-cart {
+  height: 76px;
+  width: 70px;
+  margin: 0 auto;
+  position:fixed;
+  left:0;
+  right: 0;
+  bottom: 0;
+  /*background: darkcyan;*/
+}
+
+.shop-cart .cart {
+  height: 65px;
+  width: 65px;
+  margin: 0 auto;
+  display: block;
+  border-top: solid 1px #cccccc;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  background: #F7F7FA;
+}
+.shop-cart .cart .c-icon {
+  height: 53px;
+  width: 53px;
+  margin: 0 auto;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #FF5A1E;
+}
+.shop-cart .cart .c-icon .icon {
+  height: 40px;
+  width: 100%;
+  font-size: 36px;
+  color: #ffffff;
+  display: block;
+  text-align: center;
+}
+.shop-cart .cart .c-txt {
+  height: 22px;
+  width: 100%;
+  line-height: 25px;
+  color: #9E9E9F;
+  font-size: 15px;
+  display: block;
+  text-align: center;
+}
+.total-price {
+  /*height: 20px;*/
+  padding: 0 3px;
+  position: absolute;
+  line-height: 20px;
+  left:180px;
+  bottom: 64px;
+  color: #FF6600;
+  border: solid 1px #FF6600;
+  border-radius: 5px;
+  background: #ffffff;
+  text-align: center;
+}
+

@@ -12,8 +12,35 @@
 </head>
 <body ontouchstart>
   <header class="header">
-    <div class="header-wrap">
+    <div class="slide" id="slideshow">
+      <ul>
+        <li>
+          <a href="#"><img src="images/swiper-1.jpg" alt=""></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/swiper-2.jpg" alt=""></a>
+        </li>
+        <li>
+          <a href="#"><img src="images/swiper-3.jpg" alt=""></a>
+        </li>
+      </ul>
+      <div class="dot">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
 
+    <div class="notify">
+      <div class="icon icon-53"></div>
+      <div class="slide notify-text" id="notify-txt">
+        <ul>
+          <li>
+            <div class='txt'>微信端上线了，敬请使用 ~ ~</div>
+          </li>
+          <li>
+            <div class='txt'>兑换【饿了么】畅享美食红包 消耗20金币</div>
+          </li>
+        </ul>
+      </div>
     </div>
   </header>
 
@@ -129,52 +156,11 @@
   </div>
   <span class="total-price">总价：￥<strong>0</strong></span>
 </body>
-
-<script id="header-temp" type="text/template">
-  <div class="slide" id="slideshow">
-    <% if(data.ads) {%>
-    <ul>
-      <%for (var i = 0; i < data.ads.length; i++) {%>
-      <li>
-        <a href="<%=data.ads[i].linkUrl%>">
-          <img src="<%=data.ads[i].pictureUrl%>" alt="<%=data.ads[i].name%>" width="<%=data.ads[i].width%>" height="<%=data.ads[i].height%>">
-        </a>
-      </li>
-      <%}%>
-    </ul>
-    <div class="dot">
-      <%for (var i = 0; i < data.ads.length; i++) {%>
-      <span></span>
-      <%}%>
-    </div>
-    <%}%>
-  </div>
-
-  <div class="notify">
-    <div class="icon icon-53"></div>
-    <% if(data.notices) {%>
-    <div class="slide notify-text" id="notify-txt">
-      <ul>
-        <%for (var i = 0; i < data.notices.length; i++) {%>
-        <li>
-          <div class='txt'><%=data.notices[i].content%></div>
-        </li>
-        <%}%>
-      </ul>
-    </div>
-    <%}%>
-  </div>
-</script>
-
-<!--<script id="content-temp" type="text/template">-->
-
-<!--</script>-->
-
 <script src="js/lib/zepto.min.js"></script>
-<script src="js/lib/template-native.js"></script>
 <script src="js/lib/swipe.js"></script>
 <script src="js/lib/parabola.js"></script>
 <script src="js/lib/serverUrl.js"></script>
+
 <script src="js/index.js"></script>
 <script src="js/example.js"></script>
 </html>
