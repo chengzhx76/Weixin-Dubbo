@@ -1,19 +1,85 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50626
-Source Host           : localhost:3306
+Source Server         : 192.168.1.114
+Source Server Version : 50173
+Source Host           : 192.168.1.114:3306
 Source Database       : weixin
 
 Target Server Type    : MYSQL
-Target Server Version : 50626
+Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-06-29 11:41:35
+Date: 2016-06-30 17:06:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for ad
+-- ----------------------------
+DROP TABLE IF EXISTS `ad`;
+CREATE TABLE `ad` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `picture_url` varchar(255) DEFAULT NULL,
+  `link_url` varchar(255) DEFAULT NULL,
+  `width` int(11) DEFAULT NULL,
+  `height` int(11) DEFAULT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `is_enable` tinyint(4) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ad
+-- ----------------------------
+INSERT INTO `ad` VALUES ('1', '名字1', 'http://1.jsp', 'http://www.baidu.com', '120', '120', '1', '1', '首页图片1', '2016-06-29 15:24:44', '2016-06-29 15:24:48', 'NORMAL');
+INSERT INTO `ad` VALUES ('2', '名字2', 'http://3.jsp', 'http://www.baidu.com', '120', '120', '2', '1', '首页图片2', '2016-06-29 16:34:26', '2016-06-29 16:34:29', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for ad_join_position
+-- ----------------------------
+DROP TABLE IF EXISTS `ad_join_position`;
+CREATE TABLE `ad_join_position` (
+  `id` varchar(255) NOT NULL,
+  `ad_id` int(11) DEFAULT NULL,
+  `ad_position_id` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ad_join_position
+-- ----------------------------
+INSERT INTO `ad_join_position` VALUES ('1', '1', '1', '2016-06-29 15:25:44', '2016-06-29 15:25:47', 'NORMAL');
+INSERT INTO `ad_join_position` VALUES ('', '2', '1', '2016-06-29 16:36:11', '2016-06-29 16:36:13', null);
+
+-- ----------------------------
+-- Table structure for ad_position
+-- ----------------------------
+DROP TABLE IF EXISTS `ad_position`;
+CREATE TABLE `ad_position` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ad_position
+-- ----------------------------
+INSERT INTO `ad_position` VALUES ('1', '首页', 'INDEX', '首页展示的图片', '2016-06-29 15:25:27', '2016-06-29 15:25:29', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for admin
@@ -86,6 +152,28 @@ INSERT INTO `log` VALUES ('c7f665813b0f4ccb9288495218167d22', 'ACCESS', null, '0
 INSERT INTO `log` VALUES ('ec0b5ef6ce1f44579aaee60532bbfc23', 'ACCESS', null, '0:0:0:0:0:0:0:1', '/web/', 'GET', '', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101 Firefox/45.0', '', 'cheng', null, null, 'NORMAL');
 
 -- ----------------------------
+-- Table structure for notice
+-- ----------------------------
+DROP TABLE IF EXISTS `notice`;
+CREATE TABLE `notice` (
+  `id` varchar(255) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `link_url` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of notice
+-- ----------------------------
+INSERT INTO `notice` VALUES ('1', '通告1', '微信端上线了，敬请使用 ~ ~', 'http://www.zhihu.com', '备注', '2016-06-29 16:03:56', '2016-06-29 16:03:58', 'NORMAL');
+INSERT INTO `notice` VALUES ('2', '通告2', '兑换【饿了么】畅享美食红包 消耗20金币', 'http://www.baidu.com', '备注', '2016-06-29 16:32:02', '2016-06-29 16:32:08', 'NORMAL');
+
+-- ----------------------------
 -- Table structure for permission
 -- ----------------------------
 DROP TABLE IF EXISTS `permission`;
@@ -124,7 +212,9 @@ CREATE TABLE `picture` (
 -- ----------------------------
 -- Records of picture
 -- ----------------------------
-INSERT INTO `picture` VALUES ('1', '1', 'http://1.jpg', '1', null, '2016-06-29 10:10:09', '2016-06-29 10:10:12', 'NORMAL');
+INSERT INTO `picture` VALUES ('1', '1', 'http://1.jpg', '1', '首页商品图片', '2016-06-29 10:10:09', '2016-06-29 10:10:12', 'NORMAL');
+INSERT INTO `picture` VALUES ('2', '2', 'http://1.jpg', '1', '首页商品图片', '2016-06-29 16:40:31', '2016-06-29 16:40:33', 'NORMAL');
+INSERT INTO `picture` VALUES ('3', '3', 'http://1.jpg', '1', '首页商品图片', '2016-06-29 16:46:38', '2016-06-29 16:46:40', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for product
@@ -152,6 +242,8 @@ CREATE TABLE `product` (
 -- Records of product
 -- ----------------------------
 INSERT INTO `product` VALUES ('1', '大馍', '0.5', '0.5', '001', '馍', '1', '1', '1', '1', '好吃的', '2016-06-29 10:11:16', '2016-06-29 10:11:19', 'NORMAL');
+INSERT INTO `product` VALUES ('2', '花卷', '0.5', '0.5', '002', '卷子', '1', '1', '1', '1', '好吃的', '2016-06-29 16:38:03', '2016-06-29 16:38:05', 'NORMAL');
+INSERT INTO `product` VALUES ('3', '糖包', '0.6', '0.6', '003', '糖包', '1', '1', '1', '1', '好吃的', '2016-06-29 16:38:57', '2016-06-29 16:38:59', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for product_type

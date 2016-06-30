@@ -28,9 +28,9 @@ import java.util.Set;
 public class ConsumerTest {
     @Autowired
     private RpcRedisService redisService;
-    @Resource
+    @Autowired
     private RpcCartService cartService;
-    @Resource
+    @Autowired
     private RpcProductService productService;
     @Autowired
     private RpcSystemService systemService;
