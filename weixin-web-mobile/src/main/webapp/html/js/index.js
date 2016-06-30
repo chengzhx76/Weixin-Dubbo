@@ -133,4 +133,35 @@ $(function () {
         return isFinite(text) ? text : 0;
     }
 
+
+    //jsonp模式：进入该页，请求数据
+    $.ajax({
+        type: 'get',
+        async: false,
+        url: server_url + 'v1/index',
+        contentType: 'application/json',
+        headers: {
+            'X-APPKey':'weixinapp',
+            'X-Token':'122'
+        },
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "handler",
+        beforeSend: function(xhr, settings) {
+            console.log('beforeSend==> xhr'+xhr + 'settings'+settings);
+        },
+        success: function(xhr, status, data) {
+            console.log('success==> xhr'+xhr + 'status'+status + 'data'+data);
+        },
+        error: function(xhr, errorType, error) {
+            console.log('error==> xhr'+xhr + 'errorType'+errorType + 'error'+error);
+        },
+        complete: function(xhr, status) {
+            console.log('complete==> xhr'+xhr + 'status'+status);
+        }
+    });
+
+    function handler(data) {
+        console.log('handler==> data'+data);
+    }
 });

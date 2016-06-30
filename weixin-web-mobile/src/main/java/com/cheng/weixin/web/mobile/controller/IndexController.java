@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,7 @@ public class IndexController extends BaseController {
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/index")
-    public ResponseEntity<Response> index() {
+    public ResponseEntity<Response> index(HttpServletRequest request) {
         Index index = indexService.getIndexInfo("1");
         return success(index);
     }
