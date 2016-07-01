@@ -107,4 +107,12 @@ public interface RpcRedisService {
      */
     boolean exists(String key, String field);
 
+    /**
+     * 获取值根据key和Field
+     * @param key
+     * @param field
+     * @return value
+     */
+    Object getValueByKeyANdField(String key, String field);
+
 }

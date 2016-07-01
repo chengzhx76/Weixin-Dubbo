@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -140,6 +141,10 @@ public class RedisService implements RpcRedisService {
     @Override
     public Long increase(String key, String field) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        //redisTemplate.setKeySerializer(new StringRedisSerializer(StandardCharsets.UTF_8));
+        //redisTemplate.setValueSerializer(new StringRedisSerializer());
+        //redisTemplate.setHashKeySerializer(new StringRedisSerializer(StandardCharsets.UTF_8));
+        redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
         if (exists(key, field)) {
             return hashOps.increment(field, 1L);
         } else {
@@ -151,6 +156,7 @@ public class RedisService implements RpcRedisService {
     @Override
     public Long decrease(String key, String field) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
         if (exists(key, field)) {
             long count = hashOps.increment(field, -1L);
             if (count == 0) {
@@ -179,5 +185,12 @@ public class RedisService implements RpcRedisService {
     public boolean exists(String key, String field) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
         return hashOps.hasKey(field);
+    }
+
+    @Override
+    public Object getValueByKeyANdField(String key, String field) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
+        return hashOps.get(field);
     }
 }

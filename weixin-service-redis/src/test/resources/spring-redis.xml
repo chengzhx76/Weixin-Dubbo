@@ -22,12 +22,12 @@
 	</bean>
 
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
-		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="connectionFactory" ref="connectionFactory"/>
 		<property name="keySerializer" >
-			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
 		</property>
 		<property name="valueSerializer" >
-			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
 		</property>
 	</bean >
 

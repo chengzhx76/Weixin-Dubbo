@@ -26,7 +26,13 @@ public class TestAll {
 
     @Test
     public void test02() {
-        long data = redisService.increase("test-1","test");
+        long data = redisService.increase("user-11","1");
         System.out.println("======> "+data);
+    }
+    @Test
+    public void test03() {
+        Object obj = redisService.getValueByKeyANdField("user-11","1");
+        Long count = (Long) obj;
+        System.out.println(obj);
     }
 }
