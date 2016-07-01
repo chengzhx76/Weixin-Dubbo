@@ -4,16 +4,20 @@
 <mapper namespace="com.cheng.weixin.service.item.dao.PictureDaoMapper">
   <sql id="tableName">picture</sql>
   <sql id="columns">
-    p.id,p.product_id,p.picture_url,p.is_default,p.remarks,p.create_date,p.update_date,p.status
+    p.id,p.product_id,p.picture_url,p.width,p.height,p.is_default,
+    p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
-    id,product_id,picture_url,is_default,remarks,create_date,update_date,status
+    id,product_id,picture_url,width,height,is_default,
+    remarks,create_date,update_date,status
   </sql>
   <sql id="pictureIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="productId != null and productId != ''">product_id=#{productId},</if>
     <if test="pictureUrl != null and pictureUrl != ''">picture_url=#{pictureUrl},</if>
     <if test="isDefault != null and isDefault != ''">is_default=#{isDefault},</if>
+    <if test="width != null and width != ''">width=#{width},</if>
+    <if test="height != null and height != ''">height=#{height},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -83,9 +87,15 @@
 
   <!-- =================================================================== -->
   <!-- 根据商品ID获取所有的图片 -->
-  <select id="loadSingleProdut" parameterType="Picture" resultType="Picture">
+  <select id="loadAllPicture" parameterType="Picture" resultType="Picture">
     <include refid="pictureSelector"/>
     <include refid="pictureWhere"/>
+  </select>
+  <!-- 根据商品ID获取默认的图片 -->
+  <select id="loadDefaultPicture" parameterType="Picture" resultType="Picture">
+    <include refid="pictureSelector"/>
+    <include refid="pictureWhere"/>
+    AND is_default = 1
   </select>
 </mapper>
 

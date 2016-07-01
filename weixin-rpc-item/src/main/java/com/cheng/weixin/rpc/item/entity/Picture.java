@@ -10,12 +10,31 @@ import com.cheng.common.entity.DataEntity;
 public class Picture extends DataEntity<Picture> {
     private String productId;
     private String pictureUrl;
+    private int width;
+    private int height;
     private boolean isDefault;
 
     public Picture() {}
     public Picture(String productId) {
         this.productId = productId;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public String getProductId() {
         return productId;
     }

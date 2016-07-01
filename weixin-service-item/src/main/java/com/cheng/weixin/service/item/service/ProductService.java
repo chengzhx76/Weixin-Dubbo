@@ -37,8 +37,8 @@ public class ProductService implements RpcProductService {
     public List<Product> getIndex() {
         List<Product> products = productDao.loadIndex();
         for (Product product : products) {
-            List<Picture> pictures = pictureDao.loadSingleProdut(new Picture(product.getId()));
-            product.setPictures(pictures);
+            Picture pictures = pictureDao.loadDefaultPicture(new Picture(product.getId()));
+            product.setDefaultPicture(pictures);
         }
         return products;
     }

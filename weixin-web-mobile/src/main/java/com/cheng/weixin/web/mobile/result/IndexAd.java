@@ -6,20 +6,11 @@ package com.cheng.weixin.web.mobile.result;
  * Date: 2016/6/29
  */
 public class IndexAd {
-    private String id;
     private String name;
     private String pictureUrl;
     private String linkUrl;
     private int width;
     private int height;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

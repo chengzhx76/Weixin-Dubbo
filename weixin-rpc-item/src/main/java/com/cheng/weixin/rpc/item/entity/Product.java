@@ -20,10 +20,11 @@ public class Product extends DataEntity<Product> {
     private boolean isAlive;
     private int modifyAdminId;
     private boolean isIndex;
+    private String tag;
+    private String unitDesc;
 
     private List<Picture> pictures;
-
-
+    private Picture defaultPicture;
 
     public Product() {}
 
@@ -35,6 +36,30 @@ public class Product extends DataEntity<Product> {
         super();
         this.id = id;
         this.isIndex = isIndex;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getUnitDesc() {
+        return unitDesc;
+    }
+
+    public void setUnitDesc(String unitDesc) {
+        this.unitDesc = unitDesc;
+    }
+
+    public Picture getDefaultPicture() {
+        return defaultPicture;
+    }
+
+    public void setDefaultPicture(Picture defaultPicture) {
+        this.defaultPicture = defaultPicture;
     }
 
     public List<Picture> getPictures() {

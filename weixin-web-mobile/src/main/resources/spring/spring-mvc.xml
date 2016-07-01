@@ -19,7 +19,6 @@
   <mvc:default-servlet-handler />
 	<!-- 支持注解 -->
 	<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>
-	<mvc:resources mapping="/resources/**" location="/html/" cache-period="31536000"/>
 
 	<!-- 扫描controller（controller层注入） -->
 	<context:component-scan base-package="com.cheng.weixin.web.mobile" use-default-filters="false">

@@ -18,6 +18,8 @@ public interface PictureDaoMapper extends BaseDaoMapper<Picture> {
      * @param picture
      * @return
      */
-    List<Picture> loadSingleProdut(Picture picture);
+    List<Picture> loadAllPicture(Picture picture);
+
+    Picture loadDefaultPicture(Picture picture);
 
 }

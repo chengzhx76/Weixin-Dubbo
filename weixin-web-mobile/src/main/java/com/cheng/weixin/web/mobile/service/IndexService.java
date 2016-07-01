@@ -38,7 +38,6 @@ public class IndexService {
         List<Ad> ads = systemService.getIndexAds();
         for (Ad ad : ads) {
             IndexAd indexAd = new IndexAd();
-            indexAd.setId(ad.getId());
             indexAd.setName(ad.getName());
             indexAd.setPictureUrl(ad.getPictureUrl());
             indexAd.setLinkUrl(ad.getLinkUrl());
@@ -65,7 +64,11 @@ public class IndexService {
             indexProduct.setId(product.getId());
             indexProduct.setName(product.getName());
             indexProduct.setPrice(product.getSalePrice());
-            indexProduct.setPicLink(product.getPictures().get(0).getPictureUrl());
+            indexProduct.setPicLink(product.getDefaultPicture().getPictureUrl());
+            indexProduct.setHeight(product.getDefaultPicture().getHeight());
+            indexProduct.setWidth(product.getDefaultPicture().getWidth());
+            indexProduct.setTag(product.getTag());
+            indexProduct.setDesc(product.getUnitDesc());
             indexProducts.add(indexProduct);
         }
 
