@@ -55,7 +55,6 @@ public class IndexService {
             indexNotice.setLinkUrl(notice.getLinkUrl());
             indexNotices.add(indexNotice);
         }
-
         // 商品
         List<IndexProduct> indexProducts = new ArrayList<>();
         List<Product> products = productService.getIndex();
