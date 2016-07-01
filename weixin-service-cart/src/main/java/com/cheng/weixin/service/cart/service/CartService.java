@@ -20,20 +20,41 @@ public class CartService implements RpcCartService {
     @Autowired
     private RpcRedisService redisService;
 
+    ///**
+    // * 增加商品的数量
+    // *
+    // * @param productId
+    // * @param count
+    // */
+    //@Override
+    //public void addProductCount(String userId, String productId, Integer count) {
+    //    boolean exists = redisService.exists(getCart(userId), productId);
+    //    if (exists) {
+    //        redisService.add(getCart(userId), productId, String.valueOf(count));
+    //    }else {
+    //        redisService.add(getCart(userId), productId, null);
+    //    }
+    //}
+
     /**
-     * 增加商品的数量
-     *
+     * 递增商品的数量
+     * @param userId
      * @param productId
-     * @param count
+     * @return 增加后的商品数量
      */
     @Override
-    public void addProductCount(String userId, String productId, Integer count) {
-        boolean exists = redisService.exists(getCart(userId), productId);
-        if (exists) {
-            redisService.add(getCart(userId), productId, String.valueOf(count));
-        }else {
-            redisService.add(getCart(userId), productId, null);
-        }
+    public Long addProductCount(String userId, String productId) {
+        return redisService.increase(getCart(userId), productId);
+    }
+    /**
+     * 减少商品数量
+     * @param userId
+     * @param productId
+     * @return 减少后的商品数量
+     */
+    @Override
+    public Long subProductCount(String userId, String productId) {
+        return redisService.decrease(userId, productId);
     }
 
     /**
@@ -45,6 +66,12 @@ public class CartService implements RpcCartService {
     @Override
     public Set<String> getProductIds(String userId) {
         return redisService.getFields(getCart(userId));
+    }
+
+
+    @Override
+    public void deleteProduct(String userId, String productId) {
+        redisService.deleteField(userId, productId);
     }
 
     /**

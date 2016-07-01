@@ -136,35 +136,45 @@ public class RedisService implements RpcRedisService {
         return result;
     }
 
+
     @Override
-    public void add(String key, String field ,String value) {
+    public Long increase(String key, String field) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
-        if (value != null) {
-            hashOps.put(field, value);
-        }else {
-            hashOps.increment(field, 1);
+        if (exists(key, field)) {
+            return hashOps.increment(field, 1L);
+        } else {
+            hashOps.putIfAbsent(field, 1);
+            return 1L;
         }
     }
 
-    /**
-     * 根据key获取所有的Field
-     *
-     * @param key
-     * @return
-     */
+    @Override
+    public Long decrease(String key, String field) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        if (exists(key, field)) {
+            long count = hashOps.increment(field, -1L);
+            if (count == 0) {
+                deleteField(key, field);
+                return 0L;
+            } else {
+                return count;
+            }
+        }
+        return 0L;
+    }
+
+    @Override
+    public void deleteField(String key, String field) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        hashOps.delete(field);
+    }
+
     @Override
     public Set<String> getFields(String key) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
         return hashOps.keys();
     }
 
-    /**
-     * 查看该字段是否已有
-     *
-     * @param key
-     * @param field
-     * @return
-     */
     @Override
     public boolean exists(String key, String field) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);

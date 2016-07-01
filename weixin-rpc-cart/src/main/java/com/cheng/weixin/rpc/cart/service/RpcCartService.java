@@ -8,19 +8,42 @@ import java.util.Set;
  * Date: 2016/6/28
  */
 public interface RpcCartService {
+
+    ///**
+    // * 商品递增1
+    // * @param userId
+    // * @param productId
+    // */
+    //void addProductCount(String userId, String productId);
+
     /**
-     * 增加商品的数量
-     * @param userId
-     * @param productId
-     * @param count
+     * 递增商品的数量
+     * @param userId 用户ID
+     * @param productId 商品ID
+     * @return 增加后的商品数量
      */
-    void addProductCount(String userId, String productId, Integer count);
+    Long addProductCount(String userId, String productId);
+
+    /**
+     * 减少商品数量
+     * @param userId 用户ID
+     * @param productId 商品ID
+     * @return 减少后的商品数量
+     */
+    Long subProductCount(String userId, String productId);
 
     /**
      * 获取购物车中所有商品的ID
-     * @param userId
-     * @return
+     * @param userId 用户ID
+     * @return 该用户购物车中所有商品的ID
      */
     Set<String> getProductIds(String userId);
+
+    /**
+     * 删除购物车中的商品
+     * @param userId 用户ID
+     * @param productId 商品ID
+     */
+    void deleteProduct(String userId, String productId);
 
 }

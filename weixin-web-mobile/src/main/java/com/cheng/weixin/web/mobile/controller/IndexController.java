@@ -4,6 +4,7 @@ import com.cheng.weixin.web.mobile.model.Book;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.model.User;
 import com.cheng.weixin.web.mobile.result.Index;
+import com.cheng.weixin.web.mobile.result.IndexBuy;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.IndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +70,19 @@ public class IndexController extends BaseController {
         return success(index);
     }
 
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/add")
+    public ResponseEntity<Response> add(HttpServletRequest request, String productId) {
+        IndexBuy indexBuy = indexService.addProduct("1", productId);
+        return success(indexBuy);
+    }
 
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/sub")
+    public ResponseEntity<Response> sub(HttpServletRequest request, String productId) {
+        IndexBuy indexBuy = indexService.subProduct("1", productId);
+        return success(indexBuy);
+    }
 
 
 

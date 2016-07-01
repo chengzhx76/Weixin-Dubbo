@@ -71,13 +71,26 @@ public interface RpcRedisService {
      */
     boolean flushExpireTime(final String key, Long expireTime);
 
+    // ================================Hash 操作=================================
     /**
-     * 增加数量
+     * 数量递增
      * @param key
      * @param field
-     * @param value
      */
-    void add(String key, String field ,String value);
+    Long increase(String key, String field);
+    /**
+     * 数量递减
+     * @param key
+     * @param field
+     */
+    Long decrease(String key, String field);
+
+    /**
+     * 删除一个Field
+     * @param key
+     * @param field
+     */
+    void deleteField(String key, String field);
 
     /**
      * 根据key获取所有的Field

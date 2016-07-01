@@ -6,10 +6,7 @@ import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.system.entity.Ad;
 import com.cheng.weixin.rpc.system.entity.Notice;
 import com.cheng.weixin.rpc.system.service.RpcSystemService;
-import com.cheng.weixin.web.mobile.result.Index;
-import com.cheng.weixin.web.mobile.result.IndexAd;
-import com.cheng.weixin.web.mobile.result.IndexNotice;
-import com.cheng.weixin.web.mobile.result.IndexProduct;
+import com.cheng.weixin.web.mobile.result.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,12 +69,7 @@ public class IndexService {
         }
 
         // 金额
-        Set<String> pids =  cartService.getProductIds(userId);
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (String pid : pids) {
-            Product product = productService.getById(pid);
-            totalPrice = totalPrice.add(product.getSalePrice());
-        }
+        BigDecimal totalPrice = totalPrice(userId);
 
         Index index = new Index();
         index.setAds(indexads);
@@ -88,5 +80,52 @@ public class IndexService {
         return index;
     }
 
+    /**
+     * 购买商品
+     * @param userId
+     * @param productId
+     * @return
+     */
+    public IndexBuy addProduct(String userId, String productId) {
+        long count = cartService.addProductCount(userId, productId);
+        // 金额
+        BigDecimal totalPrice = totalPrice(userId);
+
+        IndexBuy indexBuy = new IndexBuy();
+        indexBuy.setCount(count);
+        indexBuy.setPrice(totalPrice);
+        return indexBuy;
+    }
+    /**
+     * 减少商品
+     * @param userId
+     * @param productId
+     * @return
+     */
+    public IndexBuy subProduct(String userId, String productId) {
+        long count = cartService.subProductCount(userId, productId);
+        // 金额
+        BigDecimal totalPrice = totalPrice(userId);
+
+        IndexBuy indexBuy = new IndexBuy();
+        indexBuy.setCount(count);
+        indexBuy.setPrice(totalPrice);
+        return indexBuy;
+    }
+
+    /**
+     * 购物车商品的总价格
+     * @param userId
+     * @return
+     */
+    private BigDecimal totalPrice(String userId) {
+        Set<String> pids =  cartService.getProductIds(userId);
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (String pid : pids) {
+            Product product = productService.getById(pid);
+            totalPrice = totalPrice.add(product.getSalePrice());
+        }
+        return totalPrice;
+    }
 
 }
