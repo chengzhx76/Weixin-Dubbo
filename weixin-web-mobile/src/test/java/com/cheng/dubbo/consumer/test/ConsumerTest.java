@@ -36,7 +36,7 @@ public class ConsumerTest {
     private RpcSystemService systemService;
 
     @Test
-    public void test01() {
+    public void testRedis() {
         //String data = (String) redisService.get("122");
         System.out.println(redisService.set("foo","122"));
         boolean result = redisService.exists("foo");
