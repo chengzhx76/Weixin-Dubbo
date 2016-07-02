@@ -1,6 +1,6 @@
 package com.cheng.weixin.web.mobile.result;
 
-import com.cheng.weixin.common.utils.BigDecimalFormat;
+import com.cheng.weixin.common.utils.StringFormat;
 
 import java.math.BigDecimal;
 
@@ -40,7 +40,7 @@ public class IndexProduct {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = BigDecimalFormat.format(price);
+        this.price = StringFormat.format(price);
     }
 
     public String getPicLink() {

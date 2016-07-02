@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
  * Author: 光灿
  * Date: 2016/6/28
  */
-public class BigDecimalFormat {
+public class StringFormat {
     /**
      * 保留一位小数
      * @param value

@@ -1,6 +1,6 @@
 package com.cheng.weixin.web.mobile.result;
 
-import com.cheng.weixin.common.utils.BigDecimalFormat;
+import com.cheng.weixin.common.utils.StringFormat;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -49,6 +49,6 @@ public class Index {
     }
 
     public void setTotalPirce(BigDecimal totalPirce) {
-        this.totalPirce = BigDecimalFormat.format(totalPirce);
+        this.totalPirce = StringFormat.format(totalPirce);
     }
 }

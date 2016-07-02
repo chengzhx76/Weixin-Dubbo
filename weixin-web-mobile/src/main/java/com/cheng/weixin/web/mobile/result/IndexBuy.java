@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result;
 
+import com.cheng.weixin.common.utils.StringFormat;
+
 import java.math.BigDecimal;
 
 /**
@@ -9,7 +11,7 @@ import java.math.BigDecimal;
  */
 public class IndexBuy {
     private Long count;
-    private BigDecimal price;
+    private String price;
 
     public Long getCount() {
         return count;
@@ -19,12 +21,12 @@ public class IndexBuy {
         this.count = count;
     }
 
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        this.price = StringFormat.format(price);
     }
 }
 

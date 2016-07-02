@@ -45,7 +45,7 @@ public interface RpcCartService {
      * @param productId
      * @return
      */
-    Integer getCounts(String userId, String productId);
+    Long getCounts(String userId, String productId);
 
     /**
      * 删除购物车中的商品

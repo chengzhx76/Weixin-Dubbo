@@ -54,7 +54,7 @@ public class CartService implements RpcCartService {
      */
     @Override
     public Long subProductCount(String userId, String productId) {
-        return redisService.decrease(userId, productId);
+        return redisService.decrease(getCart(userId), productId);
     }
 
     /**
@@ -69,9 +69,9 @@ public class CartService implements RpcCartService {
     }
 
     @Override
-    public Integer getCounts(String userId, String productId) {
+    public Long getCounts(String userId, String productId) {
         Object counts = redisService.getValueByKeyANdField(getCart(userId), productId);
-        return (Integer) counts;
+        return (Long) counts;
     }
 
     @Override

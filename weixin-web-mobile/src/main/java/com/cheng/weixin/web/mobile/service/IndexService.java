@@ -119,15 +119,15 @@ public class IndexService {
      * @return
      */
     private BigDecimal totalPrice(String userId) {
-        Set<String> productids =  cartService.getProductIds(userId);
+        Set<String> productIds =  cartService.getProductIds(userId);
         BigDecimal totalPrice = new BigDecimal(0);
-        for (String productId : productids) {
+        for (String productId : productIds) {
 
             // 根据Feild获取values 在乘以 单价 = total
-
+            Long counts = cartService.getCounts(userId, productId);
 
             Product product = productService.getById(productId);
-            totalPrice = totalPrice.add(product.getSalePrice());
+            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(counts)));
         }
         return totalPrice;
     }
