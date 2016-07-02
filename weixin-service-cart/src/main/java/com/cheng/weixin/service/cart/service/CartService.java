@@ -68,6 +68,11 @@ public class CartService implements RpcCartService {
         return redisService.getFields(getCart(userId));
     }
 
+    @Override
+    public Integer getCounts(String userId, String productId) {
+        Object counts = redisService.getValueByKeyANdField(getCart(userId), productId);
+        return (Integer) counts;
+    }
 
     @Override
     public void deleteProduct(String userId, String productId) {

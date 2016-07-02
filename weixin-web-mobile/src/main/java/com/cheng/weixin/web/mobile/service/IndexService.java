@@ -119,10 +119,14 @@ public class IndexService {
      * @return
      */
     private BigDecimal totalPrice(String userId) {
-        Set<String> pids =  cartService.getProductIds(userId);
+        Set<String> productids =  cartService.getProductIds(userId);
         BigDecimal totalPrice = new BigDecimal(0);
-        for (String pid : pids) {
-            Product product = productService.getById(pid);
+        for (String productId : productids) {
+
+            // 根据Feild获取values 在乘以 单价 = total
+
+
+            Product product = productService.getById(productId);
             totalPrice = totalPrice.add(product.getSalePrice());
         }
         return totalPrice;

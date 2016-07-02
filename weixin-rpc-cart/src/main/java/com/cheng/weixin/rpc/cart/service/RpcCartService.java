@@ -40,6 +40,14 @@ public interface RpcCartService {
     Set<String> getProductIds(String userId);
 
     /**
+     * 根据用户id获取和商品ID获取商品个数
+     * @param userId
+     * @param productId
+     * @return
+     */
+    Integer getCounts(String userId, String productId);
+
+    /**
      * 删除购物车中的商品
      * @param userId 用户ID
      * @param productId 商品ID
