@@ -54,6 +54,7 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
             }
         }
 
+
         // 是否是已授权的APP请求
         Properties properties = Properties.getInstance();
         String appSecret = properties.getValue(appKey);
