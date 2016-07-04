@@ -11,7 +11,7 @@
 
   <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
 
-  <dubbo:protocol id="mydubbo" name="dubbo" host="122.9.35.24" port="20883"/>
+  <dubbo:protocol id="mydubbo" name="dubbo" host="${weixin.dubbo.host.address}" port="20883"/>
 
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
 

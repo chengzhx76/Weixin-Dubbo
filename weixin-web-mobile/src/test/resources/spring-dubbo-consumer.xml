@@ -15,6 +15,6 @@
 
   <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"/>
   <dubbo:reference id="cartService" interface="com.cheng.weixin.rpc.cart.service.RpcCartService"/>
-  <dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService"/>
-  <dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService"/>
+  <!--<dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService"/>-->
+  <!--<dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService"/>-->
 </beans>

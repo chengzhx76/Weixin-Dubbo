@@ -9,12 +9,13 @@
 
   <dubbo:application name="weixin-web-mobile"/>
 
-  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
+  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/>
+  <!--<dubbo:registry id="zk1" address="122.9.35.24:2181" protocol="zookeeper"/>-->
 
   <dubbo:consumer registry="zk1"/>
 
-  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"/>
-  <dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService"/>
-  <dubbo:reference id="cartService" interface="com.cheng.weixin.rpc.cart.service.RpcCartService"/>
-  <dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService"/>
+  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService" check="false"/>
+  <dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService" check="false"/>
+  <dubbo:reference id="cartService" interface="com.cheng.weixin.rpc.cart.service.RpcCartService" check="false"/>
+  <dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService" check="false"/>
 </beans>

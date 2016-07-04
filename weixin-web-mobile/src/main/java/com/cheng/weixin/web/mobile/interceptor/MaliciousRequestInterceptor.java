@@ -79,13 +79,11 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
 
         String signParam = request.getParameter(signName);//接受签名
 
-        logger.info("待签名数据=====> "+sb.toString());
-
         String sign = Digests.md5(sb.toString());
-        logger.info("md5后=====> "+sign);
-        if (signParam.equals(sign)) {
+        if (sign.equals(signParam)) {
             // 去redis查看是否有sign这个值；如果有则返回fase；否则没有返回true 并存储到redis里
             boolean isExist = redisService.exists(sign);
+            //boolean isExist = true;
             if (isExist) {
                 response.setStatus(HttpCode.FORBIDDEN.value());
                 return false;

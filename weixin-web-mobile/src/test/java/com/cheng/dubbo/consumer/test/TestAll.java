@@ -32,7 +32,8 @@ public class TestAll {
     public void test03() throws UnsupportedEncodingException {
         long time = System.currentTimeMillis();
         System.out.println(time);
-        String param = time+"weixin"+"122";
+        String param = "wxclient"+time+"122";
+        //String param = "wxclient" + time;
 
         System.out.println(Digests.md5(param));
     }

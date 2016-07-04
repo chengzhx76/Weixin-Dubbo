@@ -3,6 +3,7 @@ package com.cheng.weixin.web.mobile.controller;
 import com.cheng.weixin.web.mobile.model.Book;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.model.User;
+import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.Index;
 import com.cheng.weixin.web.mobile.result.IndexBuy;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -66,21 +68,43 @@ public class IndexController extends BaseController {
     @IgnoreSecurity
     @RequestMapping(value = "v1/index")
     public ResponseEntity<Response> index(HttpServletRequest request) {
+
+        Enumeration enu=request.getParameterNames();
+        while(enu.hasMoreElements()){
+            String paraName=(String)enu.nextElement();
+            System.out.println(paraName+": "+request.getParameter(paraName));
+        }
+
+        Index index = indexService.getIndexInfo("1");
+        return success(index);
+    }
+
+    @RequestMapping(value = "v1/index2")
+    public ResponseEntity<Response> index2(HttpServletRequest request) {
+
+        Enumeration enu = request.getParameterNames();
+        while (enu.hasMoreElements()) {
+            String paraName = (String) enu.nextElement();
+            System.out.println(paraName + ": " + request.getParameter(paraName));
+        }
+
         Index index = indexService.getIndexInfo("1");
         return success(index);
     }
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/add")
-    public ResponseEntity<Response> add(HttpServletRequest request, String productId) {
-        IndexBuy indexBuy = indexService.addProduct("1", productId);
+    public ResponseEntity<Response> add(HttpServletRequest request) {
+        ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
+        IndexBuy indexBuy = indexService.addProduct("1", productDto.getProductId());
         return success(indexBuy);
     }
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/sub")
-    public ResponseEntity<Response> sub(HttpServletRequest request, String productId) {
-        IndexBuy indexBuy = indexService.subProduct("1", productId);
+    public ResponseEntity<Response> sub(HttpServletRequest request) {
+        ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
+        IndexBuy indexBuy = indexService.subProduct("1", productDto.getProductId());
         return success(indexBuy);
     }
 

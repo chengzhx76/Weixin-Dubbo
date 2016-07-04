@@ -64,11 +64,13 @@
     <mvc:interceptor>
       <mvc:mapping path="/**" />
       <mvc:exclude-mapping path="/v1/login"/>
+      <mvc:exclude-mapping path="/static/**"/>
       <bean class="com.cheng.weixin.web.mobile.interceptor.LogInterceptor" />
     </mvc:interceptor>
     <!-- 恶意请求拦截器 -->
     <mvc:interceptor>
       <mvc:mapping path="/**" />
+      <mvc:exclude-mapping path="/static/**"/>
       <bean class="com.cheng.weixin.web.mobile.interceptor.MaliciousRequestInterceptor">
         <property name="appKeyName" value="appKey"/>
         <property name="tokenName" value="token"/>
