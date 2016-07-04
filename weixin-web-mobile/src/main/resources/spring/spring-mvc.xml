@@ -66,16 +66,18 @@
       <mvc:exclude-mapping path="/v1/login"/>
       <bean class="com.cheng.weixin.web.mobile.interceptor.LogInterceptor" />
     </mvc:interceptor>
-    <!-- 恶意请求拦截器
+    <!-- 恶意请求拦截器 -->
     <mvc:interceptor>
       <mvc:mapping path="/**" />
       <bean class="com.cheng.weixin.web.mobile.interceptor.MaliciousRequestInterceptor">
-        <property name="appKeyName" value="X-AppKey"/>
-        <property name="tokenName" value="X-Token"/>
-        <property name="timestamp" value="timestamp"/>
+        <property name="appKeyName" value="appKey"/>
+        <property name="tokenName" value="token"/>
+        <property name="timestampName" value="timestamp"/>
+        <property name="signName" value="sign"/>
+        <property name="paramName" value="param"/>
         <property name="minRequestIntervalTime" value="300000"/>
       </bean>
-    </mvc:interceptor> -->
+    </mvc:interceptor>
   </mvc:interceptors>
 
 
@@ -86,7 +88,7 @@
   <!-- Token 认证拦截器 -->
   <bean id="securityAspect" class="com.cheng.weixin.web.mobile.security.SecurityAspect">
     <property name="tokenManager" ref="tokenManager"/>
-    <property name="tokenName" value="X-Token"/>
+    <property name="tokenName" value="token"/>
   </bean>
   <!-- Token 拦截器 -->
   <aop:config>

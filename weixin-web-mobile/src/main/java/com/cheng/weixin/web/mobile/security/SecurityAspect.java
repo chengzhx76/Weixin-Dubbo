@@ -42,7 +42,8 @@ public class SecurityAspect {
             return pjp.proceed();
         }
         // 从 request header 中获取当前 token
-        String token = ServletUtils.getRequest().getHeader(tokenName);
+        //String token = ServletUtils.getRequest().getHeader(tokenName);
+        String token = ServletUtils.getRequest().getParameter(tokenName);
         // 检查 token 有效性
         if (!tokenManager.checkToken(token)) {
             throw new TokenException(HttpCode.UNAUTHORIZED.msg());

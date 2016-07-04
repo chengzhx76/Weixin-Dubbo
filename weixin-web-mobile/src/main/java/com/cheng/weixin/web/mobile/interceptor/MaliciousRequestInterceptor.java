@@ -29,17 +29,22 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
     private static final String DEFAULT_TOKEN_NAME = "X-Token";
     private static final String DEFAULT_APP_KEY_NAME = "X-AppKey";
     private static final String DEFAULT_TIME_STAMP_NAME = "timestamp";
+    private static final String DEFAULT_SIGN_NAME = "sign";
+    private static final String DEFAULT_PARAM_NAME = "param";
     private static final Long DEFAULT_REQUEST_TIME_INTERVAL = 5 * 60 * 1000L;
 
     private String tokenName;
     private String appKeyName;
     private String timestampName;
+    private String signName;
+    private String paramName;
     private Long minRequestIntervalTime; // 允许的最小请求间隔
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //String appKey = request.getHeader(appKeyName);
+        String appKey = request.getParameter(appKeyName);
         String timestamp = request.getParameter(timestampName);
-        String appKey = request.getHeader(appKeyName);
         if(StringUtils.isAnyBlank(timestamp, appKey)) {
             throw new IllegalParameterException(HttpCode.BAD_REQUEST.msg());
         }
@@ -64,24 +69,28 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
         }
         // 验证签名
         StringBuilder sb = new StringBuilder();
+        sb.append(appKey);
         sb.append(timestamp);
-        sb.append(appSecret);
-        String token = request.getHeader(tokenName);
+        //String token = request.getHeader(tokenName);
+        String token = request.getParameter(tokenName);
         if (StringUtils.isNotBlank(token)) sb.append(token);
-        String parameter = request.getParameter("param");//接受参数
+        String parameter = request.getParameter(paramName);//接受参数
         if (StringUtils.isNotBlank(parameter)) sb.append(parameter);
 
-        String signParam = request.getParameter("sign");//接受签名
+        String signParam = request.getParameter(signName);//接受签名
+
+        logger.info("待签名数据=====> "+sb.toString());
 
         String sign = Digests.md5(sb.toString());
+        logger.info("md5后=====> "+sign);
         if (signParam.equals(sign)) {
             // 去redis查看是否有sign这个值；如果有则返回fase；否则没有返回true 并存储到redis里
-            boolean isexist = redisService.exists(sign);
-            if (isexist) {
+            boolean isExist = redisService.exists(sign);
+            if (isExist) {
                 response.setStatus(HttpCode.FORBIDDEN.value());
                 return false;
             }else {
-                redisService.set(sign, "sign", 300L);
+                redisService.set(sign, signName, 300L);
             }
         }else {
             response.setStatus(HttpCode.FORBIDDEN.value());
@@ -102,16 +111,32 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
         }
         this.appKeyName = appKeyName;
     }
-    public void setTimestamp(String timestampName) {
+    public void setTimestampName(String timestampName) {
         if (StringUtils.isEmpty(timestampName)) {
             timestampName = DEFAULT_TIME_STAMP_NAME;
         }
         this.timestampName = timestampName;
     }
+
+    public void setSignName(String signName) {
+        if (StringUtils.isEmpty(signName)) {
+            signName = DEFAULT_SIGN_NAME;
+        }
+        this.signName = signName;
+    }
+
+    public void setParamName(String paramName) {
+        if (StringUtils.isEmpty(paramName)) {
+            paramName = DEFAULT_PARAM_NAME;
+        }
+        this.paramName = paramName;
+    }
+
     public void setMinRequestIntervalTime(Long minRequestIntervalTime) {
         if (minRequestIntervalTime != null) {
             minRequestIntervalTime = DEFAULT_REQUEST_TIME_INTERVAL;
         }
         this.minRequestIntervalTime = minRequestIntervalTime;
     }
+
 }
