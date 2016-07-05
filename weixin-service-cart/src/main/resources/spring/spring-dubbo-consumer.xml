@@ -9,5 +9,6 @@
 
   <dubbo:consumer registry="zk1"/>
 
-  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService" check="false" timeout="5000"/>
+  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"
+                   check="false" timeout="5000" version="1.0"/>
 </beans>

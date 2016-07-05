@@ -15,6 +15,6 @@
 
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
 
-  <dubbo:service interface="com.cheng.weixin.rpc.item.service.RpcProductService" ref="productService"/>
+  <dubbo:service interface="com.cheng.weixin.rpc.item.service.RpcProductService" ref="productService" version="1.0"/>
 
 </beans>

@@ -14,8 +14,12 @@
 
   <dubbo:consumer registry="zk1"/>
 
-  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService" check="false"/>
-  <dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService" check="false"/>
-  <dubbo:reference id="cartService" interface="com.cheng.weixin.rpc.cart.service.RpcCartService" check="false"/>
-  <dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService" check="false"/>
+  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"
+                   check="false" timeout="5000" version="1.0"/>
+  <dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService"
+                   check="false" timeout="5000" version="1.0"/>
+  <dubbo:reference id="cartService" interface="com.cheng.weixin.rpc.cart.service.RpcCartService"
+                   check="false" timeout="5000" version="1.0"/>
+  <dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService"
+                   check="false" timeout="5000" version="1.0"/>
 </beans>
