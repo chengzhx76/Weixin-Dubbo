@@ -11,37 +11,46 @@
 		<property name="maxWaitMillis" value="${redis.maxWait}" />
 		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
 	</bean>
-	<!-- redis服务器中心 -->
-	<bean id="connectionFactory"  class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
-		<property name="poolConfig" ref="poolConfig" />
-		<property name="port" value="${redis.port}" />
-		<property name="hostName" value="${redis.host}" />
-		<!--<property name="password" value="${redis.password}" />-->
-		<property name="timeout" value="${redis.timeout}" />
-		<property name="database" value="1"/>
-	</bean>
 
-	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="keySerializer" >
-			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
-		</property>
-		<property name="valueSerializer" >
-			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
-		</property>
-	</bean >
+	<bean id="shardInfo" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg index="0" value="${redis.node1.host}" />
+		<constructor-arg index="1" value="${redis.node1.port}" type="int" />
+		<constructor-arg index="2" value="${redis.timeout}" type="int" />
+		<!--<property name="password" value="${redis.password}" />-->
+	</bean>
 
 	<!-- 定义分片式集群连接池
 	<bean id="jedisPool" class="redis.clients.jedis.ShardedJedisPool" destroy-method="close">
 		<constructor-arg index="0" ref="poolConfig"/>
 		<constructor-arg index="1">
 			<list>
-				<bean class="redis.clients.jedis.JedisShardInfo">
-					<constructor-arg index="0" value="${redis.node1.host}"/>
-					<constructor-arg index="1" value="${redis.node1.port}"/>
-				</bean>
+				<ref bean="shardInfo"/>
 			</list>
 		</constructor-arg>
 	</bean> -->
+
+	<!-- redis服务器中心 -->
+	<bean id="connectionFactory"  class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
+		<property name="poolConfig" ref="poolConfig" />
+		<property name="shardInfo" ref="shardInfo"/>
+		<property name="database" value="1"/>
+	</bean>
+
+	<!-- Redis 序列换 -->
+	<bean id="keySerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+	<bean id="valueSerializer" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+
+	<!-- RedisTemplate 模版 -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="keySerializer" ref="keySerializer"/>
+		<property name="valueSerializer" ref="valueSerializer"/>
+	</bean >
+
+	<!-- Redis 缓存时间 -->
+	<bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+		<constructor-arg index="0" ref="redisTemplate" />
+		<property name="defaultExpiration" value="${redis.expiration}" />
+	</bean>
 
 </beans>
