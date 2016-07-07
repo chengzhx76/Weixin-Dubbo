@@ -20,6 +20,11 @@ public interface PictureDaoMapper extends BaseDaoMapper<Picture> {
      */
     List<Picture> loadAllPicture(Picture picture);
 
+    /**
+     * 根据商品ID获取默认的图片
+     * @param picture
+     * @return
+     */
     Picture loadDefaultPicture(Picture picture);
 
 }

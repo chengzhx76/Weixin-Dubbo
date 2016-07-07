@@ -11,7 +11,15 @@ import com.cheng.weixin.rpc.user.enumType.BehaviorType;
  */
 public class Behavior extends DataEntity<Behavior> {
     private BehaviorType behaviorType;
-    private String description;
+    private String nanme;
+
+    public String getNanme() {
+        return nanme;
+    }
+
+    public void setNanme(String nanme) {
+        this.nanme = nanme;
+    }
 
     public BehaviorType getBehaviorType() {
         return behaviorType;
@@ -21,11 +29,4 @@ public class Behavior extends DataEntity<Behavior> {
         this.behaviorType = behaviorType;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

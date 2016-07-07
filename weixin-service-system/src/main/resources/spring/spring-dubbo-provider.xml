@@ -9,9 +9,9 @@
 
   <dubbo:application name="weixin-service-system"/>
 
-  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
+  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="${weixin.dubbo.reistry.protocol}"/> <!-- 注意要关闭防火墙 -->
 
-  <dubbo:protocol id="mydubbo" name="dubbo" host="${weixin.dubbo.host.address}" port="20885"/>
+  <dubbo:protocol id="mydubbo" name="dubbo" host="${weixin.dubbo.host.address}" port="${weixin.dubbo.system.service.port}"/>
 
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
 

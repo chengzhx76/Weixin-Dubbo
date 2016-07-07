@@ -9,7 +9,7 @@ import com.cheng.common.entity.DataEntity;
  */
 public class CashRecord extends DataEntity<CashRecord> {
     private int accountId;
-    private int beforemoney;
+    private int beforeMoney;
     private int txMoney;
     private int frozenMoney;
     private int afterBonusPoints;
@@ -25,12 +25,12 @@ public class CashRecord extends DataEntity<CashRecord> {
         this.accountId = accountId;
     }
 
-    public int getBeforemoney() {
-        return beforemoney;
+    public int getBeforeMoney() {
+        return beforeMoney;
     }
 
-    public void setBeforemoney(int beforemoney) {
-        this.beforemoney = beforemoney;
+    public void setBeforeMoney(int beforeMoney) {
+        this.beforeMoney = beforeMoney;
     }
 
     public int getTxMoney() {

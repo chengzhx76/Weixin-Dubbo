@@ -161,6 +161,11 @@
           <artifactId>weixin-rpc-system</artifactId>
           <version>${project.version}</version>
         </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-user</artifactId>
+          <version>${project.version}</version>
+        </dependency>
         <!-- Junit -->
         <dependency>
           <groupId>junit</groupId>

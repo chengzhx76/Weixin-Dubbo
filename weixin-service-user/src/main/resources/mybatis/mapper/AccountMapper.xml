@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cheng.weixin.service.user.dao.AccountDaoMapper">
+  <sql id="tableName">account</sql>
+  <sql id="columns">
+    a.id,a.member_id,a.account_level_id,a.credit_level_id,a.username,a.password,a.bonus_point_usable,
+    a.bonus_point_upgrade,a.balance,a.is_employee,a.ip,a.source_from,
+    a.remarks,a.create_date,a.update_date,a.status
+  </sql>
+  <sql id="insertColumns">
+    id,member_id,account_level_id,credit_level_id,username,password,bonus_point_usable,
+    bonus_point_upgrade,balance,is_employee,ip,source_from,
+    remarks,create_date,update_date,status
+  </sql>
+  <sql id="accountIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="memberId != null and memberId != ''">member_id=#{memberId},</if>
+    <if test="accountLevelId != null and accountLevelId != ''">account_level_id=#{accountLevelId},</if>
+    <if test="creditLevelId != null and creditLevelId != ''">credit_level_id=#{creditLevelId},</if>
+    <if test="username != null and username != ''">username=#{username},</if>
+    <if test="password != null and password != ''">password=#{password},</if>
+    <if test="bonusPointUsable != null and bonusPointUsable != ''">bonus_point_usable=#{bonusPointUsable},</if>
+    <if test="bonusPointUpgrade != null and bonusPointUpgrade != ''">bonus_point_upgrade=#{bonusPointUpgrade},</if>
+    <if test="balance != null and balance != ''">balance=#{balance},</if>
+    <if test="isEmployee != null and isEmployee != ''">is_employee=#{isEmployee},</if>
+    <if test="ip != null and ip != ''">ip=#{ip},</if>
+    <if test="sourceFrom != null and sourceFrom != ''">source_from=#{sourceFrom},</if>
+
+    <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
+    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
+    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="accountSelector">
+    select
+      <include refid="columns"/>
+    from
+      <include refid="tableName"/> AS a
+  </sql>
+
+  <sql id="accountWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="accountUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="accountIf"/>
+    </trim>
+  </sql>
+
+<!-- =================================================================== -->
+
+  <select id="load" parameterType="Account" resultType="Account">
+    <include refid="accountSelector"/>
+    <include refid="accountWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="Account">
+    <include refid="accountSelector"/>
+    <include refid="accountWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="Account">
+    UPDATE <include refid="tableName"/>
+    <include refid="accountUpdate"/>
+    <include refid="accountWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="Account">
+    INSERT INTO
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
+    VALUES
+    <include refid="accountIf"/>
+  </insert>
+
+</mapper>
+

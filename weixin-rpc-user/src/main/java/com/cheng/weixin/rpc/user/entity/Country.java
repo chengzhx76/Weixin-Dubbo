@@ -8,5 +8,13 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/3
  */
 public class Country extends DataEntity<Country> {
+    private String name;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -18,7 +18,6 @@
     <property name="filterChainDefinitions">
       <value>
         <!-- 必须通过身份认证方可访问，身份认 证的url必须和过虑器中指定的loginUrl一致 -->
-        /test = anon
         /checkCaptcha = anon
         /login = authc
         /unauth = anon
