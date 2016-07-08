@@ -1,24 +1,24 @@
 package com.cheng.weixin.rpc.system.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.system.entity.EnumType.MsgType;
 
 /**
- * Desc:
+ * Desc: 短信模版
  * Author: cheng
  * Date: 2016/6/21
  */
 public class SmsTemplate extends DataEntity<SmsTemplate> {
-    private String name;
+    private MsgType type;
     private String content;
     private boolean isEnable;
 
-    public String getName() {
-        return name;
+    public MsgType getType() {
+        return type;
     }
 
-    public SmsTemplate setName(String name) {
-        this.name = name;
-        return this;
+    public void setType(MsgType type) {
+        this.type = type;
     }
 
     public String getContent() {
