@@ -1,22 +1,22 @@
-package com.cheng.weixin.rpc.system.entity;
+package com.cheng.weixin.rpc.message.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.system.entity.EnumType.MsgType;
+import com.cheng.weixin.rpc.message.entity.EnumType.MsgType;
 
 /**
  * Desc: 短信历史
  * Author: cheng
  * Date: 2016/7/8
  */
-public class MsgCodeHistory extends DataEntity<MsgCodeHistory> {
-    private String phone; // 手机号
-    private String content;// 发送的内容
-    private int timeout;// 超时时间
-    private MsgType type; // 类型
-    private String sender; // 发送者 默认：system
-    private String receiverId; // 接受者
-    private String userIp; // IP地址
-    private String validate; // 验证码
+public class SmsHistory extends DataEntity<SmsHistory> {
+    private String phone;       // 手机号
+    private String content;     // 发送的内容
+    private int timeout;        // 超时时间
+    private MsgType type;       // 类型
+    private String sender;      // 发送者 默认：system
+    private String receiverId;  // 接受者
+    private String userIp;      // IP地址
+    private String validate;    // 验证码
 
 
     public String getPhone() {

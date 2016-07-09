@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.system.entity;
+package com.cheng.weixin.rpc.message.entity;
 
 import com.cheng.common.entity.DataEntity;
 

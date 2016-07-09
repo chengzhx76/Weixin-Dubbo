@@ -40,6 +40,7 @@
       <module>weixin-web-manage</module>
       <module>weixin-web-mobile</module>
       <module>weixin-service-system</module>
+      <module>weixin-rpc-message</module>
     </modules>
 
     <properties>
