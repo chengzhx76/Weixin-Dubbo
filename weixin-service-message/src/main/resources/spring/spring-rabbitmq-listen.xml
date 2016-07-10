@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+	http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+  <!-- 定义RabbitMQ的连接工厂 -->
+  <rabbit:connection-factory id="connectionFactory"
+                             host="${rabbitmq.host}"
+                             port="${rabbitmq.port}"
+                             username="${rabbitmq.username}"
+                             password="${rabbitmq.password}"
+                             virtual-host="${rabbitmq.vhost}"/>
+  <!-- MQ的管理，包括队列、交换器等 -->
+  <rabbit:admin connection-factory="connectionFactory" />
+
+  <!-- queue 队列声明-->
+  <rabbit:queue name="WEIXIN-SENDSMS-QUEUE-REG" auto-declare="true"/>
+
+  <rabbit:listener-container connection-factory="connectionFactory">
+    <rabbit:listener ref="consumer" method="sendRegMsgCode" queue-names="WEIXIN-SENDSMS-QUEUE-REG" />
+  </rabbit:listener-container>
+
+  <bean id="consumer" class="com.cheng.weixin.service.message.service.SmsService"/>
+</beans>

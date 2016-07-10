@@ -2,6 +2,7 @@ package com.cheng.weixin.web.manage.security;
 
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.StringUtils;
+import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import org.apache.shiro.authc.AuthenticationException;
@@ -46,7 +47,7 @@ public class WxFormAuthenticationFilter extends FormAuthenticationFilter {
             password="";
         }
         boolean rememberMe = isRememberMe(request);
-        String host = StringUtils.getRemoteAddr((HttpServletRequest) request);
+        String host = SystemUtils.getRemoteAddr((HttpServletRequest) request);
         String captcha = getCaptcha(request);
         boolean mobile = isMobileLogin(request);
 
@@ -95,7 +96,7 @@ public class WxFormAuthenticationFilter extends FormAuthenticationFilter {
         SystemAuthorizingRealm.Principal principal = (SystemAuthorizingRealm.Principal) subject.getPrincipal();
         // 更新登录信息
         Admin admin = adminService.getAdminById(principal.getId());
-        admin.setNewLoginIp(StringUtils.getRemoteAddr(ServletUtils.getRequest()));
+        admin.setNewLoginIp(SystemUtils.getRemoteAddr(ServletUtils.getRequest()));
         adminService.updateAdminLoginInfo(admin);
         return false;
     }

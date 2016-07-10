@@ -1,7 +1,7 @@
 package com.cheng.weixin.rpc.message.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.message.entity.EnumType.MsgType;
+import com.cheng.weixin.rpc.message.enums.MsgType;
 
 /**
  * Desc: 短信历史

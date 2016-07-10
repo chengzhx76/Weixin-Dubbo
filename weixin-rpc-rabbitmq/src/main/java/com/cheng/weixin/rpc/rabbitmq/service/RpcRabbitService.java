@@ -11,4 +11,10 @@ public interface RpcRabbitService {
      * @param obj
      */
     void saveLogs(Object obj);
+
+    /**
+     * 发送注册短消息
+     * @param data 序列化JSON格式
+     */
+    void sendRegMsgCode(String data);
 }

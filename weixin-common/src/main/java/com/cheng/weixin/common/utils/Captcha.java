@@ -1,7 +1,5 @@
-package com.cheng.weixin.web.manage.utils;
+package com.cheng.weixin.common.utils;
 
-
-import com.cheng.weixin.common.utils.CacheUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

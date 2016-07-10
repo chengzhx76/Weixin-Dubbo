@@ -1,14 +1,11 @@
-package com.cheng.weixin.web.manage.utils;
-
-import com.cheng.weixin.common.security.Encodes;
-import com.cheng.weixin.common.security.Digests;
+package com.cheng.weixin.common.security;
 
 /**
- * Desc: 系统工具类 密码的加密、验证
- * Author: Cheng
- * Date: 2016/1/29 0029
+ * Desc: 封装一些加密工具 密码的加密、验证
+ * Author: 光灿
+ * Date: 2016/7/9
  */
-public class SystemUtils {
+public class SecretUtils {
     /** Shiro 算法 **/
     public static final String HASH_ALGORITHM = "SHA-1";
     /** 盐值的大小 **/
@@ -39,5 +36,4 @@ public class SystemUtils {
         byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
         return password.equals(Encodes.encodeHex(salt)+Encodes.encodeHex(hashPassword));
     }
-
 }

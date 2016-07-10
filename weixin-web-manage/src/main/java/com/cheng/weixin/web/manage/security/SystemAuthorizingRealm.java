@@ -4,12 +4,13 @@ import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.common.security.Encodes;
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.StringUtils;
+import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.entity.Role;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import com.cheng.weixin.rpc.log.service.RpcLogService;
-import com.cheng.weixin.web.manage.utils.Captcha;
+import com.cheng.weixin.common.utils.Captcha;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -88,7 +89,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
             }
             // 保存日志
             HttpServletRequest request = ServletUtils.getRequest();
-            logService.saveLog(StringUtils.getRemoteAddr(request),request.getHeader("user-agent"),request.getRequestURI(),
+            logService.saveLog(SystemUtils.getRemoteAddr(request),request.getHeader("user-agent"),request.getRequestURI(),
                     request.getParameterMap(),request.getMethod(), null, "系统登录", UserUtils.getPrincipal().getUsername());
             return info;
         }
@@ -147,9 +148,9 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
     public void initCredentialsMatcher() {
         HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
         // 设置加密方式
-        matcher.setHashAlgorithmName(SystemUtils.HASH_ALGORITHM);
+        matcher.setHashAlgorithmName(SecretUtils.HASH_ALGORITHM);
         // 设置迭代次数
-        matcher.setHashIterations(SystemUtils.HASH_INTERATIONS);
+        matcher.setHashIterations(SecretUtils.HASH_INTERATIONS);
         // 注入到Shrio里自定义的加密方式
         setCredentialsMatcher(matcher);
     }*/

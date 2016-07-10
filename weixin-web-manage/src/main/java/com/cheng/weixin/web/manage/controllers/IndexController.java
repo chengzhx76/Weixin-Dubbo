@@ -2,7 +2,7 @@ package com.cheng.weixin.web.manage.controllers;
 
 import com.cheng.weixin.common.utils.CacheUtils;
 import com.cheng.weixin.web.manage.security.SystemAuthorizingRealm.Principal;
-import com.cheng.weixin.web.manage.utils.Captcha;
+import com.cheng.weixin.common.utils.Captcha;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

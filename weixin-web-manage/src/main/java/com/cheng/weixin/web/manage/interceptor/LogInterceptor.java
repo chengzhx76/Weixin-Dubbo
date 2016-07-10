@@ -1,7 +1,7 @@
 package com.cheng.weixin.web.manage.interceptor;
 
 import com.cheng.weixin.common.utils.DateUtils;
-import com.cheng.weixin.common.utils.StringUtils;
+import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rpc.log.service.RpcLogService;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.joda.time.DateTime;
@@ -49,7 +49,7 @@ public class LogInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 保存日志
-        logService.saveLog(StringUtils.getRemoteAddr(request),request.getHeader("user-agent"),request.getRequestURI(),
+        logService.saveLog(SystemUtils.getRemoteAddr(request),request.getHeader("user-agent"),request.getRequestURI(),
                 request.getParameterMap(),request.getMethod(),/*handler,*/ ex, null, UserUtils.getPrincipal().getUsername());
 
         if (logger.isDebugEnabled()) {

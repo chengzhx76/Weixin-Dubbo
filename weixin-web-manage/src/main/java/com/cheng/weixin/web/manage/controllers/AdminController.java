@@ -1,9 +1,9 @@
 package com.cheng.weixin.web.manage.controllers;
 
+import com.cheng.weixin.common.security.SecretUtils;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.model.Page;
-import com.cheng.weixin.web.manage.utils.SystemUtils;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,7 +50,7 @@ public class AdminController extends BaseController  {
     public String modifyPwd(String oldPasswd, String newPasswd, Model model) {
         Admin currentAdmin = UserUtils.getUser();
         if (StringUtils.isNoneBlank(oldPasswd, newPasswd)) {
-            if (SystemUtils.validatePassword(oldPasswd, currentAdmin.getPassword())) {
+            if (SecretUtils.validatePassword(oldPasswd, currentAdmin.getPassword())) {
                 adminService.updatePasswdById(currentAdmin.getId(), newPasswd);
                 addMessage(model, "msg", "修改密码成功！");
                 // 清除缓存
@@ -74,7 +74,7 @@ public class AdminController extends BaseController  {
         if(checkUserName(admin.getUsername())) {
             addMessage(model, "msg", "添加用户" + admin.getUsername() + "失败，用户名已存在！");
         }
-        admin.setPassword(SystemUtils.entryptPassword("abc1234"));
+        admin.setPassword(SecretUtils.entryptPassword("abc1234"));
         adminService.add(admin);
         addMessage(model, "msg", "添加用户" + admin.getUsername() + "成功！");
         return "redirect:admin/list";

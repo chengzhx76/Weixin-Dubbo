@@ -1,6 +1,10 @@
 package com.cheng.weixin.web.mobile.service;
 
-import com.cheng.weixin.rpc.redis.service.RpcRedisService;
+import com.cheng.weixin.common.utils.ServletUtils;
+import com.cheng.weixin.common.utils.SystemUtils;
+import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitService;
+import com.cheng.weixin.web.mobile.json.CustomObjectMapper;
+import com.cheng.weixin.web.mobile.model.SmsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +17,24 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
     @Autowired
-    private RpcRedisService redisService;
+    private CustomObjectMapper objectMapper;
 
+    @Autowired
+    private RpcRabbitService rabbitService;
+    /**
+     * 发送验证码
+     * @param phone
+     */
+    public void sendRegMsgCode(String phone) {
+        String userIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
+
+        SmsModel smsModel = new SmsModel();
+        smsModel.setUserIp(userIp);
+        smsModel.setPhone(phone);
+
+        String data = objectMapper.toJsonString(smsModel);
+        rabbitService.sendRegMsgCode(data);
+
+    }
 
 }

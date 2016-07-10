@@ -19,4 +19,9 @@ public class RabbitService implements RpcRabbitService {
         rabbitTemplate.convertAndSend("WEIXIN-LOG", obj);
     }
 
+    @Override
+    public void sendRegMsgCode(String data) {
+        rabbitTemplate.convertAndSend("REG-MSG", data);
+    }
+
 }

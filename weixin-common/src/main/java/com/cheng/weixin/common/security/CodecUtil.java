@@ -18,7 +18,7 @@ public class CodecUtil {
     /**
      * 创建随机数
      */
-    public static String createRandom(int count) {
+    public static String createRandomNum(int count) {
         return RandomStringUtils.randomNumeric(count);
     }
 

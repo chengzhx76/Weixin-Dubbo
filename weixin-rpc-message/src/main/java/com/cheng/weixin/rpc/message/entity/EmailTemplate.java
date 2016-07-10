@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.message.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.message.enums.MsgType;
 
 /**
  * Desc: 邮件模板
@@ -8,44 +9,31 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/17
  */
 public class EmailTemplate extends DataEntity<EmailTemplate> {
-    private String name;
-    private String title;
+    private MsgType type;
     private String content;
     private boolean isEnable;
 
-    public String getName() {
-        return name;
+    public MsgType getType() {
+        return type;
     }
 
-    public EmailTemplate setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public EmailTemplate setTitle(String title) {
-        this.title = title;
-        return this;
+    public void setType(MsgType type) {
+        this.type = type;
     }
 
     public String getContent() {
         return content;
     }
 
-    public EmailTemplate setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
-        return this;
     }
 
     public boolean isEnable() {
         return isEnable;
     }
 
-    public EmailTemplate setEnable(boolean enable) {
+    public void setEnable(boolean enable) {
         isEnable = enable;
-        return this;
     }
 }

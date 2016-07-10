@@ -41,6 +41,7 @@
       <module>weixin-web-mobile</module>
       <module>weixin-service-system</module>
       <module>weixin-rpc-message</module>
+      <module>weixin-service-message</module>
     </modules>
 
     <properties>
@@ -165,6 +166,11 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-rpc-user</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-message</artifactId>
           <version>${project.version}</version>
         </dependency>
         <!-- Junit -->

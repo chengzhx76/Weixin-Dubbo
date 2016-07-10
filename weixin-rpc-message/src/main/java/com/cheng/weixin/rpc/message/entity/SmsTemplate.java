@@ -1,7 +1,7 @@
 package com.cheng.weixin.rpc.message.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.message.entity.EnumType.MsgType;
+import com.cheng.weixin.rpc.message.enums.MsgType;
 
 /**
  * Desc: 短信模版
@@ -25,17 +25,15 @@ public class SmsTemplate extends DataEntity<SmsTemplate> {
         return content;
     }
 
-    public SmsTemplate setContent(String content) {
+    public void setContent(String content) {
         this.content = content;
-        return this;
     }
 
     public boolean isEnable() {
         return isEnable;
     }
 
-    public SmsTemplate setEnable(boolean enable) {
+    public void setEnable(boolean enable) {
         isEnable = enable;
-        return this;
     }
 }

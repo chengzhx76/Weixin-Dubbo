@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.message.entity.EnumType;
+package com.cheng.weixin.rpc.message.enums;
 
 /**
  * Desc: 短信消息类型
