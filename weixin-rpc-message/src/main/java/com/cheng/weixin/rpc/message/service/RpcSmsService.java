@@ -9,6 +9,6 @@ public interface RpcSmsService {
     /**
      * 发送注册短信
      */
-    void sendRegMsgCode(String data);
+    void sendRegMsgCode(Object msgData) throws Exception;
 
 }

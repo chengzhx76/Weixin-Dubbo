@@ -14,7 +14,7 @@ public interface RpcRabbitService {
 
     /**
      * 发送注册短消息
-     * @param data 序列化JSON格式
+     * @param msgData
      */
-    void sendRegMsgCode(String data);
+    void sendRegMsgCode(Object msgData);
 }

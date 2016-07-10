@@ -23,6 +23,7 @@
   <rabbit:direct-exchange name="WEIXIN-EXCHANGE-LOG" auto-declare="true" durable="true">
     <rabbit:bindings>
       <rabbit:binding queue="WEIXIN-QUEUE-LOG" key="WEIXIN-LOG"/>
+
     </rabbit:bindings>
   </rabbit:direct-exchange>
 

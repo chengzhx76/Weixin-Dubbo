@@ -80,5 +80,13 @@
     <include refid="smsTemplateIf"/>
   </insert>
 
+  <!-- ==================== -->
+    <!-- 获取激活的模板 -->
+    <select id="loadEnable">
+    <include refid="smsTemplateSelector"/>
+    <include refid="smsTemplateWhere"/>
+    AND is_enable=1
+  </select>
+
 </mapper>
 

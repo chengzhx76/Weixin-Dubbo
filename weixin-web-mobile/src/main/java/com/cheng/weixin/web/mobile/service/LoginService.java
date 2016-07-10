@@ -32,8 +32,8 @@ public class LoginService {
         smsModel.setUserIp(userIp);
         smsModel.setPhone(phone);
 
-        String data = objectMapper.toJsonString(smsModel);
-        rabbitService.sendRegMsgCode(data);
+        //String data = objectMapper.toJsonString(smsModel); // Rabbit自带json序列化
+        rabbitService.sendRegMsgCode(smsModel);
 
     }
 
