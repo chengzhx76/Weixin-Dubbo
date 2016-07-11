@@ -3,6 +3,7 @@ package com.cheng.common.entity;
 
 import com.cheng.common.entity.id.IdGen;
 import com.cheng.common.entity.enums.Status;
+import com.cheng.weixin.common.utils.StringUtils;
 
 import java.util.Date;
 
@@ -42,6 +43,9 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
     public void preInsert() {
         if (isNewRecord) {
             setId(IdGen.uuid());
+        }
+        if (StringUtils.isBlank(getRemarks())) {
+            setRemarks("--");
         }
         this.createDate = new Date();
         this.updateDate = new Date();

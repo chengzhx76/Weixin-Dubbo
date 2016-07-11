@@ -12,4 +12,5 @@ public interface RpcRabbitSmsService {
      * @param msgData
      */
     void sendRegMsgCode(Object msgData);
+    //void sendRegMsgCode(String msgData);
 }

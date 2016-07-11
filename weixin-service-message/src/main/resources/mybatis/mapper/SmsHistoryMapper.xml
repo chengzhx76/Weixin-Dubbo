@@ -51,7 +51,7 @@
 
   <sql id="smsHistoryUpdate">
     <trim prefix="SET" suffixOverrides=",">
-      <include refid="adIf"/>
+      <include refid="smsHistoryIf"/>
     </trim>
   </sql>
 
@@ -82,7 +82,10 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="smsHistoryIf"/>
+    (
+    #{id},#{phone},#{content},#{timeout},#{type},#{sender},#{receiverId},#{userIp},#{validate},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

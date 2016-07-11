@@ -9,18 +9,18 @@ public interface RpcSmsService {
     /**
      * 发送注册短信
      */
-    void sendRegMsgCode(Object msgData) throws Exception;
+    void sendRegMsg(String msgData);
 
     /**
      * 发送通知短信
      * @param msgData
      */
-    void sendNotice(Object msgData);
+    void sendNotice(String msgData);
 
     /**
      * 发送活动短信
      * @param msgData
      */
-    void sendActivity(Object msgData);
+    void sendActivity(String msgData);
 
 }

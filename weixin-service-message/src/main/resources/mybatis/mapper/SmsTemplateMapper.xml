@@ -4,17 +4,18 @@
 <mapper namespace="com.cheng.weixin.service.message.dao.SmsTemplateDaoMapper">
   <sql id="tableName">sms_template</sql>
   <sql id="columns">
-    s.id,s.type,s.content,s.is_enable,
+    s.id,s.type,s.content,timeout,s.is_enable,
     s.remarks,s.create_date,s.update_date,s.status
   </sql>
   <sql id="insertColumns">
-    id,type,content,is_enable,
+    id,type,content,timeout,is_enable,
     remarks,create_date,update_date,status
   </sql>
   <sql id="smsTemplateIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="type != null and type != ''">type=#{type},</if>
     <if test="content != null and content != ''">content=#{content},</if>
+    <if test="timeout != null and timeout != ''">timeout=#{timeout},</if>
     <if test="isEnable != null and isEnable != ''">is_enable=#{isEnable},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
@@ -25,7 +26,8 @@
     select
       <include refid="columns"/>
     from
-      <include refid="tableName"/> AS s
+      <include refid="tableName"/>
+    AS s
   </sql>
 
   <sql id="smsTemplateWhere">
@@ -77,15 +79,19 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="smsTemplateIf"/>
+    (
+    #{id},#{type},#{content},#{timeout},#{isEnable},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
-  <!-- ==================== -->
-    <!-- 获取激活的模板 -->
-    <select id="loadEnable">
+  <!-- ============================================================ -->
+    <!-- 获取激活的注册模板 -->
+    <select id="loadRegTemp" resultType="SmsTemplate">
     <include refid="smsTemplateSelector"/>
     <include refid="smsTemplateWhere"/>
-    AND is_enable=1
+    AND type = 'REGISTER'
+    AND is_enable = 1
   </select>
 
 </mapper>

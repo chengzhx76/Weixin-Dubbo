@@ -17,7 +17,7 @@ public class RabbitSmsService implements RpcRabbitSmsService {
 
     @Override
     public void sendRegMsgCode(Object data) {
-        rabbitSmsTemplate.convertAndSend("WEIXIN-SMS-REG", data);
+        rabbitSmsTemplate.convertAndSend("SMS-REGISTER", data);
     }
 
 }

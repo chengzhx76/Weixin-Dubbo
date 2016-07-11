@@ -15,6 +15,6 @@ public interface SmsTemplateDaoMapper extends BaseDaoMapper<SmsTemplate> {
      * 获取正在使用的模板
      * @return
      */
-    SmsTemplate loadEnable();
+    SmsTemplate loadRegTemp();
 
 }

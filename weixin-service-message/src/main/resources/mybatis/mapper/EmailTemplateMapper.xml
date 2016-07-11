@@ -46,7 +46,7 @@
 
   <sql id="emailTemplateUpdate">
     <trim prefix="SET" suffixOverrides=",">
-      <include refid="smsTemplateIf"/>
+      <include refid="emailTemplateIf"/>
     </trim>
   </sql>
 

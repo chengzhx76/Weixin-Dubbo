@@ -11,7 +11,16 @@ import com.cheng.weixin.rpc.message.enums.MsgType;
 public class SmsTemplate extends DataEntity<SmsTemplate> {
     private MsgType type;
     private String content;
+    private int timeout;
     private boolean isEnable;
+
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
 
     public MsgType getType() {
         return type;

@@ -43,5 +43,7 @@
     </rabbit:bindings>
   </rabbit:direct-exchange>
 
-  <rabbit:template id="amqpSmsTemplate" connection-factory="connectionFactory" exchange="WEIXIN-EXCHANGE-SMS" queue="WEIXIN-QUEUE-SMS" />
+  <rabbit:template id="amqpSmsTemplate" connection-factory="connectionFactory" exchange="WEIXIN-EXCHANGE-SMS" message-converter="jackson2JsonMessageConverter"/>
+
+  <bean id="jackson2JsonMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter"/>
 </beans>

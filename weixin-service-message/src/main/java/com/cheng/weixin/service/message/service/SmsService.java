@@ -1,8 +1,15 @@
 package com.cheng.weixin.service.message.service;
 
+import com.cheng.weixin.common.security.CodecUtil;
+import com.cheng.weixin.common.utils.JSONUtils;
+import com.cheng.weixin.common.utils.StringUtils;
+import com.cheng.weixin.rpc.message.entity.SmsHistory;
+import com.cheng.weixin.rpc.message.entity.SmsTemplate;
+import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.service.message.dao.SmsHistoryDaoMapper;
 import com.cheng.weixin.service.message.dao.SmsTemplateDaoMapper;
+import com.cheng.weixin.service.message.model.SmsModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +30,25 @@ public class SmsService implements RpcSmsService {
     private SmsHistoryDaoMapper smsHistoryDao;
 
     @Override
-    public void sendRegMsgCode(Object msgData) throws Exception {
-        logger.info("==================> "+msgData);
+    public void sendRegMsg(String msgData) {
 
-/*        SmsTemplate smsTemplate = smsTemplateDao.loadEnable();
+        logger.info("==================> "+msgData);
+        SmsTemplate smsTemplate = smsTemplateDao.loadRegTemp();
         String code = CodecUtil.createRandomNum(4);
-        //SmsModel smsModel = JSONUtils.json2pojo(data, SmsModel.class);
-        SmsModel smsModel = (SmsModel) msgData;
-        String content =  StringUtils.replace(smsTemplate.getContent(), "[MSGCODE]", code);
+
+
+        SmsModel smsModel = null;
+        try {
+            smsModel = JSONUtils.json2pojo(msgData, SmsModel.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //SmsModel smsModel = (SmsModel) msgData;
+
+        String content = StringUtils.replace(StringUtils.replace(smsTemplate.getContent(), "@MSGCODE@", code), "@TIMEOUT@", smsTemplate.getTimeout()+"");
 
         // 发送短信 开始
-        System.out.println("开始发送短信===> "+content);
+        logger.info("开始发送短信===> "+content);
 
         // 保存短息历史纪录
         SmsHistory history = new SmsHistory();
@@ -41,18 +56,19 @@ public class SmsService implements RpcSmsService {
         history.setUserIp(smsModel.getUserIp());
         history.setContent(content);
         history.setSender("system");
-        history.setTimeout(10);
+        history.setTimeout(smsTemplate.getTimeout());
         history.setType(MsgType.REGISTER);
         history.setValidate(code);
-        smsHistoryDao.save(history);*/
+        history.preInsert();
+        smsHistoryDao.save(history);
     }
     @Override
-    public void sendNotice(Object msgData) {
+    public void sendNotice(String msgData) {
         logger.info("==================> "+msgData);
     }
 
     @Override
-    public void sendActivity(Object msgData) {
+    public void sendActivity(String msgData) {
         logger.info("==================> "+msgData);
     }
 }
