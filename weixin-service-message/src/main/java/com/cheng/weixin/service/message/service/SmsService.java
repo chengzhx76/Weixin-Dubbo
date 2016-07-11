@@ -1,14 +1,10 @@
 package com.cheng.weixin.service.message.service;
 
-import com.cheng.weixin.common.security.CodecUtil;
-import com.cheng.weixin.common.utils.StringUtils;
-import com.cheng.weixin.rpc.message.entity.SmsHistory;
-import com.cheng.weixin.rpc.message.entity.SmsTemplate;
-import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.service.message.dao.SmsHistoryDaoMapper;
 import com.cheng.weixin.service.message.dao.SmsTemplateDaoMapper;
-import com.cheng.weixin.service.message.model.SmsModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +15,8 @@ import org.springframework.stereotype.Service;
  */
 @Service("smsService")
 public class SmsService implements RpcSmsService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private SmsTemplateDaoMapper smsTemplateDao;
     @Autowired
@@ -26,8 +24,9 @@ public class SmsService implements RpcSmsService {
 
     @Override
     public void sendRegMsgCode(Object msgData) throws Exception {
+        logger.info("==================> "+msgData);
 
-        SmsTemplate smsTemplate = smsTemplateDao.loadEnable();
+/*        SmsTemplate smsTemplate = smsTemplateDao.loadEnable();
         String code = CodecUtil.createRandomNum(4);
         //SmsModel smsModel = JSONUtils.json2pojo(data, SmsModel.class);
         SmsModel smsModel = (SmsModel) msgData;
@@ -45,6 +44,15 @@ public class SmsService implements RpcSmsService {
         history.setTimeout(10);
         history.setType(MsgType.REGISTER);
         history.setValidate(code);
-        smsHistoryDao.save(history);
+        smsHistoryDao.save(history);*/
+    }
+    @Override
+    public void sendNotice(Object msgData) {
+        logger.info("==================> "+msgData);
+    }
+
+    @Override
+    public void sendActivity(Object msgData) {
+        logger.info("==================> "+msgData);
     }
 }

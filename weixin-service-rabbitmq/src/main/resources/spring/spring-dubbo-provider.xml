@@ -9,12 +9,13 @@
 
   <dubbo:application name="weixin-service-rabbitmq"/>
 
-  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
+  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="${weixin.dubbo.reistry.protocol}"/> <!-- 注意要关闭防火墙 -->
 
-  <dubbo:protocol id="mydubbo" name="dubbo" host="192.168.1.103" port="20883"/>
+  <dubbo:protocol id="mydubbo" name="dubbo" host="${weixin.dubbo.host.address}" port="${weixin.dubbo.rabbitmq.service.port}"/>
 
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
 
-  <dubbo:service interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitService" ref="rabbitService"/>
+  <dubbo:service interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitLogService" ref="rabbitLogService"/>
+  <dubbo:service interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService" ref="rabbitSmsService"/>
 
 </beans>

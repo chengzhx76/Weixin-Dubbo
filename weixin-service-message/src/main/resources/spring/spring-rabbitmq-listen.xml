@@ -17,10 +17,14 @@
   <rabbit:admin connection-factory="connectionFactory" />
 
   <!-- queue 队列声明-->
-  <rabbit:queue name="WEIXIN-SENDSMS-QUEUE-REG" auto-declare="true"/>
+  <rabbit:queue name="WEIXIN-QUEUE-SMS-REGISTER" auto-declare="true"/> <!-- 注册 -->
+  <rabbit:queue name="WEIXIN-QUEUE-SMS-NOTICE" auto-declare="true"/> <!-- 通知 -->
+  <rabbit:queue name="WEIXIN-QUEUE-SMS-ACTIVITY" auto-declare="true"/> <!-- 活动 -->
 
   <rabbit:listener-container connection-factory="connectionFactory">
-    <rabbit:listener ref="consumer" method="sendRegMsgCode" queue-names="WEIXIN-SENDSMS-QUEUE-REG" />
+    <rabbit:listener ref="consumer" method="sendRegMsgCode" queue-names="WEIXIN-QUEUE-SMS-REGISTER"/>
+    <rabbit:listener ref="consumer" method="sendNotice" queue-names="WEIXIN-QUEUE-SMS-NOTICE"/>
+    <rabbit:listener ref="consumer" method="sendActivity" queue-names="WEIXIN-QUEUE-SMS-ACTIVITY"/>
   </rabbit:listener-container>
 
   <bean id="consumer" class="com.cheng.weixin.service.message.service.SmsService"/>

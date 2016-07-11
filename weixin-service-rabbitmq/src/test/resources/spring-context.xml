@@ -8,16 +8,14 @@
     http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<!-- 引入配置文件 -->
-	<context:property-placeholder location="classpath:system.properties,classpath:jdbc.properties,classpath:rabbitmq.properties" />
+	<context:property-placeholder location="classpath:system.properties,classpath:rabbitmq.properties" />
 
 	<!-- 打开Spring的Annotation支持 -->
 	<context:annotation-config />
 
 	<!-- 扫描注入  -->
-	<context:component-scan base-package="com.cheng.weixin.service.message" />
+	<context:component-scan base-package="com.cheng.weixin.service.rabbitmq" />
 
-	<import resource="classpath:spring/spring-dubbo-provider.xml"/>
-	<import resource="classpath:spring/spring-mybatis.xml"/>
-	<import resource="classpath:spring/spring-rabbitmq-listen.xml"/>
+	<import resource="classpath:spring/spring-rabbitmq.xml"/>
 
 </beans>

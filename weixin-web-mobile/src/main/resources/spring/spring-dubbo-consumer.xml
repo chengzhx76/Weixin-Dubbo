@@ -22,6 +22,6 @@
                    check="false" timeout="5000" version="1.0"/>
   <dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService"
                    check="false" timeout="5000" version="1.0"/>
-  <dubbo:reference id="rabbitService" interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitService"
+  <dubbo:reference id="rabbitService" interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitLogService"
                    check="false" timeout="5000" version="1.0"/>
 </beans>

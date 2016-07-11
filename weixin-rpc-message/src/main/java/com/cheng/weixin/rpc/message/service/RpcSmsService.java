@@ -11,4 +11,16 @@ public interface RpcSmsService {
      */
     void sendRegMsgCode(Object msgData) throws Exception;
 
+    /**
+     * 发送通知短信
+     * @param msgData
+     */
+    void sendNotice(Object msgData);
+
+    /**
+     * 发送活动短信
+     * @param msgData
+     */
+    void sendActivity(Object msgData);
+
 }

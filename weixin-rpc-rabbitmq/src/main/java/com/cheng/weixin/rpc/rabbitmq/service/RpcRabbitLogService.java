@@ -5,16 +5,11 @@ package com.cheng.weixin.rpc.rabbitmq.service;
  * Author: Cheng
  * Date: 2016/4/25 0025
  */
-public interface RpcRabbitService {
+public interface RpcRabbitLogService {
     /**
      * 保存日志
+     *
      * @param obj
      */
     void saveLogs(Object obj);
-
-    /**
-     * 发送注册短消息
-     * @param msgData
-     */
-    void sendRegMsgCode(Object msgData);
 }
