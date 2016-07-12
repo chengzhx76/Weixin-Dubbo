@@ -7,7 +7,7 @@ package com.cheng.weixin.rpc.message.enums;
  */
 public enum MsgType {
     NOTICE("通知"),
-    REGISTER("注册"),
+    VALIDATE("验证码"),
     ACTIVITY("活动");
 
     public String name;

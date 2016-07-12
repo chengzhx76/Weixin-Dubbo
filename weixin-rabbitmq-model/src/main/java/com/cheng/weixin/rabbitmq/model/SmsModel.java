@@ -1,4 +1,4 @@
-package com.cheng.test;
+package com.cheng.weixin.rabbitmq.model;
 
 /**
  * Desc: 短消息

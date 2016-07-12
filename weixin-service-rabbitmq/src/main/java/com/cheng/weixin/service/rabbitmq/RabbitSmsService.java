@@ -16,8 +16,8 @@ public class RabbitSmsService implements RpcRabbitSmsService {
     private RabbitTemplate rabbitSmsTemplate;
 
     @Override
-    public void sendRegMsgCode(Object data) {
-        rabbitSmsTemplate.convertAndSend("SMS-REGISTER", data);
+    public void sendValidate(Object data) {
+        rabbitSmsTemplate.convertAndSend("SMS-VALIDATE", data);
     }
 
 }

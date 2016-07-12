@@ -42,6 +42,7 @@
       <module>weixin-service-system</module>
       <module>weixin-rpc-message</module>
       <module>weixin-service-message</module>
+      <module>weixin-rabbitmq-model</module>
     </modules>
 
     <properties>
@@ -114,6 +115,11 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-common-entity</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rabbitmq-model</artifactId>
           <version>${project.version}</version>
         </dependency>
 

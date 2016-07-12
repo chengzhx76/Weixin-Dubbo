@@ -31,13 +31,13 @@
 
   <!-- 短消息服务 -->
   <!-- queue 队列声明-->
-  <rabbit:queue name="WEIXIN-QUEUE-SMS-REGISTER" auto-declare="true"/> <!-- 注册 -->
+  <rabbit:queue name="WEIXIN-QUEUE-SMS-VALIDATE" auto-declare="true"/> <!-- 验证码 -->
   <rabbit:queue name="WEIXIN-QUEUE-SMS-NOTICE" auto-declare="true"/> <!-- 通知 -->
   <rabbit:queue name="WEIXIN-QUEUE-SMS-ACTIVITY" auto-declare="true"/> <!-- 活动 -->
   <!-- exchange queue binging key 绑定 -->
   <rabbit:direct-exchange name="WEIXIN-EXCHANGE-SMS" auto-declare="true" durable="true">
     <rabbit:bindings>
-      <rabbit:binding queue="WEIXIN-QUEUE-SMS-REGISTER" key="SMS-REGISTER"/>
+      <rabbit:binding queue="WEIXIN-QUEUE-SMS-VALIDATE" key="SMS-VALIDATE"/>
       <rabbit:binding queue="WEIXIN-QUEUE-SMS-NOTICE" key="SMS-NOTICE"/>
       <rabbit:binding queue="WEIXIN-QUEUE-SMS-ACTIVITY" key="SMS-ACTIVITY"/>
     </rabbit:bindings>

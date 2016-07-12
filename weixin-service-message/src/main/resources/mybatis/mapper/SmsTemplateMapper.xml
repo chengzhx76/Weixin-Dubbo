@@ -90,7 +90,7 @@
     <select id="loadRegTemp" resultType="SmsTemplate">
     <include refid="smsTemplateSelector"/>
     <include refid="smsTemplateWhere"/>
-    AND type = 'REGISTER'
+    AND type = 'VALIDATE'
     AND is_enable = 1
   </select>
 

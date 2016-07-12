@@ -26,6 +26,10 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>weixin-rabbitmq-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>weixin-rpc-message</artifactId>
     </dependency>
     <dependency>

@@ -9,14 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>weixin-rpc-rabbitmq</artifactId>
-
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>weixin-rabbitmq-model</artifactId>
-    </dependency>
-  </dependencies>
+  <artifactId>weixin-rabbitmq-model</artifactId>
 
 
 </project>

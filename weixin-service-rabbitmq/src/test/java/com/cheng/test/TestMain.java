@@ -1,5 +1,6 @@
 package com.cheng.test;
 
+import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,9 +41,6 @@ public class TestMain {
         smsModel.setUserIp("127.0.0.1");
         smsModel.setPhone("18600536683");
 
-        //String data = objectMapper.toJsonString(smsModel); // Rabbit自带json序列化
-
-
-        rabbitSmsService.sendRegMsgCode(smsModel);
+        rabbitSmsService.sendValidate(smsModel);
     }
 }

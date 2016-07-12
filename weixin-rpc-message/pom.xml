@@ -16,6 +16,10 @@
       <groupId>com.cheng</groupId>
       <artifactId>weixin-common-entity</artifactId>
     </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>weixin-rabbitmq-model</artifactId>
+    </dependency>
   </dependencies>
 
 </project>

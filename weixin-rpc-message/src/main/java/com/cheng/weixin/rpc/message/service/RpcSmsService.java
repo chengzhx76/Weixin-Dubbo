@@ -1,5 +1,8 @@
 package com.cheng.weixin.rpc.message.service;
 
+
+import com.cheng.weixin.rabbitmq.model.SmsModel;
+
 /**
  * Desc: 短信服务
  * Author: 光灿
@@ -9,7 +12,7 @@ public interface RpcSmsService {
     /**
      * 发送注册短信
      */
-    void sendRegMsg(String msgData);
+    void sendValidate(SmsModel smsModel);
 
     /**
      * 发送通知短信

@@ -1,7 +1,7 @@
 package com.cheng.test;
 
+import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
-import com.cheng.weixin.service.message.model.SmsModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

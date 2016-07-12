@@ -1,15 +1,14 @@
 package com.cheng.weixin.service.message.service;
 
 import com.cheng.weixin.common.security.CodecUtil;
-import com.cheng.weixin.common.utils.JSONUtils;
 import com.cheng.weixin.common.utils.StringUtils;
+import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.message.entity.SmsHistory;
 import com.cheng.weixin.rpc.message.entity.SmsTemplate;
 import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.service.message.dao.SmsHistoryDaoMapper;
 import com.cheng.weixin.service.message.dao.SmsTemplateDaoMapper;
-import com.cheng.weixin.service.message.model.SmsModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +29,10 @@ public class SmsService implements RpcSmsService {
     private SmsHistoryDaoMapper smsHistoryDao;
 
     @Override
-    public void sendRegMsg(String msgData) {
-
-        logger.info("==================> "+msgData);
+    public void sendValidate(SmsModel smsModel) {
         SmsTemplate smsTemplate = smsTemplateDao.loadRegTemp();
         String code = CodecUtil.createRandomNum(4);
-
-
-        SmsModel smsModel = null;
-        try {
-            smsModel = JSONUtils.json2pojo(msgData, SmsModel.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //SmsModel smsModel = (SmsModel) msgData;
-
-        String content = StringUtils.replace(StringUtils.replace(smsTemplate.getContent(), "@MSGCODE@", code), "@TIMEOUT@", smsTemplate.getTimeout()+"");
+        String content = StringUtils.replace(StringUtils.replace(smsTemplate.getContent(), "[MSGCODE]", code), "[TIMEOUT]", smsTemplate.getTimeout()+"");
 
         // 发送短信 开始
         logger.info("开始发送短信===> "+content);
@@ -57,7 +44,7 @@ public class SmsService implements RpcSmsService {
         history.setContent(content);
         history.setSender("system");
         history.setTimeout(smsTemplate.getTimeout());
-        history.setType(MsgType.REGISTER);
+        history.setType(MsgType.VALIDATE);
         history.setValidate(code);
         history.preInsert();
         smsHistoryDao.save(history);

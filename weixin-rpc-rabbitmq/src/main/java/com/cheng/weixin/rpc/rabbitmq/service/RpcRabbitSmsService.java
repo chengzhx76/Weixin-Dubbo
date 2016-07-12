@@ -11,6 +11,5 @@ public interface RpcRabbitSmsService {
      * 发送注册短消息
      * @param msgData
      */
-    void sendRegMsgCode(Object msgData);
-    //void sendRegMsgCode(String msgData);
+    void sendValidate(Object msgData);
 }
