@@ -10,7 +10,6 @@
   <dubbo:application name="weixin-web-mobile"/>
 
   <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/>
-  <!--<dubbo:registry id="zk1" address="122.9.35.24:2181" protocol="zookeeper"/>-->
 
   <dubbo:consumer registry="zk1"/>
 
@@ -25,5 +24,7 @@
   <dubbo:reference id="rabbitLogService" interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitLogService"
                    check="false" timeout="5000" version="1.0"/>
   <dubbo:reference id="rabbitSmsService" interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService"
+                   check="false" timeout="5000" version="1.0"/>
+  <dubbo:reference id="userService" interface="com.cheng.weixin.rpc.user.service.RpcUserService"
                    check="false" timeout="5000" version="1.0"/>
 </beans>

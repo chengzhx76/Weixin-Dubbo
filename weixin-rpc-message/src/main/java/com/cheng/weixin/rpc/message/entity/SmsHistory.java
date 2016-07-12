@@ -3,6 +3,8 @@ package com.cheng.weixin.rpc.message.entity;
 import com.cheng.common.entity.DataEntity;
 import com.cheng.weixin.rpc.message.enums.MsgType;
 
+import java.util.Date;
+
 /**
  * Desc: 短信历史
  * Author: cheng
@@ -18,6 +20,16 @@ public class SmsHistory extends DataEntity<SmsHistory> {
     private String userIp;      // IP地址
     private String validate;    // 验证码
 
+    // 当天的开始时间
+    private Date startOfDay;
+
+    public Date getStartOfDay() {
+        return startOfDay;
+    }
+
+    public void setStartOfDay(Date startOfDay) {
+        this.startOfDay = startOfDay;
+    }
 
     public String getPhone() {
         return phone;

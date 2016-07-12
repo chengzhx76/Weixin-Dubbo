@@ -9,10 +9,13 @@ import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.service.message.dao.SmsHistoryDaoMapper;
 import com.cheng.weixin.service.message.dao.SmsTemplateDaoMapper;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * Desc: 短信服务
@@ -29,7 +32,31 @@ public class SmsService implements RpcSmsService {
     private SmsHistoryDaoMapper smsHistoryDao;
 
     @Override
-    public void sendValidate(SmsModel smsModel) {
+    public int getCountByDay(String phone) {
+        SmsHistory smsHistory = new SmsHistory();
+        smsHistory.setPhone(phone);
+        DateTime startOfDay = new DateTime().withTimeAtStartOfDay();
+        smsHistory.setStartOfDay(new Date(startOfDay.getMillis()));
+        return smsHistoryDao.loadOneDayCount(smsHistory);
+    }
+    @Override
+    public int getCountByIp(String ip) {
+        SmsHistory smsHistory = new SmsHistory();
+        smsHistory.setUserIp(ip);
+        return smsHistoryDao.loadCurrentIpCount(smsHistory);
+    }
+    @Override
+    public void sendValidate(SmsModel smsModel) throws IllegalAccessException {
+
+        int countByDay = getCountByDay(smsModel.getPhone());
+        if (countByDay >= 4) {
+            throw new IllegalAccessException("当前手机号"+smsModel.getPhone()+"发送次数太多");
+        }
+        int countByIp = getCountByIp(smsModel.getUserIp());
+        if (countByIp >= 4) {
+            throw new IllegalAccessException("当前IP"+smsModel.getUserIp()+"发送次数太多");
+        }
+
         SmsTemplate smsTemplate = smsTemplateDao.loadRegTemp();
         String code = CodecUtil.createRandomNum(4);
         String content = StringUtils.replace(StringUtils.replace(smsTemplate.getContent(), "[MSGCODE]", code), "[TIMEOUT]", smsTemplate.getTimeout()+"");
@@ -49,6 +76,15 @@ public class SmsService implements RpcSmsService {
         history.preInsert();
         smsHistoryDao.save(history);
     }
+
+    @Override
+    public SmsHistory getInfoByPhoneAndType(String phone, MsgType type) {
+        SmsHistory history = new SmsHistory();
+        history.setPhone(phone);
+        history.setType(MsgType.VALIDATE);
+        return smsHistoryDao.loadNewByPhoneAndType(history);
+    }
+
     @Override
     public void sendNotice(String msgData) {
         logger.info("==================> "+msgData);

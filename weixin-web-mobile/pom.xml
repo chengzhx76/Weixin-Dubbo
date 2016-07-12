@@ -45,6 +45,14 @@
     </dependency>
     <dependency>
       <groupId>${parent.groupId}</groupId>
+      <artifactId>weixin-rpc-message</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${parent.groupId}</groupId>
+      <artifactId>weixin-rpc-user</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${parent.groupId}</groupId>
       <artifactId>weixin-rabbitmq-model</artifactId>
     </dependency>
     <dependency>

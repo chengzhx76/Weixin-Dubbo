@@ -1,6 +1,8 @@
 package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.user.enumType.Credit;
+import com.cheng.weixin.rpc.user.enumType.SourceFrom;
 
 import java.math.BigDecimal;
 
@@ -10,9 +12,8 @@ import java.math.BigDecimal;
  * Date: 2016/6/3
  */
 public class Account extends DataEntity<Account> {
-    private int memberId;
-    private int accountLevelId;
-    private int creditLevelId;
+    private String accountLevelId;
+    private Credit credit;
     private String username;
     private String password;
     private int bonusPointUsable;
@@ -20,23 +21,7 @@ public class Account extends DataEntity<Account> {
     private BigDecimal balance;
     private boolean isEmployee;
     private String ip;
-    private String sourceFrom;
-
-    public int getMemberId() {
-        return memberId;
-    }
-
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
-    }
-
-    public int getAccountLevelId() {
-        return accountLevelId;
-    }
-
-    public void setAccountLevelId(int accountLevelId) {
-        this.accountLevelId = accountLevelId;
-    }
+    private SourceFrom sourceFrom;
 
     public String getUsername() {
         return username;
@@ -54,12 +39,20 @@ public class Account extends DataEntity<Account> {
         this.password = password;
     }
 
-    public int getCreditLevelId() {
-        return creditLevelId;
+    public String getAccountLevelId() {
+        return accountLevelId;
     }
 
-    public void setCreditLevelId(int creditLevelId) {
-        this.creditLevelId = creditLevelId;
+    public void setAccountLevelId(String accountLevelId) {
+        this.accountLevelId = accountLevelId;
+    }
+
+    public Credit getCredit() {
+        return credit;
+    }
+
+    public void setCredit(Credit credit) {
+        this.credit = credit;
     }
 
     public int getBonusPointUsable() {
@@ -102,11 +95,11 @@ public class Account extends DataEntity<Account> {
         this.ip = ip;
     }
 
-    public String getSourceFrom() {
+    public SourceFrom getSourceFrom() {
         return sourceFrom;
     }
 
-    public void setSourceFrom(String sourceFrom) {
+    public void setSourceFrom(SourceFrom sourceFrom) {
         this.sourceFrom = sourceFrom;
     }
 }

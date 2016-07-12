@@ -11,4 +11,23 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface SmsHistoryDaoMapper extends BaseDaoMapper<SmsHistory> {
+    /**
+     * 当天发送的短信个数
+     * @param smsHistory
+     * @return
+     */
+    int loadOneDayCount(SmsHistory smsHistory);
+    /**
+     * 当前IP发送的短信个数
+     * @param smsHistory
+     * @return
+     */
+    int loadCurrentIpCount(SmsHistory smsHistory);
+
+    /**
+     * 获取最近的一条记录
+     * @param smsHistory
+     * @return
+     */
+    SmsHistory loadNewByPhoneAndType(SmsHistory smsHistory);
 }

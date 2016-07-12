@@ -4,18 +4,20 @@
 <mapper namespace="com.cheng.weixin.service.user.dao.MemberDaoMapper">
   <sql id="tableName">member</sql>
   <sql id="columns">
-    m.id,m.name,m.employer,m.mobile,m.address,m.email,m.idcard,m.sex,m.birthday,m.region_province_id,
+    m.id,m.account_id,m.name,m.nickname,m.employer,m.mobile,m.address,m.email,m.idcard,m.sex,m.birthday,m.region_province_id,
     m.region_city_id,m.region_country_id,m.telephone,m.post_code,m.income_month,m.job,m.hobby,
     m.remarks,m.create_date,m.update_date,m.status
   </sql>
   <sql id="insertColumns">
-    id,name,employer,mobile,address,email,idcard,sex,birthday,region_province_id,
+    id,account_id,name,nickname,employer,mobile,address,email,idcard,sex,birthday,region_province_id,
     region_city_id,region_country_id,telephone,post_code,income_month,job,hobby,
     remarks,create_date,update_date,status
   </sql>
   <sql id="memberIf">
     <if test="id != null and id != ''">id=#{id},</if>
+    <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
     <if test="name != null and name != ''">name=#{name},</if>
+    <if test="nickname != null and nickname != ''">nickname=#{nickname},</if>
     <if test="employer != null and employer != ''">employer=#{employer},</if>
     <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
     <if test="address != null and address != ''">address=#{address},</if>
@@ -92,7 +94,11 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="memberIf"/>
+    (
+    #{id},#{accountId},#{name},#{nickname},#{employer},#{mobile},#{address},#{email},#{idcard},#{sex},#{birthday},#{regionProvinceId},
+    #{regionCityId},#{regionCountryId},#{telephone},#{postCode},#{incomeMonth},#{job},#{hobby},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

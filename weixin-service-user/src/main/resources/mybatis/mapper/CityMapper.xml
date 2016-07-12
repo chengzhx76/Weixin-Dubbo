@@ -52,21 +52,21 @@
 <!-- =================================================================== -->
 
   <select id="load" parameterType="City" resultType="City">
-    <include refid="behaviorSelector"/>
-    <include refid="behaviorWhere"/>
+    <include refid="citySelector"/>
+    <include refid="cityWhere"/>
   </select>
 
   <!-- 获取全部 -->
   <select id="loadAll" resultType="City">
-    <include refid="behaviorSelector"/>
-    <include refid="behaviorWhere"/>
+    <include refid="citySelector"/>
+    <include refid="cityWhere"/>
   </select>
 
   <!-- 更新 -->
   <update id="update" parameterType="City">
     UPDATE <include refid="tableName"/>
-    <include refid="behaviorUpdate"/>
-    <include refid="behaviorWhere"/>
+    <include refid="cityUpdate"/>
+    <include refid="cityWhere"/>
   </update>
   <!-- 插入 -->
   <insert id="save" parameterType="City">

@@ -11,7 +11,9 @@ import java.util.Date;
  * Date: 2016/6/3
  */
 public class Member extends DataEntity<Member> {
+    private String accountId;
     private String name;
+    private String nickname;
     private String employer;
     private String mobile;
     private String address;
@@ -27,6 +29,22 @@ public class Member extends DataEntity<Member> {
     private String incomeMonth;
     private String job;
     private String hobby;
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getName() {
         return name;

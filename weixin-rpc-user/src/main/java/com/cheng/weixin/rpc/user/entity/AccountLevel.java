@@ -12,11 +12,18 @@ public class AccountLevel extends DataEntity<AccountLevel> {
     private int accountId;
     private String name;
     private int needRonusPoint;
-    private int onusPointEveryLevel;
+    private int pointEveryLevel;
     private double reductPercent;
     private String consumeScale;
     private int freeFrequency;
     private boolean isEnable;
+
+    public AccountLevel() {
+    }
+
+    public AccountLevel(boolean isEnable) {
+        this.isEnable = isEnable;
+    }
 
     public int getAccountId() {
         return accountId;
@@ -42,12 +49,12 @@ public class AccountLevel extends DataEntity<AccountLevel> {
         this.name = name;
     }
 
-    public int getOnusPointEveryLevel() {
-        return onusPointEveryLevel;
+    public int getPointEveryLevel() {
+        return pointEveryLevel;
     }
 
-    public void setOnusPointEveryLevel(int onusPointEveryLevel) {
-        this.onusPointEveryLevel = onusPointEveryLevel;
+    public void setPointEveryLevel(int pointEveryLevel) {
+        this.pointEveryLevel = pointEveryLevel;
     }
 
     public int getFreeFrequency() {

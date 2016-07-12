@@ -6,6 +6,7 @@ package com.cheng.weixin.rpc.user.enumType;
  * Date: 2016/6/3
  */
 public enum Sex {
+    NO,
     MAN,
     WOMEN;
 }

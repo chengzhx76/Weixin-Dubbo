@@ -38,6 +38,12 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="phone != null and phone != ''">
+        AND phone = #{phone}
+      </if>
+      <if test="type != null and type != ''">
+        AND type = #{type}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -87,6 +93,31 @@
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>
+
+  <!-- ======================================= -->
+  <!-- 今天发送短信的个数 -->
+  <select id="loadOneDayCount" parameterType="SmsHistory" resultType="int">
+    SELECT COUNT(id) FROM
+    <include refid="tableName"/>
+    <include refid="smsHistoryWhere"/>
+    AND phone = #{phone}
+    AND create_date &lt; #{startOfDay}
+  </select>
+
+  <!-- 当前IP发送短信的个数 -->
+  <select id="loadCurrentIpCount" parameterType="SmsHistory" resultType="int">
+    SELECT COUNT(id) FROM
+    <include refid="tableName"/>
+    <include refid="smsHistoryWhere"/>
+    AND user_ip = #{userIp}
+  </select>
+  <!-- 获取最新的一条记录 -->
+  <select id="loadNewByPhoneAndType" parameterType="SmsHistory" resultType="SmsHistory">
+    <include refid="smsHistorySelector"/>
+    <include refid="smsHistoryWhere"/>
+    ORDER BY create_date
+    LIMIT 1
+  </select>
 
 </mapper>
 

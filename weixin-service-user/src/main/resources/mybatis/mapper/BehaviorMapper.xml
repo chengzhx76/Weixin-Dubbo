@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cheng.weixin.service.user.dao.CityDaoMapper">
-  <sql id="tableName">city</sql>
+<mapper namespace="com.cheng.weixin.service.user.dao.BehaviorDaoMapper">
+  <sql id="tableName">behavior</sql>
   <sql id="columns">
     b.id,b.behavior_type,b.nanme
     b.remarks,b.create_date,b.update_date,b.status

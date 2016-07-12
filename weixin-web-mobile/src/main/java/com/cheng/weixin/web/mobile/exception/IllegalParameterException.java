@@ -7,9 +7,9 @@ package com.cheng.weixin.web.mobile.exception;
 import com.cheng.weixin.web.mobile.exception.message.HttpCode;
 
 /**
- * 
- * @author ShenHuaJie
- * @version 2016年6月7日 下午8:46:11
+ * Desc: 异常
+ * Author: cheng
+ * Date: 2016/6/21
  */
 @SuppressWarnings("serial")
 public class IllegalParameterException extends BaseException {

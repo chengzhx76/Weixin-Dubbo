@@ -4,20 +4,19 @@
 <mapper namespace="com.cheng.weixin.service.user.dao.AccountDaoMapper">
   <sql id="tableName">account</sql>
   <sql id="columns">
-    a.id,a.member_id,a.account_level_id,a.credit_level_id,a.username,a.password,a.bonus_point_usable,
+    a.id,a.account_level_id,a.credit,a.username,a.password,a.bonus_point_usable,
     a.bonus_point_upgrade,a.balance,a.is_employee,a.ip,a.source_from,
     a.remarks,a.create_date,a.update_date,a.status
   </sql>
   <sql id="insertColumns">
-    id,member_id,account_level_id,credit_level_id,username,password,bonus_point_usable,
+    id,account_level_id,credit,username,password,bonus_point_usable,
     bonus_point_upgrade,balance,is_employee,ip,source_from,
     remarks,create_date,update_date,status
   </sql>
   <sql id="accountIf">
     <if test="id != null and id != ''">id=#{id},</if>
-    <if test="memberId != null and memberId != ''">member_id=#{memberId},</if>
     <if test="accountLevelId != null and accountLevelId != ''">account_level_id=#{accountLevelId},</if>
-    <if test="creditLevelId != null and creditLevelId != ''">credit_level_id=#{creditLevelId},</if>
+    <if test="credit != null and credit != ''">credit=#{credit},</if>
     <if test="username != null and username != ''">username=#{username},</if>
     <if test="password != null and password != ''">password=#{password},</if>
     <if test="bonusPointUsable != null and bonusPointUsable != ''">bonus_point_usable=#{bonusPointUsable},</if>
@@ -88,7 +87,11 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="accountIf"/>
+    (
+    #{id},#{accountLevelId},#{credit},#{username},#{password},#{bonusPointUsable},
+    #{bonusPointUpgrade},#{balance},#{isEmployee},#{ip},#{sourceFrom},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>
