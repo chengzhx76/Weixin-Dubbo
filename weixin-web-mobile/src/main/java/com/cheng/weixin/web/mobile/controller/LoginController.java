@@ -2,6 +2,7 @@ package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.RegDto;
+import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ public class LoginController extends BaseController {
     @Autowired
     private LoginService loginService;
     /** 发送验证码 **/
+    @IgnoreSecurity
     @RequestMapping(value = "v1/sendMsgCode")
     public ResponseEntity<Response> sendMsgCode(HttpServletRequest request) {
         RegDto userDto = (RegDto) getDto(request, RegDto.class);
@@ -27,6 +29,7 @@ public class LoginController extends BaseController {
         return success();
     }
     /** 验证验证码 **/
+    @IgnoreSecurity
     @RequestMapping(value = "v1/checkCode")
     public ResponseEntity<Response> checkCode(HttpServletRequest request) {
         RegDto reg = (RegDto) getDto(request, RegDto.class);
@@ -34,6 +37,7 @@ public class LoginController extends BaseController {
     }
 
     /** 保存注册信息 **/
+    @IgnoreSecurity
     @RequestMapping(value = "v1/register")
     public ResponseEntity<Response> register(HttpServletRequest request) {
         RegDto reg = (RegDto) getDto(request, RegDto.class);

@@ -100,8 +100,7 @@
     SELECT COUNT(id) FROM
     <include refid="tableName"/>
     <include refid="smsHistoryWhere"/>
-    AND phone = #{phone}
-    AND create_date &lt; #{startOfDay}
+    AND create_date &gt; #{startOfDay}
   </select>
 
   <!-- 当前IP发送短信的个数 -->
@@ -115,7 +114,7 @@
   <select id="loadNewByPhoneAndType" parameterType="SmsHistory" resultType="SmsHistory">
     <include refid="smsHistorySelector"/>
     <include refid="smsHistoryWhere"/>
-    ORDER BY create_date
+    ORDER BY create_date DESC
     LIMIT 1
   </select>
 

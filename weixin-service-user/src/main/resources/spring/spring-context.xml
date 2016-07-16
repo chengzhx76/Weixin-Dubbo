@@ -16,7 +16,7 @@
 	<!-- 扫描注入  -->
 	<context:component-scan base-package="com.cheng.weixin.service.user" />
 
-	<!--<import resource="classpath:spring/spring-dubbo-provider.xml"/>-->
+	<import resource="classpath:spring/spring-dubbo-provider.xml"/>
 	<import resource="classpath:spring/spring-mybatis.xml"/>
 
 </beans>

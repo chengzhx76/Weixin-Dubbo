@@ -28,7 +28,7 @@ public interface RpcSmsService {
     /**
      * 发送注册短信
      */
-    void sendValidate(SmsModel smsModel) throws IllegalAccessException;
+    void sendValidate(SmsModel smsModel);
 
     /**
      * 获取记录根据手机号和类型

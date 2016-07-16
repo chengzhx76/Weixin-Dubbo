@@ -15,6 +15,9 @@
 
   <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService" timeout="5000" version="1.0"/>
   <dubbo:reference id="cartService" interface="com.cheng.weixin.rpc.cart.service.RpcCartService" timeout="5000" version="1.0"/>
-  <!--<dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService" timeout="5000" version="1.0"/>-->
-  <!--<dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService" timeout="5000" version="1.0"/>-->
+  <dubbo:reference id="productService" interface="com.cheng.weixin.rpc.item.service.RpcProductService" timeout="5000" version="1.0"/>
+  <dubbo:reference id="systemService" interface="com.cheng.weixin.rpc.system.service.RpcSystemService" timeout="5000" version="1.0"/>
+  <dubbo:reference id="smsService" interface="com.cheng.weixin.rpc.message.service.RpcSmsService" timeout="5000" version="1.0"/>
+  <dubbo:reference id="rabbitSmsService" interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService" timeout="5000" version="1.0"/>
+  <dubbo:reference id="userService" interface="com.cheng.weixin.rpc.user.service.RpcUserService" timeout="5000" version="1.0"/>
 </beans>

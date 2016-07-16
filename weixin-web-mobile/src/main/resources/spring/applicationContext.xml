@@ -11,9 +11,8 @@
 	<context:annotation-config />
 
 	<!-- 扫描注入  -->
-	<context:component-scan base-package="com.cheng.weixin.web.mobile">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	<context:component-scan base-package="com.cheng.weixin.web.mobile" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
 
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:globalconf.properties,classpath:system.properties"/>

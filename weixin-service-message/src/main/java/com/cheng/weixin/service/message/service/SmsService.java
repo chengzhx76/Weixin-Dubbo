@@ -46,15 +46,17 @@ public class SmsService implements RpcSmsService {
         return smsHistoryDao.loadCurrentIpCount(smsHistory);
     }
     @Override
-    public void sendValidate(SmsModel smsModel) throws IllegalAccessException {
+    public void sendValidate(SmsModel smsModel) {
 
         int countByDay = getCountByDay(smsModel.getPhone());
         if (countByDay >= 4) {
-            throw new IllegalAccessException("当前手机号"+smsModel.getPhone()+"发送次数太多");
+            logger.warn("当前手机号"+smsModel.getPhone()+"发送次数太多");
+            return;
         }
         int countByIp = getCountByIp(smsModel.getUserIp());
         if (countByIp >= 4) {
-            throw new IllegalAccessException("当前IP"+smsModel.getUserIp()+"发送次数太多");
+            logger.warn("当前IP"+smsModel.getUserIp()+"发送次数太多");
+            return;
         }
 
         SmsTemplate smsTemplate = smsTemplateDao.loadRegTemp();

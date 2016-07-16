@@ -16,7 +16,7 @@
 		<constructor-arg index="0" value="${redis.node1.host}" />
 		<constructor-arg index="1" value="${redis.node1.port}" type="int" />
 		<constructor-arg index="2" value="${redis.timeout}" type="int" />
-		<!--<property name="password" value="${redis.password}" />-->
+		<property name="password" value="${redis.node1.password}" />
 	</bean>
 
 	<!-- 定义分片式集群连接池

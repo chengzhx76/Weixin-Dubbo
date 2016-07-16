@@ -22,7 +22,7 @@ public class TestMain {
     private RpcSmsService smsService;
 
     @Test
-    public void testSendMsgCode() throws IllegalAccessException {
+    public void testSendMsgCode() {
         SmsModel smsModel = new SmsModel();
         smsModel.setUserIp("127.0.0.1");
         smsModel.setPhone("18600536683");

@@ -8,6 +8,7 @@ import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.exception.BusinessException;
 import com.cheng.weixin.web.mobile.param.RegDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +36,11 @@ public class LoginService {
         String userIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         int countByDay = smsService.getCountByDay(phone);
         if (countByDay >= 4) {
-            throw new IllegalStateException("当前手机号"+phone+"发送次数太多");
+            throw new BusinessException("当前手机号"+phone+"发送次数太多");
         }
         int countByIp = smsService.getCountByIp(userIp);
         if (countByIp >= 4) {
-            throw new IllegalStateException("当前IP"+userIp+"发送次数太多");
+            throw new BusinessException("当前IP"+userIp+"发送次数太多");
         }
 
         SmsModel smsModel = new SmsModel();
