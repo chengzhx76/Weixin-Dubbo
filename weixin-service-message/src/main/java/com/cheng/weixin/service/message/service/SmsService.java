@@ -43,6 +43,8 @@ public class SmsService implements RpcSmsService {
     public int getCountByIp(String ip) {
         SmsHistory smsHistory = new SmsHistory();
         smsHistory.setUserIp(ip);
+        DateTime startOfDay = new DateTime().withTimeAtStartOfDay();
+        smsHistory.setStartOfDay(new Date(startOfDay.getMillis()));
         return smsHistoryDao.loadCurrentIpCount(smsHistory);
     }
     @Override

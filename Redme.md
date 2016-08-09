@@ -1,5 +1,6 @@
 ### Redis命令
-打开客户端$ redis-cli
+打开客户端
+[root@cloud src]# redis-cli -p 6767 -a root#wx
 
 ### zookeeper命令
 
