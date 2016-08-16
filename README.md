@@ -1,26 +1,26 @@
 # 环境部署文档
 ---
 
-## 安装JDK环境
+## 安装JDK环境 
 
-###1.先卸载open-jdk
+###1.先卸载open-jdk 
 
-java –version
-rpm -qa | grep java
+java –version 
+rpm -qa | grep java 
 
-rpm -qa | grep jdk //查看安装了哪些 要逐一卸载
+rpm -qa | grep jdk //查看安装了哪些 要逐一卸载 
 
-tzdata-java-2013g-1.el6.noarch
-java-1.6.0-openjdk-1.6.0.0-11.1.13.4.el6.x86_64
-java-1.7.0-openjdk-1.7.0.65-2.5.1.2.el6_5.x86_64
+tzdata-java-2013g-1.el6.noarch 
+java-1.6.0-openjdk-1.6.0.0-11.1.13.4.el6.x86_64 
+java-1.7.0-openjdk-1.7.0.65-2.5.1.2.el6_5.x86_64 
 
-如：
-rpm -e --nodeps tzdata-java-2014g-1.el6.noarch
-rpm -e --nodeps java-1.7.0-openjdk-1.7.0.65-2.5.1.2.el6_5.x86_64
-rpm -e --nodeps java-1.6.0-openjdk-1.6.0.0-11.1.13.4.el6.x86_64
+如： 
+rpm -e --nodeps tzdata-java-2014g-1.el6.noarch 
+rpm -e --nodeps java-1.7.0-openjdk-1.7.0.65-2.5.1.2.el6_5.x86_64 
+rpm -e --nodeps java-1.6.0-openjdk-1.6.0.0-11.1.13.4.el6.x86_64 
 
-###2.开始安装：
-mkdir /usr/local/java // 创建JDK目录
+###2.开始安装： 
+mkdir /usr/local/java // 创建JDK目录 
 
 // FTP或SFTP上传jdk tar包
 tar -xvf jdk-7u71-linux-i586.tar.gz
