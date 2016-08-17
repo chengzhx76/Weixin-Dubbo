@@ -1,5 +1,6 @@
 package com.cheng.weixin.web.mobile.service;
 
+import com.cheng.weixin.common.security.CodecUtil;
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
@@ -9,7 +10,9 @@ import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.exception.BusinessException;
+import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
+import com.cheng.weixin.web.mobile.result.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,5 +73,18 @@ public class LoginService {
         String userIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         userService.saveAccess(regDto.getPhone(),regDto.getPassword(), regDto.getNickname(),userIp);
     }
-
+    /**
+     * 用户登录
+     * @param loginDto
+     */
+    public Login login(LoginDto loginDto) {
+        String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
+        String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);
+        if ("PASSWDFAIL".equals(result) || "NOTUSER".equals(result)) {
+            return new Login(false, "");
+        }else if ("SUCCESS".equals(result)) {
+            return new Login(true, CodecUtil.createUUID());
+        }
+        return new Login(false, "");
+    }
 }

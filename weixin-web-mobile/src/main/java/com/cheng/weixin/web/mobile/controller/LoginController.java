@@ -1,6 +1,7 @@
 package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
+import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.LoginService;
@@ -44,4 +45,13 @@ public class LoginController extends BaseController {
         loginService.saveAccess(reg);
         return success();
     }
+    /** 登陆 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/login")
+    public ResponseEntity<Response> login(HttpServletRequest request) {
+        LoginDto loginDto = (LoginDto) getDto(request, LoginDto.class);
+        return success(loginService.login(loginDto));
+    }
+
+
 }

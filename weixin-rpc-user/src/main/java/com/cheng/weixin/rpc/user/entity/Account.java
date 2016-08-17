@@ -23,6 +23,19 @@ public class Account extends DataEntity<Account> {
     private String ip;
     private SourceFrom sourceFrom;
 
+    public Account() {
+    }
+
+    public Account(String username) {
+        this.username = username;
+    }
+
+    //public Account(String id, String loginIp) {
+    //    super.id = id;
+    //    this.username = loginIp;
+    //}
+
+
     public String getUsername() {
         return username;
     }

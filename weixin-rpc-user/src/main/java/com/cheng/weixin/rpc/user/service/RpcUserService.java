@@ -13,4 +13,13 @@ public interface RpcUserService {
      * @param nickname
      */
     void saveAccess(String phone, String password, String nickname, String ip);
+
+    /**
+     * 登陆验证
+     * @param username
+     * @param password
+     * @param loginIp
+     * @return
+     */
+    String validateLogin(String username, String password, String loginIp);
 }

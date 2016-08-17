@@ -57,4 +57,21 @@ public class UserService implements RpcUserService {
         member.preInsert();
         memberDao.save(member);
     }
+
+    @Override
+    public String validateLogin(String username, String password, String loginIp) {
+        Account userAccount = accountDao.load(new Account(username));
+        if (null != userAccount) {
+            if (!password.equals(userAccount.getPassword())) {
+                return "PASSWDFAIL";
+            }
+        }else {
+            return "NOTUSER";
+        }
+        // 登陆成功保存登陆者的IP
+        userAccount.setIp(loginIp);
+        userAccount.preUpdate();
+        accountDao.update(userAccount);
+        return "SUCCESS";
+    }
 }
