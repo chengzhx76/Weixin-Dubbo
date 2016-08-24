@@ -87,6 +87,12 @@ public class ConsumerTest {
     }
 
     @Test
+    public void testLogin() {
+        String data = userService.validateLogin("18600536683", "123456", "127.0.0.1");
+        System.out.println("=====> "+ data);
+    }
+
+    @Test
     public void testSms() {
         int countByDay = smsService.getCountByDay("18600536683");
         System.out.println("=========>" + countByDay);

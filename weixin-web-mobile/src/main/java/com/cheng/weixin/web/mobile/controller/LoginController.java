@@ -45,6 +45,7 @@ public class LoginController extends BaseController {
         loginService.saveAccess(reg);
         return success();
     }
+
     /** 登陆 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/login")
@@ -52,6 +53,5 @@ public class LoginController extends BaseController {
         LoginDto loginDto = (LoginDto) getDto(request, LoginDto.class);
         return success(loginService.login(loginDto));
     }
-
 
 }
