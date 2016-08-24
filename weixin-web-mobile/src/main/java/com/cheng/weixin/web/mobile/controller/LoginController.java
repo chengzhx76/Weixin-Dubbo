@@ -51,7 +51,8 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "v1/login")
     public ResponseEntity<Response> login(HttpServletRequest request) {
         LoginDto loginDto = (LoginDto) getDto(request, LoginDto.class);
-        return success(loginService.login(loginDto));
+        loginService.login(loginDto);
+        return success();
     }
 
 }

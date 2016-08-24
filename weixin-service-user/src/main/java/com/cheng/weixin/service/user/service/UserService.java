@@ -10,6 +10,8 @@ import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.service.user.dao.AccountDaoMapper;
 import com.cheng.weixin.service.user.dao.AccountLevelDaoMapper;
 import com.cheng.weixin.service.user.dao.MemberDaoMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,8 @@ import java.math.BigDecimal;
 @Service("userService")
 public class UserService implements RpcUserService {
 
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private AccountDaoMapper accountDao;
     @Autowired
@@ -31,7 +35,17 @@ public class UserService implements RpcUserService {
     private MemberDaoMapper memberDao;
 
     @Override
+    public Account getAccountByLoginName(String loginName) {
+        return accountDao.load(new Account(loginName));
+    }
+
+    @Override
     public void saveAccess(String phone, String password, String nickname, String ip) {
+
+        if (null != getAccountByLoginName(phone)) {
+            logger.info("当前用户{}已存在", phone);
+            throw new IllegalArgumentException("当前用户"+phone+"已存在");
+        }
 
         AccountLevel accountLevel = accountLevelDao.load(new AccountLevel(true));
 
@@ -59,8 +73,8 @@ public class UserService implements RpcUserService {
     }
 
     @Override
-    public String validateLogin(String username, String password, String loginIp) {
-        Account userAccount = accountDao.load(new Account(username));
+    public String validateLogin(String loginName, String password, String loginIp) {
+        Account userAccount = accountDao.load(new Account(loginName));
         if (null != userAccount) {
             if (!password.equals(userAccount.getPassword())) {
                 return "PASSWDFAIL";

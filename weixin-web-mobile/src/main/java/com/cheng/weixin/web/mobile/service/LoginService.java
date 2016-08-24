@@ -8,8 +8,12 @@ import com.cheng.weixin.rpc.message.entity.SmsHistory;
 import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
+import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.exception.BusinessException;
+import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
+import com.cheng.weixin.web.mobile.exception.LoginException;
+import com.cheng.weixin.web.mobile.exception.message.HttpCode;
 import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
 import com.cheng.weixin.web.mobile.result.Login;
@@ -33,9 +37,12 @@ public class LoginService {
 
     /**
      * 发送验证码
-     * @param phone
+     * @param phone 登陆账号
      */
     public void sendRegMsgCode(String phone) {
+
+        checkAccountIsExistByLoginName(phone);
+
         String userIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         int countByDay = smsService.getCountByDay(phone);
         if (countByDay >= 4) {
@@ -77,14 +84,33 @@ public class LoginService {
      * 用户登录
      * @param loginDto
      */
-    public Login login(LoginDto loginDto) {
+    //public Login login(LoginDto loginDto) {
+    //    String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
+    //    String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);
+    //    if ("PASSWDFAIL".equals(result) || "NOTUSER".equals(result)) {
+    //        return new Login(false, "");
+    //    }else if ("SUCCESS".equals(result)) {
+    //        return new Login(true, CodecUtil.createUUID());
+    //    }
+    //    return new Login(false, "");
+    //}
+
+    public void login(LoginDto loginDto) {
         String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);
         if ("PASSWDFAIL".equals(result) || "NOTUSER".equals(result)) {
-            return new Login(false, "");
-        }else if ("SUCCESS".equals(result)) {
-            return new Login(true, CodecUtil.createUUID());
+            throw new LoginException(HttpCode.LOGIN_FAIL.msg());
         }
-        return new Login(false, "");
+    }
+
+    /**
+     * 检查该用户是否存在
+     * @param LoginName 登录名
+     */
+    private void checkAccountIsExistByLoginName(String LoginName) {
+        Account account = userService.getAccountByLoginName(LoginName);
+        if (null != account) {
+            throw new IllegalParameterException(HttpCode.BAD_REQUEST.msg());
+        }
     }
 }
