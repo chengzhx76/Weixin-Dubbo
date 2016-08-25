@@ -9,6 +9,7 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -75,7 +76,6 @@ public class RedisService implements RpcRedisService {
     @Override
     public Object get(final String key) {
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-
         return operations.get(key);
     }
 
@@ -192,5 +192,13 @@ public class RedisService implements RpcRedisService {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
         redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
         return hashOps.get(field);
+    }
+
+    @Override
+    public Map<Serializable, Object>  getEntries(String key) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        //redisTemplate.setHashKeySerializer(new GenericToStringSerializer(String.class));
+        redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
+        return hashOps.entries();
     }
 }

@@ -1,10 +1,14 @@
 package com.cheng.weixin.service.cart.service;
 
+import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -86,5 +90,18 @@ public class CartService implements RpcCartService {
      */
     private String getCart(String userId) {
         return CART+userId;
+    }
+
+    @Override
+    public List<ShoppingCart> getShoppingCart(String accessId) {
+
+        Map<Serializable, Object> allProduct = redisService.getEntries(accessId);
+
+        Set<Serializable> fields = allProduct.keySet();
+        for (Object itemName : fields) {
+            System.out.println(itemName+" "+allProduct.get(itemName));
+        }
+
+        return null;
     }
 }

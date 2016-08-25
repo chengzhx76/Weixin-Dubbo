@@ -1,5 +1,8 @@
 package com.cheng.weixin.rpc.cart.service;
 
+import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,5 +56,12 @@ public interface RpcCartService {
      * @param productId 商品ID
      */
     void deleteProduct(String userId, String productId);
+
+    /**
+     * 获取购物车的信息
+     * @param accessId 用户ID
+     * @return 购物车的商品
+     */
+    List<ShoppingCart> getShoppingCart(String accessId);
 
 }

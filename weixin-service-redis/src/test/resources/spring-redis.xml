@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
 	<!-- 构建连接池配置信息 -->
@@ -16,7 +16,7 @@
 		<constructor-arg index="0" value="${redis.node1.host}" />
 		<constructor-arg index="1" value="${redis.node1.port}" type="int" />
 		<constructor-arg index="2" value="${redis.timeout}" type="int" />
-		<!--<property name="password" value="${redis.password}" />-->
+		<property name="password" value="${redis.node1.password}" />
 	</bean>
 
 	<!-- 定义分片式集群连接池
@@ -52,7 +52,5 @@
 		<constructor-arg index="0" ref="redisTemplate" />
 		<property name="defaultExpiration" value="${redis.expiration}" />
 	</bean>
-
-
 
 </beans>
