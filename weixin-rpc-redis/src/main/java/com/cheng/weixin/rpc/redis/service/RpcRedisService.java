@@ -1,5 +1,7 @@
 package com.cheng.weixin.rpc.redis.service;
 
+import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -97,7 +99,7 @@ public interface RpcRedisService {
      * @param key
      * @return
      */
-    Set<String> getFields(String key);
+    Set getFields(String key);
 
     /**
      * 查看该字段是否已有
@@ -114,5 +116,12 @@ public interface RpcRedisService {
      * @return value
      */
     Object getValueByKeyANdField(String key, String field);
+
+    /**
+     * 获取Field和Value
+     * @param key
+     * @return
+     */
+    Map<Serializable, Object>  getEntries(String key);
 
 }

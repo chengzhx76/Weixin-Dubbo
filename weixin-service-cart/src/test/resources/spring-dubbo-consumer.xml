@@ -7,9 +7,9 @@
           http://code.alibabatech.com/schema/dubbo
           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-  <dubbo:application name="cheng-dubbo-cart-consumer"/>
+  <dubbo:application name="cheng-dubbo-cart-consumer-test"/>
 
-  <dubbo:registry id="zk1" address="122.9.35.24:2181" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
+  <dubbo:registry id="zk1" address="120.27.53.171:2181" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
 
   <dubbo:consumer registry="zk1"/>
 

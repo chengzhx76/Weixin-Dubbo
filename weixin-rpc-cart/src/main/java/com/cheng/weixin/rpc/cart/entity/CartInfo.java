@@ -8,24 +8,35 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/6
  */
 public class CartInfo extends DataEntity<CartInfo>  {
-    private int accessId;
-    private int productId;
+    private String accessId;
+    private String productId;
     private int quantity;
 
-    public int getAccessId() {
+    public CartInfo() {
+    }
+
+    public CartInfo(String accessId, String productId, int quantity) {
+        this.accessId = accessId;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
+    public String getAccessId() {
         return accessId;
     }
 
-    public void setAccessId(int accessId) {
+    public CartInfo setAccessId(String accessId) {
         this.accessId = accessId;
+        return this;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public CartInfo setProductId(String productId) {
         this.productId = productId;
+        return this;
     }
 
     public int getQuantity() {

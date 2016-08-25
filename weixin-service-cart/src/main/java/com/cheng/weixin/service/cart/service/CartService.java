@@ -1,10 +1,16 @@
 package com.cheng.weixin.service.cart.service;
 
+import com.cheng.weixin.rpc.cart.entity.CartInfo;
+import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -86,5 +92,24 @@ public class CartService implements RpcCartService {
      */
     private String getCart(String userId) {
         return CART+userId;
+    }
+
+    @Override
+    public ShoppingCart getShoppingCart(String accessId) {
+        Map<Serializable, Object> allProduct = redisService.getEntries(accessId);
+
+        ShoppingCart shoppingCart = new ShoppingCart();
+        if (!allProduct.isEmpty()) {
+            List<CartInfo> cartInfos = new ArrayList<>();
+            Set<Serializable> fields = allProduct.keySet();
+            for (Serializable itemName : fields) {
+                cartInfos.add(new CartInfo(accessId, itemName.toString(), Integer.parseInt(allProduct.get(itemName).toString())));
+                System.out.println("===> "+itemName+" "+allProduct.get(itemName));
+            }
+            shoppingCart.setCartInfos(cartInfos);
+            shoppingCart.setAccessId(accessId);
+            shoppingCart.setTotalQuantity(cartInfos.size());
+        }
+        return shoppingCart;
     }
 }
