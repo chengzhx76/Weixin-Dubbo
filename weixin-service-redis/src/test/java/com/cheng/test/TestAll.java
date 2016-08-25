@@ -40,7 +40,7 @@ public class TestAll {
     }
     @Test
     public void test04() {
-        Map<Serializable, Object> datas = redisService.getEntries("user-11");
+        Map<Serializable, Object> datas = redisService.getEntries("CART_1");
 
         Set<Serializable> fields = datas.keySet();
         for (Serializable field : fields) {

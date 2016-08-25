@@ -11,7 +11,7 @@
 	<context:annotation-config />
 
 	<!-- 扫描注入  -->
-	<context:component-scan base-package="com.cheng.weixin" />
+	<context:component-scan base-package="com.cheng.weixin.service.cart.service" />
 
 	<import resource="classpath:spring-dubbo-consumer.xml"/>
 
