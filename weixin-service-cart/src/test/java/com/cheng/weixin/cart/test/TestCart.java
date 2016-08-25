@@ -1,5 +1,6 @@
 package com.cheng.weixin.cart.test;
 
+import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Date: 2016/7/2
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:spring-context.xml"})
+@ContextConfiguration(locations = {"classpath:spring-context.xml"})
 public class TestCart {
     @Autowired
     private RpcCartService cartService;
@@ -28,5 +29,11 @@ public class TestCart {
     public void testGet() {
         Long data = cartService.getCounts("1", "1");
         System.out.println("testGet======> "+data);
+    }
+
+    @Test
+    public void testGetAll() {
+        ShoppingCart shoppingCart = cartService.getShoppingCart("1");
+        System.out.println(shoppingCart);
     }
 }

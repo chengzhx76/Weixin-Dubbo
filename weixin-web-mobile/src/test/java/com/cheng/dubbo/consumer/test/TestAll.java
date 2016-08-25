@@ -3,6 +3,7 @@ package com.cheng.dubbo.consumer.test;
 import com.cheng.weixin.common.security.Digests;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -43,4 +44,15 @@ public class TestAll {
         String param = "1228358c427e15ec4244c86111dceee696a";
         System.out.println(Digests.md5(param));
     }
+
+    @Test
+    public void test05() {
+        String usrHome = System.getProperty("user.home");
+
+        File file = new File(usrHome+"\\test");
+        file.mkdir();
+
+        System.out.println(usrHome);
+    }
+
 }

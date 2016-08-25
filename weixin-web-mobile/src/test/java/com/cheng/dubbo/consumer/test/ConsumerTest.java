@@ -63,6 +63,7 @@ public class ConsumerTest {
         }
     }
 
+
     @Test
     public void testProduct() {
         Product product = productService.getById("1");

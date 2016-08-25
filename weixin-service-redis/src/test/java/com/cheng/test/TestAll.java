@@ -30,7 +30,7 @@ public class TestAll {
 
     @Test
     public void test02() {
-        long data = redisService.increase("user-11","1");
+        long data = redisService.increase("user-12","1");
         System.out.println("======> "+data);
     }
     @Test
