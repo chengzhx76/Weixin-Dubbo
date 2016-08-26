@@ -8,9 +8,11 @@ import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,12 +36,15 @@ public class CartService {
         List<ProductInfo> productInfos = new ArrayList<>();
         ProductInfo productInfo = null;
         if (!cartInfos.isEmpty()) {
+            BigDecimal totalPrice = new BigDecimal(0);
             for (CartInfo cartInfo : cartInfos) {
                 productInfo = new ProductInfo();
                 Product product = productService.getDefaultPictureById(cartInfo.getProductId());
                 if (null != product) {
                     productInfo.setProductImg(product.getDefaultPicture().getPictureUrl());
-                    productInfo.setSalePrice(StringFormat.format(product.getSalePrice()));
+                    BigDecimal salePrice = product.getSalePrice();
+                    totalPrice = totalPrice.add(salePrice);
+                    productInfo.setSalePrice(StringFormat.format(salePrice));
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));
                     productInfo.setName(product.getName());
                     productInfo.setNums(cartInfo.getQuantity());
@@ -47,6 +52,8 @@ public class CartService {
                 }
             }
             shoppingCartInfo.setProducts(productInfos);
+            shoppingCartInfo.setDeliveryDate(new DateTime().plusDays(1).toString("MM月dd日"));
+            shoppingCartInfo.setTotalPrice(StringFormat.format(totalPrice));
         }
         return shoppingCartInfo;
     }
