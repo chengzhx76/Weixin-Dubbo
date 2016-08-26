@@ -1,6 +1,5 @@
 package com.cheng.weixin.web.mobile.service;
 
-import com.cheng.weixin.common.security.CodecUtil;
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
@@ -16,7 +15,6 @@ import com.cheng.weixin.web.mobile.exception.LoginException;
 import com.cheng.weixin.web.mobile.exception.message.HttpCode;
 import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
-import com.cheng.weixin.web.mobile.result.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,7 +92,6 @@ public class LoginService {
     //    }
     //    return new Login(false, "");
     //}
-
     public void login(LoginDto loginDto) {
         String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);

@@ -24,6 +24,8 @@ public class Product extends DataEntity<Product> {
     private String unitDesc;
 
     private List<Picture> pictures;
+
+    /** 冗余字段 **/
     private Picture defaultPicture;
 
     public Product() {}

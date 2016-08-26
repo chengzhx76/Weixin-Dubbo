@@ -1,4 +1,4 @@
-package com.cheng.weixin.web.mobile.result;
+package com.cheng.weixin.web.mobile.result.index;
 
 import com.cheng.weixin.common.utils.StringFormat;
 

@@ -32,6 +32,13 @@ public class ProductService implements RpcProductService {
         return productDao.load(new Product(id));
     }
 
+    @Override
+    public Product getDefaultPictureById(String id) {
+        Product product = productDao.load(new Product(id));
+        Picture pictures = pictureDao.loadDefaultPicture(new Picture(product.getId()));
+        product.setDefaultPicture(pictures);
+        return product;
+    }
 
     @Override
     public List<Product> getIndex() {

@@ -6,7 +6,7 @@ import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.system.entity.Ad;
 import com.cheng.weixin.rpc.system.entity.Notice;
 import com.cheng.weixin.rpc.system.service.RpcSystemService;
-import com.cheng.weixin.web.mobile.result.*;
+import com.cheng.weixin.web.mobile.result.index.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

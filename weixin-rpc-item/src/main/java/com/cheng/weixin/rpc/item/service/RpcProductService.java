@@ -17,6 +17,12 @@ public interface RpcProductService {
      * @return
      */
     Product getById(String id);
+    /**
+     * 根据ID获取商品和默认图片
+     * @param id
+     * @return
+     */
+    Product getDefaultPictureById(String id);
 
     /**
      * 获取首页的商品

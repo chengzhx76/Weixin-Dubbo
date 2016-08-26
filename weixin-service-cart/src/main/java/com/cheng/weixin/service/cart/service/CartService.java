@@ -104,7 +104,7 @@ public class CartService implements RpcCartService {
             Set<Serializable> fields = allProduct.keySet();
             for (Serializable itemName : fields) {
                 cartInfos.add(new CartInfo(accessId, itemName.toString(), Integer.parseInt(allProduct.get(itemName).toString())));
-                System.out.println("===> "+itemName+" "+allProduct.get(itemName));
+                //System.out.println("===> "+itemName+" "+allProduct.get(itemName));
             }
             shoppingCart.setCartInfos(cartInfos);
             shoppingCart.setAccessId(accessId);

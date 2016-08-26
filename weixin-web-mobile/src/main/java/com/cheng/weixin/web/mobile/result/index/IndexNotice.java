@@ -1,4 +1,4 @@
-package com.cheng.weixin.web.mobile.result;
+package com.cheng.weixin.web.mobile.result.index;
 
 /**
  * Desc: 通知

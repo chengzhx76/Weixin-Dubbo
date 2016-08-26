@@ -18,4 +18,6 @@ public class StringFormat {
         DecimalFormat format=new DecimalFormat("0.0");
         return format.format(value);
     }
+
+    //product.getSalePrice().setScale(2, BigDecimal.ROUND_HALF_UP).toString()
 }
