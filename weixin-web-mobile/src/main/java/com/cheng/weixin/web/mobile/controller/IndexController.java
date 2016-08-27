@@ -7,7 +7,7 @@ import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.index.Index;
 import com.cheng.weixin.web.mobile.result.index.IndexBuy;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
-import com.cheng.weixin.web.mobile.service.IndexService;
+import com.cheng.weixin.web.mobile.service.SysIndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 public class IndexController extends BaseController {
     @Autowired
-    private IndexService indexService;
+    private SysIndexService sysIndexService;
 
     @RequestMapping(value = "v1/index1")
     public ResponseEntity<Response> index1() {
@@ -60,11 +60,6 @@ public class IndexController extends BaseController {
         return success(user);
     }
 
-    @RequestMapping(value = "v1/login")
-    public ResponseEntity<Response> login1() {
-        return failure();
-    }
-
     @IgnoreSecurity
     @RequestMapping(value = "v1/index")
     public ResponseEntity<Response> index(HttpServletRequest request) {
@@ -75,20 +70,7 @@ public class IndexController extends BaseController {
             System.out.println(paraName+": "+request.getParameter(paraName));
         }
 
-        Index index = indexService.getIndexInfo("1");
-        return success(index);
-    }
-
-    @RequestMapping(value = "v1/index2")
-    public ResponseEntity<Response> index2(HttpServletRequest request) {
-
-        Enumeration enu = request.getParameterNames();
-        while (enu.hasMoreElements()) {
-            String paraName = (String) enu.nextElement();
-            System.out.println(paraName + ": " + request.getParameter(paraName));
-        }
-
-        Index index = indexService.getIndexInfo("1");
+        Index index = sysIndexService.getIndexInfo("1");
         return success(index);
     }
 
@@ -96,7 +78,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        IndexBuy indexBuy = indexService.addProduct("1", productDto.getProductId());
+        IndexBuy indexBuy = sysIndexService.addProduct("1", productDto.getProductId());
         return success(indexBuy);
     }
 
@@ -104,7 +86,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        IndexBuy indexBuy = indexService.subProduct("1", productDto.getProductId());
+        IndexBuy indexBuy = sysIndexService.subProduct("1", productDto.getProductId());
         return success(indexBuy);
     }
 

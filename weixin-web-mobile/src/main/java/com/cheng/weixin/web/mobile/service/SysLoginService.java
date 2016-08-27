@@ -23,8 +23,8 @@ import org.springframework.stereotype.Service;
  * Author: cheng
  * Date: 2016/7/8
  */
-@Service("loginService")
-public class LoginService {
+@Service("sysLoginService")
+public class SysLoginService {
 
     @Autowired
     private RpcRabbitSmsService rabbitService;

@@ -1,6 +1,9 @@
 package com.cheng.dubbo.consumer.test;
 
+import com.alibaba.fastjson.JSON;
+import com.cheng.weixin.common.utils.JSONUtils;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
+import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
@@ -11,6 +14,7 @@ import com.cheng.weixin.rpc.system.entity.Ad;
 import com.cheng.weixin.rpc.system.entity.Notice;
 import com.cheng.weixin.rpc.system.service.RpcSystemService;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +57,7 @@ public class ConsumerTest {
     }
 
     @Test
-    public void testCart() {
+    public void testAddCart() {
         long count = cartService.addProductCount("1","1");
         System.out.println("=========> "+count);
 
@@ -63,6 +67,11 @@ public class ConsumerTest {
         }
     }
 
+    @Test
+    public void testGetCart() {
+        ShoppingCart cartInfo = cartService.getShoppingCart("1");
+        System.out.println("=========> "+JSON.toJSONString(cartInfo));
+    }
 
     @Test
     public void testProduct() {

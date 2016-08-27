@@ -20,8 +20,8 @@ import java.util.Set;
  * Author: cheng
  * Date: 2016/6/28
  */
-@Service("indexService")
-public class IndexService {
+@Service("sysIndexService")
+public class SysIndexService {
     @Autowired
     private RpcCartService cartService;
     @Autowired

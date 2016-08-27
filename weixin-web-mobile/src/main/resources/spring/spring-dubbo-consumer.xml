@@ -10,7 +10,7 @@
   <dubbo:application name="weixin-web-mobile"/>
 
   <!--<dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="${weixin.dubbo.reistry.protocol}"/>-->
-  <dubbo:registry id="zk1" address="120.27.53.171:2181" protocol="${weixin.dubbo.reistry.protocol}"/>
+  <dubbo:registry id="zk1" address="120.27.53.171:2181" protocol="zookeeper"/>
 
   <dubbo:consumer registry="zk1"/>
 

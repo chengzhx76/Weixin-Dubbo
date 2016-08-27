@@ -3,7 +3,7 @@ package com.cheng.weixin.web.mobile.controller;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
-import com.cheng.weixin.web.mobile.service.CartService;
+import com.cheng.weixin.web.mobile.service.SysCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,16 +17,16 @@ import javax.servlet.http.HttpServletRequest;
  * Date: 2016/08/27
  */
 @RestController
-@RequestMapping("cart")
-public class ShoppingCartController extends BaseController {
+@RequestMapping(value = "cart")
+public class CartController extends BaseController {
     @Autowired
-    private CartService cartService;
+    private SysCartService sysCartService;
 
     /** 购物车信息 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/info")
     public ResponseEntity<Response> login(HttpServletRequest request) {
-        ShoppingCartInfo shoppingCartInfo = cartService.getShoppingCart("1");
+        ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart("1");
         return success(shoppingCartInfo);
     }
 

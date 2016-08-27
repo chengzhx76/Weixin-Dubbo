@@ -21,8 +21,8 @@ import java.util.List;
  * Author: hp
  * Date: 2016/8/26
  */
-@Service("cartService")
-public class CartService {
+@Service("sysSartService")
+public class SysCartService {
     @Autowired
     private RpcCartService cartService;
     @Autowired
@@ -35,7 +35,7 @@ public class CartService {
         ShoppingCartInfo shoppingCartInfo = new ShoppingCartInfo();
         List<ProductInfo> productInfos = new ArrayList<>();
         ProductInfo productInfo = null;
-        if (!cartInfos.isEmpty()) {
+        if (null != cartInfos && !cartInfos.isEmpty()) {
             BigDecimal totalPrice = new BigDecimal(0);
             for (CartInfo cartInfo : cartInfos) {
                 productInfo = new ProductInfo();
