@@ -2,6 +2,7 @@ package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.ProductDto;
+import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.SysCartService;
@@ -30,18 +31,22 @@ public class CartController extends BaseController {
         ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart("1");
         return success(shoppingCartInfo);
     }
-
+    /** 增加购物车的商品 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
-        return success();
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        ProductCartInfo productCart = sysCartService.addProduct("1", product.getProductId());
+        return success(productCart);
     }
 
+    /** 减少购物车的商品 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
-        ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        return success();
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        ProductCartInfo productCart = sysCartService.subProduct("1", product.getProductId());
+        return success(productCart);
     }
 
 }
