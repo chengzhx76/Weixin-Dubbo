@@ -1,0 +1,36 @@
+package com.cheng.weixin.web.mobile.result.cart;
+
+/**
+ * Desc: 购物车商品信息
+ * Author: hp
+ * Date: 2016/9/8
+ */
+public class ProductCartInfo {
+    private int count;
+    private String totalPrice;
+    private String freight;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getFreight() {
+        return freight;
+    }
+
+    public void setFreight(String freight) {
+        this.freight = freight;
+    }
+}

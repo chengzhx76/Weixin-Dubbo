@@ -6,6 +6,7 @@ import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
+import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
 import org.joda.time.DateTime;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Desc: 购物车
@@ -43,7 +45,7 @@ public class SysCartService {
                 if (null != product) {
                     productInfo.setProductImg(product.getDefaultPicture().getPictureUrl());
                     BigDecimal salePrice = product.getSalePrice();
-                    totalPrice = totalPrice.add(salePrice);
+                    //totalPrice = totalPrice.add(salePrice);
                     productInfo.setSalePrice(StringFormat.format(salePrice));
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));
                     productInfo.setName(product.getName());
@@ -57,5 +59,26 @@ public class SysCartService {
         }
         return shoppingCartInfo;
     }
+
+    public ProductCartInfo addProduct(String userId, String id) {
+        // 先获取该商品的数量
+        Long currentCount = cartService.addProductCount(userId, id);
+
+        // 购物车已选择的商品的总价格
+        BigDecimal totalPrice = new BigDecimal(0);
+        Set<String> productIds = cartService.getProductIds(userId);
+        for (String productId : productIds) {
+            Long count = cartService.getCounts(userId, productId);
+            Product product = productService.getById(productId);
+            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+        }
+        ProductCartInfo productCart = new ProductCartInfo();
+        productCart.setCount(Integer.parseInt(currentCount+""));
+        productCart.setTotalPrice(StringFormat.format(totalPrice));
+        productCart.setFreight("2");
+        return productCart;
+    }
+
+
 
 }
