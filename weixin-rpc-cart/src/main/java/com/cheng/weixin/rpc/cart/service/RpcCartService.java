@@ -55,6 +55,12 @@ public interface RpcCartService {
      * @param productId 商品ID
      */
     void deleteProduct(String userId, String productId);
+    /**
+     * 批量删除商品
+     * @param userId
+     * @param productIds
+     */
+    void batchDeteleProduct(String userId, String[] productIds);
 
     /**
      * 获取购物车的信息
@@ -63,4 +69,11 @@ public interface RpcCartService {
      */
     ShoppingCart getShoppingCart(String accessId);
 
+    /**
+     * 添加商品
+     * @param userId
+     * @param productId
+     * @param count
+     */
+    void addProduct(String userId, String productId, int count);
 }

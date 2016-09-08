@@ -176,6 +176,12 @@ public class RedisService implements RpcRedisService {
     }
 
     @Override
+    public void batchDeleteField(String key, String... field) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        hashOps.delete(field);
+    }
+
+    @Override
     public Set<String> getFields(String key) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
         return hashOps.keys();
@@ -200,5 +206,12 @@ public class RedisService implements RpcRedisService {
         //redisTemplate.setHashKeySerializer(new GenericToStringSerializer(String.class));
         redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
         return hashOps.entries();
+    }
+
+    @Override
+    public void put(String key, String field, String value) {
+        BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
+        redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
+        hashOps.put(field, value);
     }
 }

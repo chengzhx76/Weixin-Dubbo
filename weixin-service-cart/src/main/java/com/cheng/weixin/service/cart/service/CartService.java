@@ -112,4 +112,14 @@ public class CartService implements RpcCartService {
         }
         return shoppingCart;
     }
+
+    @Override
+    public void batchDeteleProduct(String userId, String[] productIds) {
+        redisService.batchDeleteField(getCart(userId), productIds);
+    }
+
+    @Override
+    public void addProduct(String userId, String productId, int count) {
+        redisService.put(getCart(userId), productId, count+"");
+    }
 }

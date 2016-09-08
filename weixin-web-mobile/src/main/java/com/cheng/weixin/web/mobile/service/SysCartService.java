@@ -6,6 +6,7 @@ import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
+import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
@@ -104,6 +105,31 @@ public class SysCartService {
 
     public ProductCartInfo deleteProduct(String userId, String id) {
         cartService.deleteProduct(userId, id);
+
+        // 购物车已选择的商品的总价格
+        BigDecimal totalPrice = new BigDecimal(0);
+        Set<String> productIds = cartService.getProductIds(userId);
+        for (String productId : productIds) {
+            Long count = cartService.getCounts(userId, productId);
+            Product product = productService.getById(productId);
+            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+        }
+        ProductCartInfo productCart = new ProductCartInfo();
+        productCart.setCount(0);
+        productCart.setTotalPrice(StringFormat.format(totalPrice));
+        productCart.setFreight("2");
+        return productCart;
+    }
+
+    public void batchDeletedProduct(String userId, String[] productIds) {
+        cartService.batchDeteleProduct(userId, productIds);
+        return null;
+    }
+
+    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {
+        for (ProductDto product : products) {
+            cartService.addProduct(userId, product.getProductId(), product.getCount());
+        }
 
         // 购物车已选择的商品的总价格
         BigDecimal totalPrice = new BigDecimal(0);

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Desc: 购物车
@@ -54,6 +55,24 @@ public class CartController extends BaseController {
     public ResponseEntity<Response> delete(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
         ProductCartInfo productCart = sysCartService.subProduct("1", product.getProductId());
+        return success(productCart);
+    }
+
+    /** 批量删除商品到购物车 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/batchDelete")
+    public ResponseEntity<Response> batchDelete(HttpServletRequest request) {
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        sysCartService.batchDeletedProduct("1", product.getProductIds());
+        return success();
+    }
+
+    /** 批量添加商品到购物车 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/batchDelete")
+    public ResponseEntity<Response> batchAdd(HttpServletRequest request) {
+        List<ProductDto> products = (List<ProductDto>) getDto(request, ProductDto.class);
+        ProductCartInfo productCart = sysCartService.batchAddProduct("1", products);
         return success(productCart);
     }
 }

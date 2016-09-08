@@ -95,6 +95,13 @@ public interface RpcRedisService {
     void deleteField(String key, String field);
 
     /**
+     * 批量删除
+     * @param key
+     * @param field
+     */
+    void batchDeleteField(String key, String... field);
+
+    /**
      * 根据key获取所有的Field
      * @param key
      * @return
@@ -123,5 +130,13 @@ public interface RpcRedisService {
      * @return
      */
     Map<Serializable, Object>  getEntries(String key);
+
+    /**
+     * 加入
+     * @param key
+     * @param field
+     * @param value
+     */
+    void put(String key, String field, String value);
 
 }
