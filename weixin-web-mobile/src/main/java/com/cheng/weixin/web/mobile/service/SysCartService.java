@@ -79,6 +79,23 @@ public class SysCartService {
         return productCart;
     }
 
+    public ProductCartInfo subProduct(String userId, String id) {
+        // 先获取该商品的数量
+        Long currentCount = cartService.subProductCount(userId, id);
 
+        // 购物车已选择的商品的总价格
+        BigDecimal totalPrice = new BigDecimal(0);
+        Set<String> productIds = cartService.getProductIds(userId);
+        for (String productId : productIds) {
+            Long count = cartService.getCounts(userId, productId);
+            Product product = productService.getById(productId);
+            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+        }
+        ProductCartInfo productCart = new ProductCartInfo();
+        productCart.setCount(Integer.parseInt(currentCount+""));
+        productCart.setTotalPrice(StringFormat.format(totalPrice));
+        productCart.setFreight("2");
+        return productCart;
+    }
 
 }
