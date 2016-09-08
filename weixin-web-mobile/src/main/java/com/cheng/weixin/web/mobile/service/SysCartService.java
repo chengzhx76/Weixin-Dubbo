@@ -61,7 +61,7 @@ public class SysCartService {
     }
 
     public ProductCartInfo addProduct(String userId, String id) {
-        // 先获取该商品的数量
+        // 获取该商品的数量
         Long currentCount = cartService.addProductCount(userId, id);
 
         // 购物车已选择的商品的总价格
@@ -80,9 +80,10 @@ public class SysCartService {
     }
 
     public ProductCartInfo subProduct(String userId, String id) {
-        // 先获取该商品的数量
+        // 获取该商品的数量
         Long currentCount = cartService.subProductCount(userId, id);
         if (currentCount <= 0) {
+            cartService.deleteProduct(userId, id);
             currentCount = 0L;
         }
 
@@ -96,6 +97,24 @@ public class SysCartService {
         }
         ProductCartInfo productCart = new ProductCartInfo();
         productCart.setCount(Integer.parseInt(currentCount+""));
+        productCart.setTotalPrice(StringFormat.format(totalPrice));
+        productCart.setFreight("2");
+        return productCart;
+    }
+
+    public ProductCartInfo deleteProduct(String userId, String id) {
+        cartService.deleteProduct(userId, id);
+
+        // 购物车已选择的商品的总价格
+        BigDecimal totalPrice = new BigDecimal(0);
+        Set<String> productIds = cartService.getProductIds(userId);
+        for (String productId : productIds) {
+            Long count = cartService.getCounts(userId, productId);
+            Product product = productService.getById(productId);
+            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+        }
+        ProductCartInfo productCart = new ProductCartInfo();
+        productCart.setCount(0);
         productCart.setTotalPrice(StringFormat.format(totalPrice));
         productCart.setFreight("2");
         return productCart;

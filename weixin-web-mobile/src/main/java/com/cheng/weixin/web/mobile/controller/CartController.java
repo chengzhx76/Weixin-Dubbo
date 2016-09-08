@@ -48,5 +48,12 @@ public class CartController extends BaseController {
         ProductCartInfo productCart = sysCartService.subProduct("1", product.getProductId());
         return success(productCart);
     }
-
+    /** 删除购物车的商品 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/delete")
+    public ResponseEntity<Response> delete(HttpServletRequest request) {
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        ProductCartInfo productCart = sysCartService.subProduct("1", product.getProductId());
+        return success(productCart);
+    }
 }
