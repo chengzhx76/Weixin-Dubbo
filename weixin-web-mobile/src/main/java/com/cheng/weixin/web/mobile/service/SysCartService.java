@@ -82,6 +82,9 @@ public class SysCartService {
     public ProductCartInfo subProduct(String userId, String id) {
         // 先获取该商品的数量
         Long currentCount = cartService.subProductCount(userId, id);
+        if (currentCount <= 0) {
+            currentCount = 0L;
+        }
 
         // 购物车已选择的商品的总价格
         BigDecimal totalPrice = new BigDecimal(0);
