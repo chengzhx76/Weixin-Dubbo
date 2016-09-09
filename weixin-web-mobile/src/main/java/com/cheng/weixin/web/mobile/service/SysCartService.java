@@ -84,6 +84,12 @@ public class SysCartService {
         return chooseShoppingCartPrice(userId, null);
     }
 
+    public void changeStatus(String userId, String[] productIds) {
+        for (String productId : productIds) {
+            cartService.changeStatus(userId, productId);
+        }
+    }
+
 /*    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {
         for (ProductDto product : products) {
             cartService.addProduct(userId, product.getProductId(), product.getCount());

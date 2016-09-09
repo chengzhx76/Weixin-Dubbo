@@ -57,6 +57,13 @@ public class CartController extends BaseController {
         return success(productCart);
     }
 
+    /** 改变选择状态 **/
+    @RequestMapping(value = "v1/change")
+    public ResponseEntity<Response> changeStatus(HttpServletRequest request) {
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        sysCartService.changeStatus("1", product.getProductIds());
+        return success();
+    }
 
     /** 批量添加商品到购物车 **/
 /*    @IgnoreSecurity
