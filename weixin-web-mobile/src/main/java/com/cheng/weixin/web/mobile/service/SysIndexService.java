@@ -119,7 +119,7 @@ public class SysIndexService {
      * @return
      */
     private BigDecimal totalPrice(String userId) {
-        Set<String> productIds =  cartService.getProductIds(userId);
+        Set<String> productIds =  cartService.getChooseProductIds(userId);
         BigDecimal totalPrice = new BigDecimal(0);
         for (String productId : productIds) {
 

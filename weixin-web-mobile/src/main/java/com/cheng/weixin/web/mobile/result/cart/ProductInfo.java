@@ -12,6 +12,7 @@ public class ProductInfo {
     private String marketPrice;
     private String salePrice;
     private int nums;
+    private boolean choose;
 
     public String getProductId() {
         return productId;
@@ -59,5 +60,13 @@ public class ProductInfo {
 
     public void setNums(int nums) {
         this.nums = nums;
+    }
+
+    public boolean isChoose() {
+        return choose;
+    }
+
+    public void setChoose(boolean choose) {
+        this.choose = choose;
     }
 }

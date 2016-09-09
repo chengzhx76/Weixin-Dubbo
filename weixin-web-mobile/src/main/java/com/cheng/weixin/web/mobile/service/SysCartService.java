@@ -6,7 +6,6 @@ import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
-import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
@@ -46,11 +45,14 @@ public class SysCartService {
                 if (null != product) {
                     productInfo.setProductImg(product.getDefaultPicture().getPictureUrl());
                     BigDecimal salePrice = product.getSalePrice();
-                    //totalPrice = totalPrice.add(salePrice);
+                    if (cartInfo.isChoose()) {
+                        totalPrice = totalPrice.add(salePrice);
+                    }
                     productInfo.setSalePrice(StringFormat.format(salePrice));
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));
                     productInfo.setName(product.getName());
                     productInfo.setNums(cartInfo.getQuantity());
+                    productInfo.setChoose(cartInfo.isChoose());
                     productInfos.add(productInfo);
                 }
             }
@@ -64,76 +66,32 @@ public class SysCartService {
     public ProductCartInfo addProduct(String userId, String id) {
         // 获取该商品的数量
         Long currentCount = cartService.addProductCount(userId, id);
-
-        // 购物车已选择的商品的总价格
-        BigDecimal totalPrice = new BigDecimal(0);
-        Set<String> productIds = cartService.getProductIds(userId);
-        for (String productId : productIds) {
-            Long count = cartService.getCounts(userId, productId);
-            Product product = productService.getById(productId);
-            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
-        }
-        ProductCartInfo productCart = new ProductCartInfo();
-        productCart.setCount(Integer.parseInt(currentCount+""));
-        productCart.setTotalPrice(StringFormat.format(totalPrice));
-        productCart.setFreight("2");
-        return productCart;
+        return chooseShoppingCartPrice(userId, currentCount);
     }
 
     public ProductCartInfo subProduct(String userId, String id) {
         // 获取该商品的数量
         Long currentCount = cartService.subProductCount(userId, id);
-        if (currentCount <= 0) {
-            cartService.deleteProduct(userId, id);
-            currentCount = 0L;
-        }
-
-        // 购物车已选择的商品的总价格
-        BigDecimal totalPrice = new BigDecimal(0);
-        Set<String> productIds = cartService.getProductIds(userId);
-        for (String productId : productIds) {
-            Long count = cartService.getCounts(userId, productId);
-            Product product = productService.getById(productId);
-            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
-        }
-        ProductCartInfo productCart = new ProductCartInfo();
-        productCart.setCount(Integer.parseInt(currentCount+""));
-        productCart.setTotalPrice(StringFormat.format(totalPrice));
-        productCart.setFreight("2");
-        return productCart;
+        //if (currentCount <= 0) {
+        //    cartService.deleteProduct(userId, id);
+        //    currentCount = 0L;
+        //}
+        return chooseShoppingCartPrice(userId, currentCount);
     }
 
     public ProductCartInfo deleteProduct(String userId, String id) {
         cartService.deleteProduct(userId, id);
-
-        // 购物车已选择的商品的总价格
-        BigDecimal totalPrice = new BigDecimal(0);
-        Set<String> productIds = cartService.getProductIds(userId);
-        for (String productId : productIds) {
-            Long count = cartService.getCounts(userId, productId);
-            Product product = productService.getById(productId);
-            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
-        }
-        ProductCartInfo productCart = new ProductCartInfo();
-        productCart.setCount(0);
-        productCart.setTotalPrice(StringFormat.format(totalPrice));
-        productCart.setFreight("2");
-        return productCart;
+        return chooseShoppingCartPrice(userId, null);
     }
 
-    public void batchDeletedProduct(String userId, String[] productIds) {
-        cartService.batchDeteleProduct(userId, productIds);
-        return null;
-    }
-
-    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {
+/*    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {
         for (ProductDto product : products) {
             cartService.addProduct(userId, product.getProductId(), product.getCount());
         }
 
         // 购物车已选择的商品的总价格
         BigDecimal totalPrice = new BigDecimal(0);
-        Set<String> productIds = cartService.getProductIds(userId);
+        Set<String> productIds = cartService.getChooseProductIds(userId);
         for (String productId : productIds) {
             Long count = cartService.getCounts(userId, productId);
             Product product = productService.getById(productId);
@@ -141,6 +99,28 @@ public class SysCartService {
         }
         ProductCartInfo productCart = new ProductCartInfo();
         productCart.setCount(0);
+        productCart.setTotalPrice(StringFormat.format(totalPrice));
+        productCart.setFreight("2");
+        return productCart;
+    }*/
+
+    /**
+     * 购物车已选择的商品的总价格
+     * @param userId
+     * @param currentCount
+     * @return
+     */
+    private ProductCartInfo chooseShoppingCartPrice(String userId, Long currentCount) {
+        BigDecimal totalPrice = new BigDecimal(0);
+        Set<String> productIds = cartService.getChooseProductIds(userId);
+        for (String productId : productIds) {
+            Long count = cartService.getCounts(userId, productId);
+            Product product = productService.getById(productId);
+            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+        }
+        ProductCartInfo productCart = new ProductCartInfo();
+        if (currentCount != null)
+            productCart.setCount(Integer.parseInt(currentCount+""));
         productCart.setTotalPrice(StringFormat.format(totalPrice));
         productCart.setFreight("2");
         return productCart;

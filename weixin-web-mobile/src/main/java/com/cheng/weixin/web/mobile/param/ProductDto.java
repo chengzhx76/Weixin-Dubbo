@@ -7,7 +7,7 @@ package com.cheng.weixin.web.mobile.param;
  */
 public class ProductDto {
     private String productId;
-    private int count;
+    private Long count;
 
     private String[] productIds;
 
@@ -19,11 +19,11 @@ public class ProductDto {
         this.productIds = productIds;
     }
 
-    public int getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Long count) {
         this.count = count;
     }
 

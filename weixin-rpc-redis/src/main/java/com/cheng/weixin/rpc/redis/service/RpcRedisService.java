@@ -137,6 +137,6 @@ public interface RpcRedisService {
      * @param field
      * @param value
      */
-    void put(String key, String field, String value);
+    void put(String key, String field, Long value);
 
 }

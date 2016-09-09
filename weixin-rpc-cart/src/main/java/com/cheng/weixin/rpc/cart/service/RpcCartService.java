@@ -39,7 +39,7 @@ public interface RpcCartService {
      * @param userId 用户ID
      * @return 该用户购物车中所有商品的ID
      */
-    Set<String> getProductIds(String userId);
+    Set<String> getChooseProductIds(String userId);
 
     /**
      * 根据用户id获取和商品ID获取商品个数
@@ -55,12 +55,6 @@ public interface RpcCartService {
      * @param productId 商品ID
      */
     void deleteProduct(String userId, String productId);
-    /**
-     * 批量删除商品
-     * @param userId
-     * @param productIds
-     */
-    void batchDeteleProduct(String userId, String[] productIds);
 
     /**
      * 获取购物车的信息
@@ -75,5 +69,12 @@ public interface RpcCartService {
      * @param productId
      * @param count
      */
-    void addProduct(String userId, String productId, int count);
+    void addProduct(String userId, String productId, Long count);
+
+    /**
+     * 改变选择状态
+     * @param userId
+     * @param productId
+     */
+    void changeStatus(String userId, String productId);
 }

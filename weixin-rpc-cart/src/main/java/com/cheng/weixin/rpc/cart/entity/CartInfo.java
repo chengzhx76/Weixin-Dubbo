@@ -11,6 +11,7 @@ public class CartInfo extends DataEntity<CartInfo>  {
     private String accessId;
     private String productId;
     private int quantity;
+    private boolean isChoose;
 
     public CartInfo() {
     }
@@ -45,5 +46,13 @@ public class CartInfo extends DataEntity<CartInfo>  {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isChoose() {
+        return isChoose;
+    }
+
+    public void setChoose(boolean choose) {
+        isChoose = choose;
     }
 }

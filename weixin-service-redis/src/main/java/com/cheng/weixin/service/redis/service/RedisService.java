@@ -209,7 +209,7 @@ public class RedisService implements RpcRedisService {
     }
 
     @Override
-    public void put(String key, String field, String value) {
+    public void put(String key, String field, Long value) {
         BoundHashOperations hashOps = redisTemplate.boundHashOps(key);
         redisTemplate.setHashValueSerializer(new GenericToStringSerializer(Long.class));
         hashOps.put(field, value);

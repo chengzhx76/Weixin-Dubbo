@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Desc: 购物车
@@ -22,6 +19,8 @@ import java.util.Set;
 public class CartService implements RpcCartService {
 
     private static final String CART = "CART_";
+    private static final String CHOOSE = "TRUE_";
+    private static final String NO_CHOOSE = "FALSE_";
 
     @Autowired
     private RpcRedisService redisService;
@@ -50,7 +49,8 @@ public class CartService implements RpcCartService {
      */
     @Override
     public Long addProductCount(String userId, String productId) {
-        return redisService.increase(getCart(userId), productId);
+        changeChooseStatus(userId, productId);
+        return redisService.increase(getCart(userId), getProductFlag(userId, productId));
     }
     /**
      * 减少商品数量
@@ -60,7 +60,8 @@ public class CartService implements RpcCartService {
      */
     @Override
     public Long subProductCount(String userId, String productId) {
-        return redisService.decrease(getCart(userId), productId);
+        changeChooseStatus(userId, productId);
+        return redisService.decrease(getCart(userId), getProductFlag(userId, productId));
     }
 
     /**
@@ -70,19 +71,67 @@ public class CartService implements RpcCartService {
      * @return
      */
     @Override
-    public Set<String> getProductIds(String userId) {
-        return redisService.getFields(getCart(userId));
+    public Set<String> getChooseProductIds(String userId) {
+        Set<String> allProductIds = redisService.getFields(getCart(userId));
+        Set<String> productIds = new HashSet<>();
+        for (String productId : allProductIds) {
+            if (productId.startsWith(CHOOSE)) {
+                productIds.add(productId);
+            }
+        }
+        return productIds;
     }
 
     @Override
     public Long getCounts(String userId, String productId) {
-        Object counts = redisService.getValueByKeyANdField(getCart(userId), productId);
+        Object counts = redisService.getValueByKeyANdField(getCart(userId), getProductFlag(userId, productId));
         return (Long) counts;
     }
 
     @Override
     public void deleteProduct(String userId, String productId) {
-        redisService.deleteField(userId, productId);
+        redisService.deleteField(userId, getProductFlag(userId, productId));
+    }
+
+    @Override
+    public ShoppingCart getShoppingCart(String accessId) {
+        Map<Serializable, Object> allProduct = redisService.getEntries(accessId);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        if (!allProduct.isEmpty()) {
+            List<CartInfo> cartInfos = new ArrayList<>();
+            Set<Serializable> fields = allProduct.keySet();
+            for (Serializable itemName : fields) {
+                CartInfo cart = new CartInfo();
+                cart.setAccessId(accessId);
+                cart.setProductId(itemName.toString().split("-")[1]);
+                cart.setQuantity(Integer.parseInt(allProduct.get(itemName).toString()));
+                String isChoose = itemName.toString().split("-")[0];
+                cart.setChoose(isChoose.equals("TRUE") ? true : false);
+                cartInfos.add(cart);
+            }
+            shoppingCart.setCartInfos(cartInfos);
+            shoppingCart.setAccessId(accessId);
+            shoppingCart.setTotalQuantity(cartInfos.size());
+        }
+        return shoppingCart;
+    }
+
+    @Override
+    public void addProduct(String userId, String productId, Long count) {
+        redisService.put(getCart(userId), getProductFlag(userId, productId), count);
+    }
+
+    @Override
+    public void changeStatus(String userId, String productId) {
+        if (redisService.exists(getCart(userId), chooseProduct(productId))) {
+            Long counts = (Long) redisService.getValueByKeyANdField(getCart(userId), chooseProduct(productId));
+            redisService.deleteField(getCart(userId), chooseProduct(productId));
+            redisService.put(getCart(userId), noChooseProduct(productId), counts);
+        }else if (redisService.exists(getCart(userId), noChooseProduct(productId))) {
+            Long counts = (Long) redisService.getValueByKeyANdField(getCart(userId), noChooseProduct(productId));
+            redisService.deleteField(getCart(userId),noChooseProduct(productId));
+            redisService.put(getCart(userId), chooseProduct(productId), counts);
+        }
     }
 
     /**
@@ -94,32 +143,33 @@ public class CartService implements RpcCartService {
         return CART+userId;
     }
 
-    @Override
-    public ShoppingCart getShoppingCart(String accessId) {
-        Map<Serializable, Object> allProduct = redisService.getEntries(accessId);
+    private String chooseProduct(String productId) {
+        return CHOOSE+productId;
+    }
+    private String noChooseProduct(String productId) {
+        return NO_CHOOSE+productId;
+    }
 
-        ShoppingCart shoppingCart = new ShoppingCart();
-        if (!allProduct.isEmpty()) {
-            List<CartInfo> cartInfos = new ArrayList<>();
-            Set<Serializable> fields = allProduct.keySet();
-            for (Serializable itemName : fields) {
-                cartInfos.add(new CartInfo(accessId, itemName.toString(), Integer.parseInt(allProduct.get(itemName).toString())));
-                //System.out.println("===> "+itemName+" "+allProduct.get(itemName));
-            }
-            shoppingCart.setCartInfos(cartInfos);
-            shoppingCart.setAccessId(accessId);
-            shoppingCart.setTotalQuantity(cartInfos.size());
+    private String getProductFlag(String userId, String productId) {
+        if (redisService.exists(getCart(userId), chooseProduct(productId))) {
+            return chooseProduct(productId);
+        }else if (redisService.exists(getCart(userId), noChooseProduct(productId))) {
+            return noChooseProduct(productId);
+        } else {
+            return chooseProduct(productId);
         }
-        return shoppingCart;
     }
 
-    @Override
-    public void batchDeteleProduct(String userId, String[] productIds) {
-        redisService.batchDeleteField(getCart(userId), productIds);
-    }
-
-    @Override
-    public void addProduct(String userId, String productId, int count) {
-        redisService.put(getCart(userId), productId, count+"");
+    /**
+     * 改变选择状态
+     * @param userId
+     * @param productId
+     */
+    private void changeChooseStatus(String userId, String productId) {
+        if (redisService.exists(getCart(userId), noChooseProduct(productId))) {
+            Long counts = (Long) redisService.getValueByKeyANdField(getCart(userId), noChooseProduct(productId));
+            redisService.deleteField(getCart(userId),noChooseProduct(productId));
+            redisService.put(getCart(userId), chooseProduct(productId), counts);
+        }
     }
 }
