@@ -45,6 +45,9 @@
       <if test="isIndex != null and isIndex != ''">
         is_index = #{isIndex}
       </if>
+      <if test="productTypeId != null and productTypeId != ''">
+        product_type_id = #{productTypeId}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -95,6 +98,11 @@
   <!-- ======================================== -->
   <!-- 获取首页的商品 -->
   <select id="loadIndex" parameterType="Product" resultType="Product">
+    <include refid="productSelector"/>
+    <include refid="productWhere"/>
+  </select>
+  <!-- 获取首页的商品 -->
+  <select id="loadMallByTypeId" parameterType="Product" resultType="Product">
     <include refid="productSelector"/>
     <include refid="productWhere"/>
   </select>

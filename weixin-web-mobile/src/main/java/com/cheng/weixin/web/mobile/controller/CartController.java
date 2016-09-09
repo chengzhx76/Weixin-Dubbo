@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * Date: 2016/08/27
  */
 @RestController
-@RequestMapping(value = "cart")
+@RequestMapping("cart")
 public class CartController extends BaseController {
     @Autowired
     private SysCartService sysCartService;
@@ -27,7 +27,7 @@ public class CartController extends BaseController {
     /** 购物车信息 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/info")
-    public ResponseEntity<Response> login(HttpServletRequest request) {
+    public ResponseEntity<Response> info(HttpServletRequest request) {
         ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart("1");
         return success(shoppingCartInfo);
     }

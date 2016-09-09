@@ -18,4 +18,11 @@ public interface ProductDaoMapper extends BaseDaoMapper<Product> {
      * @return
      */
     List<Product> loadIndex();
+
+    /**
+     * 获取商品 根据类型ID
+     * @param product
+     * @return
+     */
+    List<Product> loadMallByTypeId(Product product);
 }

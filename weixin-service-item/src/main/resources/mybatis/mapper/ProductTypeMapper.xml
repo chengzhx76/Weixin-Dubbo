@@ -53,7 +53,7 @@
     <include refid="productTypeSelector"/>
     <include refid="productTypeWhere"/>
   </select>
-  <!-- 获取全部用户信息 -->
+  <!-- 获取全部信息 -->
   <select id="loadAll" resultType="ProductType">
     <include refid="productTypeSelector"/>
     <include refid="productTypeWhere"/>

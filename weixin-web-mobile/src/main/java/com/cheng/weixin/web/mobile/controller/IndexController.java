@@ -90,19 +90,4 @@ public class IndexController extends BaseController {
         return success(indexBuy);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

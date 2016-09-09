@@ -16,7 +16,7 @@ public class Product extends DataEntity<Product> {
     private BigDecimal salePrice;
     private String no;
     private String keywords;
-    private int productTypeId;
+    private String typeId;
     private boolean isAlive;
     private int modifyAdminId;
     private boolean isIndex;
@@ -97,12 +97,12 @@ public class Product extends DataEntity<Product> {
         this.no = no;
     }
 
-    public int getProductTypeId() {
-        return productTypeId;
+    public String getTypeId() {
+        return typeId;
     }
 
-    public void setProductTypeId(int productTypeId) {
-        this.productTypeId = productTypeId;
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
     }
 
     public String getKeywords() {
