@@ -179,6 +179,11 @@
           <artifactId>weixin-rpc-message</artifactId>
           <version>${project.version}</version>
         </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-order</artifactId>
+          <version>${project.version}</version>
+        </dependency>
         <!-- Junit -->
         <dependency>
           <groupId>junit</groupId>

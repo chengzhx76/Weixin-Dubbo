@@ -65,6 +65,14 @@ public class CartController extends BaseController {
         return success();
     }
 
+    /** 购买 **/
+    @RequestMapping(value = "v1/buy")
+    public ResponseEntity<Response> buy(HttpServletRequest request) {
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        return success();
+    }
+
+
     /** 批量添加商品到购物车 **/
 /*    @IgnoreSecurity
     @RequestMapping(value = "v1/batchDelete")

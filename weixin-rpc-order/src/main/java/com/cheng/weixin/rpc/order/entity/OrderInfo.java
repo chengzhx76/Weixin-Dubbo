@@ -38,7 +38,6 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal productTotalPrice;
     private BigDecimal discount;
     private String remarkSystem;
-    private String id;
     private String postCode;
     private String telephone;
     private String email;
@@ -251,16 +250,6 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setRemarkSystem(String remarkSystem) {
         this.remarkSystem = remarkSystem;
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getPostCode() {
