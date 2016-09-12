@@ -9,7 +9,6 @@ import com.cheng.common.entity.DataEntity;
  */
 public class Pay extends DataEntity<Pay> {
     private String name;
-    private boolean isEnable;
     private int orderBy;
 
     public String getName() {
@@ -18,14 +17,6 @@ public class Pay extends DataEntity<Pay> {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isEnable() {
-        return isEnable;
-    }
-
-    public void setEnable(boolean enable) {
-        isEnable = enable;
     }
 
     public int getOrderBy() {
