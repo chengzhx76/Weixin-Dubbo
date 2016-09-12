@@ -107,6 +107,12 @@ vi /etc/redis.conf
 // 修改如下，默认为no(后台启动) 
 daemonize yes 
 
+// 添加密码 
+requirepass passwd 
+  
+// 修改端口 
+port 6677 
+
 ###5.启动 
 redis-server ../redis.conf 
 // 测试 
