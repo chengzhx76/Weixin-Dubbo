@@ -67,7 +67,7 @@
       <mvc:exclude-mapping path="/static/**"/>
       <bean class="com.cheng.weixin.web.mobile.interceptor.LogInterceptor" />
     </mvc:interceptor>
-    <!-- 恶意请求拦截器
+    <!-- 恶意请求拦截器 -->
     <mvc:interceptor>
       <mvc:mapping path="/**" />
       <mvc:exclude-mapping path="/static/**"/>
@@ -79,7 +79,7 @@
         <property name="paramName" value="param"/>
         <property name="minRequestIntervalTime" value="300000"/>
       </bean>
-    </mvc:interceptor> -->
+    </mvc:interceptor>
   </mvc:interceptors>
 
 

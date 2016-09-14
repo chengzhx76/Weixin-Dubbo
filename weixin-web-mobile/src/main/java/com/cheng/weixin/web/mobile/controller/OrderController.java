@@ -18,7 +18,7 @@ public class OrderController extends BaseController {
     /** 购买 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/buy")
-    public ResponseEntity<Response> buy(String[] ids) {
+    public ResponseEntity<Response> buy() {
 
         return success();
     }
