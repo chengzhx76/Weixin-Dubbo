@@ -3,6 +3,7 @@ package com.cheng.weixin.service.cart.service;
 import com.cheng.weixin.common.constant.Constant;
 import com.cheng.weixin.rpc.cart.entity.CartInfo;
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
+import com.cheng.weixin.rpc.cart.model.ProductModel;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,6 +130,28 @@ public class CartService implements RpcCartService {
             redisService.deleteField(getCart(userId),noChooseProduct(productId));
             redisService.put(getCart(userId), chooseProduct(productId), counts);
         }
+    }
+
+    @Override
+    public List<ProductModel> getChooseProductInfo(String userId) {
+        Map<Serializable, Object> map = redisService.getEntries(userId);
+
+        List<ProductModel> products = new ArrayList<>();
+        Set<Serializable> fields = map.keySet();
+        for (Serializable item : fields) {
+            if (redisService.exists(getCart(userId), Constant.CHOOSE+item.toString())) {
+                ProductModel product = new ProductModel();
+                product.setId(item.toString());
+                product.setCount(Integer.parseInt(map.get(item).toString()));
+                products.add(product);
+            }
+        }
+        return products;
+    }
+
+    @Override
+    public void deletedChooseProduct(String userId, String productId) {
+        redisService.decrease(userId, chooseProduct(productId));
     }
 
     /**

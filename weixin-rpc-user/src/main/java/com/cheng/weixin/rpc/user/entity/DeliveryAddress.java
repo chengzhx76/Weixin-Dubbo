@@ -12,6 +12,7 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
     private int regionProvinceId;
     private int regionCityId;
     private int regionCountryId;
+    private int villageId;
     private String consignee;
     private String address;
     private String mobile;
@@ -58,6 +59,14 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
 
     public void setConsignee(String consignee) {
         this.consignee = consignee;
+    }
+
+    public int getVillageId() {
+        return villageId;
+    }
+
+    public void setVillageId(int villageId) {
+        this.villageId = villageId;
     }
 
     public String getAddress() {

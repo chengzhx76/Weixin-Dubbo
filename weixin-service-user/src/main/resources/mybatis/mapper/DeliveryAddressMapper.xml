@@ -43,6 +43,9 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="isDefault != null and isDefault != ''">
+        is_default = #{isDefault}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -89,6 +92,13 @@
     VALUES
     <include refid="deliveryAddressIf"/>
   </insert>
+
+  <!-- 获取默认的地址 -->
+  <select id="loadDefaultAddress" parameterType="DeliveryAddress" resultType="DeliveryAddress">
+    <include refid="deliveryAddressSelector"/>
+    <include refid="deliveryAddressWhere"/>
+  </select>
+
 
 </mapper>
 

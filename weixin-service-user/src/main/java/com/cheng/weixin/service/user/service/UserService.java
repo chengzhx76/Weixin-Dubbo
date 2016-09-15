@@ -2,6 +2,7 @@ package com.cheng.weixin.service.user.service;
 
 import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.entity.AccountLevel;
+import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
 import com.cheng.weixin.rpc.user.entity.Member;
 import com.cheng.weixin.rpc.user.enumType.Credit;
 import com.cheng.weixin.rpc.user.enumType.Sex;
@@ -9,6 +10,7 @@ import com.cheng.weixin.rpc.user.enumType.SourceFrom;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.service.user.dao.AccountDaoMapper;
 import com.cheng.weixin.service.user.dao.AccountLevelDaoMapper;
+import com.cheng.weixin.service.user.dao.DeliveryAddressDaoMapper;
 import com.cheng.weixin.service.user.dao.MemberDaoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,8 @@ public class UserService implements RpcUserService {
     private AccountLevelDaoMapper accountLevelDao;
     @Autowired
     private MemberDaoMapper memberDao;
+    @Autowired
+    private DeliveryAddressDaoMapper deliveryAddressDao;
 
     @Override
     public Account getAccountByLoginName(String loginName) {
@@ -87,5 +91,17 @@ public class UserService implements RpcUserService {
         userAccount.preUpdate();
         accountDao.update(userAccount);
         return "SUCCESS";
+    }
+
+    @Override
+    public DeliveryAddress getDefaultAddress() {
+        return deliveryAddressDao.loadDefaultAddress();
+    }
+
+    @Override
+    public Account getAccount(String userId) {
+        Account account = new Account();
+        account.setId(userId);
+        return accountDao.load(account);
     }
 }

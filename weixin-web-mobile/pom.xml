@@ -56,6 +56,10 @@
       <artifactId>weixin-rabbitmq-model</artifactId>
     </dependency>
     <dependency>
+      <groupId>${parent.groupId}</groupId>
+      <artifactId>weixin-rpc-order</artifactId>
+    </dependency>
+    <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
     </dependency>

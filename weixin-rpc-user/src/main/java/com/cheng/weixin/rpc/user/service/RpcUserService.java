@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.user.service;
 
 import com.cheng.weixin.rpc.user.entity.Account;
+import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
 
 /**
  * Desc: 用户
@@ -31,4 +32,17 @@ public interface RpcUserService {
      * @return
      */
     String validateLogin(String username, String password, String loginIp);
+
+    /**
+     * 获取默认的配送地址
+     * @return
+     */
+    DeliveryAddress getDefaultAddress();
+
+    /**
+     * 获取用户账户信息
+     * @param userId
+     * @return
+     */
+    Account getAccount(String userId);
 }

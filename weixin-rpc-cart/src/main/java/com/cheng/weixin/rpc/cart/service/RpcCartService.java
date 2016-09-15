@@ -1,7 +1,9 @@
 package com.cheng.weixin.rpc.cart.service;
 
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
+import com.cheng.weixin.rpc.cart.model.ProductModel;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -77,4 +79,18 @@ public interface RpcCartService {
      * @param productId
      */
     void changeStatus(String userId, String productId);
+
+    /**
+     * 获取已选择的商品信息
+     * @param userId
+     * @return
+     */
+    List<ProductModel> getChooseProductInfo(String userId);
+
+    /**
+     * 删除已选择的商品（已购买的商品删除）
+     * @param userId
+     * @param productId
+     */
+    void deletedChooseProduct(String userId, String productId);
 }
