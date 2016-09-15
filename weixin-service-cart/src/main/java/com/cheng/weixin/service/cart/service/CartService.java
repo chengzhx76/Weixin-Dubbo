@@ -1,5 +1,6 @@
 package com.cheng.weixin.service.cart.service;
 
+import com.cheng.weixin.common.constant.Constant;
 import com.cheng.weixin.rpc.cart.entity.CartInfo;
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
@@ -17,10 +18,6 @@ import java.util.*;
  */
 @Service("cartService")
 public class CartService implements RpcCartService {
-
-    private static final String CART = "CART_";
-    private static final String CHOOSE = "TRUE_";
-    private static final String NO_CHOOSE = "FALSE_";
 
     @Autowired
     private RpcRedisService redisService;
@@ -75,7 +72,7 @@ public class CartService implements RpcCartService {
         Set<String> allProductIds = redisService.getFields(getCart(userId));
         Set<String> productIds = new HashSet<>();
         for (String productId : allProductIds) {
-            if (productId.startsWith(CHOOSE)) {
+            if (productId.startsWith(Constant.CHOOSE)) {
                 productIds.add(productId);
             }
         }
@@ -140,14 +137,14 @@ public class CartService implements RpcCartService {
      * @return
      */
     private String getCart(String userId) {
-        return CART+userId;
+        return Constant.CART+userId;
     }
 
     private String chooseProduct(String productId) {
-        return CHOOSE+productId;
+        return Constant.CHOOSE+productId;
     }
     private String noChooseProduct(String productId) {
-        return NO_CHOOSE+productId;
+        return Constant.NO_CHOOSE+productId;
     }
 
     private String getProductFlag(String userId, String productId) {
