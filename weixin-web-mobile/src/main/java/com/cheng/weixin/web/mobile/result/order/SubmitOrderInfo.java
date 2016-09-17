@@ -1,16 +1,18 @@
 package com.cheng.weixin.web.mobile.result.order;
 
+import java.util.List;
+
 /**
  * Desc:
  * Author: 光灿
  * Date: 2016/9/15
  */
-public class OrderInfo {
+public class SubmitOrderInfo {
     private String consignee;
     private String address;
     private String mobile;
-    private String[] deliveryTime;
-    private String[] pays;
+    private List<OrderDeliveryTime> deliveryTime;
+    private List<OrderPay> pays;
     private int availableCoupon;
     private String availableBalance;
     private String remark;
@@ -45,19 +47,19 @@ public class OrderInfo {
         this.mobile = mobile;
     }
 
-    public String[] getDeliveryTime() {
+    public List<OrderDeliveryTime> getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(String[] deliveryTime) {
+    public void setDeliveryTime(List<OrderDeliveryTime> deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
-    public String[] getPays() {
+    public List<OrderPay> getPays() {
         return pays;
     }
 
-    public void setPays(String[] pays) {
+    public void setPays(List<OrderPay> pays) {
         this.pays = pays;
     }
 
