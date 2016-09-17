@@ -31,14 +31,14 @@ yum install glibc.i686
 ①vi /etc/profile 
  
 ②在末尾行添加 
-       #set java environment 
-       JAVA_HOME=/usr/local/src/java/jdk1.7.0_71 
-       CLASSPATH=.:$JAVA_HOME/lib.tools.jar 
-       PATH=$JAVA_HOME/bin:$PATH
-       export JAVA_HOME CLASSPATH PATH 
+#set java environment 
+JAVA_HOME=/usr/local/java/jdk1.7.0_45
+CLASSPATH=.:$JAVA_HOME/lib.tools.jar 
+PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME CLASSPATH PATH
 或： 
-export JAVA_HOME=/usr/local/jdk1.7.0_45 
-export JRE_HOME=/usr/local/jdk1.7.0_45/jre 
+export JAVA_HOME=/usr/local/java/jdk1.7.0_45
+export JRE_HOME=$JAVA_HOME/jre 
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib:$CLASSPATH 
 export PATH=$JAVA_HOME/bin:$PATH 
 
@@ -83,6 +83,16 @@ mysqladmin -u root password 'new-password'
 
 // 登录MYSQL 
 mysql -u root -p password 
+
+允许root用户在任何地方进行远程登录，并具有所有库任何操作权限，具体操作如下：
+在本机先使用root用户登录mysql：
+mysql -u root -p"youpassword" 
+进行授权操作：
+mysql>GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'youpassword' WITH GRANT OPTION;
+重载授权表：
+FLUSH PRIVILEGES;
+退出mysql数据库：
+exit
 
 --- 
 
@@ -133,6 +143,38 @@ root       854     1  0 18:56 ?        00:00:00 /usr/local/redis/redis-3.0.7/src
 ./redis-cli -p 6767 -a password shutdown 
 
 ---
+ 
+##安装 Zookeeper 
+解压：tar -zxvf zookeeper-3.4.6.tar.gz 
+配置：进入conf目录重命名 mv zoo_sample.cfg zoo.cfg 
+      修改zoo.cfg文件 dataDir=/usr/local/zookeeper/zookeeper-3.4.6/data 
+启动：进入bin目录 
+      ./zkServer.sh start 
+      JMX enabled by default 
+      Using config: /usr/local/zookeeper/zookeeper-3.4.6/bin/../conf/zoo.cfg 
+      Starting zookeeper ... STARTED 
+查看是否启动：进入bin目录 ./zkServer.sh status 
+      [./zkServer.sh status 
+      JMX enabled by default 
+      Using config: /usr/local/zookeeper/zookeeper-3.4.6/bin/../conf/zoo.cfg 
+      Mode: standalone 
+ 
+停止：进入bin目录 ./zkServer.sh stop 
+ 
+查看节点： 
+./zkCli.sh 
+ls / 
+[zookeeper] 
+ 
+1. 启动ZK服务:       sh bin/zkServer.sh start 
+2. 查看ZK服务状态:   sh bin/zkServer.sh status 
+3. 停止ZK服务:       sh bin/zkServer.sh stop 
+4. 重启ZK服务:       sh bin/zkServer.sh restart
+
+
+使用delete命令可以删除指定znode. 当该znode拥有子znode时, 必须先删除其所有子znode, 否则操作将失败. 
+rmr命令可用于代替delete命令, rmr是一个递归删除命令, 如果发生指定节点拥有子节点时, rmr命令会首先删除子节点. 
+
 
 ##安装RabbitMQ 
 
@@ -198,13 +240,13 @@ mkdir web
 cd web 
 
 ### 2.安装 
-tar -zxv -f apache-tomcat-7.0.42.tar.gz // 解压压缩包 
+tar -zxvf apache-tomcat-7.0.61.tar.gz // 解压压缩包 
 
 ### 3.设置环境变量 
 vim /etc/profile  文件后面加入（千万不要有空格） 
 
-export CATALINA_BASE=/home/develop/apache-tomcat-7.0.59 
-export TOMCAT_HOME=/home/develop/apache-tomcat-7.0.59 
+export CATALINA_BASE=/usr/local/cheng/web/apache-tomcat-7.0.61
+export TOMCAT_HOME=/usr/local/cheng/web/apache-tomcat-7.0.61
 
 
 保存，退出，然后运行： 
