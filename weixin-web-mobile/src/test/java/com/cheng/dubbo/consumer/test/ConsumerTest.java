@@ -39,10 +39,10 @@ public class ConsumerTest {
     private RpcRedisService redisService;
     @Autowired
     private RpcCartService cartService;
-    //@Autowired
-    //private RpcProductService productService;
-    //@Autowired
-    //private RpcSystemService systemService;
+    @Autowired
+    private RpcProductService productService;
+    @Autowired
+    private RpcSystemService systemService;
     //@Autowired
     //private RpcUserService userService;
     //@Autowired
@@ -82,30 +82,30 @@ public class ConsumerTest {
         }
     }
 
-    //@Test
-    //public void testGetCart() {
-    //    ShoppingCart cartInfo = cartService.getShoppingCart("1");
-    //    System.out.println("=========> "+JSON.toJSONString(cartInfo));
-    //}
-    //
-    //@Test
-    //public void testProduct() {
-    //    Product product = productService.getById("1");
-    //    System.out.println("============> "+ product);
-    //}
-    //
-    //@Test
-    //public void testSys() {
-    //    List<Ad> ads = systemService.getIndexAds();
-    //    for (Ad ad : ads) {
-    //        System.out.println("=========> "+ad);
-    //    }
-    //    List<Notice> notices = systemService.getIndexNotices();
-    //    for (Notice notice : notices) {
-    //        System.out.println("=========> "+notice);
-    //    }
-    //}
-    //
+    @Test
+    public void testGetCart() {
+        ShoppingCart cartInfo = cartService.getShoppingCart("1");
+        System.out.println("=========> "+JSON.toJSONString(cartInfo));
+    }
+
+    @Test
+    public void testProduct() {
+        Product product = productService.getById("1");
+        System.out.println("============> "+ product);
+    }
+
+    @Test
+    public void testSys() {
+        List<Ad> ads = systemService.getIndexAds();
+        for (Ad ad : ads) {
+            System.out.println("=========> "+ad);
+        }
+        List<Notice> notices = systemService.getIndexNotices();
+        for (Notice notice : notices) {
+            System.out.println("=========> "+notice);
+        }
+    }
+
     //@Test
     //public void testSaveAccess() {
     //    userService.saveAccess("18600536683","123456","Cheng","127.0.0.1");

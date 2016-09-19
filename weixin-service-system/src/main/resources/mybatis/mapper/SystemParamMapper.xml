@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cheng.weixin.service.system.dao.NoticeDaoMapper">
+<mapper namespace="com.cheng.weixin.service.system.dao.SystemParamDaoMapper">
   <sql id="tableName">system_param</sql>
   <sql id="columns">
     s.id,s.name,s.title,s.logo,s.description,s.copyright,

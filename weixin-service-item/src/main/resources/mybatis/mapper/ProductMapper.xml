@@ -4,11 +4,11 @@
 <mapper namespace="com.cheng.weixin.service.item.dao.ProductDaoMapper">
   <sql id="tableName">product</sql>
   <sql id="columns">
-    p.id,p.name,p.market_price,p.sale_price,p.no,p.key_words,p.product_type_id,p.is_alive,p.is_index,
+    p.id,p.name,p.market_price,p.sale_price,p.no,p.key_words,p.type_id,p.is_alive,p.is_index,
     p.tag,p.unit_desc,p.units_in_stock,p.modify_admin_id,p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
-    id,name,market_price,sale_price,no,key_words,product_type_id,is_alive,is_index,
+    id,name,market_price,sale_price,no,key_words,type_id,is_alive,is_index,
     tag,unit_desc,units_in_stock,modify_admin_id,remarks,create_date,update_date,status
   </sql>
   <sql id="productIf">
@@ -18,7 +18,7 @@
     <if test="salePrice != null and salePrice != ''">sale_price=#{salePrice},</if>
     <if test="no != null and no != ''">no=#{no},</if>
     <if test="keywords != null and keywords != ''">key_words=#{keywords},</if>
-    <if test="productTypeId != null and productTypeId != ''">product_type_id=#{productTypeId},</if>
+    <if test="typeId != null and typeId != ''">type_id=#{typeId},</if>
     <if test="isAlive != null and isAlive != ''">is_alive=#{isAlive},</if>
     <if test="isIndex != null and isIndex != ''">is_index=#{isIndex},</if>
     <if test="tag != null and tag != ''">tag=#{tag},</if>
@@ -45,8 +45,8 @@
       <if test="isIndex != null and isIndex != ''">
         is_index = #{isIndex}
       </if>
-      <if test="productTypeId != null and productTypeId != ''">
-        product_type_id = #{productTypeId}
+      <if test="typeId != null and typeId != ''">
+        type_id = #{typeId}
       </if>
       <choose>
         <when test="status != null and status !=''">
