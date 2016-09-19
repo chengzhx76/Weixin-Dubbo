@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cheng.weixin.service.order.dao.orderReturnDetailDetailDaoMapper">
-  <sql id="tableName">order_return</sql>
+  <sql id="tableName">order_return_detail</sql>
   <sql id="columns">
     o.id,o.return_oid,o.no,o.name,o.quantity,o.subtatal,o.market_price,o.sale_price,o.deal_price,o.discount_rate,o.is_gift,
     o.remorks,o.creote_dote,o.updote_dote,o.stotus

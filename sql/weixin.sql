@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 122.9.35.24
+Source Server         : 120.27.53.171--wx
 Source Server Version : 50173
-Source Host           : 122.9.35.24:3306
+Source Host           : 120.27.53.171:3306
 Source Database       : weixin
 
 Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-07-12 18:45:30
+Date: 2016-09-19 10:25:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -187,6 +187,78 @@ CREATE TABLE `admin_role` (
 INSERT INTO `admin_role` VALUES ('1', '1');
 
 -- ----------------------------
+-- Table structure for arayacak_address
+-- ----------------------------
+DROP TABLE IF EXISTS `arayacak_address`;
+CREATE TABLE `arayacak_address` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of arayacak_address
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for arayacak_delivery_time
+-- ----------------------------
+DROP TABLE IF EXISTS `arayacak_delivery_time`;
+CREATE TABLE `arayacak_delivery_time` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of arayacak_delivery_time
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for delivery_time
+-- ----------------------------
+DROP TABLE IF EXISTS `delivery_time`;
+CREATE TABLE `delivery_time` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of delivery_time
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for delivery_type
+-- ----------------------------
+DROP TABLE IF EXISTS `delivery_type`;
+CREATE TABLE `delivery_type` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of delivery_type
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for email_template
 -- ----------------------------
 DROP TABLE IF EXISTS `email_template`;
@@ -295,6 +367,171 @@ INSERT INTO `notice` VALUES ('1', '通告1', '微信端上线了，敬请使用 
 INSERT INTO `notice` VALUES ('2', '通告2', '兑换【饿了么】畅享美食红包 消耗20金币', 'http://www.baidu.com', '备注', '2016-06-29 16:32:02', '2016-06-29 16:32:08', 'NORMAL');
 
 -- ----------------------------
+-- Table structure for order_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `order_detail`;
+CREATE TABLE `order_detail` (
+  `id` varchar(255) NOT NULL,
+  `order_info_id` varchar(255) DEFAULT NULL,
+  `oid` varchar(255) DEFAULT NULL,
+  `no` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `quantity` varchar(255) DEFAULT NULL,
+  `subtotal` varchar(255) DEFAULT NULL,
+  `market_price` decimal(10,0) DEFAULT NULL,
+  `sale_price` decimal(10,0) DEFAULT NULL,
+  `deal_price` decimal(10,0) DEFAULT NULL,
+  `discount_rate` varchar(255) DEFAULT NULL,
+  `is_posted` varchar(255) DEFAULT NULL,
+  `is_comment` varchar(255) DEFAULT NULL,
+  `is_gift` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for order_info
+-- ----------------------------
+DROP TABLE IF EXISTS `order_info`;
+CREATE TABLE `order_info` (
+  `id` varchar(255) NOT NULL,
+  `account_id` varchar(255) DEFAULT NULL,
+  `relate_oid` int(11) DEFAULT NULL,
+  `amount_payable` varchar(255) DEFAULT NULL,
+  `amount_paid` int(11) DEFAULT NULL,
+  `sale_price_total` varchar(255) DEFAULT NULL,
+  `consignee` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `delivery_time_id` int(11) DEFAULT NULL,
+  `pay_id` int(11) DEFAULT NULL,
+  `delivery_type_id` int(11) DEFAULT NULL,
+  `arayacak_address` varchar(255) DEFAULT NULL,
+  `arayacak_delivery_time_id` int(11) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `pay_status` varchar(255) DEFAULT NULL,
+  `order_status_customer_id` int(11) DEFAULT NULL,
+  `order_status_system_id` int(11) DEFAULT NULL,
+  `order_type` varchar(255) DEFAULT NULL,
+  `freight_reduce` varchar(255) DEFAULT NULL,
+  `freight_payable` varchar(255) DEFAULT NULL,
+  `product_total_price` decimal(10,0) DEFAULT NULL,
+  `discount` varchar(255) DEFAULT NULL,
+  `remark_system` varchar(255) DEFAULT NULL,
+  `post_code` varchar(255) DEFAULT NULL,
+  `telephone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `pay_time` datetime DEFAULT NULL,
+  `exchange_oid` int(11) DEFAULT NULL,
+  `custom_pice` varchar(255) DEFAULT NULL,
+  `coupon_code` varchar(255) DEFAULT NULL,
+  `coupon_reducePrice` decimal(10,0) DEFAULT NULL,
+  `cash_reduce_price` decimal(10,0) DEFAULT NULL,
+  `bonus_point_reduce_price` decimal(10,0) DEFAULT NULL,
+  `is_free_account_level` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for order_return
+-- ----------------------------
+DROP TABLE IF EXISTS `order_return`;
+CREATE TABLE `order_return` (
+  `id` varchar(255) NOT NULL,
+  `access_id` int(11) DEFAULT NULL,
+  `return_id` int(11) DEFAULT NULL,
+  `order_info_oid` int(11) DEFAULT NULL,
+  `order_info_id` int(11) DEFAULT NULL,
+  `refund_payable` varchar(255) DEFAULT NULL,
+  `refund_paid` int(11) DEFAULT NULL,
+  `sale_price_tatal` varchar(255) DEFAULT NULL,
+  `consignee` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `return_status_id` int(11) DEFAULT NULL,
+  `freight` varchar(255) DEFAULT NULL,
+  `product_total_price` decimal(10,0) DEFAULT NULL,
+  `remark_system` varchar(255) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `post_code` varchar(255) DEFAULT NULL,
+  `telephone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `return_reason_id` int(11) DEFAULT NULL,
+  `custom_return_reason` varchar(255) DEFAULT NULL,
+  `refund_type_id` int(11) DEFAULT NULL,
+  `custom_price` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_return
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for order_return_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `order_return_detail`;
+CREATE TABLE `order_return_detail` (
+  `id` varchar(255) NOT NULL,
+  `return_oid` varchar(255) DEFAULT NULL,
+  `no` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `quantity` varchar(255) DEFAULT NULL,
+  `subtatal` varchar(255) DEFAULT NULL,
+  `market_price` decimal(10,0) DEFAULT NULL,
+  `sale_price` decimal(10,0) DEFAULT NULL,
+  `deal_price` decimal(10,0) DEFAULT NULL,
+  `discount_rate` varchar(255) DEFAULT NULL,
+  `is_gift` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_return_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for pay
+-- ----------------------------
+DROP TABLE IF EXISTS `pay`;
+CREATE TABLE `pay` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pay
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for permission
 -- ----------------------------
 DROP TABLE IF EXISTS `permission`;
@@ -391,6 +628,57 @@ CREATE TABLE `product_type` (
 INSERT INTO `product_type` VALUES ('1', '主营食品', null, '2016-06-29 10:11:40', '2016-06-29 10:11:42', 'NORMAL');
 
 -- ----------------------------
+-- Table structure for refund_type
+-- ----------------------------
+DROP TABLE IF EXISTS `refund_type`;
+CREATE TABLE `refund_type` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of refund_type
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for return_reason
+-- ----------------------------
+DROP TABLE IF EXISTS `return_reason`;
+CREATE TABLE `return_reason` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of return_reason
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for return_status
+-- ----------------------------
+DROP TABLE IF EXISTS `return_status`;
+CREATE TABLE `return_status` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of return_status
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -478,3 +766,24 @@ CREATE TABLE `sms_template` (
 -- Records of sms_template
 -- ----------------------------
 INSERT INTO `sms_template` VALUES ('1', 'VALIDATE', '尊敬的用户，您的验证码为[MSGCODE]，本验证码有效时间[TIMEOUT]分钟，请勿告知他人', '10', '1', '验证码短信', '2016-07-11 18:22:28', '2016-07-11 18:22:31', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for system_param
+-- ----------------------------
+DROP TABLE IF EXISTS `system_param`;
+CREATE TABLE `system_param` (
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `copyright` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of system_param
+-- ----------------------------
