@@ -1,6 +1,7 @@
 package com.cheng.dubbo.consumer.test;
 
 import com.alibaba.fastjson.JSON;
+import com.cheng.weixin.common.constant.Constant;
 import com.cheng.weixin.common.utils.JSONUtils;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
@@ -21,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -55,6 +57,19 @@ public class ConsumerTest {
         boolean result = redisService.exists("122");
         System.out.println("=======> "+result);
     }
+
+    @Test
+    public void testRedis2() {
+        Set<String> allProductIds = redisService.getFields("CART_1");
+        Set<String> productIds = new HashSet<>();
+        for (String productId : allProductIds) {
+            if (productId.startsWith(Constant.CHOOSE)) {
+                productIds.add(productId.replace(Constant.CHOOSE, ""));
+            }
+        }
+    }
+
+
 
     @Test
     public void testAddCart() {

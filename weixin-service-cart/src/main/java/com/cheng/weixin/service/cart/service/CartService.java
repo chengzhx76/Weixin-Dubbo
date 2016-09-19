@@ -1,6 +1,7 @@
 package com.cheng.weixin.service.cart.service;
 
 import com.cheng.weixin.common.constant.Constant;
+import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.cart.entity.CartInfo;
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.model.ProductModel;
@@ -74,7 +75,7 @@ public class CartService implements RpcCartService {
         Set<String> productIds = new HashSet<>();
         for (String productId : allProductIds) {
             if (productId.startsWith(Constant.CHOOSE)) {
-                productIds.add(productId.replace(Constant.CHOOSE, ""));
+                productIds.add(StringUtils.replace(productId, Constant.CHOOSE, ""));
             }
         }
         return productIds;
