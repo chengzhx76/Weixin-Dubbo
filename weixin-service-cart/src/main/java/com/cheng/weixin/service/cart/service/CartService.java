@@ -74,7 +74,7 @@ public class CartService implements RpcCartService {
         Set<String> productIds = new HashSet<>();
         for (String productId : allProductIds) {
             if (productId.startsWith(Constant.CHOOSE)) {
-                productIds.add(productId);
+                productIds.add(productId.replace(Constant.CHOOSE, ""));
             }
         }
         return productIds;

@@ -1,14 +1,14 @@
 #!/bin/sh
 
 ## java env
-export JAVA_HOME=/usr/jdk/jdk1.7.0_45
+export JAVA_HOME=/usr/local/java/jdk1.7.0_45
 export JRE_HOME=$JAVA_HOME/jre
 
 ## service name
 APP_NAME=cart
 
-SERVICE_DIR=/usr/cheng/service/$APP_NAME
-SERVICE_NAME=weixin-service-$APP_NAME
+SERVICE_DIR=/usr/local/cheng/service/$APP_NAME
+SERVICE_NAME=weixin-service-$APP_NAME-1.0-SNAPSHOT
 JAR_NAME=$SERVICE_NAME\.jar
 PID=$SERVICE_NAME\.pid
 

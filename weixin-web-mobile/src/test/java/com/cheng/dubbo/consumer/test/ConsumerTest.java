@@ -37,16 +37,16 @@ public class ConsumerTest {
     private RpcRedisService redisService;
     @Autowired
     private RpcCartService cartService;
-    @Autowired
-    private RpcProductService productService;
-    @Autowired
-    private RpcSystemService systemService;
-    @Autowired
-    private RpcUserService userService;
-    @Autowired
-    private RpcSmsService smsService;
-    @Autowired
-    private RpcRabbitSmsService rabbitSmsService;
+    //@Autowired
+    //private RpcProductService productService;
+    //@Autowired
+    //private RpcSystemService systemService;
+    //@Autowired
+    //private RpcUserService userService;
+    //@Autowired
+    //private RpcSmsService smsService;
+    //@Autowired
+    //private RpcRabbitSmsService rabbitSmsService;
 
     @Test
     public void testRedis() {
@@ -61,59 +61,59 @@ public class ConsumerTest {
         long count = cartService.addProductCount("1","1");
         System.out.println("=========> "+count);
 
-        Set<String> productIds = cartService.getProductIds("1");
+        Set<String> productIds = cartService.getChooseProductIds("1");
         for (String productId : productIds) {
             System.out.println("=======> "+productId);
         }
     }
 
-    @Test
-    public void testGetCart() {
-        ShoppingCart cartInfo = cartService.getShoppingCart("1");
-        System.out.println("=========> "+JSON.toJSONString(cartInfo));
-    }
-
-    @Test
-    public void testProduct() {
-        Product product = productService.getById("1");
-        System.out.println("============> "+ product);
-    }
-
-    @Test
-    public void testSys() {
-        List<Ad> ads = systemService.getIndexAds();
-        for (Ad ad : ads) {
-            System.out.println("=========> "+ad);
-        }
-        List<Notice> notices = systemService.getIndexNotices();
-        for (Notice notice : notices) {
-            System.out.println("=========> "+notice);
-        }
-    }
-
-    @Test
-    public void testSaveAccess() {
-        userService.saveAccess("18600536683","123456","Cheng","127.0.0.1");
-    }
-
-    @Test
-    public void testLogin() {
-        String data = userService.validateLogin("18600536683", "123456", "127.0.0.1");
-        System.out.println("=====> "+ data);
-    }
-
-    @Test
-    public void testSms() {
-        int countByDay = smsService.getCountByDay("18600536683");
-        System.out.println("=========>" + countByDay);
-    }
-
-    @Test
-    public void testRabbitSms() {
-        SmsModel smsModel = new SmsModel();
-        smsModel.setUserIp("127.0.0.2");
-        smsModel.setPhone("18600536683");
-        rabbitSmsService.sendValidate(smsModel);
-    }
+    //@Test
+    //public void testGetCart() {
+    //    ShoppingCart cartInfo = cartService.getShoppingCart("1");
+    //    System.out.println("=========> "+JSON.toJSONString(cartInfo));
+    //}
+    //
+    //@Test
+    //public void testProduct() {
+    //    Product product = productService.getById("1");
+    //    System.out.println("============> "+ product);
+    //}
+    //
+    //@Test
+    //public void testSys() {
+    //    List<Ad> ads = systemService.getIndexAds();
+    //    for (Ad ad : ads) {
+    //        System.out.println("=========> "+ad);
+    //    }
+    //    List<Notice> notices = systemService.getIndexNotices();
+    //    for (Notice notice : notices) {
+    //        System.out.println("=========> "+notice);
+    //    }
+    //}
+    //
+    //@Test
+    //public void testSaveAccess() {
+    //    userService.saveAccess("18600536683","123456","Cheng","127.0.0.1");
+    //}
+    //
+    //@Test
+    //public void testLogin() {
+    //    String data = userService.validateLogin("18600536683", "123456", "127.0.0.1");
+    //    System.out.println("=====> "+ data);
+    //}
+    //
+    //@Test
+    //public void testSms() {
+    //    int countByDay = smsService.getCountByDay("18600536683");
+    //    System.out.println("=========>" + countByDay);
+    //}
+    //
+    //@Test
+    //public void testRabbitSms() {
+    //    SmsModel smsModel = new SmsModel();
+    //    smsModel.setUserIp("127.0.0.2");
+    //    smsModel.setPhone("18600536683");
+    //    rabbitSmsService.sendValidate(smsModel);
+    //}
 
 }
