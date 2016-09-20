@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-09-19 10:25:21
+Date: 2016-09-20 17:11:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,14 +41,7 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('08f1a907ed5e4d7680fb5aa559925467', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:33:01', '2016-07-12 18:33:01', 'NORMAL');
-INSERT INTO `account` VALUES ('10fdd56f2f0f4a1b89ac9e22770db859', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:22:02', '2016-07-12 18:22:02', 'NORMAL');
-INSERT INTO `account` VALUES ('17ead34100a34b6eab41998c7e0b3ea7', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:19:59', '2016-07-12 18:19:59', 'NORMAL');
-INSERT INTO `account` VALUES ('36e9820b365b4585ada816e387328e69', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:37:02', '2016-07-12 18:37:02', 'NORMAL');
-INSERT INTO `account` VALUES ('37ace3a6d0c3416192a90cf3339df26b', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:30:15', '2016-07-12 18:30:15', 'NORMAL');
-INSERT INTO `account` VALUES ('bbe76ee9b432466a93ceee835eb6ab6a', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:39:39', '2016-07-12 18:39:39', 'NORMAL');
-INSERT INTO `account` VALUES ('d4b3f9dc7096471db2b89c3566137296', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:24:15', '2016-07-12 18:24:15', 'NORMAL');
-INSERT INTO `account` VALUES ('e1731aa57ad7406fbde258a816715769', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-07-12 18:35:31', '2016-07-12 18:35:31', 'NORMAL');
+INSERT INTO `account` VALUES ('ad90aeda385243278c07099c5bb67e31', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-09-20 10:03:47', '2016-09-20 10:04:00', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for account_level
@@ -99,9 +92,9 @@ CREATE TABLE `ad` (
 -- ----------------------------
 -- Records of ad
 -- ----------------------------
-INSERT INTO `ad` VALUES ('1', '名字1', 'http://122.9.35.24/moblie/static/images/ad/swiper-1.jpg', 'http://www.baidu.com', '120', '120', '1', '1', '首页图片1', '2016-06-29 15:24:44', '2016-06-29 15:24:48', 'NORMAL');
-INSERT INTO `ad` VALUES ('2', '名字2', 'http://122.9.35.24/moblie/static/images/ad/swiper-2.jpg', 'http://www.baidu.com', '120', '120', '2', '1', '首页图片2', '2016-06-29 16:34:26', '2016-06-29 16:34:29', 'NORMAL');
-INSERT INTO `ad` VALUES ('3', '名字3', 'http://122.9.35.24/moblie/static/images/ad/swiper-3.jpg', 'http://www.baidu.com', '120', '120', '3', '1', '首页图片3', '2016-06-30 18:07:05', '2016-06-30 18:07:08', 'NORMAL');
+INSERT INTO `ad` VALUES ('1', '名字1', 'http://wx.aqd123.com/moblie/static/images/ad/swiper-1.jpg', 'http://www.baidu.com', '120', '120', '1', '1', '首页图片1', '2016-06-29 15:24:44', '2016-06-29 15:24:48', 'NORMAL');
+INSERT INTO `ad` VALUES ('2', '名字2', 'http://wx.aqd123.com/moblie/static/images/ad/swiper-2.jpg', 'http://www.baidu.com', '120', '120', '2', '1', '首页图片2', '2016-06-29 16:34:26', '2016-06-29 16:34:29', 'NORMAL');
+INSERT INTO `ad` VALUES ('3', '名字3', 'http://wx.aqd123.com/moblie/static/images/ad/swiper-3.jpg', 'http://www.baidu.com', '120', '120', '3', '1', '首页图片3', '2016-06-30 18:07:05', '2016-06-30 18:07:08', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for ad_join_position
@@ -343,6 +336,7 @@ INSERT INTO `member` VALUES ('1', '1', '1', '1', null, null, null, null, null, n
 INSERT INTO `member` VALUES ('bad8d84ebf7445c39156158426ae356e', '08f1a907ed5e4d7680fb5aa559925467', null, 'Chen', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 INSERT INTO `member` VALUES ('2129333011c64d0e8b3b12c3385ccd5f', '36e9820b365b4585ada816e387328e69', null, 'Cheng', null, '18600536683', null, null, null, 'NO', null, '0', '0', '0', null, null, null, null, null, '2016-07-12 18:37:02', '2016-07-12 18:37:02', '--', 'NORMAL');
 INSERT INTO `member` VALUES ('4710c0e0a4a34118824594499da1f33b', 'bbe76ee9b432466a93ceee835eb6ab6a', null, 'Cheng', null, '18600536683', null, null, null, 'NO', null, '0', '0', '0', null, null, null, null, null, '2016-07-12 18:40:09', '2016-07-12 18:40:09', '--', 'NORMAL');
+INSERT INTO `member` VALUES ('8641e5226a40445994843069a86972df', 'ad90aeda385243278c07099c5bb67e31', null, 'Cheng', null, '18600536683', null, null, null, 'NO', null, '0', '0', '0', null, null, null, null, null, '2016-09-20 10:03:47', '2016-09-20 10:03:47', '--', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for notice
@@ -572,9 +566,9 @@ CREATE TABLE `picture` (
 -- ----------------------------
 -- Records of picture
 -- ----------------------------
-INSERT INTO `picture` VALUES ('1', '1', 'http://122.9.35.24/moblie/static/images/product/zm.jpg', '120', '120', '1', '首页商品图片', '2016-06-29 10:10:09', '2016-06-29 10:10:12', 'NORMAL');
-INSERT INTO `picture` VALUES ('2', '2', 'http://122.9.35.24/moblie/static/images/product/hj.jpg', '120', '120', '1', '首页商品图片', '2016-06-29 16:40:31', '2016-06-29 16:40:33', 'NORMAL');
-INSERT INTO `picture` VALUES ('3', '3', 'http://122.9.35.24/moblie/static/images/product/tb.jpg', '120', '120', '1', '首页商品图片', '2016-06-29 16:46:38', '2016-06-29 16:46:40', 'NORMAL');
+INSERT INTO `picture` VALUES ('1', '1', 'http://wx.aqd123.com/moblie/static/images/product/zm.jpg', '120', '120', '1', '首页商品图片', '2016-06-29 10:10:09', '2016-06-29 10:10:12', 'NORMAL');
+INSERT INTO `picture` VALUES ('2', '2', 'http://wx.aqd123.com/moblie/static/images/product/hj.jpg', '120', '120', '1', '首页商品图片', '2016-06-29 16:40:31', '2016-06-29 16:40:33', 'NORMAL');
+INSERT INTO `picture` VALUES ('3', '3', 'http://wx.aqd123.com/moblie/static/images/product/tb.jpg', '120', '120', '1', '首页商品图片', '2016-06-29 16:46:38', '2016-06-29 16:46:40', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for product
@@ -587,7 +581,7 @@ CREATE TABLE `product` (
   `sale_price` decimal(10,1) DEFAULT NULL,
   `no` varchar(255) DEFAULT NULL,
   `key_words` varchar(255) DEFAULT NULL,
-  `product_type_id` varchar(255) DEFAULT NULL,
+  `type_id` varchar(255) DEFAULT NULL,
   `is_alive` tinyint(4) DEFAULT NULL,
   `is_index` tinyint(4) DEFAULT NULL,
   `modify_admin_id` varchar(255) DEFAULT NULL,
@@ -745,6 +739,8 @@ INSERT INTO `sms_history` VALUES ('74763c7ffdcf400eae9424b31aff6dd1', '186005366
 INSERT INTO `sms_history` VALUES ('3140775641c6475882ed1ca9393dfb17', '18600536683', '尊敬的用户，您的验证码为1276，本验证码有效时间10分钟，请勿告知他人', '10', 'VALIDATE', 'system', null, '127.0.0.1', '1276', '--', '2016-07-12 10:37:48', '2016-07-12 10:37:48', 'NORMAL');
 INSERT INTO `sms_history` VALUES ('f034b9585e4e41baabf86c9d57b19606', '18600536683', '尊敬的用户，您的验证码为5384，本验证码有效时间10分钟，请勿告知他人', '10', 'VALIDATE', 'system', null, '127.0.0.1', '5384', '--', '2016-07-12 11:04:48', '2016-07-12 11:04:48', 'NORMAL');
 INSERT INTO `sms_history` VALUES ('e86149af290648108f5d4fdb4d0285c8', '18600536683', '尊敬的用户，您的验证码为5138，本验证码有效时间10分钟，请勿告知他人', '10', 'VALIDATE', 'system', null, '127.0.0.1', '5138', '--', '2016-07-12 11:11:05', '2016-07-12 11:11:05', 'NORMAL');
+INSERT INTO `sms_history` VALUES ('e01665a042584448a0259b718c7d06a6', '18600536683', '????????????9502?????????10?????????', '10', 'VALIDATE', 'system', null, '127.0.0.2', '9502', '--', '2016-09-20 11:05:09', '2016-09-20 11:05:09', 'NORMAL');
+INSERT INTO `sms_history` VALUES ('4b1ca7e9443043d18313df99f7a968a3', '18600536683', '尊敬的用户，您的验证码为0393，本验证码有效时间10分钟，请勿告知他人', '10', 'VALIDATE', 'system', null, '127.0.0.2', '0393', '--', '2016-09-20 11:08:28', '2016-09-20 11:08:28', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for sms_template

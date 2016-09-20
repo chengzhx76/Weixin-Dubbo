@@ -36,8 +36,7 @@ public class ShoppingCart extends DataEntity<ShoppingCart> {
         return cartInfos;
     }
 
-    public ShoppingCart setCartInfos(List<CartInfo> cartInfos) {
+    public void setCartInfos(List<CartInfo> cartInfos) {
         this.cartInfos = cartInfos;
-        return this;
     }
 }

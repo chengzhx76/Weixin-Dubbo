@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -64,11 +63,11 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "v1/index")
     public ResponseEntity<Response> index(HttpServletRequest request) {
 
-        Enumeration enu=request.getParameterNames();
-        while(enu.hasMoreElements()){
-            String paraName=(String)enu.nextElement();
-            System.out.println(paraName+": "+request.getParameter(paraName));
-        }
+        //Enumeration enu=request.getParameterNames();
+        //while(enu.hasMoreElements()){
+        //    String paraName=(String)enu.nextElement();
+        //    System.out.println(paraName+": "+request.getParameter(paraName));
+        //}
 
         Index index = sysIndexService.getIndexInfo("1");
         return success(index);

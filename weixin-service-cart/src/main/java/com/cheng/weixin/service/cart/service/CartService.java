@@ -94,7 +94,7 @@ public class CartService implements RpcCartService {
 
     @Override
     public ShoppingCart getShoppingCart(String accessId) {
-        Map<Serializable, Object> allProduct = redisService.getEntries(accessId);
+        Map<Serializable, Object> allProduct = redisService.getEntries(getCart(accessId));
         ShoppingCart shoppingCart = new ShoppingCart();
         if (!allProduct.isEmpty()) {
             List<CartInfo> cartInfos = new ArrayList<>();
@@ -102,10 +102,10 @@ public class CartService implements RpcCartService {
             for (Serializable itemName : fields) {
                 CartInfo cart = new CartInfo();
                 cart.setAccessId(accessId);
-                cart.setProductId(itemName.toString().split("-")[1]);
+                cart.setProductId(itemName.toString().split("_")[1]);
                 cart.setQuantity(Integer.parseInt(allProduct.get(itemName).toString()));
-                String isChoose = itemName.toString().split("-")[0];
-                cart.setChoose(isChoose.equals("TRUE") ? true : false);
+                String isChoose = itemName.toString().split("_")[0];
+                cart.setChoose("TRUE".equals(isChoose) ? true : false);
                 cartInfos.add(cart);
             }
             shoppingCart.setCartInfos(cartInfos);

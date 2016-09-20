@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.cheng.weixin.common.constant.Constant;
 import com.cheng.weixin.common.utils.JSONUtils;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
+import com.cheng.weixin.rpc.cart.entity.CartInfo;
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
@@ -22,8 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -66,6 +69,15 @@ public class ConsumerTest {
             if (productId.startsWith(Constant.CHOOSE)) {
                 productIds.add(productId.replace(Constant.CHOOSE, ""));
             }
+        }
+    }
+    @Test
+    public void testRedis3() {
+        Map<Serializable, Object> allProduct = redisService.getEntries("CART_1");
+        Set<Serializable> fields = allProduct.keySet();
+        for (Serializable itemName : fields) {
+            String value = allProduct.get(itemName).toString();
+            System.out.println("===> " + itemName + " : " + value);
         }
     }
 

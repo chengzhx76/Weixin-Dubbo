@@ -35,18 +35,19 @@ public class SysCartService {
         List<CartInfo> cartInfos = shoppingCart.getCartInfos();
 
         ShoppingCartInfo shoppingCartInfo = new ShoppingCartInfo();
-        List<ProductInfo> productInfos = new ArrayList<>();
-        ProductInfo productInfo = null;
         if (null != cartInfos && !cartInfos.isEmpty()) {
+            List<ProductInfo> productInfos = new ArrayList<>();
+            ProductInfo productInfo = null;
             BigDecimal totalPrice = new BigDecimal(0);
             for (CartInfo cartInfo : cartInfos) {
                 productInfo = new ProductInfo();
                 Product product = productService.getDefaultPictureById(cartInfo.getProductId());
                 if (null != product) {
+                    productInfo.setProductId(product.getId());
                     productInfo.setProductImg(product.getDefaultPicture().getPictureUrl());
                     BigDecimal salePrice = product.getSalePrice();
                     if (cartInfo.isChoose()) {
-                        totalPrice = totalPrice.add(salePrice);
+                        totalPrice = totalPrice.add(salePrice.multiply(new BigDecimal(cartInfo.getQuantity())));
                     }
                     productInfo.setSalePrice(StringFormat.format(salePrice));
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));
