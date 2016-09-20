@@ -93,6 +93,14 @@ mysql>GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'youpassword' WITH
 FLUSH PRIVILEGES;
 退出mysql数据库：
 exit
+ 
+乱码解决 
+CentOS 6以上的版本：
+vi /etc/my.cnf 
+[mysqld] 下增加 
+character-set-server=utf8 
+重启
+service mysqld restart 
 
 --- 
 

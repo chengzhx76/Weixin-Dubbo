@@ -43,12 +43,12 @@ public class ConsumerTest {
     private RpcProductService productService;
     @Autowired
     private RpcSystemService systemService;
-    //@Autowired
-    //private RpcUserService userService;
-    //@Autowired
-    //private RpcSmsService smsService;
-    //@Autowired
-    //private RpcRabbitSmsService rabbitSmsService;
+    @Autowired
+    private RpcUserService userService;
+    @Autowired
+    private RpcSmsService smsService;
+    @Autowired
+    private RpcRabbitSmsService rabbitSmsService;
 
     @Test
     public void testRedis() {
@@ -68,8 +68,6 @@ public class ConsumerTest {
             }
         }
     }
-
-
 
     @Test
     public void testAddCart() {
@@ -106,29 +104,29 @@ public class ConsumerTest {
         }
     }
 
-    //@Test
-    //public void testSaveAccess() {
-    //    userService.saveAccess("18600536683","123456","Cheng","127.0.0.1");
-    //}
-    //
-    //@Test
-    //public void testLogin() {
-    //    String data = userService.validateLogin("18600536683", "123456", "127.0.0.1");
-    //    System.out.println("=====> "+ data);
-    //}
-    //
-    //@Test
-    //public void testSms() {
-    //    int countByDay = smsService.getCountByDay("18600536683");
-    //    System.out.println("=========>" + countByDay);
-    //}
-    //
-    //@Test
-    //public void testRabbitSms() {
-    //    SmsModel smsModel = new SmsModel();
-    //    smsModel.setUserIp("127.0.0.2");
-    //    smsModel.setPhone("18600536683");
-    //    rabbitSmsService.sendValidate(smsModel);
-    //}
+    @Test
+    public void testSaveAccess() {
+        userService.saveAccess("18600536683","123456","Cheng","127.0.0.1");
+    }
+
+    @Test
+    public void testLogin() {
+        String data = userService.validateLogin("18600536683", "123456", "127.0.0.1");
+        System.out.println("=====> "+ data);
+    }
+
+    @Test
+    public void testSms() {
+        int countByDay = smsService.getCountByDay("18600536683");
+        System.out.println("=========>" + countByDay);
+    }
+
+    @Test
+    public void testRabbitSms() {
+        SmsModel smsModel = new SmsModel();
+        smsModel.setUserIp("127.0.0.2");
+        smsModel.setPhone("18600536683");
+        rabbitSmsService.sendValidate(smsModel);
+    }
 
 }
