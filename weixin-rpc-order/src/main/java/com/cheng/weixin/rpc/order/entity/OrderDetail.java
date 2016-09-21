@@ -10,9 +10,8 @@ import java.math.BigDecimal;
  * Date: 2016/6/6
  */
 public class OrderDetail extends DataEntity<OrderDetail> {
-    private int orderInfoId;
+    private String orderInfoId;
     private String oid;
-    private String no;
     private String name;
     private int quantity;
     private BigDecimal subtotal;
@@ -20,15 +19,14 @@ public class OrderDetail extends DataEntity<OrderDetail> {
     private BigDecimal salePrice;
     private BigDecimal dealPrice;
     private double discountRate;
-    private boolean isPosted;
     private boolean isComment;
     private boolean isGift;
 
-    public int getOrderInfoId() {
+    public String getOrderInfoId() {
         return orderInfoId;
     }
 
-    public void setOrderInfoId(int orderInfoId) {
+    public void setOrderInfoId(String orderInfoId) {
         this.orderInfoId = orderInfoId;
     }
 
@@ -38,14 +36,6 @@ public class OrderDetail extends DataEntity<OrderDetail> {
 
     public void setOid(String oid) {
         this.oid = oid;
-    }
-
-    public String getNo() {
-        return no;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
     }
 
     public String getName() {
@@ -102,14 +92,6 @@ public class OrderDetail extends DataEntity<OrderDetail> {
 
     public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
-    }
-
-    public boolean isPosted() {
-        return isPosted;
-    }
-
-    public void setPosted(boolean posted) {
-        isPosted = posted;
     }
 
     public boolean isComment() {

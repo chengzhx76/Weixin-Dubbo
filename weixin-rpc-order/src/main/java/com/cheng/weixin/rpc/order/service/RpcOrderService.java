@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.order.service;
 
 import com.cheng.weixin.rpc.order.entity.DeliveryTime;
+import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
 
 import java.util.List;
@@ -22,4 +23,12 @@ public interface RpcOrderService {
      * @return
      */
     List<Pay> getAllPay();
+
+    /**
+     * 获取所有的订单
+     * @param userId
+     * @return
+     */
+    List<OrderInfo> getOrderInfos(String userId);
+
 }

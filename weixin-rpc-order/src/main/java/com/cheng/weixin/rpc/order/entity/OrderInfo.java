@@ -13,74 +13,54 @@ import java.util.Date;
  * Date: 2016/6/6
  */
 public class OrderInfo extends DataEntity<OrderInfo> {
-    private int accountId;
-    private int relateOid;
+    private String accountId;
+    private String relateOid;
     private BigDecimal amountPayable;
     private BigDecimal amountPaid;
-    private BigDecimal salePriceTotal;
     private String consignee;
     private String mobile;
     private String address;
-    private int deliveryTimeId;
-    private int payId;
-    private int deliveryTypeId;
+    private String deliveryTimeId;
+    private String payId;
+    private String deliveryTypeId;
     private String arayacakAddress;
     private String arayacakDeliveryTimeId;
     private String province;
     private String city;
     private String country;
     private PayStatus payStatus;
-    private int orderStatusCustomerId;
-    private int orderStatusSystemId;
     private OrderType orderType;
     private BigDecimal freightReduce;
     private BigDecimal freightPayable;
     private BigDecimal productTotalPrice;
     private BigDecimal discount;
-    private String remarkSystem;
+    private String remarkCustomer;
     private String postCode;
     private String telephone;
     private String email;
+    private Date addTime;
     private Date payTime;
     private String exchangeOid;
-    private String customPice;
+    private String customPrice;
     private String couponCode;
     private BigDecimal couponReducePrice;
     private BigDecimal cashReducePrice;
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
 
-    public String getArayacakAddress() {
-        return arayacakAddress;
-    }
-
-    public OrderInfo setArayacakAddress(String arayacakAddress) {
-        this.arayacakAddress = arayacakAddress;
-        return this;
-    }
-
-    public String getArayacakDeliveryTimeId() {
-        return arayacakDeliveryTimeId;
-    }
-
-    public OrderInfo setArayacakDeliveryTimeId(String arayacakDeliveryTimeId) {
-        this.arayacakDeliveryTimeId = arayacakDeliveryTimeId;
-        return this;
-    }
-
-    public int getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
-    public int getRelateOid() {
+    public String getRelateOid() {
         return relateOid;
     }
 
-    public void setRelateOid(int relateOid) {
+    public void setRelateOid(String relateOid) {
         this.relateOid = relateOid;
     }
 
@@ -98,14 +78,6 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setAmountPaid(BigDecimal amountPaid) {
         this.amountPaid = amountPaid;
-    }
-
-    public BigDecimal getSalePriceTotal() {
-        return salePriceTotal;
-    }
-
-    public void setSalePriceTotal(BigDecimal salePriceTotal) {
-        this.salePriceTotal = salePriceTotal;
     }
 
     public String getConsignee() {
@@ -132,28 +104,44 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.address = address;
     }
 
-    public int getDeliveryTimeId() {
+    public String getDeliveryTimeId() {
         return deliveryTimeId;
     }
 
-    public void setDeliveryTimeId(int deliveryTimeId) {
+    public void setDeliveryTimeId(String deliveryTimeId) {
         this.deliveryTimeId = deliveryTimeId;
     }
 
-    public int getPayId() {
+    public String getPayId() {
         return payId;
     }
 
-    public void setPayId(int payId) {
+    public void setPayId(String payId) {
         this.payId = payId;
     }
 
-    public int getDeliveryTypeId() {
+    public String getDeliveryTypeId() {
         return deliveryTypeId;
     }
 
-    public void setDeliveryTypeId(int deliveryTypeId) {
+    public void setDeliveryTypeId(String deliveryTypeId) {
         this.deliveryTypeId = deliveryTypeId;
+    }
+
+    public String getArayacakAddress() {
+        return arayacakAddress;
+    }
+
+    public void setArayacakAddress(String arayacakAddress) {
+        this.arayacakAddress = arayacakAddress;
+    }
+
+    public String getArayacakDeliveryTimeId() {
+        return arayacakDeliveryTimeId;
+    }
+
+    public void setArayacakDeliveryTimeId(String arayacakDeliveryTimeId) {
+        this.arayacakDeliveryTimeId = arayacakDeliveryTimeId;
     }
 
     public String getProvince() {
@@ -186,22 +174,6 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setPayStatus(PayStatus payStatus) {
         this.payStatus = payStatus;
-    }
-
-    public int getOrderStatusCustomerId() {
-        return orderStatusCustomerId;
-    }
-
-    public void setOrderStatusCustomerId(int orderStatusCustomerId) {
-        this.orderStatusCustomerId = orderStatusCustomerId;
-    }
-
-    public int getOrderStatusSystemId() {
-        return orderStatusSystemId;
-    }
-
-    public void setOrderStatusSystemId(int orderStatusSystemId) {
-        this.orderStatusSystemId = orderStatusSystemId;
     }
 
     public OrderType getOrderType() {
@@ -244,12 +216,12 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.discount = discount;
     }
 
-    public String getRemarkSystem() {
-        return remarkSystem;
+    public String getRemarkCustomer() {
+        return remarkCustomer;
     }
 
-    public void setRemarkSystem(String remarkSystem) {
-        this.remarkSystem = remarkSystem;
+    public void setRemarkCustomer(String remarkCustomer) {
+        this.remarkCustomer = remarkCustomer;
     }
 
     public String getPostCode() {
@@ -276,6 +248,14 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.email = email;
     }
 
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
     public Date getPayTime() {
         return payTime;
     }
@@ -292,12 +272,12 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.exchangeOid = exchangeOid;
     }
 
-    public String getCustomPice() {
-        return customPice;
+    public String getCustomPrice() {
+        return customPrice;
     }
 
-    public void setCustomPice(String customPice) {
-        this.customPice = customPice;
+    public void setCustomPrice(String customPrice) {
+        this.customPrice = customPrice;
     }
 
     public String getCouponCode() {

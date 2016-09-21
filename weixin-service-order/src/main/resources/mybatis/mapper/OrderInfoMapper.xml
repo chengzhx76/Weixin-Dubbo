@@ -4,16 +4,16 @@
 <mapper namespace="com.cheng.weixin.service.order.dao.OrderInfoDaoMapper">
   <sql id="tableName">order_info</sql>
   <sql id="columns">
-    o.id,o.account_id,o.relate_oid,o.amount_payable,o.amount_paid,o.sale_price_total,o.consignee,o.mobile,o.address,o.delivery_time_id,o.pay_id,o.delivery_type_id,o.arayacak_address,
-    o.arayacak_delivery_time_id,o.province,o.city,o.country,o.pay_status,o.order_status_customer_id,o.order_status_system_id,o.order_type,o.freight_reduce,o.freight_payable,
-    o.product_total_price,o.discount,o.remark_system,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.custom_pice,o.coupon_code,o.coupon_reducePrice,o.cash_reduce_price,
+    o.id,o.account_id,o.relate_oid,o.amount_payable,o.amount_paid,o.consignee,o.mobile,o.address,o.delivery_time_id,o.pay_id,o.delivery_type_id,o.arayacak_address,
+    o.arayacak_delivery_time_id,o.province,o.city,o.country,o.pay_status,o.order_type,o.freight_reduce,o.freight_payable,
+    o.product_total_price,o.discount,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.add_time,o.exchange_oid,o.custom_Price,o.coupon_code,o.coupon_reducePrice,o.cash_reduce_price,
     o.bonus_point_reduce_price,o.is_free_account_level,
     o.remorks,o.creote_dote,o.updote_dote,o.stotus
   </sql>
   <sql id="insertColumns">
-    id,account_id,relate_oid,amount_payable,amount_paid,sale_price_total,consignee,mobile,address,delivery_time_id,pay_id,delivery_type_id,arayacak_address,
-    arayacak_delivery_time_id,province,city,country,pay_status,order_status_customer_id,order_status_system_id,order_type,freight_reduce,freight_payable,
-    product_total_price,discount,remark_system,post_code,telephone,email,pay_time,exchange_oid,custom_pice,coupon_code,coupon_reduce_price,cash_reduce_price,
+    id,account_id,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time_id,pay_id,delivery_type_id,arayacak_address,
+    arayacak_delivery_time_id,province,city,country,pay_status,order_type,freight_reduce,freight_payable,
+    product_total_price,discount,remark_customer,post_code,telephone,email,pay_time,add_time,exchange_oid,custom_Price,coupon_code,coupon_reduce_price,cash_reduce_price,
     bonus_point_reduce_price,is_free_account_level,
     remarks,create_date,update_date,status
   </sql>
@@ -23,7 +23,6 @@
     <if test="relateOid != null and relateOid != ''">relate_oid=#{relateOid},</if>
     <if test="amountPayable != null and amountPayable != ''">amount_payable=#{amountPayable},</if>
     <if test="amountPaid != null and amountPaid != ''">amount_paid=#{amountPaid},</if>
-    <if test="salePriceTotal != null and salePriceTotal != ''">sale_price_total=#{salePriceTotal},</if>
     <if test="consignee != null and consignee != ''">consignee=#{consignee},</if>
     <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
     <if test="address != null and address != ''">address=#{address},</if>
@@ -36,20 +35,19 @@
     <if test="city != null and city != ''">city=#{city},</if>
     <if test="country != null and country != ''">country=#{country},</if>
     <if test="payStatus != null and payStatus != ''">pay_status=#{payStatus},</if>
-    <if test="orderStatusCustomerId != null and orderStatusCustomerId != ''">order_status_customer_id=#{orderStatusCustomerId},</if>
-    <if test="orderStatusSystemId != null and orderStatusSystemId != ''">order_status_system_id=#{orderStatusSystemId},</if>
     <if test="orderType != null and orderType != ''">order_type=#{orderType},</if>
     <if test="freightReduce != null and freightReduce != ''">freight_reduce=#{freightReduce},</if>
     <if test="freightPayable != null and freightPayable != ''">freight_payable=#{freightPayable},</if>
     <if test="productTotalPrice != null and productTotalPrice != ''">product_total_price=#{productTotalPrice},</if>
     <if test="discount != null and discount != ''">discount=#{discount},</if>
-    <if test="remarkSystem != null and remarkSystem != ''">remark_system=#{remarkSystem},</if>
+    <if test="remarkCustomer != null and remarkCustomer != ''">remark_customer=#{remarkCustomer},</if>
     <if test="postCode != null and postCode != ''">post_code=#{postCode},</if>
     <if test="telephone != null and telephone != ''">telephone=#{telephone},</if>
     <if test="email != null and email != ''">email=#{email},</if>
     <if test="payTime != null and payTime != ''">pay_time=#{payTime},</if>
+    <if test="addTime != null and addTime != ''">add_time=#{addTime},</if>
     <if test="exchangeOid != null and exchangeOid != ''">exchange_oid=#{exchangeOid},</if>
-    <if test="customPice != null and customPice != ''">custom_pice=#{customPice},</if>
+    <if test="customPrice != null and customPrice != ''">custom_price=#{customPrice},</if>
     <if test="couponCode != null and couponCode != ''">coupon_code=#{couponCode},</if>
     <if test="couponReducePrice != null and couponReducePrice != ''">coupon_reduce_price=#{couponReducePrice},</if>
     <if test="cashReducePrice != null and cashReducePrice != ''">cash_reduce_price=#{cashReducePrice},</if>
@@ -64,7 +62,7 @@
     select
       <include refid="columns"/>
     from
-      <include refid="tableName"/> AS a
+      <include refid="tableName"/> AS o
   </sql>
 
   <sql id="orderInfoWhere">
@@ -117,9 +115,9 @@
     )
     VALUES
     (
-    #{id},#{account_id},#{relate_oid},#{amount_payable},#{amount_paid},#{sale_price_total},#{consignee},#{mobile},#{address},#{delivery_time_id},#{pay_id},#{delivery_type_id},#{arayacak_address},
-    #{arayacak_delivery_time_id},#{province},#{city},#{country},#{pay_status},#{order_status_customer_id},#{order_status_system_id},#{order_type},#{freight_reduce},#{freight_payable},
-    #{product_total_price},#{discount},#{remark_system},#{post_code},#{telephone},#{email},#{pay_time},#{exchange_oid},#{custom_pice},#{coupon_code},#{coupon_reducePrice},#{cash_reduce_price},
+    #{id},#{account_id},#{relate_oid},#{amount_payable},#{amount_paid},#{consignee},#{mobile},#{address},#{delivery_time_id},#{pay_id},#{delivery_type_id},#{arayacak_address},
+    #{arayacak_delivery_time_id},#{province},#{city},#{country},#{pay_status},#{order_type},#{freight_reduce},#{freight_payable},
+    #{product_total_price},#{discount},#{remark_customer},#{post_code},#{telephone},#{email},#{pay_time},#{add_time},#{exchange_oid},#{custom_Price},#{coupon_code},#{coupon_reducePrice},#{cash_reduce_price},
     #{bonus_point_reduce_price},#{is_free_account_level},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
