@@ -7,11 +7,12 @@
           http://code.alibabatech.com/schema/dubbo
           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-  <dubbo:application name="cheng-dubbo-cart-consumer-test"/>
+  <dubbo:application name="cheng-cart-consumer-test"/>
 
   <dubbo:registry id="zk1" address="120.27.53.171:2181" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
 
   <dubbo:consumer registry="zk1"/>
 
-  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"/>
+  <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"
+                   check="false" timeout="5000" version="1.0"/>
 </beans>

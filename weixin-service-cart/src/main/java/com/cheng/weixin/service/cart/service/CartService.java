@@ -89,7 +89,7 @@ public class CartService implements RpcCartService {
 
     @Override
     public void deleteProduct(String userId, String productId) {
-        redisService.deleteField(userId, getProductFlag(userId, productId));
+        redisService.deleteField(getCart(userId), getProductFlag(userId, productId));
     }
 
     @Override

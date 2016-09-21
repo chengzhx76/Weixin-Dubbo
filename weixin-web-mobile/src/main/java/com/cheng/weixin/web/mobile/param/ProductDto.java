@@ -1,5 +1,10 @@
 package com.cheng.weixin.web.mobile.param;
 
+import com.alibaba.fastjson.JSON;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Desc: 商品
  * Author: cheng
@@ -34,4 +39,15 @@ public class ProductDto {
     public void setProductId(String productId) {
         this.productId = productId;
     }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+
+        String[] productIds = {"1", "2"};
+        ProductDto p = new ProductDto();
+        p.setProductIds(productIds);
+        String data = JSON.toJSONString(productIds);
+        String ecode = URLEncoder.encode(data, "UTF-8");
+        System.out.println(data + " == "+ecode);
+    }
+
 }

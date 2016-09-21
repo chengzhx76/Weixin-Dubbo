@@ -1,4 +1,4 @@
-package com.cheng.weixin.item.test;
+package com.cheng.weixin.cart;
 
 import org.junit.Test;
 

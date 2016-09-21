@@ -1,4 +1,4 @@
-package com.cheng.weixin.item.test;
+package com.cheng.weixin.cart;
 
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Date: 2016/7/2
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring-context.xml"})
+@ContextConfiguration(locations = {"classpath*:spring-context.xml"})
 public class TestCart {
     @Autowired
     private RpcCartService cartService;
@@ -36,5 +36,11 @@ public class TestCart {
         ShoppingCart shoppingCart = cartService.getShoppingCart("1");
         System.out.println(shoppingCart);
     }
+
+    @Test
+    public void testDelete() {
+        cartService.deleteProduct("1", "1");
+    }
+
 
 }

@@ -58,6 +58,7 @@ public class CartController extends BaseController {
     }
 
     /** 改变选择状态 **/
+    @IgnoreSecurity
     @RequestMapping(value = "v1/change")
     public ResponseEntity<Response> changeStatus(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
@@ -66,11 +67,11 @@ public class CartController extends BaseController {
     }
 
     /** 购买 **/
-    @RequestMapping(value = "v1/buy")
+/*    @RequestMapping(value = "v1/buy")
     public ResponseEntity<Response> buy(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
         return success();
-    }
+    }*/
 
 
     /** 批量添加商品到购物车 **/
