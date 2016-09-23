@@ -49,6 +49,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
 
+
     private List<OrderDetail> orderDetails;
 
     public String getAccountId() {
