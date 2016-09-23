@@ -6,6 +6,7 @@ import com.cheng.weixin.rpc.order.enumType.PayStatus;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Desc: 订单
@@ -47,6 +48,8 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal cashReducePrice;
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
+
+    private List<OrderDetail> orderDetails;
 
     public String getAccountId() {
         return accountId;
@@ -318,5 +321,13 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setFreeAccountLevel(boolean freeAccountLevel) {
         isFreeAccountLevel = freeAccountLevel;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

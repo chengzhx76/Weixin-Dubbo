@@ -22,6 +22,11 @@ public class OrderDetail extends DataEntity<OrderDetail> {
     private boolean isComment;
     private boolean isGift;
 
+    public OrderDetail() {
+    }
+    public OrderDetail(String orderInfoId) {
+        this.orderInfoId = orderInfoId;
+    }
     public String getOrderInfoId() {
         return orderInfoId;
     }

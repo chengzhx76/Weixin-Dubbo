@@ -70,6 +70,9 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="accountId != null and accountId != ''">
+        account_id = #{accountId}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -96,6 +99,11 @@
 
   <!-- 获取全部 -->
   <select id="loadAll" resultType="orderInfo">
+    <include refid="orderInfoSelector"/>
+    <include refid="orderInfoWhere"/>
+  </select>
+  <!-- 获取全部 -->
+  <select id="loadByUserId" resultType="orderInfo">
     <include refid="orderInfoSelector"/>
     <include refid="orderInfoWhere"/>
   </select>

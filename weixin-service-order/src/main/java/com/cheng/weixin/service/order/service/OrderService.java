@@ -1,10 +1,12 @@
 package com.cheng.weixin.service.order.service;
 
 import com.cheng.weixin.rpc.order.entity.DeliveryTime;
+import com.cheng.weixin.rpc.order.entity.OrderDetail;
 import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.service.order.dao.DeliveryTimeDaoMapper;
+import com.cheng.weixin.service.order.dao.OrderDetailDaoMapper;
 import com.cheng.weixin.service.order.dao.OrderInfoDaoMapper;
 import com.cheng.weixin.service.order.dao.PayDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import java.util.List;
 public class OrderService implements RpcOrderService {
     @Autowired
     private OrderInfoDaoMapper orderInfoDao;
+    @Autowired
+    private OrderDetailDaoMapper orderDetailDao;
     @Autowired
     private DeliveryTimeDaoMapper deliveryTimeDao;
     @Autowired
@@ -36,10 +40,11 @@ public class OrderService implements RpcOrderService {
 
     @Override
     public List<OrderInfo> getOrderInfos(String userId) {
-        List<OrderInfo> orderInfos = orderInfoDao.loadAll();
-
-
-
-        return null;
+        List<OrderInfo> orderInfos = orderInfoDao.loadByUserId(userId);
+        for (OrderInfo order : orderInfos) {
+            List<OrderDetail> orderDetails = orderDetailDao.loadByOrder(new OrderDetail(order.getId()));
+            order.setOrderDetails(orderDetails);
+        }
+        return orderInfos;
     }
 }

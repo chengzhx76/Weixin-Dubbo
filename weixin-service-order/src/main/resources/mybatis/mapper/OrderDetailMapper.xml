@@ -43,6 +43,9 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="orderInfoId != null and orderInfoId != ''">
+        order_info_id = #{orderInfoId}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -69,6 +72,12 @@
 
   <!-- 获取全部 -->
   <select id="loadAll" resultType="orderDetail">
+    <include refid="orderDetailSelector"/>
+    <include refid="orderDetailWhere"/>
+  </select>
+
+  <!-- 获取该订单下的商品详情 -->
+  <select id="loadByOrder" resultType="orderDetail">
     <include refid="orderDetailSelector"/>
     <include refid="orderDetailWhere"/>
   </select>
