@@ -26,8 +26,13 @@ public class Account extends DataEntity<Account> {
     public Account() {
     }
 
-    public Account(String username) {
+    public Account(String id, String username) {
+        this.id = id;
         this.username = username;
+    }
+
+    public Account(BigDecimal balance) {
+        this.balance = balance;
     }
 
     //public Account(String id, String loginIp) {

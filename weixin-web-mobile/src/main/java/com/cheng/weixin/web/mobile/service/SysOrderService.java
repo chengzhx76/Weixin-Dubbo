@@ -96,6 +96,17 @@ public class SysOrderService {
         return submitOrder;
     }
 
+    public void submitOrder() {
+        BigDecimal totalProductPrice = new BigDecimal(0);
+        List<ProductModel> productModels = cartService.getChooseProductInfo("1");
+        for (int i=0; i<productModels.size(); i++) {
+            Product product = productService.getById(productModels.get(i).getId());
+            totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(new BigDecimal(productModels.get(i).getCount())));
+        }
+        cartService.deletedChooseProduct("1");
+    }
+
+
     public List<OrderList> getOrders() {
         List<OrderInfo> orderInfos = orderService.getOrderInfos("1");
         List<OrderList> orders = new ArrayList<>();

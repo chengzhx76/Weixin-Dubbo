@@ -33,6 +33,15 @@ public class OrderController extends BaseController {
         return success(orderInfo);
     }
 
+    /** 购买 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/buy")
+    public ResponseEntity<Response> submitBuy() {
+        orderService.submitOrder();
+        return success();
+    }
+
+
     /** 订单列表 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/orders")

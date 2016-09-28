@@ -90,7 +90,6 @@ public interface RpcCartService {
     /**
      * 删除已选择的商品（已购买的商品删除）
      * @param userId
-     * @param productId
      */
-    void deletedChooseProduct(String userId, String productId);
+    void deletedChooseProduct(String userId);
 }

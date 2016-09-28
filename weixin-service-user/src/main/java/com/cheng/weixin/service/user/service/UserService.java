@@ -40,7 +40,7 @@ public class UserService implements RpcUserService {
 
     @Override
     public Account getAccountByLoginName(String loginName) {
-        return accountDao.load(new Account(loginName));
+        return accountDao.load(new Account(null, loginName));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class UserService implements RpcUserService {
 
     @Override
     public String validateLogin(String loginName, String password, String loginIp) {
-        Account userAccount = accountDao.load(new Account(loginName));
+        Account userAccount = accountDao.load(new Account(null, loginName));
         if (null != userAccount) {
             if (!password.equals(userAccount.getPassword())) {
                 return "PASSWDFAIL";
@@ -104,4 +104,15 @@ public class UserService implements RpcUserService {
         account.setId(userId);
         return accountDao.load(account);
     }
+
+    @Override
+    public void updateAccountBalance(String userId, BigDecimal subAmount) {
+        Account userAccount = accountDao.load(new Account(userId, null));
+        if (userAccount.getBalance()!=null) {
+            if (userAccount.getBalance().compareTo(subAmount) != -1) {
+                accountDao.update(new Account(userAccount.getBalance().subtract(subAmount)));
+            }
+        }
+    }
+
 }

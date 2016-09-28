@@ -18,7 +18,6 @@ public class Pay extends DataEntity<Pay> {
         super.id = id;
     }
 
-
     public String getName() {
         return name;
     }

@@ -3,6 +3,8 @@ package com.cheng.weixin.rpc.user.service;
 import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
 
+import java.math.BigDecimal;
+
 /**
  * Desc: 用户
  * Author: cheng
@@ -45,4 +47,10 @@ public interface RpcUserService {
      * @return
      */
     Account getAccount(String userId);
+
+    /**
+     * 更新帐户金额
+     * @param userId
+     */
+    void updateAccountBalance(String userId, BigDecimal subAmount);
 }

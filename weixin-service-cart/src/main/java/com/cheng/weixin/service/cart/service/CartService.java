@@ -151,8 +151,14 @@ public class CartService implements RpcCartService {
     }
 
     @Override
-    public void deletedChooseProduct(String userId, String productId) {
-        redisService.decrease(userId, chooseProduct(productId));
+    public void deletedChooseProduct(String userId) {
+        Map<Serializable, Object> map = redisService.getEntries(userId);
+        Set<Serializable> fields = map.keySet();
+        for (Serializable item : fields) {
+            if (redisService.exists(getCart(userId), Constant.CHOOSE+item.toString())) {
+                redisService.deleteField(getCart(userId), getProductFlag(getCart(userId), item.toString()));
+            }
+        }
     }
 
     /**
