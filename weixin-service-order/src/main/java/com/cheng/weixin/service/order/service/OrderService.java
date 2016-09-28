@@ -1,12 +1,12 @@
 package com.cheng.weixin.service.order.service;
 
 import com.cheng.weixin.rpc.order.entity.DeliveryTime;
-import com.cheng.weixin.rpc.order.entity.OrderDetail;
+import com.cheng.weixin.rpc.order.entity.OrderProductDetail;
 import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.service.order.dao.DeliveryTimeDaoMapper;
-import com.cheng.weixin.service.order.dao.OrderDetailDaoMapper;
+import com.cheng.weixin.service.order.dao.OrderProductDetailDaoMapper;
 import com.cheng.weixin.service.order.dao.OrderInfoDaoMapper;
 import com.cheng.weixin.service.order.dao.PayDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class OrderService implements RpcOrderService {
     @Autowired
     private OrderInfoDaoMapper orderInfoDao;
     @Autowired
-    private OrderDetailDaoMapper orderDetailDao;
+    private OrderProductDetailDaoMapper orderProductDetailDao;
     @Autowired
     private DeliveryTimeDaoMapper deliveryTimeDao;
     @Autowired
@@ -42,11 +42,14 @@ public class OrderService implements RpcOrderService {
     public List<OrderInfo> getOrderInfos(String userId) {
         List<OrderInfo> orderInfos = orderInfoDao.loadByUserId(userId);
         for (OrderInfo order : orderInfos) {
-            List<OrderDetail> orderDetails = orderDetailDao.loadByOrder(new OrderDetail(order.getId()));
-            order.setOrderDetails(orderDetails);
+            List<OrderProductDetail> orderProductDetails = orderProductDetailDao.loadByOrder(new OrderProductDetail(order.getId()));
+            order.setOrderDetails(orderProductDetails);
         }
         return orderInfos;
     }
 
-
+    @Override
+    public OrderInfo getOrderDetail(String userId) {
+        return orderInfoDao.load(new OrderInfo(userId));
+    }
 }

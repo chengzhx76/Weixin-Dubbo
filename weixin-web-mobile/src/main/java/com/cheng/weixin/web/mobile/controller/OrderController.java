@@ -1,6 +1,7 @@
 package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
+import com.cheng.weixin.web.mobile.result.order.OrderDetail;
 import com.cheng.weixin.web.mobile.result.order.OrderList;
 import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
@@ -39,5 +40,14 @@ public class OrderController extends BaseController {
         List<OrderList> orders = orderService.getOrders();
         return success(orders);
     }
+
+    /** 订单详情 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/detail")
+    public ResponseEntity<Response> orderDetail() {
+        OrderDetail order = orderService.getOrderDetail();
+        return success(order);
+    }
+
 
 }

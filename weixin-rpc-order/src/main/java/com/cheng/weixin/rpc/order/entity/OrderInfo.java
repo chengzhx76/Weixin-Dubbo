@@ -36,6 +36,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal freightReduce;
     private BigDecimal freightPayable;
     private BigDecimal productTotalPrice;
+    private BigDecimal balanceOffset;
     private BigDecimal discount;
     private String remarkCustomer;
     private String postCode;
@@ -50,6 +51,13 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
     private String commentId;
+
+    public OrderInfo() {
+    }
+
+    public OrderInfo(String accountId) {
+        this.accountId = accountId;
+    }
 
     public String getOid() {
         return oid;
@@ -75,7 +83,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.flowStatus = flowStatus;
     }
 
-    private List<OrderDetail> orderDetails;
+    private List<OrderProductDetail> orderDetails;
 
     public String getAccountId() {
         return accountId;
@@ -203,6 +211,14 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setPayStatus(PayStatus payStatus) {
         this.payStatus = payStatus;
+    }
+
+    public BigDecimal getBalanceOffset() {
+        return balanceOffset;
+    }
+
+    public void setBalanceOffset(BigDecimal balanceOffset) {
+        this.balanceOffset = balanceOffset;
     }
 
     public OrderType getOrderType() {
@@ -341,11 +357,11 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         isFreeAccountLevel = freeAccountLevel;
     }
 
-    public List<OrderDetail> getOrderDetails() {
+    public List<OrderProductDetail> getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
+    public void setOrderDetails(List<OrderProductDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
 }

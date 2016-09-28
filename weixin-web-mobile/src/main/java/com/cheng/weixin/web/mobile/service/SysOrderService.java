@@ -14,10 +14,7 @@ import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
-import com.cheng.weixin.web.mobile.result.order.OrderDeliveryTime;
-import com.cheng.weixin.web.mobile.result.order.OrderList;
-import com.cheng.weixin.web.mobile.result.order.OrderPay;
-import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
+import com.cheng.weixin.web.mobile.result.order.*;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -109,8 +106,10 @@ public class SysOrderService {
             orderList.setOrderNum(order.getOid());
             orderList.setNumber(order.getOrderDetails().size()+"");
             orderList.setStatus(order.getFlowStatus().split("-"));
-            // 总金额 = 商品总金额 - 优惠金额 + 应付运费
-            orderList.setTotalPrice(StringFormat.format(order.getProductTotalPrice().subtract(order.getDiscount()).add(order.getFreightPayable())));
+            // 总金额 = 商品总金额 - 余额抵扣 - 优惠金额 + 应付运费
+            orderList.setTotalPrice(StringFormat.format(
+                    order.getProductTotalPrice().subtract(order.getBalanceOffset())
+                    .subtract(order.getDiscount()).add(order.getFreightPayable())));
             String orderStatus = "";
             if (order.getPayStatus().equals(PayStatus.NONPAYMENT)) {
                 orderStatus = "INVALID";
@@ -125,5 +124,36 @@ public class SysOrderService {
         return orders;
     }
 
+    public OrderDetail getOrderDetail() {
+        OrderDetail detail = new OrderDetail();
+        OrderInfo orderInfo = orderService.getOrderDetail("1");
+        detail.setId(orderInfo.getId());
+        String[] flowStatus = orderInfo.getFlowStatus().split("-");
+        detail.setStatus(flowStatus[flowStatus.length+1]);
+        detail.setOid(orderInfo.getOid());
+        detail.setConsignee(orderInfo.getConsignee());
+        detail.setAddress(orderInfo.getAddress());
+
+        Pay pay = orderService.getPay(orderInfo.getPayId());
+
+        detail.setPayWay(pay.getName());
+        detail.setProductTotalPrice(StringFormat.format(orderInfo.getProductTotalPrice()));
+        detail.setFreightPayable(StringFormat.format(orderInfo.getFreightPayable()));
+        detail.setCouponReducePrice(StringFormat.format(orderInfo.getCouponReducePrice()));
+        detail.setBalanceOffset(StringFormat.format(orderInfo.getBalanceOffset()));
+        // 总金额 = 商品总金额 - 余额抵扣 - 优惠金额 + 应付运费
+        detail.setTotalPrice(StringFormat.format(
+                orderInfo.getProductTotalPrice().subtract(orderInfo.getBalanceOffset())
+                .subtract(orderInfo.getDiscount()).add(orderInfo.getFreightPayable())));
+        String orderStatus = "";
+        if (orderInfo.getPayStatus().equals(PayStatus.NONPAYMENT)) {
+            orderStatus = "INVALID";
+        } else if (StringUtils.isBlank(orderInfo.getCommentId())) {
+            orderStatus = "WAITCOMMENT";
+            detail.setCommentId(orderInfo.getCommentId());
+        }
+        detail.setOrderStatus(orderStatus);
+        return detail;
+    }
 
 }

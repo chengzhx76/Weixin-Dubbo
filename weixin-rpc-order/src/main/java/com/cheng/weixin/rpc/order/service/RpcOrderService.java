@@ -23,6 +23,11 @@ public interface RpcOrderService {
      * @return
      */
     List<Pay> getAllPay();
+    /**
+     * 获取所有的支付
+     * @return
+     */
+    Pay getPay(String id);
 
     /**
      * 获取所有的订单
@@ -30,5 +35,12 @@ public interface RpcOrderService {
      * @return
      */
     List<OrderInfo> getOrderInfos(String userId);
+
+    /**
+     * 获取订单详情
+     * @param userId
+     * @return
+     */
+    OrderInfo getOrderDetail(String userId);
 
 }

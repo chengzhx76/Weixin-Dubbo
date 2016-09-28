@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cheng.weixin.service.order.dao.OrderDetailDaoMapper">
-  <sql id="tableName">order_detail</sql>
+<mapper namespace="com.cheng.weixin.service.order.dao.OrderProductDetailDaoMapper">
+  <sql id="tableName">order_product_detail</sql>
   <sql id="columns">
     o.id,order_info_id,o.oid,o.name,o.quantity,o.subtotal,o.market_price,
     o.sale_price,o.deal_price,o.discount_rate,o.is_comment,o.is_gift

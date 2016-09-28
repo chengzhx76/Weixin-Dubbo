@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * Author: cheng
  * Date: 2016/6/6
  */
-public class OrderDetail extends DataEntity<OrderDetail> {
+public class OrderProductDetail extends DataEntity<OrderProductDetail> {
     private String orderInfoId;
     private String oid;
     private String name;
@@ -22,9 +22,9 @@ public class OrderDetail extends DataEntity<OrderDetail> {
     private boolean isComment;
     private boolean isGift;
 
-    public OrderDetail() {
+    public OrderProductDetail() {
     }
-    public OrderDetail(String orderInfoId) {
+    public OrderProductDetail(String orderInfoId) {
         this.orderInfoId = orderInfoId;
     }
     public String getOrderInfoId() {

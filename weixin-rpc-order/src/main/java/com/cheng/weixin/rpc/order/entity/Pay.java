@@ -11,6 +11,14 @@ public class Pay extends DataEntity<Pay> {
     private String name;
     private int orderBy;
 
+    public Pay() {
+    }
+
+    public Pay(String id) {
+        super.id = id;
+    }
+
+
     public String getName() {
         return name;
     }
