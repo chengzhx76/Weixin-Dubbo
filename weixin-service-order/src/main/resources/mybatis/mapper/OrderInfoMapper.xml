@@ -6,20 +6,21 @@
   <sql id="columns">
     o.id,o.account_id,o.relate_oid,o.amount_payable,o.amount_paid,o.consignee,o.mobile,o.address,o.delivery_time_id,o.pay_id,o.delivery_type_id,o.arayacak_address,
     o.arayacak_delivery_time_id,o.province,o.city,o.country,o.pay_status,o.order_type,o.freight_reduce,o.freight_payable,
-    o.product_total_price,o.discount,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.add_time,o.exchange_oid,o.custom_Price,o.coupon_code,o.coupon_reducePrice,o.cash_reduce_price,
-    o.bonus_point_reduce_price,o.is_free_account_level,
+    o.product_total_price,o.discount,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.custom_Price,o.coupon_code,o.coupon_reducePrice,o.flow_status,
+    o.bonus_point_reduce_price,o.is_free_account_level,o.comment_id,
     o.remorks,o.creote_dote,o.updote_dote,o.stotus
   </sql>
   <sql id="insertColumns">
-    id,account_id,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time_id,pay_id,delivery_type_id,arayacak_address,
+    id,account_id,oid,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time_id,pay_id,delivery_type_id,arayacak_address,
     arayacak_delivery_time_id,province,city,country,pay_status,order_type,freight_reduce,freight_payable,
-    product_total_price,discount,remark_customer,post_code,telephone,email,pay_time,add_time,exchange_oid,custom_Price,coupon_code,coupon_reduce_price,cash_reduce_price,
-    bonus_point_reduce_price,is_free_account_level,
+    product_total_price,discount,remark_customer,post_code,telephone,email,pay_time,exchange_oid,custom_Price,coupon_code,coupon_reduce_price,flow_status,
+    bonus_point_reduce_price,is_free_account_level,comment_id,
     remarks,create_date,update_date,status
   </sql>
   <sql id="orderInfoIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
+    <if test="oid != null and oid != ''">oid=#{oid},</if>
     <if test="relateOid != null and relateOid != ''">relate_oid=#{relateOid},</if>
     <if test="amountPayable != null and amountPayable != ''">amount_payable=#{amountPayable},</if>
     <if test="amountPaid != null and amountPaid != ''">amount_paid=#{amountPaid},</if>
@@ -45,14 +46,14 @@
     <if test="telephone != null and telephone != ''">telephone=#{telephone},</if>
     <if test="email != null and email != ''">email=#{email},</if>
     <if test="payTime != null and payTime != ''">pay_time=#{payTime},</if>
-    <if test="addTime != null and addTime != ''">add_time=#{addTime},</if>
     <if test="exchangeOid != null and exchangeOid != ''">exchange_oid=#{exchangeOid},</if>
     <if test="customPrice != null and customPrice != ''">custom_price=#{customPrice},</if>
     <if test="couponCode != null and couponCode != ''">coupon_code=#{couponCode},</if>
     <if test="couponReducePrice != null and couponReducePrice != ''">coupon_reduce_price=#{couponReducePrice},</if>
-    <if test="cashReducePrice != null and cashReducePrice != ''">cash_reduce_price=#{cashReducePrice},</if>
+    <if test="flowStatus != null and flowStatus != ''">flow_status=#{flowStatus},</if>
     <if test="bonusPointReducePrice != null and bonusPointReducePrice != ''">bonus_point_reduce_price=#{bonusPointReducePrice},</if>
     <if test="isFreeAccountLevel != null and isFreeAccountLevel != ''">is_free_account_level=#{isFreeAccountLevel},</if>
+    <if test="commentId != null and commentId != ''">commentId=#{comment_id},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -123,10 +124,10 @@
     )
     VALUES
     (
-    #{id},#{account_id},#{relate_oid},#{amount_payable},#{amount_paid},#{consignee},#{mobile},#{address},#{delivery_time_id},#{pay_id},#{delivery_type_id},#{arayacak_address},
+    #{id},#{account_id},#{oid},#{relate_oid},#{amount_payable},#{amount_paid},#{consignee},#{mobile},#{address},#{delivery_time_id},#{pay_id},#{delivery_type_id},#{arayacak_address},
     #{arayacak_delivery_time_id},#{province},#{city},#{country},#{pay_status},#{order_type},#{freight_reduce},#{freight_payable},
-    #{product_total_price},#{discount},#{remark_customer},#{post_code},#{telephone},#{email},#{pay_time},#{add_time},#{exchange_oid},#{custom_Price},#{coupon_code},#{coupon_reducePrice},#{cash_reduce_price},
-    #{bonus_point_reduce_price},#{is_free_account_level},
+    #{product_total_price},#{discount},#{remark_customer},#{post_code},#{telephone},#{email},#{pay_time},#{exchange_oid},#{custom_Price},#{coupon_code},#{coupon_reducePrice},#{flow_status},
+    #{bonus_point_reduce_price},#{is_free_account_level},#{comment_id},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>

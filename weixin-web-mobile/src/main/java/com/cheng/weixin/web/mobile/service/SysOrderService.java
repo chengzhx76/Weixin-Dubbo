@@ -7,14 +7,18 @@ import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.order.entity.DeliveryTime;
+import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
+import com.cheng.weixin.rpc.order.enumType.PayStatus;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.result.order.OrderDeliveryTime;
+import com.cheng.weixin.web.mobile.result.order.OrderList;
 import com.cheng.weixin.web.mobile.result.order.OrderPay;
 import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +47,7 @@ public class SysOrderService {
         SubmitOrderInfo submitOrder = new SubmitOrderInfo();
 
         // 配送地址
-        DeliveryAddress address = userService.getDefaultAddress();
+        DeliveryAddress address = userService.getDefaultAddress("1");
         submitOrder.setConsignee(address.getConsignee());
         submitOrder.setMobile(address.getMobile());
         submitOrder.setAddress(address.getAddress());
@@ -94,5 +98,32 @@ public class SysOrderService {
 
         return submitOrder;
     }
+
+    public List<OrderList> getOrders() {
+        List<OrderInfo> orderInfos = orderService.getOrderInfos("1");
+        List<OrderList> orders = new ArrayList<>();
+        for (OrderInfo order : orderInfos) {
+            OrderList orderList = new OrderList();
+            orderList.setId(order.getId());
+            orderList.setDate(new DateTime(order.getCreateDate()).toString("dd-MM-yyyy HH:mm:ss"));
+            orderList.setOrderNum(order.getOid());
+            orderList.setNumber(order.getOrderDetails().size()+"");
+            orderList.setStatus(order.getFlowStatus().split("-"));
+            // 总金额 = 商品总金额 - 优惠金额 + 应付运费
+            orderList.setTotalPrice(StringFormat.format(order.getProductTotalPrice().subtract(order.getDiscount()).add(order.getFreightPayable())));
+            String orderStatus = "";
+            if (order.getPayStatus().equals(PayStatus.NONPAYMENT)) {
+                orderStatus = "INVALID";
+            } else if (StringUtils.isBlank(order.getCommentId())) {
+                orderStatus = "WAITCOMMENT";
+                orderList.setCommentId(order.getCommentId());
+            }
+            orderList.setOrderStatus(orderStatus);
+
+            orders.add(orderList);
+        }
+        return orders;
+    }
+
 
 }

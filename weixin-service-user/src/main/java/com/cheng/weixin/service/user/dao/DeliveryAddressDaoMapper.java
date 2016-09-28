@@ -15,5 +15,5 @@ public interface DeliveryAddressDaoMapper extends BaseDaoMapper<DeliveryAddress>
      * 获取默认的配送地址
      * @return
      */
-    DeliveryAddress loadDefaultAddress();
+    DeliveryAddress loadDefaultAddress( DeliveryAddress address);
 }

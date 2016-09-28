@@ -6,12 +6,30 @@ package com.cheng.weixin.web.mobile.result.order;
  * Date: 2016/9/21
  */
 public class OrderList {
+    private String id;
     private String date;
     private String orderNum;
     private String number;
     private String[] status;
     private String totalPrice;
     private String orderStatus;
+    private String commentId;
+
+    public String getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getDate() {
         return date;

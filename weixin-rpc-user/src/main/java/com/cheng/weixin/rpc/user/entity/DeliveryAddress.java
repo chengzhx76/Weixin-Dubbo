@@ -8,7 +8,7 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/3
  */
 public class DeliveryAddress extends DataEntity<DeliveryAddress> {
-    private int accountId;
+    private String accountId;
     private int regionProvinceId;
     private int regionCityId;
     private int regionCountryId;
@@ -21,11 +21,19 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
     private String postCode;
     private boolean isDefault;
 
-    public int getAccountId() {
+    public DeliveryAddress() {
+    }
+
+    public DeliveryAddress(String accountId, boolean isDefault) {
+        this.accountId = accountId;
+        this.isDefault = isDefault;
+    }
+
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 

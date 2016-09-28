@@ -94,8 +94,8 @@ public class UserService implements RpcUserService {
     }
 
     @Override
-    public DeliveryAddress getDefaultAddress() {
-        return deliveryAddressDao.loadDefaultAddress();
+    public DeliveryAddress getDefaultAddress(String userId) {
+        return deliveryAddressDao.loadDefaultAddress(new DeliveryAddress(userId, true));
     }
 
     @Override

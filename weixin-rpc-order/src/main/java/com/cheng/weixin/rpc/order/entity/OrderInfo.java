@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class OrderInfo extends DataEntity<OrderInfo> {
     private String accountId;
+    private String oid;
     private String relateOid;
     private BigDecimal amountPayable;
     private BigDecimal amountPaid;
@@ -30,6 +31,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String city;
     private String country;
     private PayStatus payStatus;
+    private String flowStatus;
     private OrderType orderType;
     private BigDecimal freightReduce;
     private BigDecimal freightPayable;
@@ -39,7 +41,6 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String postCode;
     private String telephone;
     private String email;
-    private Date addTime;
     private Date payTime;
     private String exchangeOid;
     private String customPrice;
@@ -48,7 +49,31 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal cashReducePrice;
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
+    private String commentId;
 
+    public String getOid() {
+        return oid;
+    }
+
+    public void setOid(String oid) {
+        this.oid = oid;
+    }
+
+    public String getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
+    }
+
+    public String getFlowStatus() {
+        return flowStatus;
+    }
+
+    public void setFlowStatus(String flowStatus) {
+        this.flowStatus = flowStatus;
+    }
 
     private List<OrderDetail> orderDetails;
 
@@ -250,14 +275,6 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
     }
 
     public Date getPayTime() {
