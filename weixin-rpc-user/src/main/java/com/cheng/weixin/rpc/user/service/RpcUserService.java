@@ -18,6 +18,13 @@ public interface RpcUserService {
     Account getAccountByLoginName(String loginName);
 
     /**
+     * 根据ID获取帐户信息
+     * @param id
+     * @return
+     */
+    Account getAccountById(String id);
+
+    /**
      * 保存帐号信息
      * @param phone
      * @param password

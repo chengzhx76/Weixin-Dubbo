@@ -12,6 +12,8 @@ import java.math.BigDecimal;
  * Date: 2016/6/3
  */
 public class Account extends DataEntity<Account> {
+    private String avatar;
+    private String nickname;
     private String accountLevelId;
     private Credit credit;
     private String username;
@@ -35,11 +37,21 @@ public class Account extends DataEntity<Account> {
         this.balance = balance;
     }
 
-    //public Account(String id, String loginIp) {
-    //    super.id = id;
-    //    this.username = loginIp;
-    //}
+    public String getAvatar() {
+        return avatar;
+    }
 
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
     public String getUsername() {
         return username;

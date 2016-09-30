@@ -4,17 +4,19 @@
 <mapper namespace="com.cheng.weixin.service.user.dao.AccountDaoMapper">
   <sql id="tableName">account</sql>
   <sql id="columns">
-    a.id,a.account_level_id,a.credit,a.username,a.password,a.bonus_point_usable,
+    a.id,a.avatar,a.nickname,a.account_level_id,a.credit,a.username,a.password,a.bonus_point_usable,
     a.bonus_point_upgrade,a.balance,a.is_employee,a.ip,a.source_from,
     a.remarks,a.create_date,a.update_date,a.status
   </sql>
   <sql id="insertColumns">
-    id,account_level_id,credit,username,password,bonus_point_usable,
+    id,avatar,nickname,account_level_id,credit,username,password,bonus_point_usable,
     bonus_point_upgrade,balance,is_employee,ip,source_from,
     remarks,create_date,update_date,status
   </sql>
   <sql id="accountIf">
     <if test="id != null and id != ''">id=#{id},</if>
+    <if test="avatar != null and avatar != ''">avatar=#{avatar},</if>
+    <if test="nickname != null and nickname != ''">nickname=#{nickname},</if>
     <if test="accountLevelId != null and accountLevelId != ''">account_level_id=#{accountLevelId},</if>
     <if test="credit != null and credit != ''">credit=#{credit},</if>
     <if test="username != null and username != ''">username=#{username},</if>
@@ -88,7 +90,7 @@
     )
     VALUES
     (
-    #{id},#{accountLevelId},#{credit},#{username},#{password},#{bonusPointUsable},
+    #{id},#{avatar},#{nickname},#{accountLevelId},#{credit},#{username},#{password},#{bonusPointUsable},
     #{bonusPointUpgrade},#{balance},#{isEmployee},#{ip},#{sourceFrom},
     #{remarks},#{createDate},#{updateDate},#{status}
     )

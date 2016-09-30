@@ -47,6 +47,11 @@ public class UserService implements RpcUserService {
     }
 
     @Override
+    public Account getAccountById(String id) {
+        return accountDao.load(new Account(id, null));
+    }
+
+    @Override
     public void saveAccess(String phone, String password, String nickname, String ip) {
 
         if (null != getAccountByLoginName(phone)) {
@@ -144,7 +149,19 @@ public class UserService implements RpcUserService {
     }
 
     @Override
+    public void addCouponRecord(CouponRecord couponRecor) {
+        couponRecordDao.save(couponRecor);
+    }
+
+    @Override
     public CashRecord getCashRecord(String userId) {
         return cashRecordDao.loadByUser(new CashRecord(userId));
     }
+
+    @Override
+    public void addCashRecord(CashRecord cashRecord) {
+        cashRecordDao.save(cashRecord);
+    }
+
+
 }
