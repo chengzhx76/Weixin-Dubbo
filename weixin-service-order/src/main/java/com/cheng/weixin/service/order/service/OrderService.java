@@ -28,6 +28,7 @@ public class OrderService implements RpcOrderService {
     @Autowired
     private PayDaoMapper payDao;
 
+
     @Override
     public List<DeliveryTime> getAllDeliveryTime() {
         return deliveryTimeDao.loadAll();
@@ -51,5 +52,15 @@ public class OrderService implements RpcOrderService {
     @Override
     public OrderInfo getOrderDetail(String userId) {
         return orderInfoDao.load(new OrderInfo(userId));
+    }
+
+    @Override
+    public void addOrder(OrderInfo orderInfo) {
+        orderInfoDao.save(orderInfo);
+    }
+
+    @Override
+    public Pay getPay(String id) {
+        return payDao.load(new Pay(id));
     }
 }

@@ -1,17 +1,12 @@
 package com.cheng.weixin.service.user.service;
 
-import com.cheng.weixin.rpc.user.entity.Account;
-import com.cheng.weixin.rpc.user.entity.AccountLevel;
-import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
-import com.cheng.weixin.rpc.user.entity.Member;
+import com.cheng.weixin.common.exception.BusinessException;
+import com.cheng.weixin.rpc.user.entity.*;
 import com.cheng.weixin.rpc.user.enumType.Credit;
 import com.cheng.weixin.rpc.user.enumType.Sex;
 import com.cheng.weixin.rpc.user.enumType.SourceFrom;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
-import com.cheng.weixin.service.user.dao.AccountDaoMapper;
-import com.cheng.weixin.service.user.dao.AccountLevelDaoMapper;
-import com.cheng.weixin.service.user.dao.DeliveryAddressDaoMapper;
-import com.cheng.weixin.service.user.dao.MemberDaoMapper;
+import com.cheng.weixin.service.user.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +32,14 @@ public class UserService implements RpcUserService {
     private MemberDaoMapper memberDao;
     @Autowired
     private DeliveryAddressDaoMapper deliveryAddressDao;
+    @Autowired
+    private BehaviorDaoMapper behaviorDao;
+    @Autowired
+    private BonusPointRecordDaoMapper bonusPointRecordDao;
+    @Autowired
+    private CouponRecordDaoMapper couponRecordDao;
+    @Autowired
+    private CashRecordDaoMapper cashRecordDao;
 
     @Override
     public Account getAccountByLoginName(String loginName) {
@@ -110,9 +113,38 @@ public class UserService implements RpcUserService {
         Account userAccount = accountDao.load(new Account(userId, null));
         if (userAccount.getBalance()!=null) {
             if (userAccount.getBalance().compareTo(subAmount) != -1) {
-                accountDao.update(new Account(userAccount.getBalance().subtract(subAmount)));
+                Account account = new Account();
+                account.setBalance(userAccount.getBalance().subtract(subAmount));
+                account.preUpdate();
+                accountDao.update(account);
+            }else {
+                throw new BusinessException(400, "余额不足");
             }
         }
     }
 
+    @Override
+    public void addBehavior(Behavior behavior) {
+        behaviorDao.save(behavior);
+    }
+
+    @Override
+    public BonusPointRecord getBonusPointRecord(String userId) {
+        return bonusPointRecordDao.loadByUserId(new BonusPointRecord(userId));
+    }
+
+    @Override
+    public void addBonusPointRecord(BonusPointRecord bonusPointRecord) {
+        bonusPointRecordDao.save(bonusPointRecord);
+    }
+
+    @Override
+    public CouponRecord getCouponRecordByUser(String userId) {
+        return couponRecordDao.loadByUser(new CouponRecord(userId));
+    }
+
+    @Override
+    public CashRecord getCashRecord(String userId) {
+        return cashRecordDao.loadByUser(new CashRecord(userId));
+    }
 }

@@ -9,10 +9,10 @@ import com.cheng.common.entity.DataEntity;
  */
 public class DeliveryAddress extends DataEntity<DeliveryAddress> {
     private String accountId;
-    private int regionProvinceId;
-    private int regionCityId;
-    private int regionCountryId;
-    private int villageId;
+    private String regionProvinceId;
+    private String regionCityId;
+    private String regionCountryId;
+    private String villageId;
     private String consignee;
     private String address;
     private String mobile;
@@ -37,28 +37,36 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
         this.accountId = accountId;
     }
 
-    public int getRegionProvinceId() {
+    public String getRegionProvinceId() {
         return regionProvinceId;
     }
 
-    public void setRegionProvinceId(int regionProvinceId) {
+    public void setRegionProvinceId(String regionProvinceId) {
         this.regionProvinceId = regionProvinceId;
     }
 
-    public int getRegionCityId() {
+    public String getRegionCityId() {
         return regionCityId;
     }
 
-    public void setRegionCityId(int regionCityId) {
+    public void setRegionCityId(String regionCityId) {
         this.regionCityId = regionCityId;
     }
 
-    public int getRegionCountryId() {
+    public String getRegionCountryId() {
         return regionCountryId;
     }
 
-    public void setRegionCountryId(int regionCountryId) {
+    public void setRegionCountryId(String regionCountryId) {
         this.regionCountryId = regionCountryId;
+    }
+
+    public String getVillageId() {
+        return villageId;
+    }
+
+    public void setVillageId(String villageId) {
+        this.villageId = villageId;
     }
 
     public String getConsignee() {
@@ -67,14 +75,6 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
 
     public void setConsignee(String consignee) {
         this.consignee = consignee;
-    }
-
-    public int getVillageId() {
-        return villageId;
-    }
-
-    public void setVillageId(int villageId) {
-        this.villageId = villageId;
     }
 
     public String getAddress() {

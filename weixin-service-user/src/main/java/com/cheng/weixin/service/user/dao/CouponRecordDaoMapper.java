@@ -11,4 +11,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CouponRecordDaoMapper extends BaseDaoMapper<CouponRecord> {
+    /**
+     * 根据用户获取券记录
+     * @param couponRecord
+     * @return
+     */
+    CouponRecord loadByUser(CouponRecord couponRecord);
+
 }

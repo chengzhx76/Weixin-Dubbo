@@ -11,4 +11,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CashRecordDaoMapper extends BaseDaoMapper<CashRecord> {
+    /**
+     * 获取现金记录
+     * @return
+     */
+    CashRecord loadByUser(CashRecord cashRecord);
+
 }

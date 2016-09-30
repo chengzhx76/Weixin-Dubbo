@@ -26,10 +26,13 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String payId;
     private String deliveryTypeId;
     private String arayacakAddress;
-    private String arayacakDeliveryTimeId;
+    private String arayacakDeliveryTime;
     private String province;
     private String city;
     private String country;
+    private String villageId;
+    private String ip;
+
     private PayStatus payStatus;
     private String flowStatus;
     private OrderType orderType;
@@ -47,7 +50,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String customPrice;
     private String couponCode;
     private BigDecimal couponReducePrice;
-    private BigDecimal cashReducePrice;
+    //private BigDecimal cashReducePrice;
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
     private String commentId;
@@ -57,6 +60,22 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public OrderInfo(String accountId) {
         this.accountId = accountId;
+    }
+
+    public String getVillageId() {
+        return villageId;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public void setVillageId(String villageId) {
+        this.villageId = villageId;
     }
 
     public String getOid() {
@@ -173,12 +192,12 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.arayacakAddress = arayacakAddress;
     }
 
-    public String getArayacakDeliveryTimeId() {
-        return arayacakDeliveryTimeId;
+    public String getArayacakDeliveryTime() {
+        return arayacakDeliveryTime;
     }
 
-    public void setArayacakDeliveryTimeId(String arayacakDeliveryTimeId) {
-        this.arayacakDeliveryTimeId = arayacakDeliveryTimeId;
+    public void setArayacakDeliveryTime(String arayacakDeliveryTime) {
+        this.arayacakDeliveryTime = arayacakDeliveryTime;
     }
 
     public String getProvince() {
@@ -333,13 +352,13 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.couponReducePrice = couponReducePrice;
     }
 
-    public BigDecimal getCashReducePrice() {
-        return cashReducePrice;
-    }
-
-    public void setCashReducePrice(BigDecimal cashReducePrice) {
-        this.cashReducePrice = cashReducePrice;
-    }
+    //public BigDecimal getCashReducePrice() {
+    //    return cashReducePrice;
+    //}
+    //
+    //public void setCashReducePrice(BigDecimal cashReducePrice) {
+    //    this.cashReducePrice = cashReducePrice;
+    //}
 
     public BigDecimal getBonusPointReducePrice() {
         return bonusPointReducePrice;

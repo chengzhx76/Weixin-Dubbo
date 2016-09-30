@@ -8,20 +8,27 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/3
  */
 public class BonusPointRecord extends DataEntity<BonusPointRecord> {
-    private int accountId;
+    private String accountId;
     private int beforeBonusPoints;
     private int txBonusPoints;
     private int frozenBonusPoints;
     private int afterBonusPoints;
     private int txType;
-    private int behaviorId;
+    private String behaviorId;
     private String txResult;
 
-    public int getAccountId() {
+    public BonusPointRecord() {
+    }
+
+    public BonusPointRecord(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
@@ -65,11 +72,11 @@ public class BonusPointRecord extends DataEntity<BonusPointRecord> {
         this.txType = txType;
     }
 
-    public int getBehaviorId() {
+    public String getBehaviorId() {
         return behaviorId;
     }
 
-    public void setBehaviorId(int behaviorId) {
+    public void setBehaviorId(String behaviorId) {
         this.behaviorId = behaviorId;
     }
 

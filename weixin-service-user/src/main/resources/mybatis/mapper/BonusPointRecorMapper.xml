@@ -41,6 +41,9 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="accountId != null and accountId != ''">
+        account_id = #{accountId}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -61,6 +64,11 @@
 <!-- =================================================================== -->
 
   <select id="load" parameterType="BonusPointRecord" resultType="BonusPointRecord">
+    <include refid="bonusPointRecordSelector"/>
+    <include refid="bonusPointRecordWhere"/>
+  </select>
+
+  <select id="loadByUserId" parameterType="BonusPointRecord" resultType="BonusPointRecord">
     <include refid="bonusPointRecordSelector"/>
     <include refid="bonusPointRecordWhere"/>
   </select>

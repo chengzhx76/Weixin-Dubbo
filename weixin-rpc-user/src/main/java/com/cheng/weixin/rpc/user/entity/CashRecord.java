@@ -2,74 +2,83 @@ package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
 
+import java.math.BigDecimal;
+
 /**
  * Desc: 记录现金账户的收支情况
  * Author: cheng
  * Date: 2016/6/3
  */
 public class CashRecord extends DataEntity<CashRecord> {
-    private int accountId;
-    private int beforeMoney;
-    private int txMoney;
-    private int frozenMoney;
-    private int afterBonusPoints;
-    private int txType;
-    private int behaviorId;
+    private String accountId;
+    private BigDecimal beforeMoney;
+    private BigDecimal txMoney;
+    private BigDecimal frozenMoney;
+    private BigDecimal afterBonusPoints;
+    private String txType;
+    private String behaviorId;
     private String txResult;
 
-    public int getAccountId() {
-        return accountId;
+    public CashRecord() {
     }
 
-    public void setAccountId(int accountId) {
+    public CashRecord(String accountId) {
         this.accountId = accountId;
     }
 
-    public int getBeforeMoney() {
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public BigDecimal getBeforeMoney() {
         return beforeMoney;
     }
 
-    public void setBeforeMoney(int beforeMoney) {
+    public void setBeforeMoney(BigDecimal beforeMoney) {
         this.beforeMoney = beforeMoney;
     }
 
-    public int getTxMoney() {
+    public BigDecimal getTxMoney() {
         return txMoney;
     }
 
-    public void setTxMoney(int txMoney) {
+    public void setTxMoney(BigDecimal txMoney) {
         this.txMoney = txMoney;
     }
 
-    public int getFrozenMoney() {
+    public BigDecimal getFrozenMoney() {
         return frozenMoney;
     }
 
-    public void setFrozenMoney(int frozenMoney) {
+    public void setFrozenMoney(BigDecimal frozenMoney) {
         this.frozenMoney = frozenMoney;
     }
 
-    public int getAfterBonusPoints() {
+    public BigDecimal getAfterBonusPoints() {
         return afterBonusPoints;
     }
 
-    public void setAfterBonusPoints(int afterBonusPoints) {
+    public void setAfterBonusPoints(BigDecimal afterBonusPoints) {
         this.afterBonusPoints = afterBonusPoints;
     }
 
-    public int getTxType() {
+    public String getTxType() {
         return txType;
     }
 
-    public void setTxType(int txType) {
+    public void setTxType(String txType) {
         this.txType = txType;
     }
 
-    public int getBehaviorId() {
+    public String getBehaviorId() {
         return behaviorId;
     }
 
-    public void setBehaviorId(int behaviorId) {
+    public void setBehaviorId(String behaviorId) {
         this.behaviorId = behaviorId;
     }
 

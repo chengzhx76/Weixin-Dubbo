@@ -9,18 +9,21 @@ import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.order.entity.DeliveryTime;
 import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
+import com.cheng.weixin.rpc.order.enumType.OrderType;
 import com.cheng.weixin.rpc.order.enumType.PayStatus;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
-import com.cheng.weixin.rpc.user.entity.Account;
-import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
+import com.cheng.weixin.rpc.user.entity.*;
+import com.cheng.weixin.rpc.user.enumType.BehaviorType;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.result.order.*;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -104,6 +107,86 @@ public class SysOrderService {
             totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(new BigDecimal(productModels.get(i).getCount())));
         }
         cartService.deletedChooseProduct("1");
+
+        // 生成订单
+        OrderInfo order = new OrderInfo();
+        String oid = RandomStringUtils.randomNumeric(8);
+        order.setOid(oid);
+        order.setAmountPayable(totalProductPrice);
+        order.setAmountPaid(totalProductPrice);
+        order.setAccountId("1");
+        // 配送地址
+        DeliveryAddress address = userService.getDefaultAddress("1");
+        order.setConsignee(address.getConsignee());
+        order.setMobile(address.getMobile());
+        order.setVillageId(address.getVillageId());
+        order.setAddress(address.getAddress());
+        order.setPostCode(address.getPostCode());
+        order.setTelephone(address.getTelephone());
+        order.setEmail(address.getEmail());
+
+        order.setFlowStatus("已支付");
+        order.setDeliveryTimeId("2016年9月29日");
+        order.setPayId("1");
+        order.setDeliveryTypeId("1");
+        //order.setArayacakAddress("刘楼");
+        //order.setArayacakDeliveryTime("2016年9月29日");
+        order.setOrderType(OrderType.NORMAL);
+        order.setFreightReduce(BigDecimal.ZERO);
+        order.setFreightPayable(new BigDecimal(2));
+        order.setProductTotalPrice(totalProductPrice);
+        order.setDiscount(BigDecimal.ZERO);
+        order.setRemarkCustomer("备注");
+        order.setIp("127.0.0.1");
+        order.setPayTime(new Date());
+        order.setCouponCode("122355");
+        order.setBonusPointReducePrice(BigDecimal.ONE);
+        order.setFreeAccountLevel(Boolean.FALSE);
+        order.preInsert();
+        orderService.addOrder(order);
+
+        // 用户金额操作
+        userService.updateAccountBalance("1", totalProductPrice);
+
+        // 更新记录（积分记录、券记录、现金记录）
+        Behavior behavior = new Behavior();
+        behavior.setBehaviorType(BehaviorType.CASH);
+        behavior.setNanme("下单");
+        behavior.setNanme(oid);
+        behavior.preInsert();
+        userService.addBehavior(behavior);
+
+        BonusPointRecord bonusPoint = userService.getBonusPointRecord("1");
+        BonusPointRecord bonusPointRecord = new BonusPointRecord();
+        bonusPointRecord.setId(bonusPoint.getId());
+        bonusPointRecord.setBeforeBonusPoints(bonusPoint.getBeforeBonusPoints());
+        bonusPointRecord.setTxBonusPoints(10);// TODO 本次订单获取的积分
+        bonusPointRecord.setFrozenBonusPoints(10);
+        bonusPointRecord.setAfterBonusPoints(bonusPoint.getBeforeBonusPoints());
+        bonusPointRecord.setBehaviorId(behavior.getId());
+        bonusPointRecord.setTxResult("结果"); //TODO
+        userService.addBonusPointRecord(bonusPoint);
+
+        CouponRecord record  = userService.getCouponRecordByUser("1");
+        CouponRecord couponRecord = new CouponRecord();
+        couponRecord.setId(record.getId());
+        couponRecord.setCouponCodeId("123");
+        couponRecord.setCouponCodeId("1");
+        couponRecord.setTxType("支出");
+        couponRecord.setBehaviorId(behavior.getId());
+        couponRecord.setTxResult("结果");
+        userService.addCouponRecord(couponRecord);
+
+        CashRecord cash = userService.getCashRecord("1");
+        CashRecord cashRecord = new CashRecord();
+        cashRecord.setId(cash.getId());
+        cashRecord.setBeforeMoney(cash.getBeforeMoney());
+        cashRecord.setTxMoney(totalProductPrice);
+        cashRecord.setAfterBonusPoints(cash.getBeforeMoney().subtract(totalProductPrice));
+        cashRecord.setTxType("支出");
+        cashRecord.setBehaviorId(behavior.getId());
+        cashRecord.setTxResult("结果");
+        userService.addCashRecord(cashRecord);
     }
 
 

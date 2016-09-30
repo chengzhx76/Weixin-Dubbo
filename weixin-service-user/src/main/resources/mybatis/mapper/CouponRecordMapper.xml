@@ -35,6 +35,9 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="accountId != null and accountId != ''">
+        account_id = #{accountId}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -55,6 +58,10 @@
 <!-- =================================================================== -->
 
   <select id="load" parameterType="CouponRecord" resultType="CouponRecord">
+    <include refid="couponRecordSelector"/>
+    <include refid="couponRecordWhere"/>
+  </select>
+  <select id="loadByUser" parameterType="CouponRecord" resultType="CouponRecord">
     <include refid="couponRecordSelector"/>
     <include refid="couponRecordWhere"/>
   </select>

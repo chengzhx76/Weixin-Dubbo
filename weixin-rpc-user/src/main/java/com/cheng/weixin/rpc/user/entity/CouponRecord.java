@@ -8,41 +8,48 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/3
  */
 public class CouponRecord extends DataEntity<CouponRecord> {
-    private int accountId;
-    private int couponCodeId;
-    private int txType;
-    private int behaviorId;
+    private String accountId;
+    private String couponCodeId;
+    private String txType;
+    private String behaviorId;
     private String txResult;
 
-    public int getAccountId() {
-        return accountId;
+    public CouponRecord() {
     }
 
-    public void setAccountId(int accountId) {
+    public CouponRecord(String accountId) {
         this.accountId = accountId;
     }
 
-    public int getCouponCodeId() {
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getCouponCodeId() {
         return couponCodeId;
     }
 
-    public void setCouponCodeId(int couponCodeId) {
+    public void setCouponCodeId(String couponCodeId) {
         this.couponCodeId = couponCodeId;
     }
 
-    public int getTxType() {
+    public String getTxType() {
         return txType;
     }
 
-    public void setTxType(int txType) {
+    public void setTxType(String txType) {
         this.txType = txType;
     }
 
-    public int getBehaviorId() {
+    public String getBehaviorId() {
         return behaviorId;
     }
 
-    public void setBehaviorId(int behaviorId) {
+    public void setBehaviorId(String behaviorId) {
         this.behaviorId = behaviorId;
     }
 

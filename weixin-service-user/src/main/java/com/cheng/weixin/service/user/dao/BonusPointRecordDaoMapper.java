@@ -11,4 +11,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BonusPointRecordDaoMapper extends BaseDaoMapper<BonusPointRecord> {
+    /**
+     * 根据用户名获取积分
+     * @param bonusPointRecord
+     * @return
+     */
+    BonusPointRecord loadByUserId(BonusPointRecord bonusPointRecord);
+
 }

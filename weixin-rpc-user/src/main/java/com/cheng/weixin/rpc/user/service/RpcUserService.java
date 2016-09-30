@@ -1,7 +1,6 @@
 package com.cheng.weixin.rpc.user.service;
 
-import com.cheng.weixin.rpc.user.entity.Account;
-import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
+import com.cheng.weixin.rpc.user.entity.*;
 
 import java.math.BigDecimal;
 
@@ -53,4 +52,48 @@ public interface RpcUserService {
      * @param userId
      */
     void updateAccountBalance(String userId, BigDecimal subAmount);
+
+    /**
+     * 保存动作
+     * @param behavior
+     */
+    void addBehavior(Behavior behavior);
+
+    /**
+     * 积分记录
+     * @param userId
+     */
+    BonusPointRecord getBonusPointRecord(String userId);
+
+    /**
+     * 保存积分
+     * @param bonusPointRecord
+     */
+    void addBonusPointRecord(BonusPointRecord bonusPointRecord);
+
+    /**
+     * 获取用户券记录
+     * @param userId
+     * @return
+     */
+    CouponRecord getCouponRecordByUser(String userId);
+
+    /**
+     * 保存券记录
+     * @param couponRecor
+     */
+    void addCouponRecord(CouponRecord couponRecor);
+
+    /**
+     * 根据用户获取现金记录
+     * @param userId
+     * @return
+     */
+    CashRecord getCashRecord(String userId);
+
+    /**
+     * 保存现金记录
+     * @param cashRecord
+     */
+    void addCashRecord(CashRecord cashRecord);
 }

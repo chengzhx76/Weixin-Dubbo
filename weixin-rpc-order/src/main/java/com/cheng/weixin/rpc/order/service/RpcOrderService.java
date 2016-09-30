@@ -43,4 +43,10 @@ public interface RpcOrderService {
      */
     OrderInfo getOrderDetail(String userId);
 
+    /**
+     * 保存订单
+     * @param orderInfo
+     */
+    void addOrder(OrderInfo orderInfo);
+
 }
