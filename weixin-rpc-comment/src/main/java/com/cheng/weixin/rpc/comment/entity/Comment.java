@@ -24,6 +24,13 @@ public class Comment extends DataEntity<Comment> {
     private int reviewStatus;
     private String reviewResult;
 
+    public Comment() {
+    }
+
+    public Comment(String productId) {
+        this.productId = productId;
+    }
+
     public double getProductScore() {
         return productScore;
     }

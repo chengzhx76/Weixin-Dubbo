@@ -1,11 +1,17 @@
 package com.cheng.weixin.web.mobile.service;
 
 import com.cheng.weixin.common.utils.StringFormat;
+import com.cheng.weixin.rpc.comment.entity.Comment;
+import com.cheng.weixin.rpc.comment.service.RpcCommentService;
 import com.cheng.weixin.rpc.item.entity.Picture;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
+import com.cheng.weixin.rpc.user.entity.Account;
+import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.result.comment.ProductComment;
 import com.cheng.weixin.web.mobile.result.product.ProductDetail;
 import com.cheng.weixin.web.mobile.result.product.ProductPic;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +27,10 @@ import java.util.List;
 public class SysProductService {
     @Autowired
     private RpcProductService productService;
-
+    @Autowired
+    private RpcCommentService commentService;
+    @Autowired
+    private RpcUserService userService;
     /**
      * 详情页
      * @param productId
@@ -46,6 +55,16 @@ public class SysProductService {
         }
         detail.setPicList(pics);
 
+        List<Comment> commentes = commentService.getByProductId(productId);
+
+        List<ProductComment> productComment = new ArrayList<>();
+        for (Comment comment : commentes) {
+            Account account = userService.getAccountById(comment.getAccountId());
+            // TODO 等级
+            productComment.add(new ProductComment(account.getUsername(), "1",
+                    new DateTime(comment.getCreateDate()).toString("dd-MM-yyyy HH:mm:ss"), comment.getContent(),"回复"));
+        }
+        detail.setComments(productComment);
         return detail;
     }
 

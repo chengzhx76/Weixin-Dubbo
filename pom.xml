@@ -13,6 +13,7 @@
       <module>weixin-common-config</module>
       <module>weixin-common-service</module>
       <module>weixin-common-entity</module>
+      <module>weixin-rabbitmq-model</module>
       <module>weixin-rpc-admin</module>
       <module>weixin-rpc-log</module>
       <module>weixin-rpc-wxtools</module>
@@ -26,6 +27,7 @@
       <module>weixin-rpc-cart</module>
       <module>weixin-rpc-comment</module>
       <module>weixin-rpc-system</module>
+      <module>weixin-rpc-message</module>
       <module>weixin-service-admin</module>
       <module>weixin-service-cart</module>
       <module>weixin-service-item</module>
@@ -37,12 +39,11 @@
       <module>weixin-service-httpclient</module>
       <module>weixin-service-timer</module>
       <module>weixin-service-rabbitmq</module>
+      <module>weixin-service-comment</module>
+      <module>weixin-service-system</module>
+      <module>weixin-service-message</module>
       <module>weixin-web-manage</module>
       <module>weixin-web-mobile</module>
-      <module>weixin-service-system</module>
-      <module>weixin-rpc-message</module>
-      <module>weixin-service-message</module>
-      <module>weixin-rabbitmq-model</module>
     </modules>
 
     <properties>
@@ -182,6 +183,11 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-rpc-order</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-comment</artifactId>
           <version>${project.version}</version>
         </dependency>
         <!-- Junit -->

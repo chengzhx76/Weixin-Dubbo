@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.product;
 
+import com.cheng.weixin.web.mobile.result.comment.ProductComment;
+
 import java.util.List;
 
 /**
@@ -18,6 +20,16 @@ public class ProductDetail {
     private String marketPrice;
 
     private List<ProductPic> picList;
+
+    private List<ProductComment> comments;
+
+    public List<ProductComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<ProductComment> comments) {
+        this.comments = comments;
+    }
 
     public List<ProductPic> getPicList() {
         return picList;
