@@ -53,4 +53,11 @@ public interface RpcProductService {
      */
     List<ProductType> getProductType();
 
+    /**
+     * 获取该商品的所有图片
+     * @param productId
+     * @return
+     */
+    List<Picture> getAllPicture(String productId);
+
 }

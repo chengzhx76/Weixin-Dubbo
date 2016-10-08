@@ -20,7 +20,6 @@ public class UserController extends BaseController {
     @Autowired
     private SysUserService userService;
 
-
     /** 个人详细信息 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/detail")

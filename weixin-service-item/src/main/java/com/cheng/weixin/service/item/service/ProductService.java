@@ -26,11 +26,6 @@ public class ProductService implements RpcProductService {
     @Autowired
     private ProductTypeDaoMapper productTypeDao;
 
-    /**
-     * 根据ID获取商品
-     * @param id
-     * @return
-     */
     @Override
     public Product getById(String id) {
         return productDao.load(new Product(id));
@@ -71,5 +66,10 @@ public class ProductService implements RpcProductService {
     @Override
     public List<ProductType> getProductType() {
         return productTypeDao.loadAll();
+    }
+
+    @Override
+    public List<Picture> getAllPicture(String productId) {
+        return pictureDao.loadAllPicture(new Picture(productId));
     }
 }
