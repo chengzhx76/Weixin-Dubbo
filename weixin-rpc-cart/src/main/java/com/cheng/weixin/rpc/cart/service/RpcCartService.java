@@ -67,9 +67,9 @@ public interface RpcCartService {
 
     /**
      * 添加商品
-     * @param userId
-     * @param productId
-     * @param count
+     * @param userId 用户ID
+     * @param productId 商品ID
+     * @param count 商品数量
      */
     void addProduct(String userId, String productId, Long count);
 

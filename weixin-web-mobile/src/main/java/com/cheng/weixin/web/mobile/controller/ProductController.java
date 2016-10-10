@@ -30,4 +30,20 @@ public class ProductController extends BaseController {
         return success(productService.getDetail(product.getProductId()));
     }
 
+    /** 购买商品 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/buy")
+    public ResponseEntity<Response> buyProduct(HttpServletRequest request) {
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        productService.buyProduct(product.getProductId(), product.getCount());
+        return success();
+    }
+
+    /** 收藏/取消收藏 商品 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/focus")
+    public ResponseEntity<Response> addProductFocus(HttpServletRequest request) {
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        return success(productService.addFocus(product.getProductId()));
+    }
 }

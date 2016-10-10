@@ -47,4 +47,8 @@ public class TestAll {
             System.out.println("====> Value: "+field + " Key: " + datas.get(field));
         }
     }
+    @Test
+    public void test05() {
+        redisService.put("USER_1", "TRUE_1", 15L);
+    }
 }

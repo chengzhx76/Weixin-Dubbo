@@ -1,6 +1,7 @@
 package com.cheng.weixin.web.mobile.service;
 
 import com.cheng.weixin.common.utils.StringFormat;
+import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.comment.entity.Comment;
 import com.cheng.weixin.rpc.comment.service.RpcCommentService;
 import com.cheng.weixin.rpc.item.entity.Picture;
@@ -31,6 +32,8 @@ public class SysProductService {
     private RpcCommentService commentService;
     @Autowired
     private RpcUserService userService;
+    @Autowired
+    private RpcCartService cartService;
     /**
      * 详情页
      * @param productId
@@ -66,6 +69,18 @@ public class SysProductService {
         }
         detail.setComments(productComment);
         return detail;
+    }
+
+    public void buyProduct(String productId, Long count) {
+        cartService.addProduct("1", productId, count);
+    }
+
+    public boolean addFocus(String productId) {
+        boolean isFocus = userService.isProductFocus("1", productId);
+        if (!isFocus) {
+            userService.addProductFocus("1", productId);
+        }
+        return isFocus;
     }
 
 }

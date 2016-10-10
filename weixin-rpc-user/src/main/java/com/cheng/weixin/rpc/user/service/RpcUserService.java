@@ -103,4 +103,19 @@ public interface RpcUserService {
      * @param cashRecord
      */
     void addCashRecord(CashRecord cashRecord);
+
+    /**
+     * 商品收藏
+     * @param userId
+     * @param productId
+     */
+    void addProductFocus(String userId, String productId);
+
+    /**
+     * 该商品是否收藏
+     * @param userId
+     * @param productId
+     * @return
+     */
+    boolean isProductFocus(String userId, String productId);
 }

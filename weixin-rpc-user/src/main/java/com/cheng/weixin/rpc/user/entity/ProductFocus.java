@@ -8,22 +8,30 @@ import com.cheng.common.entity.DataEntity;
  * Date: 2016/6/3
  */
 public class ProductFocus extends DataEntity<ProductFocus> {
-    private int accountId;
-    private int productId;
+    private String accountId;
+    private String productId;
 
-    public int getAccountId() {
+    public ProductFocus() {
+    }
+
+    public ProductFocus(String accountId, String productId) {
+        this.accountId = accountId;
+        this.productId = productId;
+    }
+
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 }

@@ -40,6 +40,8 @@ public class UserService implements RpcUserService {
     private CouponRecordDaoMapper couponRecordDao;
     @Autowired
     private CashRecordDaoMapper cashRecordDao;
+    @Autowired
+    private ProductFocusDaoMapper productFocusDao;
 
     @Override
     public Account getAccountByLoginName(String loginName) {
@@ -163,5 +165,17 @@ public class UserService implements RpcUserService {
         cashRecordDao.save(cashRecord);
     }
 
+    @Override
+    public void addProductFocus(String userId, String productId) {
+        productFocusDao.save(new ProductFocus(userId, productId));
+    }
 
+    @Override
+    public boolean isProductFocus(String userId, String productId) {
+        ProductFocus focus = productFocusDao.load(new ProductFocus(userId, productId));
+        if (focus != null) {
+            return true;
+        }
+        return false;
+    }
 }
