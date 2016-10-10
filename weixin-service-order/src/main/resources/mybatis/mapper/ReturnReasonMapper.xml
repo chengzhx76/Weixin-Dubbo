@@ -50,25 +50,25 @@
 
 <!-- =================================================================== -->
 
-  <select id="load" parameterType="returnReason" resultType="returnReason">
+  <select id="load" parameterType="ReturnReason" resultType="ReturnReason">
     <include refid="returnReasonSelector"/>
     <include refid="returnReasonWhere"/>
   </select>
 
   <!-- 获取全部 -->
-  <select id="loadAll" resultType="returnReasonType">
+  <select id="loadAll" resultType="ReturnReason">
     <include refid="returnReasonSelector"/>
     <include refid="returnReasonWhere"/>
   </select>
 
   <!-- 更新 -->
-  <update id="update" parameterType="returnReasonType">
+  <update id="update" parameterType="ReturnReason">
     UPDATE <include refid="tableName"/>
     <include refid="returnReasonUpdate"/>
     <include refid="returnReasonWhere"/>
   </update>
   <!-- 插入 -->
-  <insert id="save" parameterType="returnReasonType">
+  <insert id="save" parameterType="ReturnReason">
     INSERT INTO
     <include refid="tableName"/>
     (

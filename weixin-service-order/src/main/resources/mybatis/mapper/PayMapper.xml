@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cheng.weixin.service.order.dao.DeliveryTypeDaoMapper">
+<mapper namespace="com.cheng.weixin.service.order.dao.PayDaoMapper">
   <sql id="tableName">pay</sql>
   <sql id="columns">
-    a.id,a.name,
-    a.remarks,a.create_date,a.update_date,a.status
+    p.id,p.name,p.order_by,
+    p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
-    id,name,
+    id,name,order_by,
     remarks,create_date,update_date,status
   </sql>
   <sql id="payIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="name != null and name != ''">name=#{name},</if>
+    <if test="orderBy != null and orderBy != ''">order_by=#{orderBy},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -23,7 +24,7 @@
     select
       <include refid="columns"/>
     from
-      <include refid="tableName"/> AS a
+      <include refid="tableName"/> AS p
   </sql>
 
   <sql id="payWhere">
@@ -40,11 +41,12 @@
         </otherwise>
       </choose>
     </where>
+    ORDER BY order_by
   </sql>
 
   <sql id="payUpdate">
     <trim prefix="SET" suffixOverrides=",">
-      <include refid="deliveryTypeIf"/>
+      <include refid="payIf"/>
     </trim>
   </sql>
 
@@ -56,19 +58,19 @@
   </select>
 
   <!-- 获取全部 -->
-  <select id="loadAll" resultType="payType">
+  <select id="loadAll" resultType="pay">
     <include refid="paySelector"/>
     <include refid="payWhere"/>
   </select>
 
   <!-- 更新 -->
-  <update id="update" parameterType="payType">
+  <update id="update" parameterType="pay">
     UPDATE <include refid="tableName"/>
     <include refid="payUpdate"/>
     <include refid="payWhere"/>
   </update>
   <!-- 插入 -->
-  <insert id="save" parameterType="payType">
+  <insert id="save" parameterType="pay">
     INSERT INTO
     <include refid="tableName"/>
     (
@@ -76,7 +78,7 @@
     )
     VALUES
     (
-    #{id},#{name},
+    #{id},#{name},#{orderBy},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>

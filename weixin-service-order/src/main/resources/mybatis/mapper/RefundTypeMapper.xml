@@ -44,31 +44,31 @@
 
   <sql id="refundTypeUpdate">
     <trim prefix="SET" suffixOverrides=",">
-      <include refid="deliveryTypeIf"/>
+      <include refid="refundTypeIf"/>
     </trim>
   </sql>
 
 <!-- =================================================================== -->
 
-  <select id="load" parameterType="refundType" resultType="refundType">
+  <select id="load" parameterType="RefundType" resultType="RefundType">
     <include refid="refundTypeSelector"/>
     <include refid="refundTypeWhere"/>
   </select>
 
   <!-- 获取全部 -->
-  <select id="loadAll" resultType="refundTypeType">
+  <select id="loadAll" resultType="RefundType">
     <include refid="refundTypeSelector"/>
     <include refid="refundTypeWhere"/>
   </select>
 
   <!-- 更新 -->
-  <update id="update" parameterType="refundTypeType">
+  <update id="update" parameterType="RefundType">
     UPDATE <include refid="tableName"/>
     <include refid="refundTypeUpdate"/>
     <include refid="refundTypeWhere"/>
   </update>
   <!-- 插入 -->
-  <insert id="save" parameterType="refundTypeType">
+  <insert id="save" parameterType="RefundType">
     INSERT INTO
     <include refid="tableName"/>
     (

@@ -10,6 +10,7 @@ import com.cheng.weixin.service.order.dao.OrderProductDetailDaoMapper;
 import com.cheng.weixin.service.order.dao.OrderInfoDaoMapper;
 import com.cheng.weixin.service.order.dao.PayDaoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * Author: 光灿
  * Date: 2016/9/14
  */
+@Service("orderService")
 public class OrderService implements RpcOrderService {
     @Autowired
     private OrderInfoDaoMapper orderInfoDao;
@@ -41,7 +43,7 @@ public class OrderService implements RpcOrderService {
 
     @Override
     public List<OrderInfo> getOrderInfos(String userId) {
-        List<OrderInfo> orderInfos = orderInfoDao.loadByUserId(userId);
+        List<OrderInfo> orderInfos = orderInfoDao.loadByUserId(new OrderInfo(userId));
         for (OrderInfo order : orderInfos) {
             List<OrderProductDetail> orderProductDetails = orderProductDetailDao.loadByOrder(new OrderProductDetail(order.getId()));
             order.setOrderDetails(orderProductDetails);

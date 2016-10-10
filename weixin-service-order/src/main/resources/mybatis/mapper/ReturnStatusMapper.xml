@@ -56,19 +56,19 @@
   </select>
 
   <!-- 获取全部 -->
-  <select id="loadAll" resultType="returnStatusType">
+  <select id="loadAll" resultType="returnStatus">
     <include refid="returnStatusSelector"/>
     <include refid="returnStatusWhere"/>
   </select>
 
   <!-- 更新 -->
-  <update id="update" parameterType="returnStatusType">
+  <update id="update" parameterType="returnStatus">
     UPDATE <include refid="tableName"/>
     <include refid="returnStatusUpdate"/>
     <include refid="returnStatusWhere"/>
   </update>
   <!-- 插入 -->
-  <insert id="save" parameterType="returnStatusType">
+  <insert id="save" parameterType="returnStatus">
     INSERT INTO
     <include refid="tableName"/>
     (
