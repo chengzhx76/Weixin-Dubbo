@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-09-20 17:11:34
+Date: 2016-10-10 15:14:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -218,6 +218,34 @@ CREATE TABLE `arayacak_delivery_time` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for comment
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `id` varchar(64) NOT NULL,
+  `order_detail_id` varchar(255) DEFAULT NULL,
+  `product_id` varchar(255) DEFAULT NULL,
+  `account_id` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `useful` varchar(255) DEFAULT NULL,
+  `useless` varchar(255) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `product_score` varchar(255) DEFAULT NULL,
+  `delivery_score` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comment
+-- ----------------------------
+INSERT INTO `comment` VALUES ('1', '1', '1', '1', '-', '很好吃！', '1', '0', '0', '99', '96', '备注', '2016-10-10 14:03:23', '2016-10-10 14:03:29', 'NORMAL');
+
+-- ----------------------------
 -- Table structure for delivery_time
 -- ----------------------------
 DROP TABLE IF EXISTS `delivery_time`;
@@ -233,6 +261,8 @@ CREATE TABLE `delivery_time` (
 -- ----------------------------
 -- Records of delivery_time
 -- ----------------------------
+INSERT INTO `delivery_time` VALUES ('1', '明天10:00-18:00', '--', '2016-10-10 14:07:01', '2016-10-10 14:06:59', 'NORMAL');
+INSERT INTO `delivery_time` VALUES ('2', '今天10:00-18:00', '--', '2016-10-10 14:10:14', '2016-10-10 14:10:16', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for delivery_type
@@ -361,35 +391,6 @@ INSERT INTO `notice` VALUES ('1', '通告1', '微信端上线了，敬请使用 
 INSERT INTO `notice` VALUES ('2', '通告2', '兑换【饿了么】畅享美食红包 消耗20金币', 'http://www.baidu.com', '备注', '2016-06-29 16:32:02', '2016-06-29 16:32:08', 'NORMAL');
 
 -- ----------------------------
--- Table structure for order_detail
--- ----------------------------
-DROP TABLE IF EXISTS `order_detail`;
-CREATE TABLE `order_detail` (
-  `id` varchar(255) NOT NULL,
-  `order_info_id` varchar(255) DEFAULT NULL,
-  `oid` varchar(255) DEFAULT NULL,
-  `no` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `quantity` varchar(255) DEFAULT NULL,
-  `subtotal` varchar(255) DEFAULT NULL,
-  `market_price` decimal(10,0) DEFAULT NULL,
-  `sale_price` decimal(10,0) DEFAULT NULL,
-  `deal_price` decimal(10,0) DEFAULT NULL,
-  `discount_rate` varchar(255) DEFAULT NULL,
-  `is_posted` varchar(255) DEFAULT NULL,
-  `is_comment` varchar(255) DEFAULT NULL,
-  `is_gift` varchar(255) DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  `update_date` datetime DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of order_detail
--- ----------------------------
-
--- ----------------------------
 -- Table structure for order_info
 -- ----------------------------
 DROP TABLE IF EXISTS `order_info`;
@@ -419,6 +420,7 @@ CREATE TABLE `order_info` (
   `freight_payable` varchar(255) DEFAULT NULL,
   `product_total_price` decimal(10,0) DEFAULT NULL,
   `discount` varchar(255) DEFAULT NULL,
+  `remark_customer` varchar(255) DEFAULT NULL,
   `remark_system` varchar(255) DEFAULT NULL,
   `post_code` varchar(255) DEFAULT NULL,
   `telephone` varchar(255) DEFAULT NULL,
@@ -427,10 +429,11 @@ CREATE TABLE `order_info` (
   `exchange_oid` int(11) DEFAULT NULL,
   `custom_pice` varchar(255) DEFAULT NULL,
   `coupon_code` varchar(255) DEFAULT NULL,
-  `coupon_reducePrice` decimal(10,0) DEFAULT NULL,
-  `cash_reduce_price` decimal(10,0) DEFAULT NULL,
+  `coupon_reduce_price` decimal(10,0) DEFAULT NULL,
+  `flow_status` varchar(255) DEFAULT NULL,
   `bonus_point_reduce_price` decimal(10,0) DEFAULT NULL,
   `is_free_account_level` varchar(255) DEFAULT NULL,
+  `comment_id` varchar(255) DEFAULT NULL,
   `remarks` varchar(255) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
@@ -439,6 +442,36 @@ CREATE TABLE `order_info` (
 
 -- ----------------------------
 -- Records of order_info
+-- ----------------------------
+INSERT INTO `order_info` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'NORMAL');
+
+-- ----------------------------
+-- Table structure for order_product_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `order_product_detail`;
+CREATE TABLE `order_product_detail` (
+  `id` varchar(255) NOT NULL,
+  `order_info_id` varchar(255) DEFAULT NULL,
+  `oid` varchar(255) DEFAULT NULL,
+  `no` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `quantity` varchar(255) DEFAULT NULL,
+  `subtotal` varchar(255) DEFAULT NULL,
+  `market_price` decimal(10,0) DEFAULT NULL,
+  `sale_price` decimal(10,0) DEFAULT NULL,
+  `deal_price` decimal(10,0) DEFAULT NULL,
+  `discount_rate` varchar(255) DEFAULT NULL,
+  `is_posted` varchar(255) DEFAULT NULL,
+  `is_comment` varchar(255) DEFAULT NULL,
+  `is_gift` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_product_detail
 -- ----------------------------
 
 -- ----------------------------
@@ -515,6 +548,7 @@ DROP TABLE IF EXISTS `pay`;
 CREATE TABLE `pay` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `order_by` int(11) DEFAULT NULL,
   `remarks` varchar(255) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
@@ -524,6 +558,9 @@ CREATE TABLE `pay` (
 -- ----------------------------
 -- Records of pay
 -- ----------------------------
+INSERT INTO `pay` VALUES ('1', '支付宝', null, '--', '2016-10-10 14:35:24', '2016-10-10 14:35:27', 'NORMAL');
+INSERT INTO `pay` VALUES ('', '微信', null, '--', '2016-10-10 14:36:05', '2016-10-10 14:36:07', 'NORMAL');
+INSERT INTO `pay` VALUES ('3', '货到付款', null, '--', '2016-10-10 14:36:35', '2016-10-10 14:36:37', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for permission
