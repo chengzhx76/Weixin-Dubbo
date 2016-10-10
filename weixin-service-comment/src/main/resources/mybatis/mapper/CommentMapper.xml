@@ -5,13 +5,13 @@
   <sql id="tableName">comment</sql>
   <sql id="columns">
     c.id,order_detail_id,c.product_id,c.account_id,c.title,c.content,c.useful,c.useless,c.parent_id,c.product_score,
-    c.delivery_score,c.review_time,c.review_status,c.review_result,c.remarks,c.create_date,c.update_date,c.status
+    c.delivery_score,c.remarks,c.create_date,c.update_date,c.status
   </sql>
   <sql id="insertColumns">
     id,order_detail_id,product_id,account_id,title,content,useful,useless,parent_id,product_score,
-    delivery_score,review_time,review_status,review_result,remarks,create_date,update_date,status
+    delivery_score,remarks,create_date,update_date,status
   </sql>
-  <sql id="productIf">
+  <sql id="commentIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="orderDetailId != null and orderDetailId != ''">order_detail_id=#{orderDetailId},</if>
     <if test="productId != null and productId != ''">product_id=#{productId},</if>
@@ -23,9 +23,6 @@
     <if test="parentId != null and parentId != ''">parent_id=#{parentId},</if>
     <if test="productScore != null and productScore != ''">product_score=#{productScore},</if>
     <if test="deliveryScore != null and deliveryScore != ''">delivery_score=#{deliveryScore},</if>
-    <if test="reviewTime != null and reviewTime != ''">review_time=#{reviewTime},</if>
-    <if test="reviewStatus != null and reviewStatus != ''">review_status=#{reviewStatus},</if>
-    <if test="reviewResult != null and reviewResult != ''">review_result=#{reviewResult},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -42,6 +39,9 @@
     <where>
       <if test="id != null and id != ''">
         id = #{id}
+      </if>
+      <if test="productId != null and productId != ''">
+        product_id = #{productId}
       </if>
       <choose>
         <when test="status != null and status !=''">
@@ -67,6 +67,13 @@
     <include refid="commentSelector"/>
     <include refid="commentWhere"/>
   </select>
+
+  <!-- 根据商品ID获取评论 -->
+  <select id="getByProductId" parameterType="comment" resultType="comment">
+    <include refid="commentSelector"/>
+    <include refid="commentWhere"/>
+  </select>
+
   <!-- 获取全部信息 -->
   <select id="loadAll" resultType="comment">
     <include refid="commentSelector"/>
@@ -87,7 +94,10 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="commentIf"/>
+    (
+    #{id},#{order_detail_id},#{product_id},#{account_id},#{title},#{content},#{useful},#{useless},
+    #{parent_id},#{product_score},#{delivery_score},#{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

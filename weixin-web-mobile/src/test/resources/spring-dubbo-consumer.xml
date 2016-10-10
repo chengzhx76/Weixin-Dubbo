@@ -20,4 +20,5 @@
   <dubbo:reference id="smsService" interface="com.cheng.weixin.rpc.message.service.RpcSmsService" timeout="5000" version="1.0"/>
   <dubbo:reference id="rabbitSmsService" interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService" timeout="5000" version="1.0"/>
   <dubbo:reference id="userService" interface="com.cheng.weixin.rpc.user.service.RpcUserService" timeout="5000" version="1.0"/>
+  <dubbo:reference id="orderService" interface="com.cheng.weixin.rpc.order.service.RpcOrderService" timeout="5000" version="1.0"/>
 </beans>
