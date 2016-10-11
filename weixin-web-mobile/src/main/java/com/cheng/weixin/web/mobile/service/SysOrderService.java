@@ -80,14 +80,15 @@ public class SysOrderService {
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         String[] productImgs = new String[productModels.size()];
         for (int i=0; i<productModels.size(); i++) {
-            Product product = productService.getById(productModels.get(i).getId());
+            Product product = productService.getDefaultPictureById(productModels.get(i).getId());
             productImgs[i] = product.getDefaultPicture().getPictureUrl();
             totalProductNums+=productModels.get(i).getCount();
             totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(new BigDecimal(productModels.get(i).getCount())));
         }
         submitOrder.setTotalProductNums(totalProductNums);
         submitOrder.setProductImgs(productImgs);
-        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice));
+        submitOrder.setTotalProductPrice(StringFormat.format(totalProductPrice));
+
         // 运费
         BigDecimal freight = new BigDecimal(5.00);
         submitOrder.setFreight(StringFormat.format(freight));
@@ -95,6 +96,9 @@ public class SysOrderService {
         // 优惠券
         BigDecimal couponRecord = new BigDecimal(0.00);
         submitOrder.setCouponRecord(StringFormat.format(couponRecord));
+
+        // 总得价格
+        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight)));
 
         return submitOrder;
     }

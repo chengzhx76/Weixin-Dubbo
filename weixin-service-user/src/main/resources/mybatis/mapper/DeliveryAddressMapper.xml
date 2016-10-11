@@ -44,10 +44,10 @@
         id = #{id}
       </if>
       <if test="accountId != null and accountId != ''">
-        account_id = #{accountId}
+        AND account_id = #{accountId}
       </if>
       <if test="isDefault != null and isDefault != ''">
-        is_default = #{isDefault}
+        AND is_default = #{isDefault}
       </if>
       <choose>
         <when test="status != null and status !=''">

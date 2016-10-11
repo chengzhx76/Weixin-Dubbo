@@ -263,3 +263,7 @@ source /etc/profile // 使profile生效
 ### 4.启动 
 // 进入bin目录启动tomcat 
 ./startup.sh 
+
+
+
+chmod u+rwx xxxx

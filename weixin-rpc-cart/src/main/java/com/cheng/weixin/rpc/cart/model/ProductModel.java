@@ -1,11 +1,13 @@
 package com.cheng.weixin.rpc.cart.model;
 
+import java.io.Serializable;
+
 /**
  * Desc:
  * Author: 光灿
  * Date: 2016/9/15
  */
-public class ProductModel {
+public class ProductModel implements Serializable {
     private String id;
     private int count;
 

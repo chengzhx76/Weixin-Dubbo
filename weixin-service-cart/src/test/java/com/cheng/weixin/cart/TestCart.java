@@ -1,12 +1,15 @@
 package com.cheng.weixin.cart;
 
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
+import com.cheng.weixin.rpc.cart.model.ProductModel;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 /**
  * Desc:
@@ -41,6 +44,13 @@ public class TestCart {
     public void testDelete() {
         cartService.deleteProduct("1", "1");
     }
+    @Test
+    public void testGetChooseProductInfo() {
+        List<ProductModel> productModels = cartService.getChooseProductInfo("1");
+        System.out.println(productModels);
+    }
+
+
 
 
 }

@@ -14,7 +14,6 @@
   <sql id="countryIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="name != null and name != ''">name=#{name},</if>
-
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>

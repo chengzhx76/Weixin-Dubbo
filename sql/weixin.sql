@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-10-10 15:14:25
+Date: 2016-10-11 14:18:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,8 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `id` varchar(255) NOT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `nickname` varchar(255) DEFAULT NULL,
   `account_level_id` varchar(255) DEFAULT NULL,
   `credit` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
@@ -41,7 +43,7 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('ad90aeda385243278c07099c5bb67e31', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-09-20 10:03:47', '2016-09-20 10:04:00', 'NORMAL');
+INSERT INTO `account` VALUES ('1', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'Cheng', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-09-20 10:03:47', '2016-09-20 10:04:00', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for account_level
@@ -244,6 +246,36 @@ CREATE TABLE `comment` (
 -- Records of comment
 -- ----------------------------
 INSERT INTO `comment` VALUES ('1', '1', '1', '1', '-', '很好吃！', '1', '0', '0', '99', '96', '备注', '2016-10-10 14:03:23', '2016-10-10 14:03:29', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for delivery_address
+-- ----------------------------
+DROP TABLE IF EXISTS `delivery_address`;
+CREATE TABLE `delivery_address` (
+  `id` varchar(255) NOT NULL,
+  `account_id` varchar(255) DEFAULT NULL,
+  `region_province_id` varchar(255) DEFAULT NULL,
+  `region_country_id` varchar(255) DEFAULT NULL,
+  `region_city_id` varchar(255) DEFAULT NULL,
+  `consignee` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `telephone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `post_code` varchar(255) DEFAULT NULL,
+  `is_default` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of delivery_address
+-- ----------------------------
+INSERT INTO `delivery_address` VALUES ('1', '1', '1', '1', '1', '收货人1', '孙寺', '1860000001', '05308911051', null, '274200', '1', '--', '2016-10-11 11:39:18', '2016-10-11 11:39:20', 'NORMAL');
+INSERT INTO `delivery_address` VALUES ('2', '1', '1', '1', '6', '收货人2', '单县', '13900000001', '05308600000', null, '274200', '0', '--', '2016-10-11 11:40:30', '2016-10-11 11:40:33', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for delivery_time
@@ -558,9 +590,9 @@ CREATE TABLE `pay` (
 -- ----------------------------
 -- Records of pay
 -- ----------------------------
-INSERT INTO `pay` VALUES ('1', '支付宝', null, '--', '2016-10-10 14:35:24', '2016-10-10 14:35:27', 'NORMAL');
-INSERT INTO `pay` VALUES ('', '微信', null, '--', '2016-10-10 14:36:05', '2016-10-10 14:36:07', 'NORMAL');
-INSERT INTO `pay` VALUES ('3', '货到付款', null, '--', '2016-10-10 14:36:35', '2016-10-10 14:36:37', 'NORMAL');
+INSERT INTO `pay` VALUES ('1', '支付宝', '2', '--', '2016-10-10 14:35:24', '2016-10-10 14:35:27', 'NORMAL');
+INSERT INTO `pay` VALUES ('2', '微信', '1', '--', '2016-10-10 14:36:05', '2016-10-10 14:36:07', 'NORMAL');
+INSERT INTO `pay` VALUES ('3', '货到付款', '3', '--', '2016-10-10 14:36:35', '2016-10-10 14:36:37', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for permission

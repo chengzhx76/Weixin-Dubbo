@@ -27,7 +27,6 @@
     <if test="isEmployee != null and isEmployee != ''">is_employee=#{isEmployee},</if>
     <if test="ip != null and ip != ''">ip=#{ip},</if>
     <if test="sourceFrom != null and sourceFrom != ''">source_from=#{sourceFrom},</if>
-
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>

@@ -135,14 +135,15 @@ public class CartService implements RpcCartService {
 
     @Override
     public List<ProductModel> getChooseProductInfo(String userId) {
-        Map<Serializable, Object> map = redisService.getEntries(userId);
+        Map<Serializable, Object> map = redisService.getEntries(getCart(userId));
 
         List<ProductModel> products = new ArrayList<>();
         Set<Serializable> fields = map.keySet();
         for (Serializable item : fields) {
-            if (redisService.exists(getCart(userId), Constant.CHOOSE+item.toString())) {
+            //if (redisService.exists(getCart(userId), Constant.CHOOSE+item.toString())) {
+            if (item.toString().startsWith(Constant.CHOOSE)) {
                 ProductModel product = new ProductModel();
-                product.setId(item.toString());
+                product.setId(StringUtils.remove(item.toString(), Constant.CHOOSE));
                 product.setCount(Integer.parseInt(map.get(item).toString()));
                 products.add(product);
             }

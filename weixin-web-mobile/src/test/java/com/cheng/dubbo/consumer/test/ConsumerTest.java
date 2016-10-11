@@ -7,9 +7,13 @@ import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.cart.entity.CartInfo;
 import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
+import com.cheng.weixin.rpc.comment.entity.Comment;
+import com.cheng.weixin.rpc.comment.service.RpcCommentService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
+import com.cheng.weixin.rpc.order.entity.DeliveryTime;
+import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import com.cheng.weixin.rpc.system.entity.Ad;
@@ -52,6 +56,10 @@ public class ConsumerTest {
     private RpcSmsService smsService;
     @Autowired
     private RpcRabbitSmsService rabbitSmsService;
+    @Autowired
+    private RpcCommentService commentService;
+    @Autowired
+    private RpcOrderService orderService;
 
     @Test
     public void testRedis() {
@@ -141,4 +149,15 @@ public class ConsumerTest {
         rabbitSmsService.sendValidate(smsModel);
     }
 
+    @Test
+    public void testComment() {
+        List<Comment> comments = commentService.getByProductId("1");
+        System.out.println("=========>" + comments);
+    }
+
+    @Test
+    public void testOrder() {
+        List<DeliveryTime> times = orderService.getAllDeliveryTime();
+        System.out.println("=========>" + times);
+    }
 }
