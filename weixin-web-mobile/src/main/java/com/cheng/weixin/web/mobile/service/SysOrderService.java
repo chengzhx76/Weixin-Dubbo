@@ -157,23 +157,21 @@ public class SysOrderService {
         behavior.setBehaviorType(BehaviorType.CASH);
         behavior.setNanme("下单");
         behavior.setNanme(oid);
-        behavior.preInsert();
         userService.addBehavior(behavior);
 
         BonusPointRecord bonusPoint = userService.getBonusPointRecord("1");
         BonusPointRecord bonusPointRecord = new BonusPointRecord();
-        bonusPointRecord.setId(bonusPoint.getId());
-        bonusPointRecord.setBeforeBonusPoints(bonusPoint.getBeforeBonusPoints());
+        bonusPointRecord.setBeforeBonusPoints(bonusPoint.getAfterBonusPoints());
         bonusPointRecord.setTxBonusPoints(10);// TODO 本次订单获取的积分
         bonusPointRecord.setFrozenBonusPoints(10);
-        bonusPointRecord.setAfterBonusPoints(bonusPoint.getBeforeBonusPoints());
+        bonusPointRecord.setAfterBonusPoints(bonusPoint.getAfterBonusPoints()+10);
         bonusPointRecord.setBehaviorId(behavior.getId());
         bonusPointRecord.setTxResult("结果"); //TODO
         userService.addBonusPointRecord(bonusPoint);
 
-        CouponRecord record  = userService.getCouponRecordByUser("1");
+        //CouponRecord record  = userService.getCouponRecordByUser("1");
         CouponRecord couponRecord = new CouponRecord();
-        couponRecord.setId(record.getId());
+        //couponRecord.setId(record.getId());
         couponRecord.setCouponCodeId("123");
         couponRecord.setCouponCodeId("1");
         couponRecord.setTxType("支出");
@@ -183,7 +181,7 @@ public class SysOrderService {
 
         CashRecord cash = userService.getCashRecord("1");
         CashRecord cashRecord = new CashRecord();
-        cashRecord.setId(cash.getId());
+        //cashRecord.setId(cash.getId());
         cashRecord.setBeforeMoney(cash.getBeforeMoney());
         cashRecord.setTxMoney(totalProductPrice);
         cashRecord.setAfterBonusPoints(cash.getBeforeMoney().subtract(totalProductPrice));

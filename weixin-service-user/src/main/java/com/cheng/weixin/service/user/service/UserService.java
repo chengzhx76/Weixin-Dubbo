@@ -132,6 +132,7 @@ public class UserService implements RpcUserService {
 
     @Override
     public void addBehavior(Behavior behavior) {
+        behavior.preInsert();
         behaviorDao.save(behavior);
     }
 
@@ -142,6 +143,7 @@ public class UserService implements RpcUserService {
 
     @Override
     public void addBonusPointRecord(BonusPointRecord bonusPointRecord) {
+        bonusPointRecord.preInsert();
         bonusPointRecordDao.save(bonusPointRecord);
     }
 
@@ -152,6 +154,7 @@ public class UserService implements RpcUserService {
 
     @Override
     public void addCouponRecord(CouponRecord couponRecor) {
+        couponRecor.preInsert();
         couponRecordDao.save(couponRecor);
     }
 
@@ -167,7 +170,9 @@ public class UserService implements RpcUserService {
 
     @Override
     public void addProductFocus(String userId, String productId) {
-        productFocusDao.save(new ProductFocus(userId, productId));
+        ProductFocus focus = new ProductFocus(userId, productId);
+        focus.preInsert();
+        productFocusDao.save(focus);
     }
 
     @Override

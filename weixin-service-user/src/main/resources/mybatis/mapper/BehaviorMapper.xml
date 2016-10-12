@@ -8,7 +8,7 @@
     b.remarks,b.create_date,b.update_date,b.status
   </sql>
   <sql id="insertColumns">
-    id,a.behavior_type,name,
+    id,behavior_type,name,
     remarks,create_date,update_date,status
   </sql>
   <sql id="behaviorIf">
