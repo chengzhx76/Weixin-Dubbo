@@ -93,7 +93,11 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="bonusPointRecordIf"/>
+    (
+    #{id},#{accountId},#{beforeBonusPoints},#{txBonusPoints},#{frozenBonusPoints},
+    #{afterBonusPoints},#{txType},#{behaviorId},#{txResult},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

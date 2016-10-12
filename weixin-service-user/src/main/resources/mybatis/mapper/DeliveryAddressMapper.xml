@@ -93,7 +93,11 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="deliveryAddressIf"/>
+    (
+    #{id},#{accountId},#{regionProvinceId},#{regionCityId},#{regionCountryId},
+    #{consignee},#{address},#{mobile},#{telephone},#{email},#{postCode},#{isDefault},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
   <!-- 获取默认的地址 -->

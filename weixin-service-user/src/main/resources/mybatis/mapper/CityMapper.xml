@@ -76,7 +76,10 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="cityIf"/>
+    (
+    #{id},#{name},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

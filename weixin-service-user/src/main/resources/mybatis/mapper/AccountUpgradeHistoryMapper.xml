@@ -80,7 +80,11 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="accountUpgradeHistoryIf"/>
+    (
+    #{accountId},#{previousLevels},#{currentLevels},#{previousBonusPoint},#{currentBonusPoint},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
+
   </insert>
 
 </mapper>

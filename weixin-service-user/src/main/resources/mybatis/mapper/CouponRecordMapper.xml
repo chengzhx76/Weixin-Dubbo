@@ -86,7 +86,10 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="couponRecordIf"/>
+    (
+    #{id},#{accountId},#{couponCodeId},#{txType},#{behaviorId},#{txResult},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

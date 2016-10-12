@@ -4,6 +4,7 @@ import com.cheng.weixin.rpc.order.entity.DeliveryTime;
 import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,15 @@ public class TestMain {
     public void test03() {
         List<OrderInfo> data = orderService.getOrderInfos("1");
         System.out.println(data);
+    }
+
+    @Test
+    public void test04() {
+        OrderInfo order = new OrderInfo();
+        String oid = RandomStringUtils.randomNumeric(8);
+        order.setOid(oid);
+        order.setAccountId("1");
+        orderService.addOrder(order);
     }
 
 }

@@ -37,4 +37,9 @@ public class ServiceTest {
         SubmitOrderInfo info = orderService.buy();
         System.out.println(JSON.toJSONString(info));
     }
+    @Test
+    public void test03() {
+        orderService.submitOrder();
+    }
+
 }

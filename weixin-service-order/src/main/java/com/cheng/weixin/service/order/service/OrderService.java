@@ -58,6 +58,7 @@ public class OrderService implements RpcOrderService {
 
     @Override
     public void addOrder(OrderInfo orderInfo) {
+        orderInfo.preInsert();
         orderInfoDao.save(orderInfo);
     }
 

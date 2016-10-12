@@ -77,7 +77,10 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="productFocusIf"/>
+    (
+    #{id},#{accountId},#{productId},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

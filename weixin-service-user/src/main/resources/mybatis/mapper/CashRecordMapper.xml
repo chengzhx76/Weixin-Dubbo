@@ -92,7 +92,10 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="behaviorIf"/>
+    (
+    #{id},#{accountId},#{beforeMoney},#{txMoney},#{frozenMoney},#{afterBonusPoints},#{txType},#{behaviorId},#{txResult},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>

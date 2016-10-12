@@ -77,7 +77,10 @@
     <include refid="insertColumns"/>
     )
     VALUES
-    <include refid="behaviorIf"/>
+    (
+    #{id},#{behaviorType},#{nanme},
+    #{remarks},#{createDate},#{updateDate},#{status}
+    )
   </insert>
 
 </mapper>
