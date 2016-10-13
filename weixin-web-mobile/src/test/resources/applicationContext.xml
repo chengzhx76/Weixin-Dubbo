@@ -11,6 +11,6 @@
 	<context:annotation-config />
 
 	<!-- 扫描注入  -->
-	<!--<context:component-scan base-package="com.cheng.dubbo.consumer.test"/>-->
+	<context:component-scan base-package="com.cheng.dubbo.consumer.test"/>
 	<context:component-scan base-package="com.cheng.weixin.web.mobile.service"/>
 </beans>

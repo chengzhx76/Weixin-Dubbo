@@ -15,6 +15,7 @@ import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.user.entity.*;
 import com.cheng.weixin.rpc.user.enumType.BehaviorType;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.exception.BusinessException;
 import com.cheng.weixin.web.mobile.result.order.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
@@ -161,13 +162,18 @@ public class SysOrderService {
 
         BonusPointRecord bonusPoint = userService.getBonusPointRecord("1");
         BonusPointRecord bonusPointRecord = new BonusPointRecord();
-        bonusPointRecord.setBeforeBonusPoints(bonusPoint.getAfterBonusPoints());
         bonusPointRecord.setTxBonusPoints(10);// TODO 本次订单获取的积分
         bonusPointRecord.setFrozenBonusPoints(10);
-        bonusPointRecord.setAfterBonusPoints(bonusPoint.getAfterBonusPoints()+10);
+        if (bonusPoint != null) {
+            bonusPointRecord.setBeforeBonusPoints(bonusPoint.getAfterBonusPoints());
+            bonusPointRecord.setAfterBonusPoints(bonusPoint.getAfterBonusPoints()+10);
+        }else {
+            bonusPointRecord.setBeforeBonusPoints(0);
+            bonusPointRecord.setAfterBonusPoints(10);
+        }
         bonusPointRecord.setBehaviorId(behavior.getId());
         bonusPointRecord.setTxResult("结果"); //TODO
-        userService.addBonusPointRecord(bonusPoint);
+        userService.addBonusPointRecord(bonusPointRecord);
 
         //CouponRecord record  = userService.getCouponRecordByUser("1");
         CouponRecord couponRecord = new CouponRecord();
@@ -180,11 +186,19 @@ public class SysOrderService {
         userService.addCouponRecord(couponRecord);
 
         CashRecord cash = userService.getCashRecord("1");
+        if (cash == null) {
+            throw new BusinessException("请先充值");
+        }
+
         CashRecord cashRecord = new CashRecord();
         //cashRecord.setId(cash.getId());
-        cashRecord.setBeforeMoney(cash.getBeforeMoney());
         cashRecord.setTxMoney(totalProductPrice);
-        cashRecord.setAfterBonusPoints(cash.getBeforeMoney().subtract(totalProductPrice));
+        cashRecord.setBeforeMoney(cash.getAfterBonusPoints());
+        BigDecimal afterBonusPoints = cash.getAfterBonusPoints().subtract(totalProductPrice);
+        if (afterBonusPoints.compareTo(BigDecimal.valueOf(-1L)) == -1) {
+            throw new BusinessException("余额不足");
+        }
+        cashRecord.setAfterBonusPoints(afterBonusPoints);
         cashRecord.setTxType("支出");
         cashRecord.setBehaviorId(behavior.getId());
         cashRecord.setTxResult("结果");

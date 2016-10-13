@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-10-11 14:18:28
+Date: 2016-10-13 11:53:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('1', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'Cheng', '1', 'WELL', '18600536683', '123456', '0', '0', '0', '0', '127.0.0.1', 'NO', '--', '2016-09-20 10:03:47', '2016-09-20 10:04:00', 'NORMAL');
+INSERT INTO `account` VALUES ('1', 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png', 'Cheng', '1', 'WELL', '18600536683', '123456', '0', '0', '1158.4', '0', '127.0.0.1', 'NO', '--', '2016-09-20 10:03:47', '2016-10-13 11:43:06', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for account_level
@@ -220,6 +220,90 @@ CREATE TABLE `arayacak_delivery_time` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for behavior
+-- ----------------------------
+DROP TABLE IF EXISTS `behavior`;
+CREATE TABLE `behavior` (
+  `id` varchar(255) NOT NULL,
+  `behavior_type` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of behavior
+-- ----------------------------
+INSERT INTO `behavior` VALUES ('83f3553b85b14f89af11bfe4a9481a4f', 'CASH', '70548275', '--', '2016-10-12 12:07:01', '2016-10-12 12:07:01', 'NORMAL');
+INSERT INTO `behavior` VALUES ('15b305bcf7034e8782d2c79aaa0d3db6', 'CASH', '02288732', '--', '2016-10-12 13:54:05', '2016-10-12 13:54:05', 'NORMAL');
+INSERT INTO `behavior` VALUES ('bd8601ce9452495f91edd75f5795c6a4', 'CASH', '43473491', '--', '2016-10-13 10:15:34', '2016-10-13 10:15:34', 'NORMAL');
+INSERT INTO `behavior` VALUES ('8155db2240824efcae8f8a66d2e23a17', 'CASH', '28152547', '--', '2016-10-13 10:17:38', '2016-10-13 10:17:38', 'NORMAL');
+INSERT INTO `behavior` VALUES ('8f274eaf59e1482db64139bcf59de9cb', 'CASH', '00933862', '--', '2016-10-13 11:17:34', '2016-10-13 11:17:34', 'NORMAL');
+INSERT INTO `behavior` VALUES ('5198886d73a8476ea4035fbd06f29a39', 'CASH', '07753186', '--', '2016-10-13 11:20:04', '2016-10-13 11:20:04', 'NORMAL');
+INSERT INTO `behavior` VALUES ('dcaed9f53fed4664adfb09566806adc7', 'CASH', '85845262', '--', '2016-10-13 11:21:10', '2016-10-13 11:21:10', 'NORMAL');
+INSERT INTO `behavior` VALUES ('44058c8dfe8c4c078607c6c6b5f171bc', 'CASH', '04553268', '--', '2016-10-13 11:29:58', '2016-10-13 11:29:58', 'NORMAL');
+INSERT INTO `behavior` VALUES ('5a35c77e84144b669be34ea554a67158', 'CASH', '29522347', '--', '2016-10-13 11:32:08', '2016-10-13 11:32:08', 'NORMAL');
+INSERT INTO `behavior` VALUES ('710b8062bdb54844803067de1b78e7bc', 'CASH', '19902742', '--', '2016-10-13 11:43:06', '2016-10-13 11:43:06', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for bonus_point_record
+-- ----------------------------
+DROP TABLE IF EXISTS `bonus_point_record`;
+CREATE TABLE `bonus_point_record` (
+  `id` varchar(255) NOT NULL,
+  `account_id` varchar(255) DEFAULT NULL,
+  `before_bonus_points` varchar(255) DEFAULT NULL,
+  `tx_bonus_points` varchar(255) DEFAULT NULL,
+  `frozen_bonus_points` varchar(255) DEFAULT NULL,
+  `after_bonus_points` varchar(255) DEFAULT NULL,
+  `tx_type` varchar(255) DEFAULT NULL,
+  `behavior_id` varchar(255) DEFAULT NULL,
+  `tx_result` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of bonus_point_record
+-- ----------------------------
+INSERT INTO `bonus_point_record` VALUES ('d8009517998e4f1993e141989e92ca48', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:21:13', '2016-10-13 11:21:13', 'NORMAL');
+INSERT INTO `bonus_point_record` VALUES ('3012e0c14a3245dcaa34e8ad036379c1', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:30:19', '2016-10-13 11:30:19', 'NORMAL');
+INSERT INTO `bonus_point_record` VALUES ('5f72e1faf728454692a05e415ead2ad5', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:32:52', '2016-10-13 11:32:52', 'NORMAL');
+INSERT INTO `bonus_point_record` VALUES ('b52d4dccce1d4d36967efe212f349209', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:43:15', '2016-10-13 11:43:15', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for cash_record
+-- ----------------------------
+DROP TABLE IF EXISTS `cash_record`;
+CREATE TABLE `cash_record` (
+  `id` varchar(255) NOT NULL,
+  `account_id` varchar(255) DEFAULT NULL,
+  `before_money` varchar(255) DEFAULT NULL,
+  `tx_money` varchar(255) DEFAULT NULL,
+  `frozen_money` varchar(255) DEFAULT NULL,
+  `after_bonus_points` varchar(255) DEFAULT NULL,
+  `tx_type` varchar(255) DEFAULT NULL,
+  `behavior_id` varchar(255) DEFAULT NULL,
+  `tx_result` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cash_record
+-- ----------------------------
+INSERT INTO `cash_record` VALUES ('1', '1', '0', '111', '111', '111', '111', '1', '1', '--', '2016-10-13 11:31:24', '2016-10-13 11:31:29', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('9dd2ed75890f48089e523cbd293465c8', null, '111', '3.2', null, '107.8', '支出', null, '结果', '--', '2016-10-13 11:43:15', '2016-10-13 11:43:15', 'NORMAL');
+
+-- ----------------------------
 -- Table structure for comment
 -- ----------------------------
 DROP TABLE IF EXISTS `comment`;
@@ -246,6 +330,31 @@ CREATE TABLE `comment` (
 -- Records of comment
 -- ----------------------------
 INSERT INTO `comment` VALUES ('1', '1', '1', '1', '-', '很好吃！', '1', '0', '0', '99', '96', '备注', '2016-10-10 14:03:23', '2016-10-10 14:03:29', 'NORMAL');
+
+-- ----------------------------
+-- Table structure for coupon_record
+-- ----------------------------
+DROP TABLE IF EXISTS `coupon_record`;
+CREATE TABLE `coupon_record` (
+  `id` varchar(255) NOT NULL,
+  `account_id` varchar(255) DEFAULT NULL,
+  `coupon_code_id` varchar(255) DEFAULT NULL,
+  `tx_type` varchar(255) DEFAULT NULL,
+  `behavior_id` varchar(255) DEFAULT NULL,
+  `tx_result` varchar(255) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of coupon_record
+-- ----------------------------
+INSERT INTO `coupon_record` VALUES ('acec1e84f17040a79a3b20cfb975a598', null, '1', '支出', null, '结果', '--', '2016-10-13 11:30:22', '2016-10-13 11:30:22', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('222d133a3af94da49f0d2634f6931a82', null, '1', '支出', null, '结果', '--', '2016-10-13 11:32:55', '2016-10-13 11:32:55', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('a751b07417bb4444ba6a5387440774d0', null, '1', '支出', null, '结果', '--', '2016-10-13 11:43:15', '2016-10-13 11:43:15', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for delivery_address
@@ -429,18 +538,19 @@ DROP TABLE IF EXISTS `order_info`;
 CREATE TABLE `order_info` (
   `id` varchar(255) NOT NULL,
   `account_id` varchar(255) DEFAULT NULL,
-  `relate_oid` int(11) DEFAULT NULL,
+  `oid` varchar(255) DEFAULT NULL,
+  `relate_oid` varchar(11) DEFAULT NULL,
   `amount_payable` varchar(255) DEFAULT NULL,
-  `amount_paid` int(11) DEFAULT NULL,
+  `amount_paid` varchar(11) DEFAULT NULL,
   `sale_price_total` varchar(255) DEFAULT NULL,
   `consignee` varchar(255) DEFAULT NULL,
   `mobile` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `delivery_time_id` int(11) DEFAULT NULL,
-  `pay_id` int(11) DEFAULT NULL,
-  `delivery_type_id` int(11) DEFAULT NULL,
+  `delivery_time_id` varchar(11) DEFAULT NULL,
+  `pay_id` varchar(11) DEFAULT NULL,
+  `delivery_type_id` varchar(11) DEFAULT NULL,
   `arayacak_address` varchar(255) DEFAULT NULL,
-  `arayacak_delivery_time_id` int(11) DEFAULT NULL,
+  `arayacak_delivery_time` varchar(11) DEFAULT NULL,
   `province` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
@@ -475,7 +585,20 @@ CREATE TABLE `order_info` (
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
-INSERT INTO `order_info` VALUES ('1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'NORMAL');
+INSERT INTO `order_info` VALUES ('1', '1', null, '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 'NORMAL');
+INSERT INTO `order_info` VALUES ('85f567341bea41de84759327276abba6', '1', '75070930', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-12 10:36:43', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-12 10:36:46', '2016-10-12 10:36:46', 'NORMAL');
+INSERT INTO `order_info` VALUES ('32f58e9a08284be79f90ac9cd340e614', '1', '76190870', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-12 11:58:28', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-12 11:58:30', '2016-10-12 11:58:30', 'NORMAL');
+INSERT INTO `order_info` VALUES ('897b4eb21eb54bb2b8d02552a5fc93a7', '1', '70548275', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-12 12:07:01', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-12 12:07:03', '2016-10-12 12:07:03', 'NORMAL');
+INSERT INTO `order_info` VALUES ('0bd953a731b84a1d8b688fe7b8de7023', '1', '02288732', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-12 13:54:04', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-12 13:54:08', '2016-10-12 13:54:08', 'NORMAL');
+INSERT INTO `order_info` VALUES ('9aee1dc1e67d4235b86a89d943b3f1d5', '1', '56014411', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 09:58:33', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 09:58:38', '2016-10-13 09:58:38', 'NORMAL');
+INSERT INTO `order_info` VALUES ('3e3c33dd5de0476e92e408e4ee9cbd02', '1', '43473491', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 10:15:30', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 10:15:34', '2016-10-13 10:15:34', 'NORMAL');
+INSERT INTO `order_info` VALUES ('4555830ca5344244a3265005c184d513', '1', '28152547', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 10:17:34', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 10:17:38', '2016-10-13 10:17:38', 'NORMAL');
+INSERT INTO `order_info` VALUES ('8a21d39d985d4876adf42af849977eb2', '1', '00933862', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 11:17:30', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 11:17:34', '2016-10-13 11:17:34', 'NORMAL');
+INSERT INTO `order_info` VALUES ('8d5420008e094013b6b0a92c95241190', '1', '07753186', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 11:20:00', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 11:20:04', '2016-10-13 11:20:04', 'NORMAL');
+INSERT INTO `order_info` VALUES ('e0a7c8746c0548fb9342bc0733bbc757', '1', '85845262', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 11:21:06', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 11:21:10', '2016-10-13 11:21:10', 'NORMAL');
+INSERT INTO `order_info` VALUES ('6d2c19644c5740da8dd77c028e4b5cb5', '1', '04553268', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 11:29:54', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 11:29:58', '2016-10-13 11:29:58', 'NORMAL');
+INSERT INTO `order_info` VALUES ('e24136415c1c4986b1de4cd6d5f416e7', '1', '29522347', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 11:32:04', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 11:32:08', '2016-10-13 11:32:08', 'NORMAL');
+INSERT INTO `order_info` VALUES ('db158022b44b4c14ab11e1028c145e01', '1', '19902742', null, '3.2', '3.2', null, '收货人1', '1860000001', '孙寺', '2016年9月29日', '1', '1', null, null, null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '备注', null, '274200', '05308911051', null, '2016-10-13 11:43:01', null, null, '122355', null, '已支付', '1', '0', null, '--', '2016-10-13 11:43:06', '2016-10-13 11:43:06', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for order_product_detail

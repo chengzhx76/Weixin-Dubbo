@@ -165,6 +165,7 @@ public class UserService implements RpcUserService {
 
     @Override
     public void addCashRecord(CashRecord cashRecord) {
+        cashRecord.preInsert();
         cashRecordDao.save(cashRecord);
     }
 

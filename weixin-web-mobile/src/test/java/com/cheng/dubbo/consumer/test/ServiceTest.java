@@ -21,14 +21,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
         "classpath*:applicationContext.xml"})
 public class ServiceTest {
     @Autowired
-    private SysIndexService sysIndexService;
+    private SysIndexService indexService;
     @Autowired
     private SysOrderService orderService;
 
 
     @Test
     public void test01() {
-        Index index = sysIndexService.getIndexInfo("1");
+        Index index = indexService.getIndexInfo("1");
         System.out.println(JSON.toJSONString(index));
     }
 
@@ -41,5 +41,8 @@ public class ServiceTest {
     public void test03() {
         orderService.submitOrder();
     }
-
+    @Test
+    public void test04() {
+        orderService.getOrders();
+    }
 }
