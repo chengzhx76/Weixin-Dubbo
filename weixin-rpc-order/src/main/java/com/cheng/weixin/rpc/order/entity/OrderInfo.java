@@ -39,7 +39,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal freightReduce;
     private BigDecimal freightPayable;
     private BigDecimal productTotalPrice;
-    private BigDecimal balanceOffset;
+    private BigDecimal balanceOffset; // 余额抵扣
     private BigDecimal discount;
     private String remarkCustomer;
     private String postCode;

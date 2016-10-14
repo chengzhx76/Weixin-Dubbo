@@ -6,7 +6,7 @@
   <sql id="columns">
     o.id,o.account_id,o.oid,o.relate_oid,o.amount_payable,o.amount_paid,o.consignee,o.mobile,o.address,o.delivery_time_id,o.pay_id,o.delivery_type_id,o.arayacak_address,
     o.arayacak_delivery_time,o.province,o.city,o.country,o.pay_status,o.order_type,o.freight_reduce,o.freight_payable,
-    o.product_total_price,o.discount,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.coupon_code,o.coupon_reduce_price,o.flow_status,
+    o.product_total_price,o.discount,o.balance_offset,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.coupon_code,o.coupon_reduce_price,o.flow_status,
     o.bonus_point_reduce_price,o.is_free_account_level,o.comment_id,
     o.remarks,o.create_date,o.update_date,o.status
   </sql>
@@ -41,6 +41,7 @@
     <if test="freightPayable != null and freightPayable != ''">freight_payable=#{freightPayable},</if>
     <if test="productTotalPrice != null and productTotalPrice != ''">product_total_price=#{productTotalPrice},</if>
     <if test="discount != null and discount != ''">discount=#{discount},</if>
+    <if test="balanceOffset != null and balanceOffset != ''">balance_offset=#{balanceOffset},</if>
     <if test="remarkCustomer != null and remarkCustomer != ''">remark_customer=#{remarkCustomer},</if>
     <if test="postCode != null and postCode != ''">post_code=#{postCode},</if>
     <if test="telephone != null and telephone != ''">telephone=#{telephone},</if>
@@ -125,7 +126,7 @@
     (
     #{id},#{accountId},#{oid},#{relateOid},#{amountPayable},#{amountPaid},#{consignee},#{mobile},#{address},#{deliveryTimeId},#{payId},#{deliveryTypeId},#{arayacakAddress},
     #{arayacakDeliveryTime},#{province},#{city},#{country},#{payStatus},#{orderType},#{freightReduce},#{freightPayable},
-    #{productTotalPrice},#{discount},#{remarkCustomer},#{postCode},#{telephone},#{email},#{payTime},#{exchangeOid},#{couponCode},#{couponReducePrice},#{flowStatus},
+    #{productTotalPrice},#{discount},#{balanceOffset}#{remarkCustomer},#{postCode},#{telephone},#{email},#{payTime},#{exchangeOid},#{couponCode},#{couponReducePrice},#{flowStatus},
     #{bonusPointReducePrice},#{isFreeAccountLevel},#{commentId},
     #{remarks},#{createDate},#{updateDate},#{status}
     )

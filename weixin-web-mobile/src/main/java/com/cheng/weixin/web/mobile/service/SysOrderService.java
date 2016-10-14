@@ -117,8 +117,6 @@ public class SysOrderService {
         OrderInfo order = new OrderInfo();
         String oid = RandomStringUtils.randomNumeric(8);
         order.setOid(oid);
-        order.setAmountPayable(totalProductPrice);
-        order.setAmountPaid(totalProductPrice);
         order.setAccountId("1");
         // 配送地址
         DeliveryAddress address = userService.getDefaultAddress("1");
@@ -137,17 +135,30 @@ public class SysOrderService {
         //order.setArayacakAddress("刘楼");
         //order.setArayacakDeliveryTime("2016年9月29日");
         order.setOrderType(OrderType.NORMAL);
-        order.setFreightReduce(BigDecimal.ZERO);
-        order.setFreightPayable(new BigDecimal(2));
-        order.setProductTotalPrice(totalProductPrice);
-        order.setDiscount(BigDecimal.ZERO);
+
+        // 是否是用余额支付
+        if(true) {
+
+        }
+
+
+        order.setFreightPayable(new BigDecimal(2)); // 应付运费
+        order.setFreightReduce(BigDecimal.ZERO); // 运费优惠
+        order.setProductTotalPrice(totalProductPrice); // 商品总金额
+        order.setDiscount(BigDecimal.ZERO); // 优惠金额
+        order.setCouponReducePrice(BigDecimal.ZERO); // 券优惠
+        order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠
+        // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
+        order.setAmountPayable(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
+                .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
+        // 已付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
+        order.setAmountPaid(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
+                .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
         order.setRemarkCustomer("备注");
         order.setIp("127.0.0.1");
         order.setPayTime(new Date());
         order.setCouponCode("122355");
-        order.setBonusPointReducePrice(BigDecimal.ONE);
         order.setFreeAccountLevel(Boolean.FALSE);
-        order.preInsert();
         orderService.addOrder(order);
 
         // 用户金额操作
@@ -160,6 +171,7 @@ public class SysOrderService {
         behavior.setNanme(oid);
         userService.addBehavior(behavior);
 
+        // 积分记录
         BonusPointRecord bonusPoint = userService.getBonusPointRecord("1");
         BonusPointRecord bonusPointRecord = new BonusPointRecord();
         bonusPointRecord.setTxBonusPoints(10);// TODO 本次订单获取的积分
@@ -175,6 +187,7 @@ public class SysOrderService {
         bonusPointRecord.setTxResult("结果"); //TODO
         userService.addBonusPointRecord(bonusPointRecord);
 
+        // 券记录
         //CouponRecord record  = userService.getCouponRecordByUser("1");
         CouponRecord couponRecord = new CouponRecord();
         //couponRecord.setId(record.getId());
@@ -185,6 +198,7 @@ public class SysOrderService {
         couponRecord.setTxResult("结果");
         userService.addCouponRecord(couponRecord);
 
+        // 现金记录
         CashRecord cash = userService.getCashRecord("1");
         if (cash == null) {
             throw new BusinessException("请先充值");
