@@ -231,9 +231,11 @@ public class SysOrderService {
             orderList.setNumber(order.getOrderDetails().size()+"");
             orderList.setStatus(order.getFlowStatus().split("-"));
             // 总金额 = 商品总金额 - 余额抵扣 - 优惠金额 + 应付运费
-            orderList.setTotalPrice(StringFormat.format(
-                    order.getProductTotalPrice().subtract(order.getBalanceOffset())
-                    .subtract(order.getDiscount()).add(order.getFreightPayable())));
+            //orderList.setTotalPrice(StringFormat.format(
+            //        order.getProductTotalPrice().subtract(order.getBalanceOffset())
+            //        .subtract(order.getDiscount()).add(order.getFreightPayable())));
+
+            orderList.setTotalPrice(StringFormat.format(order.getAmountPayable()));
             String orderStatus = "";
             if (order.getPayStatus().equals(PayStatus.NONPAYMENT)) {
                 orderStatus = "INVALID";
@@ -266,9 +268,10 @@ public class SysOrderService {
         detail.setCouponReducePrice(StringFormat.format(orderInfo.getCouponReducePrice()));
         detail.setBalanceOffset(StringFormat.format(orderInfo.getBalanceOffset()));
         // 总金额 = 商品总金额 - 余额抵扣 - 优惠金额 + 应付运费
-        detail.setTotalPrice(StringFormat.format(
-                orderInfo.getProductTotalPrice().subtract(orderInfo.getBalanceOffset())
-                .subtract(orderInfo.getDiscount()).add(orderInfo.getFreightPayable())));
+        //detail.setTotalPrice(StringFormat.format(
+        //        orderInfo.getProductTotalPrice().subtract(orderInfo.getBalanceOffset())
+        //        .subtract(orderInfo.getDiscount()).add(orderInfo.getFreightPayable())));
+        detail.setTotalPrice(StringFormat.format(orderInfo.getAmountPayable()));
         String orderStatus = "";
         if (orderInfo.getPayStatus().equals(PayStatus.NONPAYMENT)) {
             orderStatus = "INVALID";
