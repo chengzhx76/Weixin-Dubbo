@@ -128,6 +128,7 @@ public class SysOrderService {
         order.setTelephone(address.getTelephone());
         order.setEmail(address.getEmail());
 
+        order.setPayStatus(PayStatus.FREIGHTCOLLECT); // TODO 暂时定为到付
         order.setFlowStatus("已支付");
         order.setDeliveryTimeId("2016年9月29日");
         order.setPayId("1");
@@ -138,7 +139,7 @@ public class SysOrderService {
 
         // 是否是用余额支付
         if(true) {
-
+            order.setBalanceOffset(BigDecimal.valueOf(6L));
         }
 
 
@@ -151,9 +152,13 @@ public class SysOrderService {
         // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
         order.setAmountPayable(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
                 .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
-        // 已付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
-        order.setAmountPaid(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
-                .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
+        // 已付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠 - 余额抵扣
+        BigDecimal amountPaid = order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
+                                .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
+        if (true) { // 是否是用余额支付
+            amountPaid = amountPaid.subtract(BigDecimal.valueOf(6L));
+        }
+        order.setAmountPaid(amountPaid);
         order.setRemarkCustomer("备注");
         order.setIp("127.0.0.1");
         order.setPayTime(new Date());
@@ -237,7 +242,7 @@ public class SysOrderService {
 
             orderList.setTotalPrice(StringFormat.format(order.getAmountPayable()));
             String orderStatus = "";
-            if (order.getPayStatus().equals(PayStatus.NONPAYMENT)) {
+            if (PayStatus.NONPAYMENT.equals(order.getPayStatus())) {
                 orderStatus = "INVALID";
             } else if (StringUtils.isBlank(order.getCommentId())) {
                 orderStatus = "WAITCOMMENT";
@@ -251,15 +256,16 @@ public class SysOrderService {
 
     public OrderDetail getOrderDetail() {
         OrderDetail detail = new OrderDetail();
-        OrderInfo orderInfo = orderService.getOrderDetail("1");
+        OrderInfo orderInfo = orderService.getOrderDetail("1700b55803cc44dfa08bac0028bee46f");
         detail.setId(orderInfo.getId());
         String[] flowStatus = orderInfo.getFlowStatus().split("-");
-        detail.setStatus(flowStatus[flowStatus.length+1]);
+        detail.setStatus(flowStatus[flowStatus.length-1]);
         detail.setOid(orderInfo.getOid());
         detail.setConsignee(orderInfo.getConsignee());
         detail.setAddress(orderInfo.getAddress());
 
         Pay pay = orderService.getPay(orderInfo.getPayId());
+
         detail.setPayWay(pay.getName());
         detail.setProductTotalPrice(StringFormat.format(orderInfo.getProductTotalPrice()));
         detail.setFreightPayable(StringFormat.format(orderInfo.getFreightPayable()));

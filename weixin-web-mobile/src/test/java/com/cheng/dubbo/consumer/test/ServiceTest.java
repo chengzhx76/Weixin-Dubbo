@@ -43,6 +43,10 @@ public class ServiceTest {
     }
     @Test
     public void test04() {
-        orderService.getOrders();
+        System.out.println(orderService.getOrders());
+    }
+    @Test
+    public void test05() {
+        System.out.println(orderService.getOrderDetail());
     }
 }

@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.order;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import java.util.List;
 
 /**
@@ -154,5 +156,10 @@ public class OrderDetail {
 
     public void setDetails(List<OrderProductDetail> details) {
         this.details = details;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

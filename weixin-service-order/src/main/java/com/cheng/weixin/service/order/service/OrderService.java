@@ -52,8 +52,10 @@ public class OrderService implements RpcOrderService {
     }
 
     @Override
-    public OrderInfo getOrderDetail(String userId) {
-        return orderInfoDao.load(new OrderInfo(userId));
+    public OrderInfo getOrderDetail(String id) {
+        OrderInfo orderInfo = new OrderInfo();
+        orderInfo.setId(id);
+        return orderInfoDao.load(orderInfo);
     }
 
     @Override
