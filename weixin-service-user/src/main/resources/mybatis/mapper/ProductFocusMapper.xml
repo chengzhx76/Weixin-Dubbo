@@ -15,7 +15,6 @@
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="accountId != null and accountId != ''">account_id=#{accountId},</if>
     <if test="productId != null and productId != ''">product_id=#{productId},</if>
-
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -33,6 +32,12 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="id != null and id != ''">
+        AND accountId = #{accountId}
+      </if>
+      <if test="id != null and id != ''">
+        AND productId = #{productId}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -41,6 +46,20 @@
           AND status != 'DELETE'
         </otherwise>
       </choose>
+    </where>
+  </sql>
+
+  <sql id="productFocusDelete">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <if test="id != null and id != ''">
+        AND accountId = #{accountId}
+      </if>
+      <if test="id != null and id != ''">
+        AND productId = #{productId}
+      </if>
     </where>
   </sql>
 
@@ -69,6 +88,14 @@
     <include refid="productFocusUpdate"/>
     <include refid="productFocusWhere"/>
   </update>
+
+  <!-- 删除 -->
+  <update id="delete" parameterType="ProductFocus">
+    UPDATE <include refid="tableName"/>
+    <include refid="productFocusUpdate"/>
+    <include refid="productFocusDelete"/>
+  </update>
+
   <!-- 插入 -->
   <insert id="save" parameterType="ProductFocus">
     INSERT INTO

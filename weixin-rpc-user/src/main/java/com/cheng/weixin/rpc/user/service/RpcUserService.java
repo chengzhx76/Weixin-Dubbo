@@ -110,7 +110,12 @@ public interface RpcUserService {
      * @param productId
      */
     void addProductFocus(String userId, String productId);
-
+    /**
+     * 删除商品收藏
+     * @param userId
+     * @param productId
+     */
+    void deleteProductFocus(String userId, String productId);
     /**
      * 该商品是否收藏
      * @param userId

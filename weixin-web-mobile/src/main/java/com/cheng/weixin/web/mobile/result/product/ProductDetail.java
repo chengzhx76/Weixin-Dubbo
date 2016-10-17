@@ -1,6 +1,7 @@
 package com.cheng.weixin.web.mobile.result.product;
 
 import com.cheng.weixin.web.mobile.result.comment.ProductComment;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import java.util.List;
 
@@ -93,5 +94,10 @@ public class ProductDetail {
 
     public void setMarketPrice(String marketPrice) {
         this.marketPrice = marketPrice;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

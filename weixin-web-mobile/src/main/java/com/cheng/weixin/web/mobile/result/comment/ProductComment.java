@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.comment;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 /**
  * Desc: 评论
  * Author: hp
@@ -61,5 +63,9 @@ public class ProductComment {
 
     public void setReply(String reply) {
         this.reply = reply;
+    }
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

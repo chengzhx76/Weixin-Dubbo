@@ -1,5 +1,6 @@
 package com.cheng.weixin.service.user.service;
 
+import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.common.exception.BusinessException;
 import com.cheng.weixin.rpc.user.entity.*;
 import com.cheng.weixin.rpc.user.enumType.Credit;
@@ -174,6 +175,14 @@ public class UserService implements RpcUserService {
         ProductFocus focus = new ProductFocus(userId, productId);
         focus.preInsert();
         productFocusDao.save(focus);
+    }
+
+    @Override
+    public void deleteProductFocus(String userId, String productId) {
+        ProductFocus focus = new ProductFocus(userId, productId);
+        focus.setStatus(Status.DELETE);
+        focus.preUpdate();
+        productFocusDao.delete(focus);
     }
 
     @Override

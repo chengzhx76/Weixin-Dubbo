@@ -75,12 +75,14 @@ public class SysProductService {
         cartService.addProduct("1", productId, count);
     }
 
-    public boolean addFocus(String productId) {
+    public boolean focus(String productId) {
         boolean isFocus = userService.isProductFocus("1", productId);
-        if (!isFocus) {
+        if (isFocus) {
+            userService.deleteProductFocus("1", productId);
+        }else {
             userService.addProductFocus("1", productId);
         }
-        return isFocus;
+        return !isFocus;
     }
 
 }

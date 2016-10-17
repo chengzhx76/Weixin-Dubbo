@@ -19,6 +19,12 @@ public class ProductFocus extends DataEntity<ProductFocus> {
         this.productId = productId;
     }
 
+    //public ProductFocus(String accountId, String productId, Status status) {
+    //    this.accountId = accountId;
+    //    this.productId = productId;
+    //    super.status = status;
+    //}
+
     public String getAccountId() {
         return accountId;
     }

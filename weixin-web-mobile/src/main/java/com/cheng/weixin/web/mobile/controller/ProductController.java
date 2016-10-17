@@ -44,6 +44,6 @@ public class ProductController extends BaseController {
     @RequestMapping(value = "v1/focus")
     public ResponseEntity<Response> addProductFocus(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
-        return success(productService.addFocus(product.getProductId()));
+        return success(productService.focus(product.getProductId()));
     }
 }

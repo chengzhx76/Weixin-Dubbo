@@ -5,6 +5,7 @@ import com.cheng.weixin.web.mobile.result.index.Index;
 import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
 import com.cheng.weixin.web.mobile.service.SysIndexService;
 import com.cheng.weixin.web.mobile.service.SysOrderService;
+import com.cheng.weixin.web.mobile.service.SysProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class ServiceTest {
     private SysIndexService indexService;
     @Autowired
     private SysOrderService orderService;
+    @Autowired
+    private SysProductService productService;
 
 
     @Test
@@ -48,5 +51,20 @@ public class ServiceTest {
     @Test
     public void test05() {
         System.out.println(orderService.getOrderDetail());
+    }
+
+    // ========================================================= //
+
+    @Test
+    public void test06() {
+        System.out.println(productService.getDetail("1"));
+    }
+    @Test
+    public void test07() {
+        productService.buyProduct("1", 2L);
+    }
+    @Test
+    public void test08() {
+        System.out.println(productService.focus("1"));
     }
 }
