@@ -260,7 +260,6 @@ public class SysOrderService {
         detail.setAddress(orderInfo.getAddress());
 
         Pay pay = orderService.getPay(orderInfo.getPayId());
-
         detail.setPayWay(pay.getName());
         detail.setProductTotalPrice(StringFormat.format(orderInfo.getProductTotalPrice()));
         detail.setFreightPayable(StringFormat.format(orderInfo.getFreightPayable()));
