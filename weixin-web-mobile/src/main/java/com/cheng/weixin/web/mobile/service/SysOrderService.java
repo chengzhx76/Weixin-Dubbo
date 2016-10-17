@@ -244,7 +244,6 @@ public class SysOrderService {
                 orderList.setCommentId(order.getCommentId());
             }
             orderList.setOrderStatus(orderStatus);
-
             orders.add(orderList);
         }
         return orders;
