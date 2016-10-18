@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.cart;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import java.util.List;
 
 /**
@@ -35,5 +37,10 @@ public class ShoppingCartInfo {
 
     public void setProducts(List<ProductInfo> products) {
         this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.user;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 /**
  * Desc:
  * Author: hp
@@ -77,5 +79,10 @@ public class UserDetail {
 
     public void setCouponRecord(String couponRecord) {
         this.couponRecord = couponRecord;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.mall;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 /**
  * Desc: 商品类别
  * Author: hp
@@ -23,5 +25,10 @@ public class ProductCategory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

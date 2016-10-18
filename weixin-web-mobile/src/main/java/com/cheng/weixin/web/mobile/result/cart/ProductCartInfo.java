@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.cart;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 /**
  * Desc: 购物车商品信息
  * Author: hp
@@ -32,5 +34,10 @@ public class ProductCartInfo {
 
     public void setFreight(String freight) {
         this.freight = freight;
+    }
+
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
     }
 }

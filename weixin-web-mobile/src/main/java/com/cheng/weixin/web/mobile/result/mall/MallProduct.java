@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.mall;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 /**
  * Desc: 商城商品
  * Author: hp
@@ -69,5 +71,8 @@ public class MallProduct {
     public void setTag(String tag) {
         this.tag = tag;
     }
-
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
 }
