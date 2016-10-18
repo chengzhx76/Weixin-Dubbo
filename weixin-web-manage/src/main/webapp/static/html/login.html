@@ -1,64 +1,57 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>微信后台-登录</title>
-  <link href="../css/bootstrap.css" rel="stylesheet">
-  <link href="../css/login.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>微信管理后台 - 登录</title>
+    <meta name="keywords" content="微信管理后台">
+    <meta name="description" content="基于电商平台">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min.css" rel="stylesheet">
+    <link href="../css/login.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
 </head>
-<body>
-  <div class="container">
-    <div id="messageBox">
-      <div class="center-block alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <label id="loginError" class="error /*hidden*/">错误消息！</label>
-      </div>
+
+<body class="signin">
+    <div class="signinpanel">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="signin-info">
+                    <div class="logopanel m-b">
+                        <h1>[ WeiXin-Shop ]</h1>
+                    </div>
+                    <div class="m-b"></div>
+                    <h4>欢迎使用 <strong>微信管理后台</strong></h4>
+                    <ul class="m-b">
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势一</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势二</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势三</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势四</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势五</li>
+                    </ul>
+                    <!--<strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>-->
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <form method="post" action="http://www.zi-han.net/theme/hplus/index.html">
+                    <h4 class="no-margins">登录：</h4>
+                    <p class="m-t-md">登录到微信管理后台</p>
+                    <input type="text" class="form-control uname" placeholder="用户名" />
+                    <input type="password" class="form-control pword m-b" placeholder="密码" />
+                    <a href="#">忘记密码了？</a>
+                    <button class="btn btn-success btn-block">登录</button>
+                </form>
+            </div>
+        </div>
+        <div class="signup-footer">
+            <div class="pull-left">
+                Copyright &copy; 2015-2016 <a href="###">微信管理后台</a> Powered By Wxin v0.1
+            </div>
+        </div>
     </div>
-    <header>
-      <h2 class="text-center">微信管理后台登录</h2>
-    </header>
-    <section class="loginBox center-block">
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active">
-          <a href="#form" aria-controls="form" role="tab" data-toggle="tab">帐号登录</a>
-        </li>
-        <li role="presentation">
-          <a href="#wxscan" aria-controls="scan" role="tab" data-toggle="tab">微信扫描登录</a>
-        </li>
-      </ul>
-
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="form">
-          <form>
-            <div class="form-group">
-              <label for="username">登录名：</label>
-              <input type="text" class="form-control" id="username" placeholder="Username">
-            </div>
-            <div class="form-group">
-              <label for="password">密码：</label>
-              <input type="password" class="form-control" id="password" placeholder="Password">
-            </div>
-            <hr/>
-            <input id="submit" class="btn btn-primary" type="submit" value="登陆"> &nbsp;&nbsp;
-            <label for="rememberMe" title="下次不需要再登录">
-              <input type="checkbox" id="rememberMe" name="rememberMe"> 记住我（公共场所慎用）
-            </label>
-          </form>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="wxscan">
-          <img src="../img/weixin_login.jpg" alt="扫描登陆" class="img-responsive img-thumbnail">
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <h5 class="text-center">Copyright &copy; 2015-2016 <a href="###">微信管理后台</a> Powered By Wxin v0.1</h5>
-    </footer>
-  </div>
-
-  <script src="../js/jquery-1.11.1.min.js"></script>
-  <script src="../js/bootstrap.js"></script>
 </body>
 </html>
