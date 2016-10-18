@@ -24,7 +24,8 @@
     select
       <include refid="columns"/>
     from
-      <include refid="tableName"/> AS p
+      <include refid="tableName"/>
+    AS p
   </sql>
 
   <sql id="payWhere">

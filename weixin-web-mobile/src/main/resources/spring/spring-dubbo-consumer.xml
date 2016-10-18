@@ -8,9 +8,7 @@
           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
   <dubbo:application name="weixin-web-mobile"/>
-
   <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="${weixin.dubbo.reistry.protocol}"/>
-
   <dubbo:consumer registry="zk1"/>
 
   <dubbo:reference id="redisService" interface="com.cheng.weixin.rpc.redis.service.RpcRedisService"

@@ -11,5 +11,6 @@
   <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="${weixin.dubbo.reistry.protocol}"/> <!-- 注意要关闭防火墙 -->
   <dubbo:protocol id="mydubbo" name="dubbo" host="${weixin.dubbo.host.address}" port="${weixin.dubbo.order.service.port}"/>
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
+
   <dubbo:service interface="com.cheng.weixin.rpc.order.service.RpcOrderService" ref="orderService" version="1.0"/>
 </beans>

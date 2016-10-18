@@ -1,4 +1,4 @@
-package com.cheng.weixin.service.log.MqService;
+package com.cheng.weixin.service.log.service;
 
 import com.cheng.weixin.service.log.dao.LogDaoMapper;
 import org.slf4j.Logger;
@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Author: Cheng
  * Date: 2016/4/25 0025
  */
-public class LogService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogService.class);
+public class LogMQService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LogMQService.class);
     @Autowired
     private LogDaoMapper logDao;
 

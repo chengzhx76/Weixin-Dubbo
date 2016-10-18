@@ -12,4 +12,9 @@
     <!-- 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载。 -->
     <setting name="aggressiveLazyLoading" value="true"/>
   </settings>
+  <plugins>
+    <plugin interceptor="com.github.pagehelper.PageHelper">
+      <property name="dialect" value="mysql"/>
+    </plugin>
+  </plugins>
 </configuration>

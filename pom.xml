@@ -31,7 +31,6 @@
       <module>weixin-service-admin</module>
       <module>weixin-service-cart</module>
       <module>weixin-service-item</module>
-      <module>weixin-service-log</module>
       <module>weixin-service-order</module>
       <module>weixin-service-user</module>
       <module>weixin-service-wxtools</module>
@@ -44,6 +43,7 @@
       <module>weixin-service-message</module>
       <module>weixin-web-manage</module>
       <module>weixin-web-mobile</module>
+      <module>weixin-service-log</module>
     </modules>
 
     <properties>

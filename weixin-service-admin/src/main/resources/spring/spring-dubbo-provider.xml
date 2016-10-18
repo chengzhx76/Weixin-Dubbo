@@ -8,13 +8,10 @@
           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
   <dubbo:application name="weixin-service-admin"/>
-
-  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
-
-  <dubbo:protocol id="mydubbo" name="dubbo" host="192.168.1.110" port="20886"/>
-
+  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="${weixin.dubbo.reistry.protocol}"/> <!-- 注意要关闭防火墙 -->
+  <dubbo:protocol id="mydubbo" name="dubbo" host="${weixin.dubbo.host.address}" port="${weixin.dubbo.admin.service.port}"/>
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
 
-  <dubbo:service interface="com.cheng.weixin.rpc.admin.service.RpcAdminService" ref="adminService"/>
+  <dubbo:service interface="com.cheng.weixin.rpc.admin.service.RpcAdminService" ref="adminService" version="1.0"/>
 
 </beans>

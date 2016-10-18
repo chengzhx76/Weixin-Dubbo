@@ -48,9 +48,11 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("===> "+request.getRequestURI());
+
         // 保存日志
-        logService.saveLog(SystemUtils.getRemoteAddr(request),request.getHeader("user-agent"),request.getRequestURI(),
-                request.getParameterMap(),request.getMethod(),/*handler,*/ ex, null, UserUtils.getPrincipal().getUsername());
+        logService.saveLog(SystemUtils.getRemoteAddr(request), request.getHeader("user-agent"), request.getRequestURI(),
+                request.getParameterMap(), request.getMethod(),/*handler,*/ ex, null, UserUtils.getPrincipal().getUsername());
 
         if (logger.isDebugEnabled()) {
             long beginTime = runTimeThreadLocal.get(); // 开始时间
@@ -63,6 +65,5 @@ public class LogInterceptor implements HandlerInterceptor {
                     Runtime.getRuntime().freeMemory()/1024/1024,
                     (Runtime.getRuntime().maxMemory()-Runtime.getRuntime().totalMemory()+Runtime.getRuntime().freeMemory())/1024/1024);
         }
-
     }
 }

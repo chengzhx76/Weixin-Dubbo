@@ -1,20 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cheng.weixin.core.dao.LogDaoMapper">
+<mapper namespace="com.cheng.weixin.service.log.dao.LogDaoMapper">
   <sql id="tableName">log</sql>
-  <sql id="logColumns">
+  <sql id="columns">
     l.id,l.type,l.title,l.remote_addr,l.request_uri,l.method,l.params,
     l.user_agent,l.exception,l.username,l.begin_date,l.end_date,l.status
   </sql>
-  <!-- 保存日志 -->
-  <insert id="save" parameterType="Log">
+  <sql id="insertColumns">
+    id,type,title,remote_addr,request_uri,method,params,user_agent,exception,username,
+    begin_date,end_date,status
+  </sql>
+  <sql id="logIf">
+    <if test="id != null and id != ''">id=#{id},</if>
+    <if test="type != null and type != ''">type=#{type},</if>
+    <if test="title != null and title != ''">title=#{title},</if>
+    <if test="remoteAddr != null and remoteAddr != ''">remote_addr=#{remoteAddr},</if>
+    <if test="requestUri != null and requestUri != ''">request_uri=#{requestUri},</if>
+    <if test="method != null and method != ''">method=#{method},</if>
+    <if test="params != null and params != ''">params=#{params},</if>
+    <if test="userAgent != null and userAgent != ''">user_agent=#{userAgent},</if>
+    <if test="exception != null and exception != ''">exception=#{exception},</if>
+    <if test="username != null and username != ''">username=#{username},</if>
+    <if test="beginDate != null and beginDate != ''">begin_date=#{beginDate},</if>
+    <if test="endDate != null and endDate != ''">end_date=#{endDate},</if>
+    <if test="status != null and status != ''">status=#{status}</if>
+  </sql>
+  <sql id="logSelector">
+    select
+    <include refid="columns"/>
+    from
+    <include refid="tableName"/>
+    AS l
+  </sql>
+
+  <sql id="logWhere">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+      <choose>
+        <when test="status != null and status !=''">
+          AND status = #{status}
+        </when>
+        <otherwise>
+          AND status != 'DELETE'
+        </otherwise>
+      </choose>
+    </where>
+  </sql>
+
+  <sql id="logUpdate">
+    <trim prefix="SET" suffixOverrides=",">
+      <include refid="logIf"/>
+    </trim>
+  </sql>
+
+  <!-- =================================================================== -->
+  <select id="load" parameterType="log" resultType="log">
+    <include refid="logSelector"/>
+    <include refid="logWhere"/>
+  </select>
+
+  <!-- 获取全部 -->
+  <select id="loadAll" resultType="log">
+    <include refid="logSelector"/>
+    <include refid="logWhere"/>
+  </select>
+
+  <!-- 更新 -->
+  <update id="update" parameterType="log">
+    UPDATE <include refid="tableName"/>
+    <include refid="logUpdate"/>
+    <include refid="logWhere"/>
+  </update>
+  <!-- 插入 -->
+  <insert id="save" parameterType="log">
     INSERT INTO
-      <include refid="tableName"/>(id,type,title,remote_addr,request_uri,method,params,user_agent,exception,username,begin_date,end_date,status)
+    <include refid="tableName"/>
+    (
+    <include refid="insertColumns"/>
+    )
     VALUES
-      (#{id},#{type},#{title},#{remoteAddr},#{requestUri},#{method},#{params},
-      #{userAgent},#{exception},#{username},#{beginDate},#{endDate},#{status})
+    (
+    #{id},#{type},#{title},#{remoteAddr},#{requestUri},#{method},#{params},
+    #{userAgent},#{exception},#{username},#{beginDate},#{endDate},#{status}
+    )
   </insert>
 
 </mapper>
-

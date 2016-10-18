@@ -2,9 +2,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xsi:schemaLocation="http://www.springframework.org/schema/rabbit
-	http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
+	http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
 	http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
   <!-- 定义RabbitMQ的连接工厂 -->
   <rabbit:connection-factory id="connectionFactory"
@@ -16,6 +16,9 @@
   <!-- MQ的管理，包括队列、交换器等 -->
   <rabbit:admin connection-factory="connectionFactory" />
 
+  <!-- MQ的管理，包括队列、交换器等 -->
+  <rabbit:admin connection-factory="connectionFactory" />
+
   <!-- queue 队列声明-->
   <rabbit:queue name="WEIXIN-QUEUE-LOG" auto-declare="true"/>
 
@@ -23,5 +26,5 @@
     <rabbit:listener ref="consumer" method="saveLogs" queue-names="WEIXIN-QUEUE-LOG" />
   </rabbit:listener-container>
 
-  <bean id="consumer" class="com.cheng.weixin.service.log.MqService.LogService"/>
+  <bean id="consumer" class="com.cheng.weixin.service.log.service.LogMQService"/>
 </beans>

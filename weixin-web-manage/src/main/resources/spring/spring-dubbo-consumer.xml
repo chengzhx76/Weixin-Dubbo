@@ -3,16 +3,16 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/beans/spring-beans.xsd
           http://code.alibabatech.com/schema/dubbo
           http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
   <dubbo:application name="weixin-web-manage"/>
-
-  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="zookeeper"/> <!-- 注意要关闭防火墙 -->
-
+  <dubbo:registry id="zk1" address="${weixin.dubbo.reistry.address}" protocol="${weixin.dubbo.reistry.protocol}"/> <!-- 注意要关闭防火墙 -->
   <dubbo:consumer registry="zk1"/>
 
-  <dubbo:reference id="adminService" interface="com.cheng.weixin.rpc.admin.service.RpcAdminService"/>
-  <dubbo:reference id="logService" interface="com.cheng.weixin.rpc.log.service.RpcLogService"/>
+  <dubbo:reference id="adminService" interface="com.cheng.weixin.rpc.admin.service.RpcAdminService"
+                   check="false" timeout="5000" version="1.0"/>
+  <dubbo:reference id="logService" interface="com.cheng.weixin.rpc.log.service.RpcLogService"
+                   check="false" timeout="5000" version="1.0"/>
 </beans>

@@ -2,15 +2,14 @@ package com.cheng.weixin.web.manage.security;
 
 import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.common.security.Encodes;
+import com.cheng.weixin.common.utils.Captcha;
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.entity.Role;
-import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import com.cheng.weixin.rpc.log.service.RpcLogService;
-import com.cheng.weixin.common.utils.Captcha;
 import com.cheng.weixin.web.manage.utils.UserUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -30,8 +29,8 @@ import java.util.List;
  * Date: 2016/1/26 0026
  */
 public class SystemAuthorizingRealm extends AuthorizingRealm {
-    @Autowired
-    private RpcAdminService adminService;
+    //@Autowired
+    //private RpcAdminService adminService;
     @Autowired
     private RpcLogService logService;
 

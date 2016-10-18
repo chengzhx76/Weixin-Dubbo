@@ -18,7 +18,7 @@ import java.util.List;
  * Author: hp
  * Date: 2016/9/9
  */
-@Service("sysMallService")
+@Service
 public class SysMallService {
     @Autowired
     private RpcProductService productService;
@@ -30,7 +30,8 @@ public class SysMallService {
         for (ProductType type : productTypes) {
             ProductCategory category = new ProductCategory();
             category.setId(type.getId());
-            category.setName(category.getName());
+            category.setName(type.getName());
+            categories.add(category);
         }
         return categories;
     }

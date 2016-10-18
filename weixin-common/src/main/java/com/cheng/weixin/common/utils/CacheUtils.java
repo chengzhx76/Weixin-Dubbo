@@ -48,8 +48,13 @@ public class CacheUtils {
      * @return
      */
     public static Object get(String cacheName, String key) {
-        Element element = getCache(cacheName).get(key);
-        return element==null?null : element.getObjectValue();
+        Cache cache = getCache(cacheName);
+        if (cache != null) {
+            Element element = cache.get(key);
+            return element == null ? null : element.getObjectValue();
+        }
+        return cache;
+
     }
 
     /**

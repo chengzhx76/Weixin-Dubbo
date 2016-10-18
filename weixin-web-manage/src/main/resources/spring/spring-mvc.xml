@@ -40,7 +40,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/"/>
-			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/login/**"/>
 			<bean class="com.cheng.weixin.web.manage.interceptor.LogInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -67,7 +67,9 @@
     <include refid="selector"/>
     JOIN admin_role ar ON ar.role_id = r.id
     JOIN admin a ON a.id = ar.admin_id
-    WHERE a.id = #{adminId} AND p.status = 'NORMAL' AND r.status = 'NORMAL' AND a.status = 'NORMAL'
+    WHERE a.id = #{adminId}
+    AND r.status = 'NORMAL'
+    AND a.status = 'NORMAL'
   </select>
 
 </mapper>

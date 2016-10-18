@@ -10,7 +10,6 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>weixin-service-log</artifactId>
-
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -29,9 +28,12 @@
       <artifactId>weixin-rpc-log</artifactId>
     </dependency>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>weixin-rpc-log</artifactId>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
@@ -48,6 +50,14 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -68,14 +78,6 @@
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.amqp</groupId>
-      <artifactId>spring-rabbit</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.rabbitmq</groupId>
-      <artifactId>amqp-client</artifactId>
     </dependency>
     <!-- Dubbo Start -->
     <dependency>
@@ -137,6 +139,16 @@
       <artifactId>spring-expression</artifactId>
     </dependency>
     <!-- Spring end -->
+    <!-- rabbitmq start -->
+    <dependency>
+      <groupId>org.springframework.amqp</groupId>
+      <artifactId>spring-rabbit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.rabbitmq</groupId>
+      <artifactId>amqp-client</artifactId>
+    </dependency>
+    <!-- rabbitmq end -->
     <!-- MyBatis begin -->
     <dependency>
       <groupId>org.mybatis</groupId>
@@ -165,6 +177,7 @@
       <resource>
         <targetPath>${project.build.directory}/classes/META-INF/spring</targetPath>
         <directory>src/main/resources/spring</directory>
+        <!--<directory>src/main/resources</directory>-->
         <filtering>true</filtering>
         <includes>
           <include>spring-context.xml</include>
@@ -228,4 +241,5 @@
       </plugin>
     </plugins>
   </build>
+
 </project>
