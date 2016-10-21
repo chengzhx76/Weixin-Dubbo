@@ -133,7 +133,7 @@ public class Captcha {
         if (clean) {
             loginFailMap.remove(username);
         }
-        return loginFailNum > 3;
+        return loginFailNum >= 3;
     }
 
 }

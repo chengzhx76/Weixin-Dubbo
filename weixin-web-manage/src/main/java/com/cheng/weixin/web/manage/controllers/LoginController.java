@@ -25,6 +25,7 @@ import java.io.OutputStream;
  */
 @Controller
 public class LoginController extends BaseController {
+
     /** 登录页 **/
     @RequestMapping(value = "login",method = RequestMethod.GET)
     public String login() {
@@ -73,9 +74,9 @@ public class LoginController extends BaseController {
         int height = 30;//验证码的高度
         Captcha c = Captcha.getInstance();
         c.set(width, height);
-        String checkcode = c.generateCheckcode();
-        session.setAttribute(Captcha.CAPTCHA,checkcode);
+        String checkCode = c.generateCheckcode();
+        session.setAttribute(Captcha.CAPTCHA,checkCode);
         OutputStream os = resp.getOutputStream();
-        ImageIO.write(c.generateCheckImg(checkcode), "jpg", os);
+        ImageIO.write(c.generateCheckImg(checkCode), "jpg", os);
     }
 }

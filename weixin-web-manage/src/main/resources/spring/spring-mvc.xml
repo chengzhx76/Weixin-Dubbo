@@ -14,9 +14,10 @@
 	<mvc:annotation-driven />
 
   <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
-  <!--<mvc:default-servlet-handler />-->
+  <mvc:default-servlet-handler />
 
-	<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>
+	<!--<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>-->
+	<mvc:resources mapping="/resources/**" location="/static/"/>
 
 	<!-- 扫描controller（controller层注入） -->
 	<context:component-scan base-package="com.cheng.weixin.web.manage.controllers" use-default-filters="false">
@@ -25,8 +26,8 @@
 	</context:component-scan>
 
   <!-- 定义无Controller的path <->view直接映射 -->
-  <mvc:view-controller path="/" view-name="/index"/>
-	<!--<mvc:view-controller path="/" view-name="redirect:/index" />-->
+  <!--<mvc:view-controller path="/" view-name="/index"/>-->
+	<mvc:view-controller path="/" view-name="redirect:/index"/> <!-- redirect: 必须加redirect: 不然不会经过controller -->
 
 	<!-- 对模型视图添加前后缀 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -40,6 +41,8 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/resources/**"/>
+			<mvc:exclude-mapping path="/manage/drawCheckCode"/>
 			<mvc:exclude-mapping path="/login/**"/>
 			<bean class="com.cheng.weixin.web.manage.interceptor.LogInterceptor" />
 		</mvc:interceptor>
