@@ -40,8 +40,12 @@
                 <form method="post" action="http://www.zi-han.net/theme/hplus/index.html">
                     <h4 class="no-margins">登录：</h4>
                     <p class="m-t-md">登录到微信管理后台</p>
-                    <input type="text" class="form-control uname" placeholder="用户名" />
-                    <input type="password" class="form-control pword m-b" placeholder="密码" />
+                    <input type="text" class="form-control m-b uname" placeholder="用户名" />
+                    <input type="password" class="form-control m-b pword" placeholder="密码" />
+                    <div class="captcha-area m-b">
+                        <input type="text" class="form-control captcha" placeholder="验证码"/>
+                        <img src="http://www.aqd123.com/manage/drawCheckCode" style="cursor:pointer;">
+                    </div>
                     <a href="#">忘记密码了？</a>
                     <button class="btn btn-success btn-block">登录</button>
                 </form>

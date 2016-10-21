@@ -32,7 +32,7 @@ body.signin {
 
 .signinpanel .form-control {
   display: block;
-  margin-top: 15px
+  /*margin-top: 15px*/
 }
 
 .signinpanel .uname {
@@ -43,6 +43,21 @@ body.signin {
 .signinpanel .pword {
   background: #fff url(../img/locked.png) no-repeat 95% center;
   color: #333
+}
+/** 验证码 **/
+.signinpanel .captcha-area {
+  width: 100%;
+  float: left;
+}
+.signinpanel .captcha {
+  width: 60%;
+  float: left;
+  color: #333;
+}
+.signinpanel .captcha-area img {
+  float: left;
+  margin-top: 2px;
+  margin-left: 8px;
 }
 
 .signinpanel .btn {

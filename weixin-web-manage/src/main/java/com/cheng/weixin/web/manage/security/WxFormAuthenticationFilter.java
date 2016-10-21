@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Author: Cheng
@@ -98,6 +99,13 @@ public class WxFormAuthenticationFilter extends FormAuthenticationFilter {
         Admin admin = adminService.getAdminById(principal.getId());
         admin.setNewLoginIp(SystemUtils.getRemoteAddr(ServletUtils.getRequest()));
         adminService.updateAdminLoginInfo(admin);
+
+        //boolean contextRelative = true;
+        //String successUrl = this.getSuccessUrl();
+        //if("".equals(successUrl)){
+        //    successUrl = DEFAULT_SUCCESS_URL;
+        //}
+        //WebUtils.issueRedirect(request, response, successUrl, null, contextRelative);
         return false;
     }
 }
