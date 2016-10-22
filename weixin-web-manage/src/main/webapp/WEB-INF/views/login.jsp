@@ -65,73 +65,32 @@
 <script src="${ctxStatic}/js/plugins/toastr/toastr.min.js"></script>
 <script >
   $(function() {
-    var i = -1;
-    var toastCount = 0;
-    var $toastlast;
-    var getMessage = function() {
-      var msg = "Hi, welcome to Inspinia. This is example of Toastr notification box.";
-      return msg
+    var msg = "用户名或密码错误.";
+    var title = "";
+    var $showDuration = "400"; // 持续时间
+    var $hideDuration = "1000"; //隐藏持续时间
+    var $timeOut = "7000"; // 超时
+    var $extendedTimeOut = "1000" // 延长时
+    var $showEasing = "swing"; // 显示动画
+    var $hideEasing = "linear"; // 隐藏动画
+    var $showMethod = "fadeIn"; // 显示方法
+    var $hideMethod = "fadeOut"; // 隐藏方法
+    toastr.options = {
+      closeButton: true,
+      debug: false,
+      progressBar: true,
+      positionClass: "toast-top-right",
+      onclick: null
     };
-    $("#showsimple").click(function() {
-      toastr.success("Without any options", "Simple notification!")
-    });
-    $("#showtoast").click(function() {
-      var shortCutFunction = $("#toastTypeGroup input:radio:checked").val();
-      var msg = $("#message").val();
-      var title = "";
-      var $showDuration = $("#showDuration");
-      var $hideDuration = $("#hideDuration");
-      var $timeOut = $("#timeOut");
-      var $extendedTimeOut = $("#extendedTimeOut");
-      var $showEasing = $("#showEasing");
-      var $hideEasing = $("#hideEasing");
-      var $showMethod = $("#showMethod");
-      var $hideMethod = $("#hideMethod");
-      var toastIndex = toastCount++;
-      toastr.options = {
-        closeButton: $("#closeButton").prop("checked"),
-        debug: $("#debugInfo").prop("checked"),
-        progressBar: $("#progressBar").prop("checked"),
-        positionClass: $("#positionGroup input:radio:checked").val() || "toast-top-right",
-        onclick: null
-      };
-      if ($("#addBehaviorOnToastClick").prop("checked")) {
-        toastr.options.onclick = function() {
-          alert("You can perform some custom action after a toast goes away")
-        }
-      }
-      if ($showDuration.val().length) {
-        toastr.options.showDuration = $showDuration.val()
-      }
-      if ($hideDuration.val().length) {
-        toastr.options.hideDuration = $hideDuration.val()
-      }
-      if ($timeOut.val().length) {
-        toastr.options.timeOut = $timeOut.val()
-      }
-      if ($extendedTimeOut.val().length) {
-        toastr.options.extendedTimeOut = $extendedTimeOut.val()
-      }
-      if ($showEasing.val().length) {
-        toastr.options.showEasing = $showEasing.val()
-      }
-      if ($hideEasing.val().length) {
-        toastr.options.hideEasing = $hideEasing.val()
-      }
-      if ($showMethod.val().length) {
-        toastr.options.showMethod = $showMethod.val()
-      }
-      if ($hideMethod.val().length) {
-        toastr.options.hideMethod = $hideMethod.val()
-      }
-      if (!msg) {
-        msg = getMessage()
-      }
-      $("#toastrOptions").text("Command: toastr[" + shortCutFunction + ']("' + msg + (title ? '", "' + title: "") + '")\n\ntoastr.options = ' + JSON.stringify(toastr.options, null, 2));
-      var $toast = toastr[shortCutFunction](msg, title);
-      $toastlast = $toast;
-
-    });
+    toastr.options.showDuration = $showDuration
+    toastr.options.hideDuration = $hideDuration
+    toastr.options.timeOut = $timeOut
+    toastr.options.extendedTimeOut = $extendedTimeOut
+    toastr.options.showEasing = $showEasing
+    toastr.options.hideEasing = $hideEasing
+    toastr.options.showMethod = $showMethod
+    toastr.options.hideMethod = $hideMethod
+    toastr["success"](msg, title);
   });
 </script>
 </body>
