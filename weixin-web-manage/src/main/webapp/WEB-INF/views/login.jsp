@@ -65,32 +65,23 @@
 <script src="${ctxStatic}/js/plugins/toastr/toastr.min.js"></script>
 <script >
   $(function() {
-    var msg = "用户名或密码错误.";
-    var title = "";
-    var $showDuration = "400"; // 持续时间
-    var $hideDuration = "1000"; //隐藏持续时间
-    var $timeOut = "7000"; // 超时
-    var $extendedTimeOut = "1000" // 延长时
-    var $showEasing = "swing"; // 显示动画
-    var $hideEasing = "linear"; // 隐藏动画
-    var $showMethod = "fadeIn"; // 显示方法
-    var $hideMethod = "fadeOut"; // 隐藏方法
+    var msg = "<h3>用户名或密码错误.</h3>";
     toastr.options = {
-      closeButton: true,
-      debug: false,
-      progressBar: true,
-      positionClass: "toast-top-right",
-      onclick: null
-    };
-    toastr.options.showDuration = $showDuration
-    toastr.options.hideDuration = $hideDuration
-    toastr.options.timeOut = $timeOut
-    toastr.options.extendedTimeOut = $extendedTimeOut
-    toastr.options.showEasing = $showEasing
-    toastr.options.hideEasing = $hideEasing
-    toastr.options.showMethod = $showMethod
-    toastr.options.hideMethod = $hideMethod
-    toastr["success"](msg, title);
+      "closeButton": true,
+      "debug": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "onclick": null,
+      "showDuration": "400",
+      "hideDuration": "400",
+      "timeOut": "7000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+    toastr["error"](msg);
   });
 </script>
 </body>
