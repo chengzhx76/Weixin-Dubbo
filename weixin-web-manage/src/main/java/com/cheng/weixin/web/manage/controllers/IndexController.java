@@ -20,16 +20,16 @@ import java.util.Map;
 public class IndexController extends BaseController {
 
     @RequestMapping(value = "index", method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index() {
         SystemAuthorizingRealm.Principal user = UserUtils.getPrincipal();
-
-        System.out.println("==========================> index");
-
         // 登录成功后验证码记数清零
         Captcha.isValidateCodeLogin(user.getUsername(), false, true);
-
-        model.addAttribute("content", "Hello World!");
         return "index";
+    }
+
+    @RequestMapping(value = "home", method = RequestMethod.GET)
+    public String home() {
+        return "home";
     }
 
 
