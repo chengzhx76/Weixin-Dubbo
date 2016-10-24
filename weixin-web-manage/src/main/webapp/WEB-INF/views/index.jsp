@@ -13,7 +13,7 @@
   <!--[if lt IE 9]>
   <meta http-equiv="refresh" content="0;ie.html" />
   <![endif]-->
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="shortcut icon" href="${ctxStatic}/favicon.ico">
   <link href="${ctxStatic}/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
   <link href="${ctxStatic}/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
   <link href="${ctxStatic}/css/animate.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@
           <div class="logo-element">Shop</div>
         </li>
         <li>
-          <a class="J_menuItem" href="home.html">
+          <a class="J_menuItem" href="home">
             <i class="fa fa-home"></i>
             <span class="nav-label">主页</span>
           </a>
@@ -149,7 +149,7 @@
       </button>
       <nav class="page-tabs J_menuTabs">
         <div class="page-tabs-content">
-          <a href="javascript:;" class="active J_menuTab" data-id="home.html">首页</a>
+          <a href="javascript:;" class="active J_menuTab" data-id="home">首页</a>
         </div>
       </nav>
       <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -166,7 +166,7 @@
       <a href="logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
     </div>
     <div class="row J_mainContent" id="content-main">
-      <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="home.html?v=4.0" frameborder="0" data-id="home.html" seamless></iframe>
+      <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="home" frameborder="0" data-id="home" seamless></iframe>
     </div>
     <div class="footer">
       <div class="pull-right">By Cheng &copy; 2015-2016</div>
