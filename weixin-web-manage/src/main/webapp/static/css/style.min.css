@@ -2223,8 +2223,8 @@ label.error {
   border-right: none
 }
 
-#toast-container > .toast {
-  background-image: none !important
+#toast-container > .toast {/* by cheng 2016年10月24日 14:54:38 */
+  /*background-image: none !important*/
 }
 
 #toast-container > .toast:before {

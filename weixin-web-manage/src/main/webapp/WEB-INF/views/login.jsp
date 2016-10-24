@@ -17,6 +17,11 @@
   <!--[if lt IE 9]>
   <meta http-equiv="refresh" content="0;ie.html" />
   <![endif]-->
+  <style>
+    .layui-layer-content {
+      color: #666;
+    }
+  </style>
 </head>
 
 <body class="signin">
@@ -48,14 +53,14 @@
         <c:if test="${isValidateCodeLogin}">
           <sys:captcha name="captcha"/>
         </c:if>
-        <a href="#">忘记密码了？</a>
+        <a id="forgetPwd" href="javascript:">忘记密码了？</a>
         <button class="btn btn-success btn-block">登录</button>
       </form>
     </div>
   </div>
   <div class="signup-footer">
     <div class="pull-left">
-      Copyright &copy; 2015-2016 <a href="###">微信管理后台</a> Powered By Wxin v0.1
+      Copyright &copy; 2015-2016 <a href="javascript:">微信管理后台</a> Powered By Wxin v0.1
     </div>
   </div>
 </div>
@@ -63,26 +68,38 @@
 <script src="${ctxStatic}/js/jquery.min.js?v=2.1.4"></script>
 <script src="${ctxStatic}/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="${ctxStatic}/js/plugins/toastr/toastr.min.js"></script>
+<script src="${ctxStatic}/js/plugins/layer/layer.min.js"></script>
 <script >
   $(function() {
-    var msg = "<h3>用户名或密码错误.</h3>";
-    toastr.options = {
-      "closeButton": true,
-      "debug": false,
-      "progressBar": true,
-      "positionClass": "toast-top-right",
-      "onclick": null,
-      "showDuration": "400",
-      "hideDuration": "400",
-      "timeOut": "7000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
+    // 错误消息
+    if ("${message}") {
+      var msg = "<h3>${message}</h3>";
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "400",
+        "timeOut": "7000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
+      toastr["error"](msg);
     }
-    toastr["error"](msg);
+
+    // 忘记密码提示
+    $("#forgetPwd").click(function(){
+      parent.layer.alert('<h4>请联系管理员: 18600536683</h4>', {
+        skin: 'layui-layer-molv'
+      });
+    });
   });
 </script>
+
 </body>
 </html>
