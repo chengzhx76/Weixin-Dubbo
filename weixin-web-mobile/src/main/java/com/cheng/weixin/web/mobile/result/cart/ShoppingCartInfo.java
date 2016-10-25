@@ -13,6 +13,7 @@ public class ShoppingCartInfo {
 
     private String deliveryDate;
     private String totalPrice;
+    private String freight;
     private List<ProductInfo> products;
 
     public String getDeliveryDate() {
@@ -37,6 +38,13 @@ public class ShoppingCartInfo {
 
     public void setProducts(List<ProductInfo> products) {
         this.products = products;
+    }
+    public String getFreight() {
+        return freight;
+    }
+
+    public void setFreight(String freight) {
+        this.freight = freight;
     }
 
     @Override

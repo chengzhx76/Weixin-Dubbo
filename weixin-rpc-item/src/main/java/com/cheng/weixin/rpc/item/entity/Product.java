@@ -17,8 +17,9 @@ public class Product extends DataEntity<Product> {
     private String no;
     private String keywords;
     private String typeId;
+    private int unitsInStock;
     private boolean isAlive;
-    private int modifyAdminId;
+    private String modifyAdminId;
     private boolean isIndex;
     private String tag;
     private String unitDesc;
@@ -80,6 +81,13 @@ public class Product extends DataEntity<Product> {
         isIndex = index;
     }
 
+    public int getUnitsInStock() {
+        return unitsInStock;
+    }
+
+    public void setUnitsInStock(int unitsInStock) {
+        this.unitsInStock = unitsInStock;
+    }
 
     public String getName() {
         return name;
@@ -121,11 +129,11 @@ public class Product extends DataEntity<Product> {
         isAlive = alive;
     }
 
-    public int getModifyAdminId() {
+    public String getModifyAdminId() {
         return modifyAdminId;
     }
 
-    public void setModifyAdminId(int modifyAdminId) {
+    public void setModifyAdminId(String modifyAdminId) {
         this.modifyAdminId = modifyAdminId;
     }
 

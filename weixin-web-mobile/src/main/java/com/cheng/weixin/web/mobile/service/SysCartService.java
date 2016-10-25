@@ -37,10 +37,9 @@ public class SysCartService {
         ShoppingCartInfo shoppingCartInfo = new ShoppingCartInfo();
         if (null != cartInfos && !cartInfos.isEmpty()) {
             List<ProductInfo> productInfos = new ArrayList<>();
-            ProductInfo productInfo = null;
             BigDecimal totalPrice = new BigDecimal(0);
             for (CartInfo cartInfo : cartInfos) {
-                productInfo = new ProductInfo();
+                ProductInfo productInfo = new ProductInfo();
                 Product product = productService.getDefaultPictureById(cartInfo.getProductId());
                 if (null != product) {
                     productInfo.setProductId(product.getId());
@@ -53,13 +52,16 @@ public class SysCartService {
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));
                     productInfo.setName(product.getName());
                     productInfo.setNums(cartInfo.getQuantity());
+                    productInfo.setDesc(product.getUnitDesc());
                     productInfo.setChoose(cartInfo.isChoose());
+                    productInfo.setStock(product.getUnitsInStock()>0);
                     productInfos.add(productInfo);
                 }
             }
             shoppingCartInfo.setProducts(productInfos);
             shoppingCartInfo.setDeliveryDate(new DateTime().plusDays(1).toString("MM月dd日"));
             shoppingCartInfo.setTotalPrice(StringFormat.format(totalPrice));
+            shoppingCartInfo.setFreight("2");
         }
         return shoppingCartInfo;
     }

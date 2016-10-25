@@ -15,6 +15,8 @@ public class ProductInfo {
     private String salePrice;
     private int nums;
     private boolean choose;
+    private boolean stock;
+    private String desc;
 
     public String getProductId() {
         return productId;
@@ -70,6 +72,22 @@ public class ProductInfo {
 
     public void setChoose(boolean choose) {
         this.choose = choose;
+    }
+
+    public boolean isStock() {
+        return stock;
+    }
+
+    public void setStock(boolean stock) {
+        this.stock = stock;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     @Override

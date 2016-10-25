@@ -33,9 +33,9 @@ public class OrderController extends BaseController {
         return success(orderInfo);
     }
 
-    /** 购买 **/
+    /** 提交订单 **/
     @IgnoreSecurity
-    @RequestMapping(value = "v1/buy")
+    @RequestMapping(value = "v1/submit")
     public ResponseEntity<Response> submitBuy() {
         orderService.submitOrder();
         return success();

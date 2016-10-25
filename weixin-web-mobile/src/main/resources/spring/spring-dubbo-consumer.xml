@@ -29,4 +29,6 @@
                    check="false" timeout="5000" version="1.0"/>
   <dubbo:reference id="orderService" interface="com.cheng.weixin.rpc.order.service.RpcOrderService"
                    check="false" timeout="5000" version="1.0"/>
+  <dubbo:reference id="commentService" interface="com.cheng.weixin.rpc.comment.service.RpcCommentService"
+                   check="false" timeout="5000" version="1.0"/>
 </beans>
