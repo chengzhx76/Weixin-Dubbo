@@ -5,10 +5,10 @@ temp
 .idea
 *.iml
 
-#jdbc.properties
-#rabbitmq.properties
-#system.properties
-#redis.properties
+jdbc.properties
+rabbitmq.properties
+system.properties
+redis.properties
 
 #rebel.xml
 #不忽略的文件
