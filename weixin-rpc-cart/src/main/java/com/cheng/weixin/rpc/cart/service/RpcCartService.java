@@ -13,13 +13,6 @@ import java.util.Set;
  */
 public interface RpcCartService {
 
-    ///**
-    // * 商品递增1
-    // * @param userId
-    // * @param productId
-    // */
-    //void addProductCount(String userId, String productId);
-
     /**
      * 递增商品的数量
      * @param userId 用户ID
@@ -45,8 +38,8 @@ public interface RpcCartService {
 
     /**
      * 根据用户id获取和商品ID获取商品个数
-     * @param userId
-     * @param productId
+     * @param userId 用户ID
+     * @param productId 商品ID
      * @return
      */
     Long getCounts(String userId, String productId);

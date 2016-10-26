@@ -24,51 +24,18 @@ public class CartService implements RpcCartService {
     @Autowired
     private RpcRedisService redisService;
 
-    ///**
-    // * 增加商品的数量
-    // *
-    // * @param productId
-    // * @param count
-    // */
-    //@Override
-    //public void addProductCount(String userId, String productId, Integer count) {
-    //    boolean exists = redisService.exists(getCart(userId), productId);
-    //    if (exists) {
-    //        redisService.add(getCart(userId), productId, String.valueOf(count));
-    //    }else {
-    //        redisService.add(getCart(userId), productId, null);
-    //    }
-    //}
-
-    /**
-     * 递增商品的数量
-     * @param userId
-     * @param productId
-     * @return 增加后的商品数量
-     */
     @Override
     public Long addProductCount(String userId, String productId) {
         changeChooseStatus(userId, productId);
         return redisService.increase(getCart(userId), getProductFlag(userId, productId));
     }
-    /**
-     * 减少商品数量
-     * @param userId
-     * @param productId
-     * @return 减少后的商品数量
-     */
+
     @Override
     public Long subProductCount(String userId, String productId) {
         changeChooseStatus(userId, productId);
         return redisService.decrease(getCart(userId), getProductFlag(userId, productId));
     }
 
-    /**
-     * 获取购物车中所有商品的ID
-     *
-     * @param userId
-     * @return
-     */
     @Override
     public Set<String> getChooseProductIds(String userId) {
         Set<String> allProductIds = redisService.getFields(getCart(userId));
