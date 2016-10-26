@@ -45,7 +45,7 @@ public class SysCartService {
                     productInfo.setProductId(product.getId());
                     productInfo.setProductImg(product.getDefaultPicture().getPictureUrl());
                     BigDecimal salePrice = product.getSalePrice();
-                    if (cartInfo.isChoose()) {
+                    if (cartInfo.isChoose() && product.getUnitsInStock()>0) {
                         totalPrice = totalPrice.add(salePrice.multiply(new BigDecimal(cartInfo.getQuantity())));
                     }
                     productInfo.setSalePrice(StringFormat.format(salePrice));
