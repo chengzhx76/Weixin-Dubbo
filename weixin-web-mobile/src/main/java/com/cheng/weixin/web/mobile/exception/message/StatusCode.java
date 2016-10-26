@@ -7,7 +7,7 @@ import com.cheng.weixin.web.mobile.i18n.Resources;
  * Author: cheng
  * Date: 2016/6/21
  */
-public enum HttpCode {
+public enum StatusCode {
     /** 200请求成功 */
     OK(200),
     /** 207频繁操作 */
@@ -31,11 +31,16 @@ public enum HttpCode {
     /** 423已被锁定 */
     LOCKED(423),
     /** 500服务器出错 */
-    INTERNAL_SERVER_ERROR(500);
+    INTERNAL_SERVER_ERROR(500),
+
+    /** 操作商品发生异常 **/
+    PRODUCT_EXCEPTION(9000),
+    /** 库存不足 **/
+    STOCK_SHORTAGE(9001);
 
     private final Integer value;
 
-    private HttpCode(Integer value) {
+    private StatusCode(Integer value) {
         this.value = value;
     }
     /**
@@ -45,7 +50,7 @@ public enum HttpCode {
         return this.value;
     }
     public String msg() {
-        return Resources.getMessage("HTTPCODE_" + this.value);
+        return Resources.getMessage("STATUSCODE_" + this.value);
     }
 
     public String toString() {

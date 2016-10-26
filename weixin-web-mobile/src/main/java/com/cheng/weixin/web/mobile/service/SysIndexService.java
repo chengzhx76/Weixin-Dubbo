@@ -6,6 +6,8 @@ import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.system.entity.Ad;
 import com.cheng.weixin.rpc.system.entity.Notice;
 import com.cheng.weixin.rpc.system.service.RpcSystemService;
+import com.cheng.weixin.web.mobile.exception.ProductException;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.result.index.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +89,10 @@ public class SysIndexService {
      * @return
      */
     public IndexBuy addProduct(String userId, String productId) {
+        Product product = productService.getById(productId);
+        if (product.getUnitsInStock()<=0) {
+            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+        }
         long count = cartService.addProductCount(userId, productId);
         // 金额
         BigDecimal totalPrice = totalPrice(userId);

@@ -4,7 +4,7 @@ import com.cheng.weixin.common.security.Digests;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
-import com.cheng.weixin.web.mobile.exception.message.HttpCode;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.properties.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,14 +46,14 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
         String appKey = request.getParameter(appKeyName);
         String timestamp = request.getParameter(timestampName);
         if(StringUtils.isAnyBlank(timestamp, appKey)) {
-            throw new IllegalParameterException(HttpCode.BAD_REQUEST.msg());
+            throw new IllegalParameterException(StatusCode.BAD_REQUEST.msg());
         }
 
         // 请求时间超过5分钟
         if (StringUtils.isNotBlank(timestamp)) {
             long differ = System.currentTimeMillis() - Long.parseLong(timestamp);
             if (differ > minRequestIntervalTime) {
-                response.setStatus(HttpCode.MULTI_STATUS.value());
+                response.setStatus(StatusCode.MULTI_STATUS.value());
                 logger.warn("To intercept a malicious request : {}", request.getServletPath());
                 return false;
             }
@@ -64,7 +64,7 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
         Properties properties = Properties.getInstance();
         String appSecret = properties.getValue(appKey);
         if(StringUtils.isBlank(appSecret)) {
-            response.setStatus(HttpCode.FORBIDDEN.value());
+            response.setStatus(StatusCode.FORBIDDEN.value());
             return false;
         }
         // 验证签名
@@ -85,13 +85,13 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
             boolean isExist = redisService.exists(sign);
             //boolean isExist = true;
             if (isExist) {
-                response.setStatus(HttpCode.FORBIDDEN.value());
+                response.setStatus(StatusCode.FORBIDDEN.value());
                 return false;
             }else {
                 redisService.set(sign, signName, 300L);
             }
         }else {
-            response.setStatus(HttpCode.FORBIDDEN.value());
+            response.setStatus(StatusCode.FORBIDDEN.value());
             return false;
         }
         return true;

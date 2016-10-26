@@ -1,7 +1,7 @@
 package com.cheng.weixin.web.mobile.exception;
 
 
-import com.cheng.weixin.web.mobile.exception.message.HttpCode;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 
 @SuppressWarnings("serial")
 public class LoginException extends BaseException {
@@ -12,11 +12,20 @@ public class LoginException extends BaseException {
 		super(message);
 	}
 
+
+	public LoginException(StatusCode statusCode) {
+		super(statusCode);
+	}
+	public LoginException(StatusCode statusCode, String message) {
+		super(statusCode, message);
+	}
+
 	public LoginException(String message, Exception e) {
 		super(message, e);
 	}
 
-	protected HttpCode getHttpCode() {
-		return HttpCode.LOGIN_FAIL;
+
+	protected StatusCode getStatusCode() {
+		return super.statusCode != null ? super.statusCode : StatusCode.LOGIN_FAIL;
 	}
 }

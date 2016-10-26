@@ -2,7 +2,7 @@ package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.exception.BaseException;
 import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
-import com.cheng.weixin.web.mobile.exception.message.HttpCode;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.json.CustomObjectMapper;
 import com.cheng.weixin.web.mobile.model.Meta;
 import com.cheng.weixin.web.mobile.model.Response;
@@ -43,19 +43,19 @@ public abstract class BaseController {
 
     /** 设置成功响应代码 */
     protected ResponseEntity<Response> success() {
-        return setResponse(HttpCode.OK, true, HttpCode.OK.msg(), null);
+        return setResponse(StatusCode.OK, true, StatusCode.OK.msg(), null);
     }
     /** 设置成功响应代码 */
     protected ResponseEntity<Response> success(Object data) {
-        return setResponse(HttpCode.OK, true, HttpCode.OK.msg(), data);
+        return setResponse(StatusCode.OK, true, StatusCode.OK.msg(), data);
     }
 
     /** 设置失败响应代码 */
     protected ResponseEntity<Response> failure() {
-        return setResponse(HttpCode.BAD_REQUEST, false, HttpCode.BAD_REQUEST.msg(), null);
+        return setResponse(StatusCode.BAD_REQUEST, false, StatusCode.BAD_REQUEST.msg(), null);
     }
     /** 设置失败响应代码 */
-    protected ResponseEntity<Response> failure(HttpCode code) {
+    protected ResponseEntity<Response> failure(StatusCode code) {
         return setResponse(code, false, code.msg(), null);
     }
 
@@ -64,17 +64,17 @@ public abstract class BaseController {
     /** 设置成功响应代码 */
     @Deprecated
     protected ResponseEntity<Response> success(String message, Object data) {
-        return setResponse(HttpCode.OK, true, message, null);
+        return setResponse(StatusCode.OK, true, message, null);
     }
 
     /** 设置失败响应代码 */
     @Deprecated
     protected ResponseEntity<Response> failure(String message) {
-        return setResponse(HttpCode.BAD_REQUEST, false, message, null);
+        return setResponse(StatusCode.BAD_REQUEST, false, message, null);
     }
     /** 设置失败响应代码 */
     @Deprecated
-    protected ResponseEntity<Response> failure(HttpCode code, String message) {
+    protected ResponseEntity<Response> failure(StatusCode code, String message) {
         return setResponse(code, false, message, null);
     }
 
@@ -87,7 +87,7 @@ public abstract class BaseController {
      * @param data 数据
      * @return 响应实体
      */
-    protected ResponseEntity<Response> setResponse(HttpCode code, boolean success, String message, Object data) {
+    protected ResponseEntity<Response> setResponse(StatusCode code, boolean success, String message, Object data) {
         return setResponse(code.value(), success, message, data);
     }
     protected ResponseEntity<Response> setResponse(int code, boolean success, String message, Object data) {
@@ -104,20 +104,10 @@ public abstract class BaseController {
             new IllegalParameterException(ex.getMessage()).handler(meta);
         } else {
             meta.setSuccess(false);
-            meta.setCode(HttpCode.INTERNAL_SERVER_ERROR.value());
-            meta.setMsg(HttpCode.INTERNAL_SERVER_ERROR.msg());
+            meta.setCode(StatusCode.INTERNAL_SERVER_ERROR.value());
+            meta.setMsg(StatusCode.INTERNAL_SERVER_ERROR.msg());
         }
 
         return ResponseEntity.ok(new Response(meta.getCode(), meta.isSuccess(), meta.getMsg(), null));
-
-        /*String callbackParam = request.getParameter("callback");
-        response.setContentType("application/json;charset=UTF-8");
-        String data = JSON.toJSONString(new Response(meta.getCode(), meta.isSuccess(), meta.getMsg(), ""));
-        if(StringUtils.isNotBlank(callbackParam)) {
-            data = callbackParam+"("+ data +")";
-        }
-        response.getWriter().write(data);
-        response.getWriter().flush();
-        response.getWriter().close();*/
     }
 }

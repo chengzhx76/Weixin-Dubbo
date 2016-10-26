@@ -12,7 +12,7 @@ import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.exception.BusinessException;
 import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
 import com.cheng.weixin.web.mobile.exception.LoginException;
-import com.cheng.weixin.web.mobile.exception.message.HttpCode;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +96,7 @@ public class SysLoginService {
         String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);
         if ("PASSWDFAIL".equals(result) || "NOTUSER".equals(result)) {
-            throw new LoginException(HttpCode.LOGIN_FAIL.msg());
+            throw new LoginException(StatusCode.LOGIN_FAIL.msg());
         }
     }
 
@@ -107,7 +107,7 @@ public class SysLoginService {
     private void checkAccountIsExistByLoginName(String LoginName) {
         Account account = userService.getAccountByLoginName(LoginName);
         if (null != account) {
-            throw new IllegalParameterException(HttpCode.BAD_REQUEST.msg());
+            throw new IllegalParameterException(StatusCode.BAD_REQUEST.msg());
         }
     }
 }

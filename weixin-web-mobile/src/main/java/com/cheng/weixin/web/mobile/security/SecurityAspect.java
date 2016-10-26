@@ -4,7 +4,7 @@ package com.cheng.weixin.web.mobile.security;
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.web.mobile.exception.TokenException;
-import com.cheng.weixin.web.mobile.exception.message.HttpCode;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
@@ -46,7 +46,7 @@ public class SecurityAspect {
         String token = ServletUtils.getRequest().getParameter(tokenName);
         // 检查 token 有效性
         if (!tokenManager.checkToken(token)) {
-            throw new TokenException(HttpCode.UNAUTHORIZED.msg());
+            throw new TokenException(StatusCode.UNAUTHORIZED.msg());
         }
         // 调用目标方法
         return pjp.proceed();

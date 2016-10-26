@@ -1,7 +1,7 @@
 package com.cheng.weixin.web.mobile.exception;
 
 
-import com.cheng.weixin.web.mobile.exception.message.HttpCode;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 
 /**
  * @author ShenHuaJie
@@ -20,11 +20,18 @@ public class BusinessException extends BaseException {
 		super(message);
 	}
 
+	public BusinessException(StatusCode statusCode) {
+		super(statusCode);
+	}
+	public BusinessException(StatusCode statusCode, String message) {
+		super(statusCode, message);
+	}
+
 	public BusinessException(String message, Throwable ex) {
 		super(message, ex);
 	}
 
-	protected HttpCode getHttpCode() {
-		return HttpCode.CONFLICT;
+	protected StatusCode getStatusCode() {
+		return super.statusCode != null ? super.statusCode : StatusCode.CONFLICT;
 	}
 }
