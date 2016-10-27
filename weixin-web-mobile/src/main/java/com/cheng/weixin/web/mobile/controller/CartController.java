@@ -62,8 +62,8 @@ public class CartController extends BaseController {
     @RequestMapping(value = "v1/change")
     public ResponseEntity<Response> changeStatus(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
-        sysCartService.changeStatus("1", product.getProductIds());
-        return success();
+        ProductCartInfo productCart = sysCartService.changeStatus("1", product.getProductId());
+        return success(productCart);
     }
 
     /** 购买 **/

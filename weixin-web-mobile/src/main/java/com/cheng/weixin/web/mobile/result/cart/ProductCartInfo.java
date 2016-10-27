@@ -11,6 +11,8 @@ public class ProductCartInfo {
     private int count;
     private String totalPrice;
     private String freight;
+    private String freeFreightAmount;
+    private Boolean choose;
 
     public int getCount() {
         return count;
@@ -34,6 +36,22 @@ public class ProductCartInfo {
 
     public void setFreight(String freight) {
         this.freight = freight;
+    }
+
+    public String getFreeFreightAmount() {
+        return freeFreightAmount;
+    }
+
+    public void setFreeFreightAmount(String freeFreightAmount) {
+        this.freeFreightAmount = freeFreightAmount;
+    }
+
+    public Boolean getChoose() {
+        return choose;
+    }
+
+    public void setChoose(Boolean choose) {
+        this.choose = choose;
     }
 
     @Override

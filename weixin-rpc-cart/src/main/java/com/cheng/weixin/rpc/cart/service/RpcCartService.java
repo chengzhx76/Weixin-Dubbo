@@ -70,8 +70,9 @@ public interface RpcCartService {
      * 改变选择状态
      * @param userId
      * @param productId
+     * @return
      */
-    void changeStatus(String userId, String productId);
+    boolean changeStatus(String userId, String productId);
 
     /**
      * 获取已选择的商品信息

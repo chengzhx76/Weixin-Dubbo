@@ -88,16 +88,19 @@ public class CartService implements RpcCartService {
     }
 
     @Override
-    public void changeStatus(String userId, String productId) {
+    public boolean changeStatus(String userId, String productId) {
         if (redisService.exists(getCart(userId), chooseProduct(productId))) {
             Long counts = (Long) redisService.getValueByKeyANdField(getCart(userId), chooseProduct(productId));
             redisService.deleteField(getCart(userId), chooseProduct(productId));
             redisService.put(getCart(userId), noChooseProduct(productId), counts);
+            return false;
         }else if (redisService.exists(getCart(userId), noChooseProduct(productId))) {
             Long counts = (Long) redisService.getValueByKeyANdField(getCart(userId), noChooseProduct(productId));
             redisService.deleteField(getCart(userId),noChooseProduct(productId));
             redisService.put(getCart(userId), chooseProduct(productId), counts);
+            return true;
         }
+        return false;
     }
 
     @Override

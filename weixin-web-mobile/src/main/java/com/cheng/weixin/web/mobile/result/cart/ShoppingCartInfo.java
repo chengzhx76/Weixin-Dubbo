@@ -14,6 +14,7 @@ public class ShoppingCartInfo {
     private String deliveryDate;
     private String totalPrice;
     private String freight;
+    private String freeFreightAmount;
     private List<ProductInfo> products;
 
     public String getDeliveryDate() {
@@ -45,6 +46,14 @@ public class ShoppingCartInfo {
 
     public void setFreight(String freight) {
         this.freight = freight;
+    }
+
+    public String getFreeFreightAmount() {
+        return freeFreightAmount;
+    }
+
+    public void setFreeFreightAmount(String freeFreightAmount) {
+        this.freeFreightAmount = freeFreightAmount;
     }
 
     @Override

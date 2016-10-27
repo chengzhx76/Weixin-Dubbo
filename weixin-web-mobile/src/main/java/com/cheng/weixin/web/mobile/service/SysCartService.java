@@ -62,6 +62,12 @@ public class SysCartService {
             shoppingCartInfo.setDeliveryDate(new DateTime().plusDays(1).toString("MM月dd日"));
             shoppingCartInfo.setTotalPrice(StringFormat.format(totalPrice));
             shoppingCartInfo.setFreight("2");
+            if (totalPrice.compareTo(BigDecimal.valueOf(5.00)) == -1) {
+                shoppingCartInfo.setFreight("2");
+            }else {
+                shoppingCartInfo.setFreight("0");
+            }
+            shoppingCartInfo.setFreeFreightAmount("5");
         }
         return shoppingCartInfo;
     }
@@ -87,10 +93,11 @@ public class SysCartService {
         return chooseShoppingCartPrice(userId, null);
     }
 
-    public void changeStatus(String userId, String[] productIds) {
-        for (String productId : productIds) {
-            cartService.changeStatus(userId, productId);
-        }
+    public ProductCartInfo changeStatus(String userId, String productId) {
+        boolean isChoose = cartService.changeStatus(userId, productId);
+        ProductCartInfo productCart = chooseShoppingCartPrice(userId, null);
+        productCart.setChoose(isChoose);
+        return productCart;
     }
 
 /*    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {
@@ -123,15 +130,24 @@ public class SysCartService {
         BigDecimal totalPrice = new BigDecimal(0);
         Set<String> productIds = cartService.getChooseProductIds(userId);
         for (String productId : productIds) {
-            Long count = cartService.getCounts(userId, productId);
             Product product = productService.getById(productId);
-            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+            if (product.getUnitsInStock() > 0) {
+                Long count = cartService.getCounts(userId, productId);
+                totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+            }
         }
         ProductCartInfo productCart = new ProductCartInfo();
-        if (currentCount != null)
+        if (currentCount != null) {
             productCart.setCount(Integer.parseInt(currentCount+""));
+        }
         productCart.setTotalPrice(StringFormat.format(totalPrice));
-        productCart.setFreight("2");
+        if (totalPrice.compareTo(BigDecimal.valueOf(5.00)) == -1) {
+            productCart.setFreight("2");
+        }else {
+            productCart.setFreight("0");
+        }
+        productCart.setFreeFreightAmount("5");
+
         return productCart;
     }
 
