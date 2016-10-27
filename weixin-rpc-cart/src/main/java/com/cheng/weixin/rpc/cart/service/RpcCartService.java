@@ -30,11 +30,18 @@ public interface RpcCartService {
     Long subProductCount(String userId, String productId);
 
     /**
-     * 获取购物车中所有商品的ID
+     * 获取购物车中所有已选择商品的ID
      * @param userId 用户ID
      * @return 该用户购物车中所有商品的ID
      */
     Set<String> getChooseProductIds(String userId);
+
+    /**
+     * 获取购物车中所有商品的ID
+      * @param userId
+     * @return
+     */
+    Set<String> getAllProductIds(String userId);
 
     /**
      * 根据用户id获取和商品ID获取商品个数
@@ -86,4 +93,10 @@ public interface RpcCartService {
      * @param userId
      */
     void deletedChooseProduct(String userId);
+
+    /**
+     * 选择所有的商品
+      * @param userId
+     */
+    void chooseAllProduct(String userId);
 }

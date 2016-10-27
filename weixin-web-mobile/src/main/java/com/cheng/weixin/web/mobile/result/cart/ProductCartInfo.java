@@ -8,17 +8,17 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
  * Date: 2016/9/8
  */
 public class ProductCartInfo {
-    private int count;
+    private Integer count;
     private String totalPrice;
     private String freight;
     private String freeFreightAmount;
     private Boolean choose;
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 

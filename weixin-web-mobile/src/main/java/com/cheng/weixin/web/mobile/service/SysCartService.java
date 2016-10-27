@@ -30,8 +30,8 @@ public class SysCartService {
     @Autowired
     private RpcProductService productService;
 
-    public ShoppingCartInfo getShoppingCart(String userId) {
-        ShoppingCart shoppingCart = cartService.getShoppingCart(userId);
+    public ShoppingCartInfo getShoppingCart() {
+        ShoppingCart shoppingCart = cartService.getShoppingCart("1");
         List<CartInfo> cartInfos = shoppingCart.getCartInfos();
 
         ShoppingCartInfo shoppingCartInfo = new ShoppingCartInfo();
@@ -72,33 +72,37 @@ public class SysCartService {
         return shoppingCartInfo;
     }
 
-    public ProductCartInfo addProduct(String userId, String id) {
+    public ProductCartInfo addProduct(String id) {
         // 获取该商品的数量
-        Long currentCount = cartService.addProductCount(userId, id);
-        return chooseShoppingCartPrice(userId, currentCount);
+        Long currentCount = cartService.addProductCount("1", id);
+        return chooseShoppingCartPrice("1", currentCount);
     }
 
-    public ProductCartInfo subProduct(String userId, String id) {
+    public ProductCartInfo subProduct(String id) {
         // 获取该商品的数量
-        Long currentCount = cartService.subProductCount(userId, id);
-        //if (currentCount <= 0) {
-        //    cartService.deleteProduct(userId, id);
-        //    currentCount = 0L;
-        //}
-        return chooseShoppingCartPrice(userId, currentCount);
+        Long currentCount = cartService.subProductCount("1", id);
+        return chooseShoppingCartPrice("1", currentCount);
     }
 
-    public ProductCartInfo deleteProduct(String userId, String id) {
-        cartService.deleteProduct(userId, id);
-        return chooseShoppingCartPrice(userId, null);
+    public ProductCartInfo deleteProduct(String id) {
+        cartService.deleteProduct("1", id);
+        return chooseShoppingCartPrice("1", null);
     }
 
-    public ProductCartInfo changeStatus(String userId, String productId) {
-        boolean isChoose = cartService.changeStatus(userId, productId);
-        ProductCartInfo productCart = chooseShoppingCartPrice(userId, null);
+    public ProductCartInfo changeStatus(String productId) {
+        boolean isChoose = cartService.changeStatus("1", productId);
+        ProductCartInfo productCart = chooseShoppingCartPrice("1", null);
         productCart.setChoose(isChoose);
         return productCart;
     }
+
+    public ProductCartInfo chooseAllProduct() {
+        cartService.chooseAllProduct("1");
+        return chooseShoppingCartPrice("1", null);
+    }
+
+
+
 
 /*    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {
         for (ProductDto product : products) {
@@ -121,7 +125,7 @@ public class SysCartService {
     }*/
 
     /**
-     * 购物车已选择的商品的总价格
+     * 购物车已选择的商品的总价格(不包含无货的)
      * @param userId
      * @param currentCount
      * @return

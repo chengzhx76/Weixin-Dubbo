@@ -28,7 +28,7 @@ public class CartController extends BaseController {
     @IgnoreSecurity
     @RequestMapping(value = "v1/info")
     public ResponseEntity<Response> info(HttpServletRequest request) {
-        ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart("1");
+        ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart();
         return success(shoppingCartInfo);
     }
     /** 增加购物车的商品 **/
@@ -36,7 +36,7 @@ public class CartController extends BaseController {
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
-        ProductCartInfo productCart = sysCartService.addProduct("1", product.getProductId());
+        ProductCartInfo productCart = sysCartService.addProduct(product.getProductId());
         return success(productCart);
     }
 
@@ -45,15 +45,16 @@ public class CartController extends BaseController {
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
-        ProductCartInfo productCart = sysCartService.subProduct("1", product.getProductId());
+        ProductCartInfo productCart = sysCartService.subProduct(product.getProductId());
         return success(productCart);
     }
+
     /** 删除购物车的商品 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/delete")
     public ResponseEntity<Response> delete(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
-        ProductCartInfo productCart = sysCartService.deleteProduct("1", product.getProductId());
+        ProductCartInfo productCart = sysCartService.deleteProduct(product.getProductId());
         return success(productCart);
     }
 
@@ -62,24 +63,16 @@ public class CartController extends BaseController {
     @RequestMapping(value = "v1/change")
     public ResponseEntity<Response> changeStatus(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
-        ProductCartInfo productCart = sysCartService.changeStatus("1", product.getProductId());
+        ProductCartInfo productCart = sysCartService.changeStatus(product.getProductId());
         return success(productCart);
     }
 
-    /** 购买 **/
-/*    @RequestMapping(value = "v1/buy")
-    public ResponseEntity<Response> buy(HttpServletRequest request) {
-        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+    /** 选择所有 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/chooseAll")
+    public ResponseEntity<Response> allChoose() {
+        ProductCartInfo productCart = sysCartService.chooseAllProduct();
         return success();
-    }*/
+    }
 
-
-    /** 批量添加商品到购物车 **/
-/*    @IgnoreSecurity
-    @RequestMapping(value = "v1/batchDelete")
-    public ResponseEntity<Response> batchAdd(HttpServletRequest request) {
-        List<ProductDto> products = (List<ProductDto>) getDto(request, ProductDto.class);
-        ProductCartInfo productCart = sysCartService.batchAddProduct("1", products);
-        return success(productCart);
-    }*/
 }

@@ -36,9 +36,15 @@ public class CartService implements RpcCartService {
         return redisService.decrease(getCart(userId), getProductFlag(userId, productId));
     }
 
+
+    @Override
+    public Set<String> getAllProductIds(String userId) {
+        return redisService.getFields(getCart(userId));
+    }
+
     @Override
     public Set<String> getChooseProductIds(String userId) {
-        Set<String> allProductIds = redisService.getFields(getCart(userId));
+        Set<String> allProductIds = getAllProductIds(userId);
         Set<String> productIds = new HashSet<>();
         for (String productId : allProductIds) {
             if (productId.startsWith(Constant.CHOOSE)) {
@@ -110,7 +116,6 @@ public class CartService implements RpcCartService {
         List<ProductModel> products = new ArrayList<>();
         Set<Serializable> fields = map.keySet();
         for (Serializable item : fields) {
-            //if (redisService.exists(getCart(userId), Constant.CHOOSE+item.toString())) {
             if (item.toString().startsWith(Constant.CHOOSE)) {
                 ProductModel product = new ProductModel();
                 product.setId(StringUtils.remove(item.toString(), Constant.CHOOSE));
@@ -129,6 +134,14 @@ public class CartService implements RpcCartService {
             if (redisService.exists(getCart(userId), Constant.CHOOSE+item.toString())) {
                 redisService.deleteField(getCart(userId), getProductFlag(getCart(userId), item.toString()));
             }
+        }
+    }
+
+    @Override
+    public void chooseAllProduct(String userId) {
+        Set<String> allProductIds = getAllProductIds(userId);
+        for (String productId : allProductIds) {
+            changeChooseStatus(userId, productId);
         }
     }
 
@@ -159,7 +172,7 @@ public class CartService implements RpcCartService {
     }
 
     /**
-     * 改变选择状态
+     * 改变为选择状态
      * @param userId
      * @param productId
      */
