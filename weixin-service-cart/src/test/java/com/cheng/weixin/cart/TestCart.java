@@ -50,7 +50,13 @@ public class TestCart {
         System.out.println(productModels);
     }
 
+    @Test
+    public void testUnChooseAllProduct() {
+        cartService.unchooseAllProduct("1");
+    }
 
-
-
+    @Test
+    public void testChooseAllProduct() {
+        cartService.chooseAllProduct("1");
+    }
 }

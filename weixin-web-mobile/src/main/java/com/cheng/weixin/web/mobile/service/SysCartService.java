@@ -23,7 +23,7 @@ import java.util.Set;
  * Author: hp
  * Date: 2016/8/26
  */
-@Service("sysSartService")
+@Service("sysCartService")
 public class SysCartService {
     @Autowired
     private RpcCartService cartService;
@@ -101,7 +101,10 @@ public class SysCartService {
         return chooseShoppingCartPrice("1", null);
     }
 
-
+    public ProductCartInfo unChooseAllProduct() {
+        cartService.unchooseAllProduct("1");
+        return chooseShoppingCartPrice("1", null);
+    }
 
 
 /*    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {

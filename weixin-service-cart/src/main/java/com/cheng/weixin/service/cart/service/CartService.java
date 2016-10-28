@@ -39,7 +39,16 @@ public class CartService implements RpcCartService {
 
     @Override
     public Set<String> getAllProductIds(String userId) {
-        return redisService.getFields(getCart(userId));
+        Set<String> allStatusProductIds = redisService.getFields(getCart(userId));
+        Set<String> allProductIds = new HashSet<>();
+        for (String productId : allStatusProductIds) {
+            if (productId.startsWith(Constant.CHOOSE)) {
+                allProductIds.add(StringUtils.replace(productId, Constant.CHOOSE, ""));
+            }else if (productId.startsWith(Constant.NO_CHOOSE)) {
+                allProductIds.add(StringUtils.replace(productId, Constant.NO_CHOOSE, ""));
+            }
+        }
+        return allProductIds;
     }
 
     @Override
@@ -47,8 +56,8 @@ public class CartService implements RpcCartService {
         Set<String> allProductIds = getAllProductIds(userId);
         Set<String> productIds = new HashSet<>();
         for (String productId : allProductIds) {
-            if (productId.startsWith(Constant.CHOOSE)) {
-                productIds.add(StringUtils.replace(productId, Constant.CHOOSE, ""));
+            if (redisService.exists(getCart(userId), chooseProduct(productId))) {
+                productIds.add(productId);
             }
         }
         return productIds;
@@ -145,6 +154,14 @@ public class CartService implements RpcCartService {
         }
     }
 
+    @Override
+    public void unchooseAllProduct(String userId) {
+        Set<String> allProductIds = getAllProductIds(userId);
+        for (String productId : allProductIds) {
+            changeUnchooseStatus(userId, productId);
+        }
+    }
+
     /**
      * 获取当前用户购物车的标识
      * @param userId
@@ -181,6 +198,18 @@ public class CartService implements RpcCartService {
             Long counts = (Long) redisService.getValueByKeyANdField(getCart(userId), noChooseProduct(productId));
             redisService.deleteField(getCart(userId),noChooseProduct(productId));
             redisService.put(getCart(userId), chooseProduct(productId), counts);
+        }
+    }
+    /**
+     * 改变为不选择状态
+     * @param userId
+     * @param productId
+     */
+    private void changeUnchooseStatus(String userId, String productId) {
+        if (redisService.exists(getCart(userId), chooseProduct(productId))) {
+            Long counts = (Long) redisService.getValueByKeyANdField(getCart(userId), chooseProduct(productId));
+            redisService.deleteField(getCart(userId),chooseProduct(productId));
+            redisService.put(getCart(userId), noChooseProduct(productId), counts);
         }
     }
 }

@@ -90,23 +90,32 @@ public class ServiceTest {
     // ==========================CART=============================== //
     @Test
     public void test12() {
-        System.out.println(cartService.getShoppingCart("1"));
+        System.out.println(cartService.getShoppingCart());
     }
     @Test
     public void test13() {
-        System.out.println(cartService.addProduct("1", "1"));
+        System.out.println(cartService.addProduct("1"));
     }
     @Test
     public void test14() {
-        System.out.println(cartService.subProduct("1", "1"));
+        System.out.println(cartService.subProduct("1"));
     }
     @Test
     public void test15() {
-        System.out.println(cartService.deleteProduct("1", "1"));
+        System.out.println(cartService.deleteProduct("1"));
     }
     @Test
     public void test16() {
-        String[] ids = {"2","3"};
-        cartService.changeStatus("1", ids);
+        cartService.changeStatus("1");
+    }
+
+    @Test
+    public void test17() {
+        cartService.chooseAllProduct();
+    }
+
+    @Test
+    public void test18() {
+        cartService.unChooseAllProduct();
     }
 }

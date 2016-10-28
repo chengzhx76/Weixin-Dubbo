@@ -99,4 +99,10 @@ public interface RpcCartService {
       * @param userId
      */
     void chooseAllProduct(String userId);
+
+    /**
+     * 取消选择所有的商品
+      * @param userId
+     */
+    void unchooseAllProduct(String userId);
 }

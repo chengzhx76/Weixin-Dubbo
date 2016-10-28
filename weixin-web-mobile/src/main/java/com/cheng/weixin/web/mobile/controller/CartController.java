@@ -72,7 +72,13 @@ public class CartController extends BaseController {
     @RequestMapping(value = "v1/chooseAll")
     public ResponseEntity<Response> allChoose() {
         ProductCartInfo productCart = sysCartService.chooseAllProduct();
-        return success();
+        return success(productCart);
     }
-
+    /** 取消选择所有 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/unChoose")
+    public ResponseEntity<Response> unChoose() {
+        ProductCartInfo productCart = sysCartService.unChooseAllProduct();
+        return success(productCart);
+    }
 }
