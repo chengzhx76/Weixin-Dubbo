@@ -1,6 +1,7 @@
 package com.cheng.dubbo.consumer.test;
 
 import com.alibaba.fastjson.JSON;
+import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.index.Index;
 import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
 import com.cheng.weixin.web.mobile.service.*;
@@ -117,5 +118,10 @@ public class ServiceTest {
     @Test
     public void test18() {
         cartService.unChooseAllProduct();
+    }
+    @Test
+    public void test19() {
+        ProductCartInfo productCartInfo = cartService.changeStatus("1");
+        System.out.println(productCartInfo);
     }
 }

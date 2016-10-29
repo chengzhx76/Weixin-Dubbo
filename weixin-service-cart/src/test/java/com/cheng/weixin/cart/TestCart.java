@@ -51,6 +51,14 @@ public class TestCart {
     }
 
     @Test
+    public void testchangeStatus() {
+        boolean falg = cartService.changeStatus("1", "1");
+        System.out.println("=====> "+falg);
+    }
+
+
+
+    @Test
     public void testUnChooseAllProduct() {
         cartService.unchooseAllProduct("1");
     }

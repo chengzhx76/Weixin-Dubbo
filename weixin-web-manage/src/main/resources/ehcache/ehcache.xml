@@ -3,7 +3,7 @@
          xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
          updateCheck="false" name="defaultCache">
 
-  <diskStore path="../temp/ehcache"/>
+  <diskStore path="temp/ehcache"/>
   <!-- 默认缓存 -->
   <defaultCache maxEntriesLocalHeap="100" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
                 overflowToDisk="true" maxEntriesLocalDisk="100000"/>

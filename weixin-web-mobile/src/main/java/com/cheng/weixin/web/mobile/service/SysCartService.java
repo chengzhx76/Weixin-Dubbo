@@ -10,6 +10,8 @@ import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ import java.util.Set;
  */
 @Service("sysCartService")
 public class SysCartService {
+
+    private final Logger LOG = LoggerFactory.getLogger(getClass());
+
     @Autowired
     private RpcCartService cartService;
     @Autowired
