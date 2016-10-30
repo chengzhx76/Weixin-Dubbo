@@ -70,7 +70,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        IndexBuy indexBuy = sysIndexService.addProduct("1", productDto.getProductId());
+        IndexBuy indexBuy = sysIndexService.addProduct(productDto.getProductId());
         return success(indexBuy);
     }
 
@@ -78,7 +78,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        IndexBuy indexBuy = sysIndexService.subProduct("1", productDto.getProductId());
+        IndexBuy indexBuy = sysIndexService.subProduct(productDto.getProductId());
         return success(indexBuy);
     }
 

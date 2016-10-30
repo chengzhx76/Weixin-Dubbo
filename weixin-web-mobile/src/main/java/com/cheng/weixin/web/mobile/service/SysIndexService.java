@@ -84,18 +84,17 @@ public class SysIndexService {
 
     /**
      * 购买商品
-     * @param userId
      * @param productId
      * @return
      */
-    public IndexBuy addProduct(String userId, String productId) {
+    public IndexBuy addProduct(String productId) {
         Product product = productService.getById(productId);
         if (product.getUnitsInStock()<=0) {
             throw new ProductException(StatusCode.STOCK_SHORTAGE);
         }
-        long count = cartService.addProductCount(userId, productId);
+        long count = cartService.addProductCount("1", productId);
         // 金额
-        BigDecimal totalPrice = totalPrice(userId);
+        BigDecimal totalPrice = totalPrice("1");
 
         IndexBuy indexBuy = new IndexBuy();
         indexBuy.setCount(count);
@@ -104,14 +103,13 @@ public class SysIndexService {
     }
     /**
      * 减少商品
-     * @param userId
      * @param productId
      * @return
      */
-    public IndexBuy subProduct(String userId, String productId) {
-        long count = cartService.subProductCount(userId, productId);
+    public IndexBuy subProduct(String productId) {
+        long count = cartService.subProductCount("1", productId);
         // 金额
-        BigDecimal totalPrice = totalPrice(userId);
+        BigDecimal totalPrice = totalPrice("1");
 
         IndexBuy indexBuy = new IndexBuy();
         indexBuy.setCount(count);

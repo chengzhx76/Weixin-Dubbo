@@ -20,6 +20,11 @@ public interface BaseDaoMapper<T> {
      */
     List<T> loadAll();
     /**
+     * 根据条件获取List的数据
+     * @return
+     */
+    List<T> loadAll(T entity);
+    /**
      * 保存实体
      * @param entity
      * @return

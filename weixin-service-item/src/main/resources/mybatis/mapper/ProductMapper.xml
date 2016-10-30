@@ -96,15 +96,15 @@
   </insert>
 
   <!-- ======================================== -->
-  <!-- 获取首页的商品 -->
+<!--  &lt;!&ndash; 获取首页的商品 &ndash;&gt;
   <select id="loadIndex" parameterType="Product" resultType="Product">
     <include refid="productSelector"/>
     <include refid="productWhere"/>
   </select>
-  <!-- 获取首页的商品 -->
+  &lt;!&ndash; 根据ID获取商品 &ndash;&gt;
   <select id="loadMallByTypeId" parameterType="Product" resultType="Product">
     <include refid="productSelector"/>
     <include refid="productWhere"/>
-  </select>
+  </select>-->
 </mapper>
 

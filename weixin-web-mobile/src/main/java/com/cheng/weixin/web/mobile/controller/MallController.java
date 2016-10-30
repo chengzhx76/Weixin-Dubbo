@@ -1,7 +1,9 @@
 package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
+import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.mall.Mall;
+import com.cheng.weixin.web.mobile.result.mall.MallBuy;
 import com.cheng.weixin.web.mobile.result.mall.ProductCategory;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.SysMallService;
@@ -38,5 +40,20 @@ public class MallController extends BaseController {
         ProductCategory category = (ProductCategory) getDto(request, ProductCategory.class);
         Mall mallProducts = mallService.getMallProduct(category.getId());
         return success(mallProducts);
+    }
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/add")
+    public ResponseEntity<Response> add(HttpServletRequest request) {
+        ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
+        MallBuy buy = mallService.addProduct(productDto.getProductId());
+        return success(buy);
+    }
+
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/sub")
+    public ResponseEntity<Response> sub(HttpServletRequest request) {
+        ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
+        MallBuy buy = mallService.subProduct(productDto.getProductId());
+        return success(buy);
     }
 }

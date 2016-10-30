@@ -4,8 +4,6 @@ import com.cheng.weixin.common.core.dao.BaseDaoMapper;
 import com.cheng.weixin.rpc.item.entity.Product;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * Desc: 商品
  * Author: cheng
@@ -17,12 +15,12 @@ public interface ProductDaoMapper extends BaseDaoMapper<Product> {
      * 获取首页的商品
      * @return
      */
-    List<Product> loadIndex();
+    //List<Product> loadIndex();
 
     /**
      * 获取商品 根据类型ID
      * @param product
      * @return
      */
-    List<Product> loadMallByTypeId(Product product);
+    //List<Product> loadMallByTypeId(Product product);
 }

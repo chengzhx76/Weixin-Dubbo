@@ -35,9 +35,8 @@ public class Product extends DataEntity<Product> {
         super();
         this.id = id;
     }
-    public Product(String id, boolean isIndex) {
+    public Product(boolean isIndex) {
         super();
-        this.id = id;
         this.isIndex = isIndex;
     }
 
