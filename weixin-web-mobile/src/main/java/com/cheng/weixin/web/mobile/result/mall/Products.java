@@ -3,11 +3,11 @@ package com.cheng.weixin.web.mobile.result.mall;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
- * Desc: 商城商品
- * Author: hp
- * Date: 2016/9/9
+ * Desc:
+ * Author: 光灿
+ * Date: 2016/10/30
  */
-public class MallProduct {
+public class Products {
     private String id;
     private String name;
     private String price;
@@ -15,6 +15,7 @@ public class MallProduct {
     private int width;
     private int height;
     private String tag;
+    private String desc;
 
     public String getId() {
         return id;
@@ -71,6 +72,15 @@ public class MallProduct {
     public void setTag(String tag) {
         this.tag = tag;
     }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
     @Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this);

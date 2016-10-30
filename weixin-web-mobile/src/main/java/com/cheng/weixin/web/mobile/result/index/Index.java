@@ -14,7 +14,7 @@ public class Index {
     private List<IndexAd> ads;
     private List<IndexNotice> notices;
     private List<IndexProduct> products;
-    private String totalPirce;
+    private String totalPrice;
 
     public List<IndexAd> getAds() {
         return ads;
@@ -32,9 +32,6 @@ public class Index {
         this.notices = notices;
     }
 
-    public void setTotalPirce(String totalPirce) {
-        this.totalPirce = totalPirce;
-    }
 
     public List<IndexProduct> getProducts() {
         return products;
@@ -45,10 +42,10 @@ public class Index {
     }
 
     public String getTotalPirce() {
-        return totalPirce;
+        return totalPrice;
     }
 
-    public void setTotalPirce(BigDecimal totalPirce) {
-        this.totalPirce = StringFormat.format(totalPirce);
+    public void setTotalPirce(BigDecimal totalPrice) {
+        this.totalPrice = StringFormat.format(totalPrice);
     }
 }
