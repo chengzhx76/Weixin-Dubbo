@@ -2,6 +2,7 @@ package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.ProductDto;
+import com.cheng.weixin.web.mobile.result.product.ProductDetail;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.SysProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,8 @@ public class ProductController extends BaseController {
     @RequestMapping(value = "v1/detail")
     public ResponseEntity<Response> sendMsgCode(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
-        return success(productService.getDetail(product.getProductId()));
+        ProductDetail detail = productService.getDetail(product.getProductId());
+        return success(detail);
     }
 
     /** 购买商品 **/

@@ -51,7 +51,7 @@ public class SysProductService {
         detail.setGood(98);
         detail.setMarketPrice(StringFormat.format(product.getMarketPrice()));
         detail.setMarketPrice(StringFormat.format(product.getMarketPrice()));
-
+        detail.setGiveAway(product.getGiveAway());
         List<ProductPic> pics = new ArrayList<>();
         for (Picture picture : pictures) {
             pics.add(new ProductPic(picture.getPictureUrl(), picture.getWidth(), picture.getHeight()));

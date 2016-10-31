@@ -5,11 +5,11 @@
   <sql id="tableName">product</sql>
   <sql id="columns">
     p.id,p.name,p.market_price,p.sale_price,p.no,p.key_words,p.type_id,p.is_alive,p.is_index,
-    p.tag,p.unit_desc,p.units_in_stock,p.modify_admin_id,p.remarks,p.create_date,p.update_date,p.status
+    p.tag,p.unit_desc,p.units_in_stock,p.modify_admin_id,p.give_away,p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
     id,name,market_price,sale_price,no,key_words,type_id,is_alive,is_index,
-    tag,unit_desc,units_in_stock,modify_admin_id,remarks,create_date,update_date,status
+    tag,unit_desc,units_in_stock,modify_admin_id,give_away,remarks,create_date,update_date,status
   </sql>
   <sql id="productIf">
     <if test="id != null and id != ''">id=#{id},</if>
@@ -25,6 +25,7 @@
     <if test="unitDesc != null and unitDesc != ''">unit_desc=#{unitDesc},</if>
     <if test="unitsInStock != null and unitsInStock != ''">units_in_stock=#{unitsInStock},</if>
     <if test="modifyAdminId != null and modifyAdminId != ''">modify_admin_id=#{modifyAdminId},</if>
+    <if test="giveAway != null and giveAway != ''">give_away=#{giveAway},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -73,7 +74,7 @@
     <include refid="productWhere"/>
   </select>
   <!-- 获取全部信息 -->
-  <select id="loadAll" resultType="Product">
+  <select id="loadAll" parameterType="Product" resultType="Product">
     <include refid="productSelector"/>
     <include refid="productWhere"/>
   </select>

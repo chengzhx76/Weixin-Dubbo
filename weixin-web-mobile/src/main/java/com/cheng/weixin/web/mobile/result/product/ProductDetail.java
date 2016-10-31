@@ -15,10 +15,11 @@ public class ProductDetail {
     private String productId;
     private String name;
     private String desc;
-    private int sellNum;
-    private int good;
+    private int sellNum; // 月销
+    private int good; // 好评
     private String sellPrice;
     private String marketPrice;
+    private int giveAway;
 
     private List<ProductPic> picList;
 
@@ -94,6 +95,14 @@ public class ProductDetail {
 
     public void setMarketPrice(String marketPrice) {
         this.marketPrice = marketPrice;
+    }
+
+    public int getGiveAway() {
+        return giveAway;
+    }
+
+    public void setGiveAway(int giveAway) {
+        this.giveAway = giveAway;
     }
 
     @Override

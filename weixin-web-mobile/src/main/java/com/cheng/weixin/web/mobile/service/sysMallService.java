@@ -6,7 +6,10 @@ import com.cheng.weixin.rpc.item.entity.Picture;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.entity.ProductType;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
+import com.cheng.weixin.web.mobile.exception.ProductException;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.result.mall.Mall;
+import com.cheng.weixin.web.mobile.result.mall.MallBuy;
 import com.cheng.weixin.web.mobile.result.mall.ProductCategory;
 import com.cheng.weixin.web.mobile.result.mall.Products;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +67,38 @@ public class SysMallService {
         mall.setTotalPrice(StringFormat.format(totalPrice("1")));
         return mall;
     }
-
+    /**
+     * 购买商品
+     * @param productId
+     * @return
+     */
+    public MallBuy addProduct(String productId) {
+        Product product = productService.getById(productId);
+        if (product.getUnitsInStock()<=0) {
+            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+        }
+        long count = cartService.addProductCount("1", productId);
+        // 金额
+        BigDecimal totalPrice = totalPrice("1");
+        MallBuy buy = new MallBuy();
+        buy.setCount(count);
+        buy.setTotalPrice(totalPrice);
+        return buy;
+    }
+    /**
+     * 减少商品
+     * @param productId
+     * @return
+     */
+    public MallBuy subProduct(String productId) {
+        long count = cartService.subProductCount("1", productId);
+        // 金额
+        BigDecimal totalPrice = totalPrice("1");
+        MallBuy buy = new MallBuy();
+        buy.setCount(count);
+        buy.setTotalPrice(totalPrice);
+        return buy;
+    }
     /**
      * 购物车商品的总价格
      * @param userId

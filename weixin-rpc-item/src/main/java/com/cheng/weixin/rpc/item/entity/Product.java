@@ -23,6 +23,7 @@ public class Product extends DataEntity<Product> {
     private boolean isIndex;
     private String tag;
     private String unitDesc;
+    private int giveAway;
 
     private List<Picture> pictures;
 
@@ -150,5 +151,13 @@ public class Product extends DataEntity<Product> {
 
     public void setSalePrice(BigDecimal salePrice) {
         this.salePrice = salePrice;
+    }
+
+    public int getGiveAway() {
+        return giveAway;
+    }
+
+    public void setGiveAway(int giveAway) {
+        this.giveAway = giveAway;
     }
 }
