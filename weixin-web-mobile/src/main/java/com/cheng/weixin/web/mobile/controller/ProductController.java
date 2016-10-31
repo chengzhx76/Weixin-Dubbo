@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Desc: 商品
- * Author: hp
+ * Author: cheng
  * Date: 2016/10/8
  */
 @RestController
