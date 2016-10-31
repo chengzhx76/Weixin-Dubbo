@@ -9,6 +9,7 @@ import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.comment.entity.Comment;
 import com.cheng.weixin.rpc.comment.service.RpcCommentService;
+import com.cheng.weixin.rpc.item.entity.Picture;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
@@ -160,4 +161,10 @@ public class ConsumerTest {
         List<DeliveryTime> times = orderService.getAllDeliveryTime();
         System.out.println("=========>" + times);
     }
+    @Test
+    public void testShowPic() {
+        List<Picture> pictures = productService.getShowPictureByProductId("1");
+        System.out.println("=========>" + pictures);
+    }
+
 }

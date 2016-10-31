@@ -20,11 +20,18 @@ public class ProductDetail {
     private String sellPrice;
     private String marketPrice;
     private int giveAway;
+    private String count;
 
     private List<ProductPic> picList;
 
     private List<ProductComment> comments;
+    public String getCount() {
+        return count;
+    }
 
+    public void setCount(String count) {
+        this.count = count;
+    }
     public List<ProductComment> getComments() {
         return comments;
     }

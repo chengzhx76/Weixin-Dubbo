@@ -9,10 +9,12 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
  */
 public class ProductComment {
     private String username;
+    private String avatar;
     private String level;
     private String date;
     private String content;
     private String reply;
+
 
     public ProductComment() {
     }
@@ -23,6 +25,14 @@ public class ProductComment {
         this.date = date;
         this.content = content;
         this.reply = reply;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getUsername() {

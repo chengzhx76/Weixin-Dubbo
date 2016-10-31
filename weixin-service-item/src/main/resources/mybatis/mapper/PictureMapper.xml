@@ -36,7 +36,10 @@
         id = #{id}
       </if>
       <if test="productId != null and productId != ''">
-        product_id = #{productId}
+        AND product_id = #{productId}
+      </if>
+      <if test="isDefault != null">
+        AND is_default = #{isDefault}
       </if>
       <choose>
         <when test="status != null and status !=''">
@@ -63,7 +66,7 @@
     <include refid="pictureWhere"/>
   </select>
   <!-- 获取全部图片信息 -->
-  <select id="loadAll" resultType="Picture">
+  <select id="loadAll" parameterType="Picture" resultType="Picture">
     <include refid="pictureSelector"/>
     <include refid="pictureWhere"/>
   </select>
@@ -87,15 +90,15 @@
 
   <!-- =================================================================== -->
   <!-- 根据商品ID获取所有的图片 -->
-  <select id="loadAllPicture" parameterType="Picture" resultType="Picture">
+<!--  <select id="loadAllPicture" parameterType="Picture" resultType="Picture">
     <include refid="pictureSelector"/>
     <include refid="pictureWhere"/>
   </select>
-  <!-- 根据商品ID获取默认的图片 -->
+  &lt;!&ndash; 根据商品ID获取默认的图片 &ndash;&gt;
   <select id="loadDefaultPicture" parameterType="Picture" resultType="Picture">
     <include refid="pictureSelector"/>
     <include refid="pictureWhere"/>
     AND is_default = 1
-  </select>
+  </select>-->
 </mapper>
 

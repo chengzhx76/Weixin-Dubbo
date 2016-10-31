@@ -2,20 +2,18 @@ package com.cheng.item.test;
 
 /**
  * Desc:
- * Author: 光灿
- * Date: 2016/9/20
+ * Author: hp
+ * Date: 2016/10/31
  */
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath*:spring-context.xml"})
-public class TestMain {
-    //
+public class TestAll {
     //@Autowired
-    //private RpcProductService productService;
+    //private ProductService productService;
     //
     //@Test
     //public void test01() {
-    //    Product product = productService.getById("1");
-    //    System.out.println("====> "+product);
+    //    productService.getShowPictureByProductId("1");
     //}
 
 }

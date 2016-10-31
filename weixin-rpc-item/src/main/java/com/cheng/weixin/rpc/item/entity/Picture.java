@@ -12,11 +12,16 @@ public class Picture extends DataEntity<Picture> {
     private String pictureUrl;
     private int width;
     private int height;
-    private boolean isDefault;
+    private Boolean isDefault;
 
     public Picture() {}
-    public Picture(String productId) {
+
+    public Picture(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+    public Picture(String productId, Boolean isDefault) {
         this.productId = productId;
+        this.isDefault = isDefault;
     }
 
     public int getWidth() {
@@ -51,11 +56,11 @@ public class Picture extends DataEntity<Picture> {
         this.pictureUrl = pictureUrl;
     }
 
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
     }
 }

@@ -36,7 +36,6 @@ public class ProductService implements RpcProductService {
         Product product = new Product();
         product.setTypeId(typeId);
         return productDao.loadAll(product);
-        //return productDao.loadMallByTypeId(product);
     }
 
     @Override
@@ -48,17 +47,10 @@ public class ProductService implements RpcProductService {
     }
 
     @Override
-    public Picture getDefaultPictureByProductId(String productId) {
-        Picture picture = pictureDao.loadDefaultPicture(new Picture(productId));
-        return picture;
-    }
-
-    @Override
     public List<Product> getIndex() {
-        //List<Product> products = productDao.loadIndex();
         List<Product> products = productDao.loadAll(new Product(true));
         for (Product product : products) {
-            Picture pictures = pictureDao.loadDefaultPicture(new Picture(product.getId()));
+            Picture pictures = pictureDao.load(new Picture(product.getId(), true));
             product.setDefaultPicture(pictures);
         }
         return products;
@@ -71,6 +63,17 @@ public class ProductService implements RpcProductService {
 
     @Override
     public List<Picture> getAllPicture(String productId) {
-        return pictureDao.loadAllPicture(new Picture(productId));
+        return pictureDao.loadAll(new Picture(productId, null));
+    }
+
+    @Override
+    public Picture getDefaultPictureByProductId(String productId) {
+        Picture picture = pictureDao.load(new Picture(productId, true));
+        return picture;
+    }
+
+    @Override
+    public List<Picture> getShowPictureByProductId(String productId) {
+        return pictureDao.loadAll(new Picture(productId, false));
     }
 }

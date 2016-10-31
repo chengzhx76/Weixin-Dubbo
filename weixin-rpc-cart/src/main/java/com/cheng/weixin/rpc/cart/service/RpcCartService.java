@@ -105,4 +105,12 @@ public interface RpcCartService {
       * @param userId
      */
     void unchooseAllProduct(String userId);
+
+    /**
+     * 购物车中是否存在该商品
+     * @param userId
+     * @param productId
+     * @return
+     */
+    boolean exists(String userId, String productId);
 }

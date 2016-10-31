@@ -35,13 +35,6 @@ public interface RpcProductService {
     Product getDefaultPictureById(String id);
 
     /**
-     * 获取商品默认的图片
-     * @param productId
-     * @return
-     */
-    Picture getDefaultPictureByProductId(String productId);
-
-    /**
      * 获取首页的商品
      * @return
      */
@@ -54,10 +47,24 @@ public interface RpcProductService {
     List<ProductType> getProductType();
 
     /**
-     * 获取该商品的所有图片
+     * 获取该商品全部图片
      * @param productId
      * @return
      */
     List<Picture> getAllPicture(String productId);
+
+    /**
+     * 获取商品默认的图片
+     * @param productId
+     * @return
+     */
+    Picture getDefaultPictureByProductId(String productId);
+
+    /**
+     * 获取该商品的所有的轮播图
+     * @param productId
+     * @return
+     */
+    List<Picture> getShowPictureByProductId(String productId);
 
 }

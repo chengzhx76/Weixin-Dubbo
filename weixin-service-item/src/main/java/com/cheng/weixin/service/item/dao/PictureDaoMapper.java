@@ -4,8 +4,6 @@ import com.cheng.weixin.common.core.dao.BaseDaoMapper;
 import com.cheng.weixin.rpc.item.entity.Picture;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * Desc: 商品
  * Author: cheng
@@ -18,13 +16,13 @@ public interface PictureDaoMapper extends BaseDaoMapper<Picture> {
      * @param picture
      * @return
      */
-    List<Picture> loadAllPicture(Picture picture);
+    //List<Picture> loadAllPicture(Picture picture);
 
     /**
      * 根据商品ID获取默认的图片
      * @param picture
      * @return
      */
-    Picture loadDefaultPicture(Picture picture);
+    //Picture loadDefaultPicture(Picture picture);
 
 }

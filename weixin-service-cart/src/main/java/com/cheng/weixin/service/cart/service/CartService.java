@@ -162,6 +162,15 @@ public class CartService implements RpcCartService {
         }
     }
 
+    @Override
+    public boolean exists(String userId, String productId) {
+        if (redisService.exists(getCart(userId), chooseProduct(productId))
+                || redisService.exists(getCart(userId), noChooseProduct(productId))) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 获取当前用户购物车的标识
      * @param userId
