@@ -45,6 +45,7 @@ public class SysMallService {
         return categories;
     }
 
+    // TODO 登陆后查看该商品已买了多少
     public Mall getMallProduct(String cid) {
         List<Product> products = productService.getByTypeId(cid);
         Mall mall = new Mall();
@@ -67,6 +68,8 @@ public class SysMallService {
         mall.setTotalPrice(StringFormat.format(totalPrice("1")));
         return mall;
     }
+
+
     /**
      * 购买商品
      * @param productId
@@ -80,6 +83,7 @@ public class SysMallService {
         long count = cartService.addProductCount("1", productId);
         // 金额
         BigDecimal totalPrice = totalPrice("1");
+
         MallBuy buy = new MallBuy();
         buy.setCount(count);
         buy.setTotalPrice(totalPrice);
@@ -94,11 +98,13 @@ public class SysMallService {
         long count = cartService.subProductCount("1", productId);
         // 金额
         BigDecimal totalPrice = totalPrice("1");
+
         MallBuy buy = new MallBuy();
         buy.setCount(count);
         buy.setTotalPrice(totalPrice);
         return buy;
     }
+
     /**
      * 购物车商品的总价格
      * @param userId

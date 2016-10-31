@@ -21,6 +21,7 @@ public class ProductDetail {
     private String marketPrice;
     private int giveAway;
     private String count;
+    private String totalPrice;
 
     private List<ProductPic> picList;
 
@@ -110,6 +111,14 @@ public class ProductDetail {
 
     public void setGiveAway(int giveAway) {
         this.giveAway = giveAway;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override

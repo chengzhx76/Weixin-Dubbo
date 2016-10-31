@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +62,11 @@ public class SysProductService {
         if (cartService.exists("1", productId)) {
             Long count = cartService.getCounts("1", productId);
             detail.setCount(count+"");
+            BigDecimal totalPrice = BigDecimal.valueOf(count).multiply(product.getSalePrice());
+            detail.setTotalPrice(StringFormat.format(totalPrice));
         }else {
             detail.setCount("1");
+            detail.setTotalPrice(StringFormat.format(product.getSalePrice()));
         }
         List<ProductPic> pics = new ArrayList<>();
         for (Picture picture : pictures) {
