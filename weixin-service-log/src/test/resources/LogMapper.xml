@@ -88,4 +88,10 @@
     )
   </insert>
 
+  <!-- 测试 -->
+  <select id="selectLogList" parameterType="log" resultType="log">
+    <include refid="logSelector"/>
+    <include refid="logWhere"/>
+  </select>
+
 </mapper>

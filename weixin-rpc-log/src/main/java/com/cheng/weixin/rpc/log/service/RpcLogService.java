@@ -22,4 +22,5 @@ public interface RpcLogService {
      */
     void saveLog(String remoteAddr, String userAgent, String requestUri, Map<String, String[]> params, String method,
                  /*Object handler,*/ Exception ex, String title, String username);
+
 }

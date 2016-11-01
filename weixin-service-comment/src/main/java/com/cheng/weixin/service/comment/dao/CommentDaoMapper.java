@@ -4,8 +4,6 @@ import com.cheng.weixin.common.core.dao.BaseDaoMapper;
 import com.cheng.weixin.rpc.comment.entity.Comment;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * Desc: 评论
  * Author: hp
@@ -18,5 +16,5 @@ public interface CommentDaoMapper extends BaseDaoMapper<Comment> {
      * @param comment
      * @return
      */
-    List<Comment> getByProductId(Comment comment);
+    //List<Comment> getByProductId(Comment comment);
 }

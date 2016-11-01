@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LogDaoMapper  extends BaseDaoMapper<Log> {
+
+
 }

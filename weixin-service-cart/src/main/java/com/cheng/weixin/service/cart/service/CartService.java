@@ -87,7 +87,7 @@ public class CartService implements RpcCartService {
                 cart.setProductId(itemName.toString().split("_")[1]);
                 cart.setQuantity(Integer.parseInt(allProduct.get(itemName).toString()));
                 String isChoose = itemName.toString().split("_")[0];
-                cart.setChoose("TRUE".equals(isChoose) ? true : false);
+                cart.setChoose("TRUE".equals(isChoose));
                 cartInfos.add(cart);
             }
             shoppingCart.setCartInfos(cartInfos);
@@ -99,6 +99,7 @@ public class CartService implements RpcCartService {
 
     @Override
     public void addProduct(String userId, String productId, Long count) {
+        deleteProduct(userId, productId);
         redisService.put(getCart(userId), getProductFlag(userId, productId), count);
     }
 

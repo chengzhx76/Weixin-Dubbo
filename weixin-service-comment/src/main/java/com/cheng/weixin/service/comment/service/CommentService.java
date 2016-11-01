@@ -20,6 +20,6 @@ public class CommentService implements RpcCommentService {
 
     @Override
     public List<Comment> getByProductId(String productId) {
-        return commentDao.getByProductId(new Comment(productId));
+        return commentDao.loadAll(new Comment(productId));
     }
 }

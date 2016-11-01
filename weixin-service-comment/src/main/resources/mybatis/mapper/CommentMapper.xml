@@ -68,14 +68,8 @@
     <include refid="commentWhere"/>
   </select>
 
-  <!-- 根据商品ID获取评论 -->
-  <select id="getByProductId" parameterType="comment" resultType="comment">
-    <include refid="commentSelector"/>
-    <include refid="commentWhere"/>
-  </select>
-
   <!-- 获取全部信息 -->
-  <select id="loadAll" resultType="comment">
+  <select id="loadAll" parameterType="comment" resultType="comment">
     <include refid="commentSelector"/>
     <include refid="commentWhere"/>
   </select>

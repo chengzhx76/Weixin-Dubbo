@@ -60,4 +60,7 @@ public class LogService implements RpcLogService {
                 logDao.save(log);
             }
     }
+
+
+
 }
