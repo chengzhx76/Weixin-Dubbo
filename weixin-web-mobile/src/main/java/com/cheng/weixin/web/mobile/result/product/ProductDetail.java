@@ -22,6 +22,7 @@ public class ProductDetail {
     private int giveAway;
     private String count;
     private String totalPrice;
+    private boolean focus; // 是否收藏
 
     private List<ProductPic> picList;
 
@@ -119,6 +120,14 @@ public class ProductDetail {
 
     public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public boolean isFocus() {
+        return focus;
+    }
+
+    public void setFocus(boolean focus) {
+        this.focus = focus;
     }
 
     @Override

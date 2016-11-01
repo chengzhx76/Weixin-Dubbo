@@ -49,6 +49,7 @@ public class SysProductService {
     public ProductDetail getDetail(String productId) {
         Product product = productService.getById(productId);
         List<Picture> pictures = productService.getShowPictureByProductId(productId);
+        boolean isFocus = userService.isProductFocus("1", productId);
 
         ProductDetail detail = new ProductDetail();
         detail.setProductId(product.getId());
@@ -59,6 +60,7 @@ public class SysProductService {
         detail.setSellPrice(StringFormat.format(product.getSalePrice()));
         detail.setMarketPrice(StringFormat.format(product.getMarketPrice()));
         detail.setGiveAway(product.getGiveAway());
+        detail.setFocus(isFocus);
         if (cartService.exists("1", productId)) {
             Long count = cartService.getCounts("1", productId);
             detail.setCount(count+"");
