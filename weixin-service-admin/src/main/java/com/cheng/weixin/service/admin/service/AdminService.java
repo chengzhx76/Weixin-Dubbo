@@ -4,7 +4,7 @@ import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.AdminRole;
 import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.entity.Role;
-import com.cheng.weixin.rpc.admin.model.Page;
+import com.cheng.weixin.common.model.Page;
 import com.cheng.weixin.rpc.admin.service.RpcAdminService;
 import com.cheng.weixin.service.admin.dao.AdminDaoMapper;
 import com.cheng.weixin.service.admin.dao.AdminRoleDaoMapper;

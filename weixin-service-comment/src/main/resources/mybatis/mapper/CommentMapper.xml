@@ -44,7 +44,7 @@
         product_id = #{productId}
       </if>
       <choose>
-        <when test="status != null and status !=''">
+        <when test="status != null">
           AND status = #{status}
         </when>
         <otherwise>

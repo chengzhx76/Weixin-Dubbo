@@ -4,7 +4,7 @@ package com.cheng.weixin.rpc.admin.service;
 import com.cheng.weixin.rpc.admin.entity.Admin;
 import com.cheng.weixin.rpc.admin.entity.Permission;
 import com.cheng.weixin.rpc.admin.entity.Role;
-import com.cheng.weixin.rpc.admin.model.Page;
+import com.cheng.weixin.common.model.Page;
 
 import java.util.List;
 

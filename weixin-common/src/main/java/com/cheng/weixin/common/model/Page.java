@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.admin.model;
+package com.cheng.weixin.common.model;
 
 import java.util.List;
 
