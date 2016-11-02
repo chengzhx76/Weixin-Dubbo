@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Desc: 用户
@@ -112,6 +113,11 @@ public class UserService implements RpcUserService {
     @Override
     public DeliveryAddress getDeliveryAddress(String userId, String addrId) {
         return deliveryAddressDao.load(new DeliveryAddress(userId, null));
+    }
+
+    @Override
+    public List<DeliveryAddress> getAllDeliveryAddr(String userId) {
+        return deliveryAddressDao.loadAll(new DeliveryAddress(userId, null));
     }
 
     @Override

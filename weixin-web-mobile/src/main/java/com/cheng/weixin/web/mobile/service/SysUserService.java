@@ -2,10 +2,15 @@ package com.cheng.weixin.web.mobile.service;
 
 import com.cheng.weixin.common.utils.StringFormat;
 import com.cheng.weixin.rpc.user.entity.Account;
+import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.result.user.DeliveryAddr;
 import com.cheng.weixin.web.mobile.result.user.UserDetail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Desc: 用户
@@ -31,7 +36,21 @@ public class SysUserService {
         return userDetail;
     }
 
+    public List<DeliveryAddr> getDeliveryAddrs() {
+        List<DeliveryAddress> addresses = userService.getAllDeliveryAddr("1");
 
-
-
+        List<DeliveryAddr> addrs = new ArrayList<>();
+        for (DeliveryAddress address : addresses) {
+            DeliveryAddr addr = new DeliveryAddr();
+            addr.setAddrId(address.getId());
+            addr.setConsignee(address.getConsignee());
+            addr.setMobile(address.getMobile());
+            addr.setAddress(address.getAddress());
+            addr.setSex("男士"); // TODO
+            addr.setTag("公司"); // TODO
+            addr.setDefault(address.isDefault());
+            addrs.add(addr);
+        }
+        return addrs;
+    }
 }

@@ -3,6 +3,7 @@ package com.cheng.weixin.rpc.user.service;
 import com.cheng.weixin.rpc.user.entity.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Desc: 用户
@@ -51,6 +52,14 @@ public interface RpcUserService {
      * @return
      */
     DeliveryAddress getDeliveryAddress(String userId, String addrId);
+
+    /**
+     * 获取全部的配送信息
+     * @param userId
+     * @return
+     */
+    List<DeliveryAddress> getAllDeliveryAddr(String userId);
+
     /**
      * 获取用户账户信息
      * @param userId
