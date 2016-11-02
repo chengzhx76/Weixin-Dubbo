@@ -3,7 +3,6 @@ package com.cheng.dubbo.consumer.test;
 import com.alibaba.fastjson.JSON;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.index.Index;
-import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
 import com.cheng.weixin.web.mobile.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,15 +39,15 @@ public class ServiceTest {
         System.out.println(JSON.toJSONString(index));
     }
 
-    @Test
-    public void test02() {
-        SubmitOrderInfo info = orderService.buy();
-        System.out.println(JSON.toJSONString(info));
-    }
-    @Test
-    public void test03() {
-        orderService.submitOrder();
-    }
+    //@Test
+    //public void test02() {
+    //    SubmitOrderInfo info = orderService.payment();
+    //    System.out.println(JSON.toJSONString(info));
+    //}
+    //@Test
+    //public void test03() {
+    //    orderService.submitOrder();
+    //}
     @Test
     public void test04() {
         System.out.println(orderService.getOrders());
@@ -76,6 +75,11 @@ public class ServiceTest {
     @Test
     public void test09() {
         System.out.println(userService.getUserDetail());
+    }
+
+    @Test
+    public void test091() {
+        System.out.println(userService.getDeliveryAddrs());
     }
 
     // ==========================MALL=============================== //
