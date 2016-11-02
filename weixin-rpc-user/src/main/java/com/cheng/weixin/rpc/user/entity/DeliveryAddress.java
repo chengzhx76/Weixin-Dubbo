@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.common.entity.enums.Sex;
 
 /**
  * Desc: 配送地址
@@ -16,6 +17,8 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
     private String consignee;
     private String address;
     private String mobile;
+    private Sex sex;
+    private String tag;
     private String telephone;
     private String email;
     private String postCode;
@@ -27,6 +30,22 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
     public DeliveryAddress(String accountId, Boolean isDefault) {
         this.accountId = accountId;
         this.isDefault = isDefault;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
     public String getAccountId() {
@@ -117,7 +136,7 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
         this.postCode = postCode;
     }
 
-    public Boolean isDefault() {
+    public Boolean getDefault() {
         return isDefault;
     }
 

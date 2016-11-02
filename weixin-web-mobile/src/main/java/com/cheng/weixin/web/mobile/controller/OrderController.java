@@ -2,6 +2,7 @@ package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.PaymentDto;
+import com.cheng.weixin.web.mobile.result.order.ArayacakCityAddr;
 import com.cheng.weixin.web.mobile.result.order.OrderDetail;
 import com.cheng.weixin.web.mobile.result.order.OrderList;
 import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
@@ -61,5 +62,12 @@ public class OrderController extends BaseController {
         return success(order);
     }
 
+    /** 自提地点 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/ara/addr")
+    public ResponseEntity<Response> arayacakAddr() {
+        ArayacakCityAddr addr = orderService.getAllArayacakAddr();
+        return success(addr);
+    }
 
 }

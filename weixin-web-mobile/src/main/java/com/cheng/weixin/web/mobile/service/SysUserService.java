@@ -46,9 +46,9 @@ public class SysUserService {
             addr.setConsignee(address.getConsignee());
             addr.setMobile(address.getMobile());
             addr.setAddress(address.getAddress());
-            addr.setSex("男士"); // TODO
-            addr.setTag("公司"); // TODO
-            addr.setDefault(address.isDefault());
+            addr.setSex(address.getSex().getName());
+            addr.setTag(address.getTag());
+            addr.setDefault(address.getDefault());
             addrs.add(addr);
         }
         return addrs;

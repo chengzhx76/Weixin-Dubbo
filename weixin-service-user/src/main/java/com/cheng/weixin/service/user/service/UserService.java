@@ -83,7 +83,7 @@ public class UserService implements RpcUserService {
         member.setAccountId(account.getId());
         member.setNickname(nickname);
         member.setMobile(phone);
-        member.setSex(Sex.NO);
+        member.setSex(Sex.UNKNOW);
         member.preInsert();
         memberDao.save(member);
     }

@@ -14,6 +14,11 @@ public class ArayacakAddress extends DataEntity<ArayacakAddress> {
     private String country;
     private String address;
 
+    public ArayacakAddress(String city, String country) {
+        this.city = city;
+        this.country = country;
+    }
+
     public String getName() {
         return name;
     }

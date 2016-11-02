@@ -49,4 +49,10 @@ public interface RpcOrderService {
      */
     void addOrder(OrderInfo orderInfo);
 
+    /**
+     * 获取全部自提地址 // 根据GPS获取自提地点->根据自提地点搜索地点的ID
+     * @return
+     */
+    //List<ArayacakAddress> getArayacakAddr(String cityId, String countryId);
+
 }

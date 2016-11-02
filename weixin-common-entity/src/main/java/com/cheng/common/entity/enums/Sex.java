@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.user.enumType;
+package com.cheng.common.entity.enums;
 
 /**
  * Desc: 性别

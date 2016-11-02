@@ -231,7 +231,6 @@ public class SysOrderService {
         userService.addCashRecord(cashRecord);
     }
 
-
     public List<OrderList> getOrders() {
         List<OrderInfo> orderInfos = orderService.getOrderInfos("1");
         List<OrderList> orders = new ArrayList<>();
@@ -294,4 +293,32 @@ public class SysOrderService {
         return detail;
     }
 
+    public ArayacakCityAddr getAllArayacakAddr() {
+        //List<ArayacakAddress> cityAddrs = orderService.getArayacakAddr("1", null);
+        ArayacakAddr arayacakAddr = new ArayacakAddr();
+        arayacakAddr.setAddrId("1");
+        arayacakAddr.setAddress("刘楼村西头");
+        arayacakAddr.setDistance("0.3");
+        ArayacakAddr arayacakAddr2 = new ArayacakAddr();
+        arayacakAddr2.setAddrId("1");
+        arayacakAddr2.setAddress("黄楼村南头");
+        arayacakAddr2.setDistance("0.9");
+        List<ArayacakAddr> arayacakAddrs = new ArrayList<>();
+        arayacakAddrs.add(arayacakAddr);
+        arayacakAddrs.add(arayacakAddr2);
+
+        ArayacakCountryAddr countryAddr = new ArayacakCountryAddr();
+        countryAddr.setCountryId("1");
+        countryAddr.setCountry("孙寺镇");
+        countryAddr.setAddrs(arayacakAddrs);
+        List<ArayacakCountryAddr> countryAddrs = new ArrayList<>();
+        countryAddrs.add(countryAddr);
+
+        ArayacakCityAddr cityAddr = new ArayacakCityAddr();
+        cityAddr.setCid("1");
+        cityAddr.setCity("成武");
+        cityAddr.setCountryAddrs(countryAddrs);
+
+        return cityAddr;
+    }
 }

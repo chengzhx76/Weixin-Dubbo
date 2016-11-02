@@ -1,14 +1,8 @@
 package com.cheng.weixin.service.order.service;
 
-import com.cheng.weixin.rpc.order.entity.DeliveryTime;
-import com.cheng.weixin.rpc.order.entity.OrderProductDetail;
-import com.cheng.weixin.rpc.order.entity.OrderInfo;
-import com.cheng.weixin.rpc.order.entity.Pay;
+import com.cheng.weixin.rpc.order.entity.*;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
-import com.cheng.weixin.service.order.dao.DeliveryTimeDaoMapper;
-import com.cheng.weixin.service.order.dao.OrderProductDetailDaoMapper;
-import com.cheng.weixin.service.order.dao.OrderInfoDaoMapper;
-import com.cheng.weixin.service.order.dao.PayDaoMapper;
+import com.cheng.weixin.service.order.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +23,8 @@ public class OrderService implements RpcOrderService {
     private DeliveryTimeDaoMapper deliveryTimeDao;
     @Autowired
     private PayDaoMapper payDao;
+    @Autowired
+    private ArayacakAddressDaoMapper arayacakAddressDao;
 
 
     @Override
@@ -68,4 +64,9 @@ public class OrderService implements RpcOrderService {
     public Pay getPay(String id) {
         return payDao.load(new Pay(id));
     }
+
+    //@Override
+    //public List<ArayacakAddress> getArayacakAddr(String cityId, String countryId) {
+    //    return arayacakAddressDao.loadAll(new ArayacakAddress(cityId, countryId));
+    //}
 }
