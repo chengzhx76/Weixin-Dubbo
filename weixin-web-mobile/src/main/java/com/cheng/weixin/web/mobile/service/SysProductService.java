@@ -10,6 +10,8 @@ import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.exception.ProductException;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.result.comment.ProductComment;
 import com.cheng.weixin.web.mobile.result.product.ProductDetail;
 import com.cheng.weixin.web.mobile.result.product.ProductPic;
@@ -94,6 +96,10 @@ public class SysProductService {
     }
 
     public void buyProduct(String productId, Long count) {
+        Product product = productService.getById(productId);
+        if (product.getUnitsInStock()<=0) {
+            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+        }
         cartService.addProduct("1", productId, count);
     }
 

@@ -46,7 +46,11 @@ public interface RpcUserService {
      * @return
      */
     DeliveryAddress getDefaultAddress(String userId);
-
+    /**
+     * 获取默认的配送地址
+     * @return
+     */
+    DeliveryAddress getDeliveryAddress(String userId, String addrId);
     /**
      * 获取用户账户信息
      * @param userId

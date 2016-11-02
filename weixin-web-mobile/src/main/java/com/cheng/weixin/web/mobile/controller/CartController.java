@@ -27,7 +27,7 @@ public class CartController extends BaseController {
     /** 购物车信息 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/info")
-    public ResponseEntity<Response> info(HttpServletRequest request) {
+    public ResponseEntity<Response> info() {
         ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart();
         return success(shoppingCartInfo);
     }
@@ -74,6 +74,7 @@ public class CartController extends BaseController {
         ProductCartInfo productCart = sysCartService.chooseAllProduct();
         return success(productCart);
     }
+
     /** 取消选择所有 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/unChoose")

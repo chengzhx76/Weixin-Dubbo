@@ -19,12 +19,12 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
     private String telephone;
     private String email;
     private String postCode;
-    private boolean isDefault;
+    private Boolean isDefault;
 
     public DeliveryAddress() {
     }
 
-    public DeliveryAddress(String accountId, boolean isDefault) {
+    public DeliveryAddress(String accountId, Boolean isDefault) {
         this.accountId = accountId;
         this.isDefault = isDefault;
     }
@@ -117,11 +117,11 @@ public class DeliveryAddress extends DataEntity<DeliveryAddress> {
         this.postCode = postCode;
     }
 
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return isDefault;
     }
 
-    public void setDefault(boolean aDefault) {
+    public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
     }
 }

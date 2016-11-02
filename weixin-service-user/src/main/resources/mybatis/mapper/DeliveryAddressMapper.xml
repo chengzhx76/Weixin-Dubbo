@@ -46,11 +46,11 @@
       <if test="accountId != null and accountId != ''">
         AND account_id = #{accountId}
       </if>
-      <if test="isDefault != null and isDefault != ''">
+      <if test="isDefault != null">
         AND is_default = #{isDefault}
       </if>
       <choose>
-        <when test="status != null and status !=''">
+        <when test="status != null">
           AND status = #{status}
         </when>
         <otherwise>
@@ -74,7 +74,7 @@
   </select>
 
   <!-- 获取全部 -->
-  <select id="loadAll" resultType="DeliveryAddress">
+  <select id="loadAll" parameterType="DeliveryAddress" resultType="DeliveryAddress">
     <include refid="deliveryAddressSelector"/>
     <include refid="deliveryAddressWhere"/>
   </select>
@@ -99,13 +99,6 @@
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>
-
-  <!-- 获取默认的地址 -->
-  <select id="loadDefaultAddress" parameterType="DeliveryAddress" resultType="DeliveryAddress">
-    <include refid="deliveryAddressSelector"/>
-    <include refid="deliveryAddressWhere"/>
-  </select>
-
 
 </mapper>
 

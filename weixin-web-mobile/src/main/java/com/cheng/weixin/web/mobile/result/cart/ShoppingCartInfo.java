@@ -10,12 +10,38 @@ import java.util.List;
  * Date: 2016/8/26
  */
 public class ShoppingCartInfo {
-
+    private String consignee;
+    private String address;
+    private String mobile;
     private String deliveryDate;
     private String totalPrice;
     private String freight;
     private String freeFreightAmount;
     private List<ProductInfo> products;
+
+    public String getConsignee() {
+        return consignee;
+    }
+
+    public void setConsignee(String consignee) {
+        this.consignee = consignee;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public String getDeliveryDate() {
         return deliveryDate;

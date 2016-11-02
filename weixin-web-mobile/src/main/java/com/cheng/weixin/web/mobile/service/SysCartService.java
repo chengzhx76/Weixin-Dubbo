@@ -6,6 +6,8 @@ import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
+import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
+import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
@@ -29,7 +31,8 @@ import java.util.Set;
 public class SysCartService {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
-
+    @Autowired
+    private RpcUserService userService;
     @Autowired
     private RpcCartService cartService;
     @Autowired
@@ -40,6 +43,13 @@ public class SysCartService {
         List<CartInfo> cartInfos = shoppingCart.getCartInfos();
 
         ShoppingCartInfo shoppingCartInfo = new ShoppingCartInfo();
+
+        // 配送地址
+        DeliveryAddress address = userService.getDefaultAddress("1");
+        shoppingCartInfo.setConsignee(address.getConsignee());
+        shoppingCartInfo.setMobile(address.getMobile());
+        shoppingCartInfo.setAddress(address.getAddress());
+
         if (null != cartInfos && !cartInfos.isEmpty()) {
             List<ProductInfo> productInfos = new ArrayList<>();
             BigDecimal totalPrice = new BigDecimal(0);

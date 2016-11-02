@@ -16,6 +16,7 @@ import com.cheng.weixin.rpc.user.entity.*;
 import com.cheng.weixin.rpc.user.enumType.BehaviorType;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.exception.BusinessException;
+import com.cheng.weixin.web.mobile.param.PaymentDto;
 import com.cheng.weixin.web.mobile.result.order.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
@@ -43,12 +44,12 @@ public class SysOrderService {
     @Autowired
     private RpcProductService productService;
 
-    public SubmitOrderInfo buy() {
+    public SubmitOrderInfo payment(PaymentDto payment) {
 
         SubmitOrderInfo submitOrder = new SubmitOrderInfo();
 
         // 配送地址
-        DeliveryAddress address = userService.getDefaultAddress("1");
+        DeliveryAddress address = userService.getDeliveryAddress("1", payment.getAddrId());
         submitOrder.setConsignee(address.getConsignee());
         submitOrder.setMobile(address.getMobile());
         submitOrder.setAddress(address.getAddress());
@@ -101,10 +102,16 @@ public class SysOrderService {
         // 总得价格
         submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight)));
 
+        submitOrder.setTimeId(payment.getTimeId());
+        submitOrder.setPayId(payment.getPayId());
+        submitOrder.setConuponId(payment.getConuponId());
+        submitOrder.setBalance(payment.getBalance());
+        submitOrder.setRemark(payment.getRemark());
+
         return submitOrder;
     }
 
-    public void submitOrder() {
+    public void buy() {
         BigDecimal totalProductPrice = new BigDecimal(0);
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         for (int i=0; i<productModels.size(); i++) {

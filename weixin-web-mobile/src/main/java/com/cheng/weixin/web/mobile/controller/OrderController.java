@@ -1,6 +1,7 @@
 package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
+import com.cheng.weixin.web.mobile.param.PaymentDto;
 import com.cheng.weixin.web.mobile.result.order.OrderDetail;
 import com.cheng.weixin.web.mobile.result.order.OrderList;
 import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -27,17 +29,18 @@ public class OrderController extends BaseController {
 
     /** 购买 **/
     @IgnoreSecurity
-    @RequestMapping(value = "v1/buy")
-    public ResponseEntity<Response> buy() {
-        SubmitOrderInfo orderInfo = orderService.buy();
+    @RequestMapping(value = "v1/payment")
+    public ResponseEntity<Response> payment(HttpServletRequest request) {
+        PaymentDto payment = (PaymentDto) getDto(request, PaymentDto.class);
+        SubmitOrderInfo orderInfo = orderService.payment(payment);
         return success(orderInfo);
     }
 
     /** 提交订单 **/
     @IgnoreSecurity
-    @RequestMapping(value = "v1/submit")
+    @RequestMapping(value = "v1/buy")
     public ResponseEntity<Response> submitBuy() {
-        orderService.submitOrder();
+        orderService.buy();
         return success();
     }
 
