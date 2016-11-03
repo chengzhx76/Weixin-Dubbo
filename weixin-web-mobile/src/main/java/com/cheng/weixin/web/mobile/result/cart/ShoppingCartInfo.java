@@ -17,6 +17,7 @@ public class ShoppingCartInfo {
     private String totalPrice;
     private String freight;
     private String freeFreightAmount;
+    private int hasNum;
     private List<ProductInfo> products;
 
     public String getConsignee() {
@@ -80,6 +81,14 @@ public class ShoppingCartInfo {
 
     public void setFreeFreightAmount(String freeFreightAmount) {
         this.freeFreightAmount = freeFreightAmount;
+    }
+
+    public int getHasNum() {
+        return hasNum;
+    }
+
+    public void setHasNum(int hasNum) {
+        this.hasNum = hasNum;
     }
 
     @Override

@@ -49,10 +49,10 @@ public class SysCartService {
         shoppingCartInfo.setConsignee(address.getConsignee());
         shoppingCartInfo.setMobile(address.getMobile());
         shoppingCartInfo.setAddress(address.getAddress());
-
         if (null != cartInfos && !cartInfos.isEmpty()) {
             List<ProductInfo> productInfos = new ArrayList<>();
             BigDecimal totalPrice = new BigDecimal(0);
+            int hasNum = 0;
             for (CartInfo cartInfo : cartInfos) {
                 ProductInfo productInfo = new ProductInfo();
                 Product product = productService.getDefaultPictureById(cartInfo.getProductId());
@@ -62,6 +62,9 @@ public class SysCartService {
                     BigDecimal salePrice = product.getSalePrice();
                     if (cartInfo.isChoose() && product.getUnitsInStock()>0) {
                         totalPrice = totalPrice.add(salePrice.multiply(new BigDecimal(cartInfo.getQuantity())));
+                    }
+                    if (product.getUnitsInStock()>0) {
+                        hasNum++;
                     }
                     productInfo.setSalePrice(StringFormat.format(salePrice));
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));
@@ -77,6 +80,7 @@ public class SysCartService {
             shoppingCartInfo.setDeliveryDate(new DateTime().plusDays(1).toString("MM月dd日"));
             shoppingCartInfo.setTotalPrice(StringFormat.format(totalPrice));
             shoppingCartInfo.setFreight("2");
+            shoppingCartInfo.setHasNum(hasNum);
             if (totalPrice.compareTo(BigDecimal.valueOf(5.00)) == -1) {
                 shoppingCartInfo.setFreight("2");
             }else {
