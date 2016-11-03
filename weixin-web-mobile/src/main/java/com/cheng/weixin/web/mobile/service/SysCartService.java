@@ -106,11 +106,11 @@ public class SysCartService {
             shoppingCartInfo.setFreight("2");
             shoppingCartInfo.setHasNum(hasNum);
             if (totalPrice.compareTo(BigDecimal.valueOf(5.00)) == -1) { // TODO 后台定义
-                shoppingCartInfo.setFreight("2");
+                shoppingCartInfo.setFreight("2");// TODO 后台定义
             }else {
                 shoppingCartInfo.setFreight("0");
             }
-            shoppingCartInfo.setFreeFreightAmount("5");
+            shoppingCartInfo.setFreeFreightAmount("5");// TODO 后台定义
         }
         return shoppingCartInfo;
     }
