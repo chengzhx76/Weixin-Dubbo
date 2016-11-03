@@ -1,11 +1,9 @@
 package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
+import com.cheng.weixin.web.mobile.param.AddressDto;
 import com.cheng.weixin.web.mobile.param.PaymentDto;
-import com.cheng.weixin.web.mobile.result.order.ArayacakCityAddr;
-import com.cheng.weixin.web.mobile.result.order.OrderDetail;
-import com.cheng.weixin.web.mobile.result.order.OrderList;
-import com.cheng.weixin.web.mobile.result.order.SubmitOrderInfo;
+import com.cheng.weixin.web.mobile.result.order.*;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.SysOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +60,19 @@ public class OrderController extends BaseController {
         return success(order);
     }
 
-    /** 自提地点 **/
+    /** 自提地点-镇 **/
     @IgnoreSecurity
-    @RequestMapping(value = "v1/ara/addr")
-    public ResponseEntity<Response> arayacakAddr() {
-        ArayacakCityAddr addr = orderService.getAllArayacakAddr();
-        return success(addr);
+    @RequestMapping(value = "v1/ara/town")
+    public ResponseEntity<Response> arayacakTownAddr() {
+        List<ArayacakTownAddr> addrs = orderService.getAllTownArayacakAddr("1"); //TODO 默认成武
+        return success(addrs);
     }
-
+    /** 自提地点-村庄 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/ara/village")
+    public ResponseEntity<Response> arayacakVillageAddr(HttpServletRequest request) {
+        AddressDto address = (AddressDto) getDto(request, AddressDto.class);
+        List<ArayacakVillageAddr> addrs = orderService.getAllVillageArayacakAddr(address.getId());
+        return success(addrs);
+    }
 }

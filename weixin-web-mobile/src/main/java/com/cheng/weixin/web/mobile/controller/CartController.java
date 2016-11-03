@@ -1,6 +1,7 @@
 package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
+import com.cheng.weixin.web.mobile.param.AddressDto;
 import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
@@ -27,8 +28,9 @@ public class CartController extends BaseController {
     /** 购物车信息 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/info")
-    public ResponseEntity<Response> info() {
-        ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart();
+    public ResponseEntity<Response> info(HttpServletRequest request) {
+        AddressDto address = (AddressDto) getDto(request, AddressDto.class);
+        ShoppingCartInfo shoppingCartInfo = sysCartService.getShoppingCart(address);
         return success(shoppingCartInfo);
     }
     /** 增加购物车的商品 **/

@@ -5,10 +5,16 @@ package com.cheng.weixin.web.mobile.result.order;
  * Author: hp
  * Date: 2016/11/2
  */
-public class ArayacakAddr {
+public class ArayacakVillageAddr {
     private String addrId;
     private String address;
     private String distance;
+
+    public ArayacakVillageAddr(String addrId, String address, String distance) {
+        this.addrId = addrId;
+        this.address = address;
+        this.distance = distance;
+    }
 
     public String getAddrId() {
         return addrId;

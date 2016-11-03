@@ -6,9 +6,7 @@ import com.cheng.weixin.rpc.cart.model.ProductModel;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
-import com.cheng.weixin.rpc.order.entity.DeliveryTime;
-import com.cheng.weixin.rpc.order.entity.OrderInfo;
-import com.cheng.weixin.rpc.order.entity.Pay;
+import com.cheng.weixin.rpc.order.entity.*;
 import com.cheng.weixin.rpc.order.enumType.OrderType;
 import com.cheng.weixin.rpc.order.enumType.PayStatus;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
@@ -24,9 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Desc:
@@ -49,7 +45,7 @@ public class SysOrderService {
         SubmitOrderInfo submitOrder = new SubmitOrderInfo();
 
         // 配送地址
-        DeliveryAddress address = userService.getDeliveryAddress("1", payment.getAddrId());
+        DeliveryAddress address = userService.getDeliveryAddress(payment.getAddrId(), "1");
         submitOrder.setConsignee(address.getConsignee());
         submitOrder.setMobile(address.getMobile());
         submitOrder.setAddress(address.getAddress());
@@ -293,32 +289,27 @@ public class SysOrderService {
         return detail;
     }
 
-    public ArayacakCityAddr getAllArayacakAddr() {
-        //List<ArayacakAddress> cityAddrs = orderService.getArayacakAddr("1", null);
-        ArayacakAddr arayacakAddr = new ArayacakAddr();
-        arayacakAddr.setAddrId("1");
-        arayacakAddr.setAddress("刘楼村西头");
-        arayacakAddr.setDistance("0.3");
-        ArayacakAddr arayacakAddr2 = new ArayacakAddr();
-        arayacakAddr2.setAddrId("1");
-        arayacakAddr2.setAddress("黄楼村南头");
-        arayacakAddr2.setDistance("0.9");
-        List<ArayacakAddr> arayacakAddrs = new ArrayList<>();
-        arayacakAddrs.add(arayacakAddr);
-        arayacakAddrs.add(arayacakAddr2);
+    public List<ArayacakTownAddr> getAllTownArayacakAddr(String countryId) {
+        List<ArayacakAddress> countyAddrs = orderService.getArayacakAddr(countryId, null);
 
-        ArayacakCountryAddr countryAddr = new ArayacakCountryAddr();
-        countryAddr.setCountryId("1");
-        countryAddr.setCountry("孙寺镇");
-        countryAddr.setAddrs(arayacakAddrs);
-        List<ArayacakCountryAddr> countryAddrs = new ArrayList<>();
-        countryAddrs.add(countryAddr);
+        Set<String> townIds = new HashSet<>();
+        for (ArayacakAddress addr : countyAddrs) {
+            townIds.add(addr.getTown());
+        }
+        List<ArayacakTownAddr> townAddrs = new ArrayList<>();
+        for (String townId: townIds) {
+            Town town = orderService.getTownById(townId);
+            townAddrs.add(new ArayacakTownAddr(townId, town.getName()));
+        }
+        return townAddrs;
+    }
 
-        ArayacakCityAddr cityAddr = new ArayacakCityAddr();
-        cityAddr.setCid("1");
-        cityAddr.setCity("成武");
-        cityAddr.setCountryAddrs(countryAddrs);
-
-        return cityAddr;
+    public List<ArayacakVillageAddr> getAllVillageArayacakAddr(String townId) {
+        List<ArayacakAddress> villageAllAddrs = orderService.getArayacakAddr(null, townId);
+        List<ArayacakVillageAddr> villageAddrs = new ArrayList<>();
+        for (ArayacakAddress addr: villageAllAddrs) {
+            villageAddrs.add(new ArayacakVillageAddr(addr.getId(), addr.getAddress(), "3.2"));
+        }
+        return villageAddrs;
     }
 }

@@ -93,10 +93,10 @@ public class ServiceTest {
     }
 
     // ==========================CART=============================== //
-    @Test
+   /* @Test
     public void test12() {
         System.out.println(cartService.getShoppingCart());
-    }
+    }*/
     @Test
     public void test13() {
         System.out.println(cartService.addProduct("1"));

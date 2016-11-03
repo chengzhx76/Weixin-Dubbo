@@ -49,9 +49,11 @@ public interface RpcUserService {
     DeliveryAddress getDefaultAddress(String userId);
     /**
      * 获取默认的配送地址
+     * @param id
+     * @param userId
      * @return
      */
-    DeliveryAddress getDeliveryAddress(String userId, String addrId);
+    DeliveryAddress getDeliveryAddress(String id, String userId);
 
     /**
      * 获取全部的配送信息
@@ -136,4 +138,12 @@ public interface RpcUserService {
      * @return
      */
     boolean isProductFocus(String userId, String productId);
+
+    /**
+     * 获取会员信息
+     * @param userId
+     * @return
+     */
+    Member getMemberById(String userId);
+
 }

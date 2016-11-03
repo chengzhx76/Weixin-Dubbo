@@ -1,8 +1,6 @@
 package com.cheng.weixin.rpc.order.service;
 
-import com.cheng.weixin.rpc.order.entity.DeliveryTime;
-import com.cheng.weixin.rpc.order.entity.OrderInfo;
-import com.cheng.weixin.rpc.order.entity.Pay;
+import com.cheng.weixin.rpc.order.entity.*;
 
 import java.util.List;
 
@@ -50,9 +48,22 @@ public interface RpcOrderService {
     void addOrder(OrderInfo orderInfo);
 
     /**
-     * 获取全部自提地址 // 根据GPS获取自提地点->根据自提地点搜索地点的ID
+     * 获取全部镇自提地址 // 根据GPS获取自提地点->根据自提地点搜索地点的ID
      * @return
      */
-    //List<ArayacakAddress> getArayacakAddr(String cityId, String countryId);
+    List<ArayacakAddress> getArayacakAddr(String countyId, String townId);
 
+    /**
+     * 根据ID获取镇
+     * @param townId
+     * @return
+     */
+    Town getTownById(String townId);
+
+    /**
+     * 根据ID获取自提地点
+     * @param id
+     * @return
+     */
+    ArayacakAddress getArayacakAddressById(String id);
 }

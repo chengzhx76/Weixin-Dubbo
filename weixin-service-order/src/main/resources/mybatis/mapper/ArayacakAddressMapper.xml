@@ -4,11 +4,11 @@
 <mapper namespace="com.cheng.weixin.service.order.dao.ArayacakAddressDaoMapper">
   <sql id="tableName">arayacak_address</sql>
   <sql id="columns">
-    a.id,a.name,a.province,a.city,a.country,a.address,
+    a.id,a.name,a.province,a.city,a.country,a.town,a.village,a.address,
     a.remarks,a.create_date,a.update_date,a.status
   </sql>
   <sql id="insertColumns">
-    id,name,province,city,country,address,
+    id,name,province,city,country,town,village,address,
     remarks,create_date,update_date,status
   </sql>
   <sql id="arayacakAddressIf">
@@ -17,6 +17,8 @@
     <if test="province != null and province != ''">province=#{province},</if>
     <if test="city != null and city != ''">city=#{city},</if>
     <if test="country != null and country != ''">country=#{country},</if>
+    <if test="town != null and town != ''">town=#{town},</if>
+    <if test="village != null and village != ''">village=#{village},</if>
     <if test="address != null and address != ''">address=#{address},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
@@ -34,6 +36,12 @@
     <where>
       <if test="id != null and id != ''">
         id = #{id}
+      </if>
+      <if test="country != null and country != ''">
+        AND country = #{country}
+      </if>
+      <if test="town != null and town != ''">
+        AND town = #{town}
       </if>
       <choose>
         <when test="status != null and status !=''">
@@ -80,7 +88,7 @@
     )
     VALUES
     (
-    #{id},#{name},#{province},#{city},#{country},#{address},
+    #{id},#{name},#{province},#{city},#{country},#{town},#{village},#{address},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>

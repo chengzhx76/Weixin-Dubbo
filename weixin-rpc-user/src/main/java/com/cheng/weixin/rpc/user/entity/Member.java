@@ -30,6 +30,11 @@ public class Member extends DataEntity<Member> {
     private String job;
     private String hobby;
 
+    public Member() {
+    }
+    public Member(String id) {
+        super.id = id;
+    }
     public String getAccountId() {
         return accountId;
     }

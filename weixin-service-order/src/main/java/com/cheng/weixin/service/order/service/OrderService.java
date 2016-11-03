@@ -24,6 +24,8 @@ public class OrderService implements RpcOrderService {
     @Autowired
     private PayDaoMapper payDao;
     @Autowired
+    private TownDaoMapper townDao;
+    @Autowired
     private ArayacakAddressDaoMapper arayacakAddressDao;
 
 
@@ -65,8 +67,18 @@ public class OrderService implements RpcOrderService {
         return payDao.load(new Pay(id));
     }
 
-    //@Override
-    //public List<ArayacakAddress> getArayacakAddr(String cityId, String countryId) {
-    //    return arayacakAddressDao.loadAll(new ArayacakAddress(cityId, countryId));
-    //}
+    @Override
+    public List<ArayacakAddress> getArayacakAddr(String countyId, String townId) {
+        return arayacakAddressDao.loadAll(new ArayacakAddress(countyId, townId));
+    }
+
+    @Override
+    public Town getTownById(String townId) {
+        return townDao.load(new Town(townId));
+    }
+
+    @Override
+    public ArayacakAddress getArayacakAddressById(String id) {
+        return arayacakAddressDao.load(new ArayacakAddress(id));
+    }
 }

@@ -6,8 +6,12 @@ import com.cheng.weixin.rpc.cart.entity.ShoppingCart;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
+import com.cheng.weixin.rpc.order.entity.ArayacakAddress;
+import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
+import com.cheng.weixin.rpc.user.entity.Member;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.param.AddressDto;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
@@ -37,18 +41,38 @@ public class SysCartService {
     private RpcCartService cartService;
     @Autowired
     private RpcProductService productService;
+    @Autowired
+    private RpcOrderService orderService;
 
-    public ShoppingCartInfo getShoppingCart() {
+    public ShoppingCartInfo getShoppingCart(AddressDto address) {
+
         ShoppingCart shoppingCart = cartService.getShoppingCart("1");
         List<CartInfo> cartInfos = shoppingCart.getCartInfos();
 
         ShoppingCartInfo shoppingCartInfo = new ShoppingCartInfo();
-
         // 配送地址
-        DeliveryAddress address = userService.getDefaultAddress("1");
-        shoppingCartInfo.setConsignee(address.getConsignee());
-        shoppingCartInfo.setMobile(address.getMobile());
-        shoppingCartInfo.setAddress(address.getAddress());
+        if (address.getId() != null && !"".equals(address.getId())) {
+            if (address.getSince()) {
+                ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(address.getId());
+                Member member = userService.getMemberById("1");
+                shoppingCartInfo.setMobile(member.getMobile());
+                shoppingCartInfo.setAddress(arayacakAddress.getAddress());
+                shoppingCartInfo.setSince(true);
+            }else {
+                DeliveryAddress addr = userService.getDeliveryAddress(address.getId(), "1");
+                shoppingCartInfo.setConsignee(addr.getConsignee());
+                shoppingCartInfo.setMobile(addr.getMobile());
+                shoppingCartInfo.setAddress(addr.getAddress());
+                shoppingCartInfo.setSince(false);
+            }
+        } else {
+            DeliveryAddress addr = userService.getDefaultAddress("1");
+            shoppingCartInfo.setConsignee(addr.getConsignee());
+            shoppingCartInfo.setMobile(addr.getMobile());
+            shoppingCartInfo.setAddress(addr.getAddress());
+            shoppingCartInfo.setSince(false);
+        }
+
         if (null != cartInfos && !cartInfos.isEmpty()) {
             List<ProductInfo> productInfos = new ArrayList<>();
             BigDecimal totalPrice = new BigDecimal(0);
@@ -81,7 +105,7 @@ public class SysCartService {
             shoppingCartInfo.setTotalPrice(StringFormat.format(totalPrice));
             shoppingCartInfo.setFreight("2");
             shoppingCartInfo.setHasNum(hasNum);
-            if (totalPrice.compareTo(BigDecimal.valueOf(5.00)) == -1) {
+            if (totalPrice.compareTo(BigDecimal.valueOf(5.00)) == -1) { // TODO 后台定义
                 shoppingCartInfo.setFreight("2");
             }else {
                 shoppingCartInfo.setFreight("0");

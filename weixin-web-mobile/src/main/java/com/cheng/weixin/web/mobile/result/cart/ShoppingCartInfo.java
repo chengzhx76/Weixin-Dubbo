@@ -19,6 +19,7 @@ public class ShoppingCartInfo {
     private String freeFreightAmount;
     private int hasNum;
     private List<ProductInfo> products;
+    private Boolean isSince;
 
     public String getConsignee() {
         return consignee;
@@ -83,12 +84,20 @@ public class ShoppingCartInfo {
         this.freeFreightAmount = freeFreightAmount;
     }
 
+
     public int getHasNum() {
         return hasNum;
     }
 
     public void setHasNum(int hasNum) {
         this.hasNum = hasNum;
+    }
+    public Boolean getSince() {
+        return isSince;
+    }
+
+    public void setSince(Boolean since) {
+        isSince = since;
     }
 
     @Override

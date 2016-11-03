@@ -111,8 +111,11 @@ public class UserService implements RpcUserService {
     }
 
     @Override
-    public DeliveryAddress getDeliveryAddress(String userId, String addrId) {
-        return deliveryAddressDao.load(new DeliveryAddress(userId, null));
+    public DeliveryAddress getDeliveryAddress(String id, String userId) {
+        DeliveryAddress address = new DeliveryAddress();
+        address.setId(id);
+        address.setAccountId(userId);
+        return deliveryAddressDao.load(address);
     }
 
     @Override
@@ -203,5 +206,10 @@ public class UserService implements RpcUserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Member getMemberById(String userId) {
+        return memberDao.load(new Member(userId));
     }
 }
