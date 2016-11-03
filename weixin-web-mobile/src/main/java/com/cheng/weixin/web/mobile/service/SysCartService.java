@@ -65,12 +65,14 @@ public class SysCartService {
                 shoppingCartInfo.setAddress(addr.getAddress());
                 shoppingCartInfo.setSince(false);
             }
-        } else {
+            shoppingCartInfo.setAddrId(address.getId());
+        }else {
             DeliveryAddress addr = userService.getDefaultAddress("1");
             shoppingCartInfo.setConsignee(addr.getConsignee());
             shoppingCartInfo.setMobile(addr.getMobile());
             shoppingCartInfo.setAddress(addr.getAddress());
             shoppingCartInfo.setSince(false);
+            shoppingCartInfo.setAddrId(addr.getId());
         }
 
         if (null != cartInfos && !cartInfos.isEmpty()) {

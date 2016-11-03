@@ -20,6 +20,7 @@ public class ShoppingCartInfo {
     private int hasNum;
     private List<ProductInfo> products;
     private Boolean isSince;
+    private String addrId;
 
     public String getConsignee() {
         return consignee;
@@ -98,6 +99,14 @@ public class ShoppingCartInfo {
 
     public void setSince(Boolean since) {
         isSince = since;
+    }
+
+    public String getAddrId() {
+        return addrId;
+    }
+
+    public void setAddrId(String addrId) {
+        this.addrId = addrId;
     }
 
     @Override
