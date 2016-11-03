@@ -12,6 +12,7 @@ public class SubmitOrderInfo {
     private String address;
     private String mobile;
     private List<OrderDeliveryTime> deliveryTime;
+    private OrderPay recPay;
     private List<OrderPay> pays;
     private int availableCoupon;
     private String availableBalance;
@@ -27,6 +28,14 @@ public class SubmitOrderInfo {
     private String payId;
     private String conuponId;
     private Boolean isBalance;
+
+    public OrderPay getRecPay() {
+        return recPay;
+    }
+
+    public void setRecPay(OrderPay recPay) {
+        this.recPay = recPay;
+    }
 
     public String getConsignee() {
         return consignee;

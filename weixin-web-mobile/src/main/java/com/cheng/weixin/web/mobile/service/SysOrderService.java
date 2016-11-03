@@ -1,5 +1,6 @@
 package com.cheng.weixin.web.mobile.service;
 
+import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.common.utils.StringFormat;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.cart.model.ProductModel;
@@ -44,7 +45,7 @@ public class SysOrderService {
 
         SubmitOrderInfo submitOrder = new SubmitOrderInfo();
 
-        // 配送地址
+        // 配送地址recommend
         DeliveryAddress address = userService.getDeliveryAddress(payment.getAddrId(), "1");
         submitOrder.setConsignee(address.getConsignee());
         submitOrder.setMobile(address.getMobile());
@@ -62,7 +63,11 @@ public class SysOrderService {
         List<Pay> pays = orderService.getAllPay();
         List<OrderPay> orderPays = new ArrayList<>();
         for (Pay pay : pays) {
-            orderPays.add(new OrderPay(pay.getId(), pay.getName()));
+            if (pay.getStatus().equals(Status.RECOMMEND)) {
+                submitOrder.setRecPay(new OrderPay(pay.getId(), pay.getName()));
+            }else {
+                orderPays.add(new OrderPay(pay.getId(), pay.getName()));
+            }
         }
         submitOrder.setPays(orderPays);
 
