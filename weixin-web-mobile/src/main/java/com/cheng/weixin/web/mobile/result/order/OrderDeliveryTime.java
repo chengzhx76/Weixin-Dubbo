@@ -6,30 +6,31 @@ package com.cheng.weixin.web.mobile.result.order;
  * Date: 2016/9/16
  */
 public class OrderDeliveryTime {
-    private String id;
-    private String name;
+    private String value;
+    private String title;
 
     public OrderDeliveryTime() {
     }
 
     public OrderDeliveryTime(String id, String name) {
-        this.id = id;
-        this.name = name;
+        this.value = id;
+        this.title = name;
     }
 
-    public String getId() {
-        return id;
+    public String getValue() {
+        return value;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
+

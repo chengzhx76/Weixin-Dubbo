@@ -45,11 +45,29 @@ public class SysOrderService {
 
         SubmitOrderInfo submitOrder = new SubmitOrderInfo();
 
-        // 配送地址recommend
-        DeliveryAddress address = userService.getDeliveryAddress(payment.getAddrId(), "1");
-        submitOrder.setConsignee(address.getConsignee());
-        submitOrder.setMobile(address.getMobile());
-        submitOrder.setAddress(address.getAddress());
+        if (payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
+            if (payment.getSince()) {
+                ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(payment.getAddrId());
+                Member member = userService.getMemberById("1");
+                submitOrder.setMobile(member.getMobile());
+                submitOrder.setAddress(arayacakAddress.getAddress());
+                submitOrder.setSince(true);
+            }else {
+                DeliveryAddress addr = userService.getDeliveryAddress(payment.getAddrId(), "1");
+                submitOrder.setConsignee(addr.getConsignee());
+                submitOrder.setMobile(addr.getMobile());
+                submitOrder.setAddress(addr.getAddress());
+                submitOrder.setSince(false);
+            }
+            submitOrder.setAddrId(payment.getAddrId());
+        }else {
+            DeliveryAddress addr = userService.getDefaultAddress("1");
+            submitOrder.setConsignee(addr.getConsignee());
+            submitOrder.setMobile(addr.getMobile());
+            submitOrder.setAddress(addr.getAddress());
+            submitOrder.setSince(false);
+            submitOrder.setAddrId(addr.getId());
+        }
 
         // 配送时间
         List<DeliveryTime> time = orderService.getAllDeliveryTime();
@@ -64,9 +82,9 @@ public class SysOrderService {
         List<OrderPay> orderPays = new ArrayList<>();
         for (Pay pay : pays) {
             if (pay.getStatus().equals(Status.RECOMMEND)) {
-                submitOrder.setRecPay(new OrderPay(pay.getId(), pay.getName()));
+                submitOrder.setRecPay(new OrderPay(pay.getId(), pay.getName(), pay.getIcon()));
             }else {
-                orderPays.add(new OrderPay(pay.getId(), pay.getName()));
+                orderPays.add(new OrderPay(pay.getId(), pay.getName(), pay.getIcon()));
             }
         }
         submitOrder.setPays(orderPays);

@@ -8,13 +8,15 @@ package com.cheng.weixin.web.mobile.result.order;
 public class OrderPay {
     private String id;
     private String name;
+    private String icon;
 
     public OrderPay() {
     }
 
-    public OrderPay(String id, String name) {
+    public OrderPay(String id, String name, String icon) {
         this.id = id;
         this.name = name;
+        this.icon = icon;
     }
 
     public String getId() {
@@ -29,7 +31,16 @@ public class OrderPay {
         return name;
     }
 
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

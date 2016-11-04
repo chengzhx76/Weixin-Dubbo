@@ -29,6 +29,9 @@ public class SubmitOrderInfo {
     private String conuponId;
     private Boolean isBalance;
 
+    private String addrId;
+    private Boolean since;
+
     public OrderPay getRecPay() {
         return recPay;
     }
@@ -179,5 +182,21 @@ public class SubmitOrderInfo {
 
     public void setBalance(Boolean balance) {
         isBalance = balance;
+    }
+
+    public String getAddrId() {
+        return addrId;
+    }
+
+    public void setAddrId(String addrId) {
+        this.addrId = addrId;
+    }
+
+    public Boolean getSince() {
+        return since;
+    }
+
+    public void setSince(Boolean since) {
+        this.since = since;
     }
 }

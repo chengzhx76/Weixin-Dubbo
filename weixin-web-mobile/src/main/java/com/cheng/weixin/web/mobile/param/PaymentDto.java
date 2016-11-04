@@ -13,6 +13,7 @@ public class PaymentDto {
     private String conuponId;
     private Boolean isBalance;
     private String remark;
+    private Boolean since; // 是否是自提
 
     public String getAddrId() {
         return addrId;
@@ -60,6 +61,14 @@ public class PaymentDto {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Boolean getSince() {
+        return since;
+    }
+
+    public void setSince(Boolean since) {
+        this.since = since;
     }
 }
 

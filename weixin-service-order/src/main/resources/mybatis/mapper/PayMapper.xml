@@ -4,21 +4,22 @@
 <mapper namespace="com.cheng.weixin.service.order.dao.PayDaoMapper">
   <sql id="tableName">pay</sql>
   <sql id="columns">
-    p.id,p.name,p.order_by,
+    p.id,p.name,p.icon,p.order_by,
     p.remarks,p.create_date,p.update_date,p.status
   </sql>
   <sql id="insertColumns">
-    id,name,order_by,
+    id,name,icon,order_by,
     remarks,create_date,update_date,status
   </sql>
   <sql id="payIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="name != null and name != ''">name=#{name},</if>
+    <if test="icon != null and icon != ''">name=#{name},</if>
     <if test="orderBy != null and orderBy != ''">order_by=#{orderBy},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
-    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
-    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
-    <if test="status != null and status != ''">status=#{status}</if>
+    <if test="createDate != null">create_date=#{createDate},</if>
+    <if test="updateDate != null">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
   </sql>
   <sql id="paySelector">
     select
@@ -79,7 +80,7 @@
     )
     VALUES
     (
-    #{id},#{name},#{orderBy},
+    #{id},#{name},#{icon},#{orderBy},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>
