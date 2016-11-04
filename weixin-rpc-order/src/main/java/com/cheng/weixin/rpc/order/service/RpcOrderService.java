@@ -14,8 +14,14 @@ public interface RpcOrderService {
      * 获取配送时间
      * @return
      */
-    List<DeliveryTime> getAllDeliveryTime();
+    List<DeliveryTime> getAllDeliveryTimes();
 
+    /**
+     * 根据ID获取配送的时间
+     * @param id
+     * @return
+     */
+    DeliveryTime getDeliveryTime(String id);
     /**
      * 获取所有的支付
      * @return

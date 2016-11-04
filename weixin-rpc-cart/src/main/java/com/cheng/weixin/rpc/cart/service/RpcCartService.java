@@ -113,4 +113,17 @@ public interface RpcCartService {
      * @return
      */
     boolean exists(String userId, String productId);
+
+    /**
+     * 改变为选择状态
+     * @param userId
+     * @param productId
+     */
+    void changeChooseStatus(String userId, String productId);
+    /**
+     * 改变为不选择状态
+     * @param userId
+     * @param productId
+     */
+    void changeUnchooseStatus(String userId, String productId);
 }

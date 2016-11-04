@@ -19,6 +19,8 @@ import com.cheng.weixin.web.mobile.param.PaymentDto;
 import com.cheng.weixin.web.mobile.result.order.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,7 @@ import java.util.*;
  */
 @Service("sysOrderService")
 public class SysOrderService {
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private RpcUserService userService;
     @Autowired
@@ -44,8 +47,7 @@ public class SysOrderService {
     public SubmitOrderInfo payment(PaymentDto payment) {
 
         SubmitOrderInfo submitOrder = new SubmitOrderInfo();
-
-        if (payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
+        if (payment!=null && payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
             if (payment.getSince()) {
                 ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(payment.getAddrId());
                 Member member = userService.getMemberById("1");
@@ -70,14 +72,21 @@ public class SysOrderService {
         }
 
         // 配送时间
-        List<DeliveryTime> time = orderService.getAllDeliveryTime();
+        if (payment!=null && payment.getTimeId()!=null && !"".equals(payment.getTimeId())) {
+            DeliveryTime time = orderService.getDeliveryTime(payment.getTimeId());
+            submitOrder.setDeliveryTime(new OrderDeliveryTime(time.getId(), time.getName()));
+        }
+        List<DeliveryTime> times = orderService.getAllDeliveryTimes();
         List<OrderDeliveryTime> orderDeliveryTimes = new ArrayList<>();
-        for (DeliveryTime deliveryTime : time) {
+        for (DeliveryTime deliveryTime : times) {
             orderDeliveryTimes.add(new OrderDeliveryTime(deliveryTime.getId(), deliveryTime.getName()));
         }
-        submitOrder.setDeliveryTime(orderDeliveryTimes);
+        submitOrder.setDeliveryTimes(orderDeliveryTimes);
 
         // 支付方式
+        if (payment!=null && payment.getPayId()!=null && !"".equals(payment.getPayId())) {
+            submitOrder.setPayId(payment.getPayId());
+        }
         List<Pay> pays = orderService.getAllPay();
         List<OrderPay> orderPays = new ArrayList<>();
         for (Pay pay : pays) {
@@ -94,6 +103,16 @@ public class SysOrderService {
         // 余额
         Account account = userService.getAccount("1");
         submitOrder.setAvailableBalance(StringFormat.format(account.getBalance()));
+        // 是否使用余额
+        if (payment!=null && payment.getBalance()!=null && payment.getBalance()) {
+            submitOrder.setBalance(payment.getBalance());
+        }
+
+        // 是否使用余额
+        if (payment!=null && payment.getRemark()!=null && !"".equals(payment.getRemark())) {
+            submitOrder.setRemark(payment.getRemark());
+        }
+
 
         // 商品详情
         int totalProductNums = 0;
@@ -121,13 +140,34 @@ public class SysOrderService {
         // 总得价格
         submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight)));
 
-        submitOrder.setTimeId(payment.getTimeId());
-        submitOrder.setPayId(payment.getPayId());
-        submitOrder.setConuponId(payment.getConuponId());
-        submitOrder.setBalance(payment.getBalance());
-        submitOrder.setRemark(payment.getRemark());
+        if (payment!=null && payment.getTimeId()!=null && "".equals(payment.getTimeId()))
+            submitOrder.setTimeId(payment.getTimeId());
+        if (payment!=null && payment.getPayId()!=null && "".equals(payment.getPayId()))
+            submitOrder.setPayId(payment.getPayId());
+        if (payment!=null && payment.getConuponId()!=null && "".equals(payment.getConuponId()))
+            submitOrder.setConuponId(payment.getConuponId());
+        if (payment!=null && payment.getBalance()!=null && "".equals(payment.getBalance()))
+            submitOrder.setBalance(payment.getBalance());
+        if (payment!=null && payment.getRemark()!=null && "".equals(payment.getRemark()))
+            submitOrder.setRemark(payment.getRemark());
 
         return submitOrder;
+    }
+    /** 购买商品列表 **/
+    public List<ProductList> getProductList() {
+        List<ProductModel> productModels = cartService.getChooseProductInfo("1");
+        List<ProductList> productLists = new ArrayList<>();
+        for (ProductModel model : productModels) {
+            ProductList productList = new ProductList();
+            Product product = productService.getDefaultPictureById(model.getId());
+            productList.setName(product.getName());
+            productList.setImgUrl(product.getDefaultPicture().getPictureUrl());
+            productList.setCount(model.getCount());
+            productList.setDesc(product.getUnitDesc());
+            productList.setSellPrice(StringFormat.format(product.getSalePrice()));
+            productLists.add(productList);
+        }
+        return productLists;
     }
 
     public void buy() {

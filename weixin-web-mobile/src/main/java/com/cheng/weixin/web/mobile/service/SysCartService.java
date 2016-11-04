@@ -91,6 +91,8 @@ public class SysCartService {
                     }
                     if (product.getUnitsInStock()>0) {
                         hasNum++;
+                    }else {
+                        cartService.changeUnchooseStatus("1", product.getId());
                     }
                     productInfo.setSalePrice(StringFormat.format(salePrice));
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));

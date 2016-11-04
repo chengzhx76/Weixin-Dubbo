@@ -35,6 +35,14 @@ public class OrderController extends BaseController {
         return success(orderInfo);
     }
 
+    /** 购买商品列表 **/
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/product/list")
+    public ResponseEntity<Response> productList() {
+        List<ProductList> list = orderService.getProductList();
+        return success(list);
+    }
+
     /** 提交订单 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/buy")

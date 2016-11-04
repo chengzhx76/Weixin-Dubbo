@@ -33,6 +33,7 @@
       <module>weixin-service-item</module>
       <module>weixin-service-order</module>
       <module>weixin-service-user</module>
+      <module>weixin-service-log</module>
       <module>weixin-service-wxtools</module>
       <module>weixin-service-redis</module>
       <module>weixin-service-httpclient</module>
@@ -41,9 +42,8 @@
       <module>weixin-service-comment</module>
       <module>weixin-service-system</module>
       <module>weixin-service-message</module>
-      <module>weixin-web-manage</module>
+      <!--<module>weixin-web-manage</module>-->
       <module>weixin-web-mobile</module>
-      <module>weixin-service-log</module>
     </modules>
 
     <properties>

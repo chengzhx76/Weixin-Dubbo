@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.param;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Desc: 付款页面
  * Author: hp
@@ -11,9 +13,11 @@ public class PaymentDto {
     private String timeId;
     private String payId;
     private String conuponId;
-    private Boolean isBalance;
+    private Boolean balance; // 是否使用了余额
     private String remark;
     private Boolean since; // 是否是自提
+
+    private String ticketId; // 优惠券
 
     public String getAddrId() {
         return addrId;
@@ -48,11 +52,11 @@ public class PaymentDto {
     }
 
     public Boolean getBalance() {
-        return isBalance;
+        return balance;
     }
 
     public void setBalance(Boolean balance) {
-        isBalance = balance;
+        this.balance = balance;
     }
 
     public String getRemark() {
@@ -69,6 +73,28 @@ public class PaymentDto {
 
     public void setSince(Boolean since) {
         this.since = since;
+    }
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("addrId", addrId)
+                .append("timeId", timeId)
+                .append("payId", payId)
+                .append("conuponId", conuponId)
+                .append("balance", balance)
+                .append("remark", remark)
+                .append("since", since)
+                .append("ticketId", ticketId)
+                .toString();
     }
 }
 

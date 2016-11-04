@@ -30,8 +30,13 @@ public class OrderService implements RpcOrderService {
 
 
     @Override
-    public List<DeliveryTime> getAllDeliveryTime() {
+    public List<DeliveryTime> getAllDeliveryTimes() {
         return deliveryTimeDao.loadAll();
+    }
+
+    @Override
+    public DeliveryTime getDeliveryTime(String id) {
+        return deliveryTimeDao.load(new DeliveryTime(id));
     }
 
     @Override

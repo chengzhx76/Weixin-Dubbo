@@ -10,6 +10,13 @@ import com.cheng.common.entity.DataEntity;
 public class DeliveryTime extends DataEntity<DeliveryTime> {
     private String name;
 
+    public DeliveryTime() {
+    }
+
+    public DeliveryTime(String id) {
+        super.id = id;
+    }
+
     public String getName() {
         return name;
     }

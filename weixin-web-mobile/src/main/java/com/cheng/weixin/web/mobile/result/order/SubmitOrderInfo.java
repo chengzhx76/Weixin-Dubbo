@@ -11,7 +11,7 @@ public class SubmitOrderInfo {
     private String consignee;
     private String address;
     private String mobile;
-    private List<OrderDeliveryTime> deliveryTime;
+    private List<OrderDeliveryTime> deliveryTimes;
     private OrderPay recPay;
     private List<OrderPay> pays;
     private int availableCoupon;
@@ -31,6 +31,8 @@ public class SubmitOrderInfo {
 
     private String addrId;
     private Boolean since;
+
+    private OrderDeliveryTime deliveryTime;
 
     public OrderPay getRecPay() {
         return recPay;
@@ -64,12 +66,12 @@ public class SubmitOrderInfo {
         this.mobile = mobile;
     }
 
-    public List<OrderDeliveryTime> getDeliveryTime() {
-        return deliveryTime;
+    public List<OrderDeliveryTime> getDeliveryTimes() {
+        return deliveryTimes;
     }
 
-    public void setDeliveryTime(List<OrderDeliveryTime> deliveryTime) {
-        this.deliveryTime = deliveryTime;
+    public void setDeliveryTimes(List<OrderDeliveryTime> deliveryTimes) {
+        this.deliveryTimes = deliveryTimes;
     }
 
     public List<OrderPay> getPays() {
@@ -198,5 +200,13 @@ public class SubmitOrderInfo {
 
     public void setSince(Boolean since) {
         this.since = since;
+    }
+
+    public OrderDeliveryTime getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(OrderDeliveryTime deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 }
