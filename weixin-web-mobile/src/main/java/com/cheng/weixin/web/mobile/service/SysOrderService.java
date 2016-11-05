@@ -170,7 +170,7 @@ public class SysOrderService {
         return productLists;
     }
 
-    public void buy() {
+    public void buy(PaymentDto payment) {
         BigDecimal totalProductPrice = new BigDecimal(0);
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         for (int i=0; i<productModels.size(); i++) {

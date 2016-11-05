@@ -12,9 +12,8 @@
   </sql>
   <sql id="insertColumns">
     id,account_id,oid,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time_id,pay_id,delivery_type_id,arayacak_address,
-    arayacak_delivery_time,province,city,country,pay_status,order_type,freight_reduce,freight_payable,
-    product_total_price,discount,remark_customer,post_code,telephone,email,pay_time,exchange_oid,coupon_code,coupon_reduce_price,flow_status,
-    bonus_point_reduce_price,is_free_account_level,comment_id,
+    arayacak_delivery_time,province,city,country,pay_status,order_type,freight_reduce,freight_payable,product_total_price,discount,remark_customer,
+    balance_offset,post_code,telephone,email,pay_time,exchange_oid,coupon_code,coupon_reduce_price,flow_status,bonus_point_reduce_price,is_free_account_level,comment_id,
     remarks,create_date,update_date,status
   </sql>
   <sql id="orderInfoIf">
@@ -55,9 +54,9 @@
     <if test="isFreeAccountLevel != null and isFreeAccountLevel != ''">is_free_account_level=#{isFreeAccountLevel},</if>
     <if test="commentId != null and commentId != ''">commentId=#{comment_id},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
-    <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
-    <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
-    <if test="status != null and status != ''">status=#{status}</if>
+    <if test="createDate != null">create_date=#{createDate},</if>
+    <if test="updateDate != null">update_date=#{updateDate},</if>
+    <if test="status != null">status=#{status}</if>
   </sql>
   <sql id="orderInfoSelector">
     select
@@ -125,9 +124,8 @@
     VALUES
     (
     #{id},#{accountId},#{oid},#{relateOid},#{amountPayable},#{amountPaid},#{consignee},#{mobile},#{address},#{deliveryTimeId},#{payId},#{deliveryTypeId},#{arayacakAddress},
-    #{arayacakDeliveryTime},#{province},#{city},#{country},#{payStatus},#{orderType},#{freightReduce},#{freightPayable},
-    #{productTotalPrice},#{discount},#{balanceOffset}#{remarkCustomer},#{postCode},#{telephone},#{email},#{payTime},#{exchangeOid},#{couponCode},#{couponReducePrice},#{flowStatus},
-    #{bonusPointReducePrice},#{isFreeAccountLevel},#{commentId},
+    #{arayacakDeliveryTime},#{province},#{city},#{country},#{payStatus},#{orderType},#{freightReduce},#{freightPayable},#{productTotalPrice},#{discount},#{remarkCustomer},
+    #{balanceOffset},#{postCode},#{telephone},#{email},#{payTime},#{exchangeOid},#{couponCode},#{couponReducePrice},#{flowStatus},#{bonusPointReducePrice},#{isFreeAccountLevel},#{commentId},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>

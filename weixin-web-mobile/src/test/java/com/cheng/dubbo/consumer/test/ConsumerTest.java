@@ -156,11 +156,11 @@ public class ConsumerTest {
         System.out.println("=========>" + comments);
     }
 
-    @Test
+    /*@Test
     public void testOrder() {
         List<DeliveryTime> times = orderService.getAllDeliveryTime();
         System.out.println("=========>" + times);
-    }
+    }*/
     @Test
     public void testShowPic() {
         List<Picture> pictures = productService.getShowPictureByProductId("1");
