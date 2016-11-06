@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.order.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.order.enumType.PayWay;
 
 /**
  * Desc: 支付方式：微信支付，支付宝支付，货到付款
@@ -9,6 +10,7 @@ import com.cheng.common.entity.DataEntity;
  */
 public class Pay extends DataEntity<Pay> {
     private String name;
+    private PayWay payWay;
     private String icon;
     private int orderBy;
 
@@ -25,6 +27,14 @@ public class Pay extends DataEntity<Pay> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public PayWay getPayWay() {
+        return payWay;
+    }
+
+    public void setPayWay(PayWay payWay) {
+        this.payWay = payWay;
     }
 
     public String getIcon() {

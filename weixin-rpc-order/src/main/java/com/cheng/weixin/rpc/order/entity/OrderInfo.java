@@ -22,9 +22,8 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String consignee;
     private String mobile;
     private String address;
-    private String deliveryTimeId;
-    private String payId;
-    private String deliveryTypeId;
+    private String deliveryTime;
+    private String pay;
     private String arayacakAddress;
     private String arayacakDeliveryTime;
     private String province;
@@ -54,6 +53,8 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private BigDecimal bonusPointReducePrice;
     private boolean isFreeAccountLevel;
     private String commentId;
+    private Boolean since; // 是否是自提
+
 
     public OrderInfo() {
     }
@@ -160,28 +161,20 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.address = address;
     }
 
-    public String getDeliveryTimeId() {
-        return deliveryTimeId;
+    public String getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setDeliveryTimeId(String deliveryTimeId) {
-        this.deliveryTimeId = deliveryTimeId;
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
-    public String getPayId() {
-        return payId;
+    public String getPay() {
+        return pay;
     }
 
-    public void setPayId(String payId) {
-        this.payId = payId;
-    }
-
-    public String getDeliveryTypeId() {
-        return deliveryTypeId;
-    }
-
-    public void setDeliveryTypeId(String deliveryTypeId) {
-        this.deliveryTypeId = deliveryTypeId;
+    public void setPay(String pay) {
+        this.pay = pay;
     }
 
     public String getArayacakAddress() {
@@ -382,5 +375,13 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setOrderDetails(List<OrderProductDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public Boolean getSince() {
+        return since;
+    }
+
+    public void setSince(Boolean since) {
+        this.since = since;
     }
 }

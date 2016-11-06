@@ -11,14 +11,23 @@ import com.cheng.weixin.rpc.user.enumType.BehaviorType;
  */
 public class Behavior extends DataEntity<Behavior> {
     private BehaviorType behaviorType;
-    private String nanme;
+    private String name;
+    private String order;
 
-    public String getNanme() {
-        return nanme;
+    public String getName() {
+        return name;
     }
 
-    public void setNanme(String nanme) {
-        this.nanme = nanme;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
     }
 
     public BehaviorType getBehaviorType() {

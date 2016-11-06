@@ -4,16 +4,15 @@
 <mapper namespace="com.cheng.weixin.service.order.dao.OrderInfoDaoMapper">
   <sql id="tableName">order_info</sql>
   <sql id="columns">
-    o.id,o.account_id,o.oid,o.relate_oid,o.amount_payable,o.amount_paid,o.consignee,o.mobile,o.address,o.delivery_time_id,o.pay_id,o.delivery_type_id,o.arayacak_address,
-    o.arayacak_delivery_time,o.province,o.city,o.country,o.pay_status,o.order_type,o.freight_reduce,o.freight_payable,
-    o.product_total_price,o.discount,o.balance_offset,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.coupon_code,o.coupon_reduce_price,o.flow_status,
-    o.bonus_point_reduce_price,o.is_free_account_level,o.comment_id,
+    o.id,o.account_id,o.oid,o.relate_oid,o.amount_payable,o.amount_paid,o.consignee,o.mobile,o.address,o.delivery_time_id,o.pay,o.arayacak_address,
+    o.arayacak_delivery_time,o.province,o.city,o.country,o.pay_status,o.order_type,o.freight_reduce,o.freight_payable,o.bonus_point_reduce_price,o.product_total_price,o.discount,
+    o.balance_offset,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.coupon_code,o.coupon_reduce_price,o.flow_status,o.is_free_account_level,o.comment_id,since,
     o.remarks,o.create_date,o.update_date,o.status
   </sql>
   <sql id="insertColumns">
-    id,account_id,oid,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time_id,pay_id,delivery_type_id,arayacak_address,
-    arayacak_delivery_time,province,city,country,pay_status,order_type,freight_reduce,freight_payable,product_total_price,discount,remark_customer,
-    balance_offset,post_code,telephone,email,pay_time,exchange_oid,coupon_code,coupon_reduce_price,flow_status,bonus_point_reduce_price,is_free_account_level,comment_id,
+    id,account_id,oid,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time,pay,arayacak_address,
+    arayacak_delivery_time,province,city,country,pay_status,order_type,freight_reduce,freight_payable,product_total_price,discount,remark_customer,balance_offset,
+    post_code,telephone,email,pay_time,exchange_oid,coupon_code,coupon_reduce_price,flow_status,bonus_point_reduce_price,is_free_account_level,comment_id,since,
     remarks,create_date,update_date,status
   </sql>
   <sql id="orderInfoIf">
@@ -26,9 +25,8 @@
     <if test="consignee != null and consignee != ''">consignee=#{consignee},</if>
     <if test="mobile != null and mobile != ''">mobile=#{mobile},</if>
     <if test="address != null and address != ''">address=#{address},</if>
-    <if test="deliveryTimeId != null and deliveryTimeId != ''">delivery_time_id=#{deliveryTimeId},</if>
-    <if test="payId != null and payId != ''">pay_id=#{payId},</if>
-    <if test="deliveryTypeId != null and deliveryTypeId != ''">delivery_type_id=#{deliveryTypeId},</if>
+    <if test="deliveryTime != null and deliveryTime != ''">delivery_time=#{deliveryTime},</if>
+    <if test="pay != null and pay != ''">pay=#{pay},</if>
     <if test="arayacakAddress != null and arayacakAddress != ''">arayacak_address=#{arayacakAddress},</if>
     <if test="arayacakDeliveryTime != null and arayacakDeliveryTime != ''">arayacak_delivery_time=#{arayacakDeliveryTime},</if>
     <if test="province != null and province != ''">province=#{province},</if>
@@ -53,6 +51,7 @@
     <if test="bonusPointReducePrice != null and bonusPointReducePrice != ''">bonus_point_reduce_price=#{bonusPointReducePrice},</if>
     <if test="isFreeAccountLevel != null and isFreeAccountLevel != ''">is_free_account_level=#{isFreeAccountLevel},</if>
     <if test="commentId != null and commentId != ''">commentId=#{comment_id},</if>
+    <if test="since != null and since != ''">since=#{since},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null">create_date=#{createDate},</if>
     <if test="updateDate != null">update_date=#{updateDate},</if>
@@ -123,9 +122,9 @@
     )
     VALUES
     (
-    #{id},#{accountId},#{oid},#{relateOid},#{amountPayable},#{amountPaid},#{consignee},#{mobile},#{address},#{deliveryTimeId},#{payId},#{deliveryTypeId},#{arayacakAddress},
+    #{id},#{accountId},#{oid},#{relateOid},#{amountPayable},#{amountPaid},#{consignee},#{mobile},#{address},#{deliveryTime},#{pay},#{arayacakAddress},
     #{arayacakDeliveryTime},#{province},#{city},#{country},#{payStatus},#{orderType},#{freightReduce},#{freightPayable},#{productTotalPrice},#{discount},#{remarkCustomer},
-    #{balanceOffset},#{postCode},#{telephone},#{email},#{payTime},#{exchangeOid},#{couponCode},#{couponReducePrice},#{flowStatus},#{bonusPointReducePrice},#{isFreeAccountLevel},#{commentId},
+    #{balanceOffset},#{postCode},#{telephone},#{email},#{payTime},#{exchangeOid},#{couponCode},#{couponReducePrice},#{flowStatus},#{bonusPointReducePrice},#{isFreeAccountLevel},#{commentId},#{since},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>

@@ -1,7 +1,6 @@
 package com.cheng.weixin.service.user.service;
 
 import com.cheng.common.entity.enums.Status;
-import com.cheng.weixin.common.exception.BusinessException;
 import com.cheng.weixin.rpc.user.entity.*;
 import com.cheng.weixin.rpc.user.enumType.Credit;
 import com.cheng.weixin.rpc.user.enumType.Sex;
@@ -131,18 +130,9 @@ public class UserService implements RpcUserService {
     }
 
     @Override
-    public void updateAccountBalance(String userId, BigDecimal subAmount) {
-        Account userAccount = accountDao.load(new Account(userId, null));
-        if (userAccount.getBalance()!=null) {
-            if (userAccount.getBalance().compareTo(subAmount) != -1) {
-                Account account = new Account();
-                account.setBalance(userAccount.getBalance().subtract(subAmount));
-                account.preUpdate();
-                accountDao.update(account);
-            }else {
-                throw new BusinessException(400, "余额不足");
-            }
-        }
+    public void updateAccount(Account account) {
+        account.preUpdate();
+        accountDao.update(account);
     }
 
     @Override

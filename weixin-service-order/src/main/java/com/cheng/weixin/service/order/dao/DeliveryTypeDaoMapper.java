@@ -8,5 +8,6 @@ import com.cheng.weixin.rpc.order.entity.DeliveryType;
  * Author: hp
  * Date: 2016/9/9
  */
+@Deprecated
 public interface DeliveryTypeDaoMapper extends BaseDaoMapper<DeliveryType> {
 }

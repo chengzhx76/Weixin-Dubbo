@@ -48,7 +48,7 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "v1/buy")
     public ResponseEntity<Response> submitBuy(HttpServletRequest request) {
         PaymentDto payment = (PaymentDto) getDto(request, PaymentDto.class);
-        orderService.buy(payment);
+        orderService.buy(payment, request);
         return success();
     }
 

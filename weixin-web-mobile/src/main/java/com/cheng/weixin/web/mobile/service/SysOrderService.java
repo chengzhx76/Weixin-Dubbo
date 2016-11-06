@@ -3,6 +3,7 @@ package com.cheng.weixin.web.mobile.service;
 import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.common.utils.StringFormat;
 import com.cheng.weixin.common.utils.StringUtils;
+import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rpc.cart.model.ProductModel;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
@@ -10,6 +11,7 @@ import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.order.entity.*;
 import com.cheng.weixin.rpc.order.enumType.OrderType;
 import com.cheng.weixin.rpc.order.enumType.PayStatus;
+import com.cheng.weixin.rpc.order.enumType.PayWay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.user.entity.*;
 import com.cheng.weixin.rpc.user.enumType.BehaviorType;
@@ -24,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -170,7 +173,7 @@ public class SysOrderService {
         return productLists;
     }
 
-    public void buy(PaymentDto payment) {
+    public void buy(PaymentDto payment, HttpServletRequest request) {
         BigDecimal totalProductPrice = new BigDecimal(0);
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         for (int i=0; i<productModels.size(); i++) {
@@ -185,32 +188,70 @@ public class SysOrderService {
         order.setOid(oid);
         order.setAccountId("1");
         // 配送地址
-        DeliveryAddress address = userService.getDefaultAddress("1");
-        order.setConsignee(address.getConsignee());
-        order.setMobile(address.getMobile());
-        order.setVillageId(address.getVillageId());
-        order.setAddress(address.getAddress());
-        order.setPostCode(address.getPostCode());
-        order.setTelephone(address.getTelephone());
-        order.setEmail(address.getEmail());
-
-        order.setPayStatus(PayStatus.FREIGHTCOLLECT); // TODO 暂时定为到付
-        order.setFlowStatus("已支付");
-        order.setDeliveryTimeId("2016年9月29日");
-        order.setPayId("1");
-        order.setDeliveryTypeId("1");
-        //order.setArayacakAddress("刘楼");
-        //order.setArayacakDeliveryTime("2016年9月29日");
-        order.setOrderType(OrderType.NORMAL);
-
-        // 是否是用余额支付
-        if(true) {
-            order.setBalanceOffset(BigDecimal.valueOf(6L));
+        if (payment!=null && payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
+            if (payment.getSince()) {
+                ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(payment.getAddrId());
+                Member member = userService.getMemberById("1");
+                order.setMobile(member.getMobile());
+                order.setAddress(arayacakAddress.getAddress());
+                order.setSince(true);
+            }else {
+                DeliveryAddress addr = userService.getDeliveryAddress(payment.getAddrId(), "1");
+                order.setMobile(addr.getMobile());
+                order.setVillageId(addr.getVillageId());
+                order.setAddress(addr.getAddress());
+                order.setPostCode(addr.getPostCode());
+                order.setTelephone(addr.getTelephone());
+                order.setEmail(addr.getEmail());
+                order.setSince(false);
+            }
+        }else {
+            DeliveryAddress addr = userService.getDefaultAddress("1");
+            order.setConsignee(addr.getConsignee());
+            order.setMobile(addr.getMobile());
+            order.setVillageId(addr.getVillageId());
+            order.setAddress(addr.getAddress());
+            order.setPostCode(addr.getPostCode());
+            order.setTelephone(addr.getTelephone());
+            order.setEmail(addr.getEmail());
+            order.setSince(false);
         }
 
+        Pay pay = orderService.getPay(payment.getPayId());
+        if (PayWay.ONLINE.equals(pay.getPayWay())) {
+            order.setPayStatus(PayStatus.NONPAYMENT);
+        } else if (PayWay.OFFLINE.equals(pay.getPayWay())) {
+            order.setPayStatus(PayStatus.FREIGHTCOLLECT);
+            order.setFlowStatus("货到付款");
+        }
 
-        order.setFreightPayable(new BigDecimal(2)); // 应付运费
-        order.setFreightReduce(BigDecimal.ZERO); // 运费优惠
+        DeliveryTime time = orderService.getDeliveryTime(payment.getTimeId());
+        order.setDeliveryTime(time.getName());
+        order.setPay(pay.getName());
+        order.setOrderType(OrderType.NORMAL);
+
+        Account account = userService.getAccount("1");
+        // 是否是用余额支付
+        if(payment.getBalance()) {
+            BigDecimal balance = null;
+            if (account.getBalance().compareTo(totalProductPrice) == 1 || account.getBalance().compareTo(totalProductPrice) == 0) {
+                balance = account.getBalance().subtract(totalProductPrice);
+                order.setBalanceOffset(balance);
+            }else if (account.getBalance().compareTo(totalProductPrice) == -1) {
+                order.setBalanceOffset(account.getBalance());
+                balance = BigDecimal.ZERO;
+            }
+            account.setBalance(balance);
+        }
+        userService.updateAccount(account);
+
+        if (totalProductPrice.compareTo(BigDecimal.valueOf(5L))==1|| totalProductPrice.compareTo(BigDecimal.valueOf(5L)) == 0) {
+            order.setFreightPayable(BigDecimal.ZERO);
+            order.setFreightReduce(BigDecimal.valueOf(2L));
+        } else {
+            order.setFreightPayable(BigDecimal.valueOf(2L)); // 应付运费
+            order.setFreightReduce(BigDecimal.ZERO); // 运费优惠
+        }
         order.setProductTotalPrice(totalProductPrice); // 商品总金额
         order.setDiscount(BigDecimal.ZERO); // 优惠金额
         order.setCouponReducePrice(BigDecimal.ZERO); // 券优惠
@@ -221,25 +262,23 @@ public class SysOrderService {
         // 已付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠 - 余额抵扣
         BigDecimal amountPaid = order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
                                 .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
-        if (true) { // 是否是用余额支付
-            amountPaid = amountPaid.subtract(BigDecimal.valueOf(6L));
+        if (payment.getBalance()) { // 是否是用余额支付
+            amountPaid = amountPaid.subtract(order.getBalanceOffset());
         }
         order.setAmountPaid(amountPaid);
-        order.setRemarkCustomer("备注");
-        order.setIp("127.0.0.1");
+
+        order.setRemarkCustomer(payment.getRemark());
+        order.setIp(SystemUtils.getRemoteAddr(request));
         order.setPayTime(new Date());
         order.setCouponCode("122355");
         order.setFreeAccountLevel(Boolean.FALSE);
         orderService.addOrder(order);
 
-        // 用户金额操作
-        userService.updateAccountBalance("1", totalProductPrice);
-
         // 更新记录（积分记录、券记录、现金记录）
         Behavior behavior = new Behavior();
         behavior.setBehaviorType(BehaviorType.CASH);
-        behavior.setNanme("下单");
-        behavior.setNanme(oid);
+        behavior.setName("下单");
+        behavior.setOrder(oid);
         userService.addBehavior(behavior);
 
         // 积分记录
@@ -262,7 +301,6 @@ public class SysOrderService {
         //CouponRecord record  = userService.getCouponRecordByUser("1");
         CouponRecord couponRecord = new CouponRecord();
         //couponRecord.setId(record.getId());
-        couponRecord.setCouponCodeId("123");
         couponRecord.setCouponCodeId("1");
         couponRecord.setTxType("支出");
         couponRecord.setBehaviorId(behavior.getId());
@@ -277,9 +315,9 @@ public class SysOrderService {
 
         CashRecord cashRecord = new CashRecord();
         //cashRecord.setId(cash.getId());
-        cashRecord.setTxMoney(totalProductPrice);
+        cashRecord.setTxMoney(order.getBalanceOffset());
         cashRecord.setBeforeMoney(cash.getAfterBonusPoints());
-        BigDecimal afterBonusPoints = cash.getAfterBonusPoints().subtract(totalProductPrice);
+        BigDecimal afterBonusPoints = cash.getAfterBonusPoints().subtract(order.getBalanceOffset());
         if (afterBonusPoints.compareTo(BigDecimal.valueOf(-1L)) == -1) {
             throw new BusinessException("余额不足");
         }
@@ -329,7 +367,7 @@ public class SysOrderService {
         detail.setConsignee(orderInfo.getConsignee());
         detail.setAddress(orderInfo.getAddress());
 
-        Pay pay = orderService.getPay(orderInfo.getPayId());
+        Pay pay = orderService.getPay(orderInfo.getPay());
 
         detail.setPayWay(pay.getName());
         detail.setProductTotalPrice(StringFormat.format(orderInfo.getProductTotalPrice()));

@@ -2,7 +2,6 @@ package com.cheng.weixin.rpc.user.service;
 
 import com.cheng.weixin.rpc.user.entity.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -70,10 +69,10 @@ public interface RpcUserService {
     Account getAccount(String userId);
 
     /**
-     * 更新帐户金额
-     * @param userId
+     * 更新帐户
+     * @param account
      */
-    void updateAccountBalance(String userId, BigDecimal subAmount);
+    void updateAccount(Account account);
 
     /**
      * 保存动作

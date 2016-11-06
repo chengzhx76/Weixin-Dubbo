@@ -7,6 +7,7 @@ import com.cheng.common.entity.DataEntity;
  * Author: cheng
  * Date: 2016/6/6
  */
+@Deprecated
 public class DeliveryType extends DataEntity<DeliveryType> {
     private String name;
 
