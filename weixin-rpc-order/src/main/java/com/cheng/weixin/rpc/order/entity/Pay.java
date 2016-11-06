@@ -13,6 +13,7 @@ public class Pay extends DataEntity<Pay> {
     private PayWay payWay;
     private String icon;
     private int orderBy;
+    private Boolean recommend;
 
     public Pay() {
     }
@@ -51,5 +52,13 @@ public class Pay extends DataEntity<Pay> {
 
     public void setOrderBy(int orderBy) {
         this.orderBy = orderBy;
+    }
+
+    public Boolean getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Boolean recommend) {
+        this.recommend = recommend;
     }
 }

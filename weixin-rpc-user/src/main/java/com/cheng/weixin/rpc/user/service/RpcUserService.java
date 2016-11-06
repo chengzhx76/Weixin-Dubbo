@@ -106,11 +106,11 @@ public interface RpcUserService {
     void addCouponRecord(CouponRecord couponRecor);
 
     /**
-     * 根据用户获取现金记录
+     * 根据用户获取最新的一条现金记录
      * @param userId
      * @return
      */
-    CashRecord getCashRecord(String userId);
+    CashRecord getNewCashRecord(String userId);
 
     /**
      * 保存现金记录

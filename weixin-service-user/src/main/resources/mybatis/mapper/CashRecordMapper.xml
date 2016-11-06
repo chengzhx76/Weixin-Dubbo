@@ -67,11 +67,6 @@
     <include refid="cashRecordWhere"/>
   </select>
 
-  <select id="loadByUser" parameterType="CashRecord" resultType="CashRecord">
-    <include refid="cashRecordSelector"/>
-    <include refid="cashRecordWhere"/>
-  </select>
-
   <!-- 获取全部 -->
   <select id="loadAll" resultType="CashRecord">
     <include refid="cashRecordSelector"/>
@@ -98,5 +93,10 @@
     )
   </insert>
 
+  <select id="loadNewByUser" parameterType="CashRecord" resultType="CashRecord">
+    <include refid="cashRecordSelector"/>
+    <include refid="cashRecordWhere"/>
+    ORDER BY create_date DESC LIMIT 1
+  </select>
 </mapper>
 

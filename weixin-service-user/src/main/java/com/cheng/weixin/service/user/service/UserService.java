@@ -164,8 +164,8 @@ public class UserService implements RpcUserService {
     }
 
     @Override
-    public CashRecord getCashRecord(String userId) {
-        return cashRecordDao.loadByUser(new CashRecord(userId));
+    public CashRecord getNewCashRecord(String userId) {
+        return cashRecordDao.loadNewByUser(new CashRecord(userId));
     }
 
     @Override

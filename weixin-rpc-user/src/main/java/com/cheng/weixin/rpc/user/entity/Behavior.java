@@ -12,7 +12,7 @@ import com.cheng.weixin.rpc.user.enumType.BehaviorType;
 public class Behavior extends DataEntity<Behavior> {
     private BehaviorType behaviorType;
     private String name;
-    private String order;
+    private String oid;
 
     public String getName() {
         return name;
@@ -22,12 +22,12 @@ public class Behavior extends DataEntity<Behavior> {
         this.name = name;
     }
 
-    public String getOrder() {
-        return order;
+    public String getOid() {
+        return oid;
     }
 
-    public void setOrder(String order) {
-        this.order = order;
+    public void setOid(String oid) {
+        this.oid = oid;
     }
 
     public BehaviorType getBehaviorType() {

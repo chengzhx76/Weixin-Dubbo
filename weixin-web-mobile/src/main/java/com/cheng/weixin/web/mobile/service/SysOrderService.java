@@ -1,6 +1,5 @@
 package com.cheng.weixin.web.mobile.service;
 
-import com.cheng.common.entity.enums.Status;
 import com.cheng.weixin.common.utils.StringFormat;
 import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.common.utils.SystemUtils;
@@ -93,7 +92,7 @@ public class SysOrderService {
         List<Pay> pays = orderService.getAllPay();
         List<OrderPay> orderPays = new ArrayList<>();
         for (Pay pay : pays) {
-            if (pay.getStatus().equals(Status.RECOMMEND)) {
+            if (pay.getRecommend()) {
                 submitOrder.setRecPay(new OrderPay(pay.getId(), pay.getName(), pay.getIcon()));
             }else {
                 orderPays.add(new OrderPay(pay.getId(), pay.getName(), pay.getIcon()));
@@ -252,6 +251,7 @@ public class SysOrderService {
             order.setFreightPayable(BigDecimal.valueOf(2L)); // 应付运费
             order.setFreightReduce(BigDecimal.ZERO); // 运费优惠
         }
+
         order.setProductTotalPrice(totalProductPrice); // 商品总金额
         order.setDiscount(BigDecimal.ZERO); // 优惠金额
         order.setCouponReducePrice(BigDecimal.ZERO); // 券优惠
@@ -278,7 +278,7 @@ public class SysOrderService {
         Behavior behavior = new Behavior();
         behavior.setBehaviorType(BehaviorType.CASH);
         behavior.setName("下单");
-        behavior.setOrder(oid);
+        behavior.setOid(oid);
         userService.addBehavior(behavior);
 
         // 积分记录
@@ -308,24 +308,26 @@ public class SysOrderService {
         userService.addCouponRecord(couponRecord);
 
         // 现金记录
-        CashRecord cash = userService.getCashRecord("1");
-        if (cash == null) {
-            throw new BusinessException("请先充值");
-        }
+        if (payment.getBalance()) {
+            CashRecord cash = userService.getNewCashRecord("1");
+            if (cash == null) {
+                throw new BusinessException("请先充值");
+            }
 
-        CashRecord cashRecord = new CashRecord();
-        //cashRecord.setId(cash.getId());
-        cashRecord.setTxMoney(order.getBalanceOffset());
-        cashRecord.setBeforeMoney(cash.getAfterBonusPoints());
-        BigDecimal afterBonusPoints = cash.getAfterBonusPoints().subtract(order.getBalanceOffset());
-        if (afterBonusPoints.compareTo(BigDecimal.valueOf(-1L)) == -1) {
-            throw new BusinessException("余额不足");
+            CashRecord cashRecord = new CashRecord();
+            cashRecord.setAccountId("1");
+            cashRecord.setTxMoney(order.getBalanceOffset());
+            cashRecord.setBeforeMoney(cash.getAfterBonusPoints());
+            BigDecimal afterBonusPoints = cash.getAfterBonusPoints().subtract(order.getBalanceOffset());
+            if (afterBonusPoints.compareTo(BigDecimal.valueOf(-1L)) == -1) {
+                throw new BusinessException("余额不足");
+            }
+            cashRecord.setAfterBonusPoints(afterBonusPoints);
+            cashRecord.setTxType("支出");
+            cashRecord.setBehaviorId(behavior.getId());
+            cashRecord.setTxResult("结果");
+            userService.addCashRecord(cashRecord);
         }
-        cashRecord.setAfterBonusPoints(afterBonusPoints);
-        cashRecord.setTxType("支出");
-        cashRecord.setBehaviorId(behavior.getId());
-        cashRecord.setTxResult("结果");
-        userService.addCashRecord(cashRecord);
     }
 
     public List<OrderList> getOrders() {
