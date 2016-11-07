@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.promotion;
+package com.cheng.weixin.rpc.promotion.entity;
 
 import com.cheng.common.entity.DataEntity;
 
@@ -12,7 +12,6 @@ public class CouponCode extends DataEntity<CouponCode> {
     private String code;
     private String accountId;
     private boolean isUsed;
-    private boolean isEnable;
 
     public String getCouponId() {
         return couponId;
@@ -44,13 +43,5 @@ public class CouponCode extends DataEntity<CouponCode> {
 
     public void setUsed(boolean used) {
         isUsed = used;
-    }
-
-    public boolean isEnable() {
-        return isEnable;
-    }
-
-    public void setEnable(boolean enable) {
-        isEnable = enable;
     }
 }

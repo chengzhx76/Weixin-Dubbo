@@ -115,7 +115,6 @@ public class SysOrderService {
             submitOrder.setRemark(payment.getRemark());
         }
 
-
         // 商品详情
         int totalProductNums = 0;
         BigDecimal totalProductPrice = new BigDecimal(0);
@@ -148,7 +147,7 @@ public class SysOrderService {
             submitOrder.setPayId(payment.getPayId());
         if (payment!=null && payment.getConuponId()!=null && "".equals(payment.getConuponId()))
             submitOrder.setConuponId(payment.getConuponId());
-        if (payment!=null && payment.getBalance()!=null && "".equals(payment.getBalance()))
+        if (payment!=null && payment.getBalance()!=null)
             submitOrder.setBalance(payment.getBalance());
         if (payment!=null && payment.getRemark()!=null && "".equals(payment.getRemark()))
             submitOrder.setRemark(payment.getRemark());

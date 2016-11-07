@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.promotion;
+package com.cheng.weixin.rpc.promotion.entity;
 
 import com.cheng.common.entity.DataEntity;
 
@@ -23,7 +23,6 @@ public class Coupon extends DataEntity<Coupon> {
     private String excludeGroup;
     private Date beginTime;
     private Date endTime;
-    private boolean isEnable;
 
     public String getName() {
         return name;
@@ -121,12 +120,5 @@ public class Coupon extends DataEntity<Coupon> {
         this.endTime = endTime;
     }
 
-    public boolean isEnable() {
-        return isEnable;
-    }
-
-    public void setEnable(boolean enable) {
-        isEnable = enable;
-    }
 }
 

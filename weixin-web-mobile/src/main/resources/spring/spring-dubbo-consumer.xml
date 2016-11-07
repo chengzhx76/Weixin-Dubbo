@@ -31,4 +31,6 @@
                    check="false" timeout="5000" version="1.0"/>
   <dubbo:reference id="commentService" interface="com.cheng.weixin.rpc.comment.service.RpcCommentService"
                    check="false" timeout="5000" version="1.0"/>
+  <dubbo:reference id="promotionService" interface="com.cheng.weixin.rpc.promotion.service.RpcCouponService"
+                   check="false" timeout="5000" version="1.0"/>
 </beans>

@@ -44,6 +44,7 @@
       <module>weixin-service-message</module>
       <!--<module>weixin-web-manage</module>-->
       <module>weixin-web-mobile</module>
+      <module>weixin-service-promotion</module>
     </modules>
 
     <properties>
@@ -188,6 +189,11 @@
         <dependency>
           <groupId>${project.groupId}</groupId>
           <artifactId>weixin-rpc-comment</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>${project.groupId}</groupId>
+          <artifactId>weixin-rpc-promotion</artifactId>
           <version>${project.version}</version>
         </dependency>
         <!-- Junit -->

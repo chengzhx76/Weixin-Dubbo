@@ -1,4 +1,4 @@
-package com.cheng.weixin.rpc.promotion;
+package com.cheng.weixin.rpc.promotion.entity;
 
 
 import com.cheng.common.entity.DataEntity;
