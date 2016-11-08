@@ -4,19 +4,19 @@
 <mapper namespace="com.cheng.weixin.service.promotion.dao.CouponDaoMapper">
   <sql id="tableName">coupon</sql>
   <sql id="columns">
-    c.id,name,c.coupon_type,c.face_value,c.delay_day,c.is_free,c.is_reuse,
+    c.id,name,c.type,c.face_value,c.delay_day,c.is_free,c.is_reuse,
     c.enough_money,c.discount,c.include_group,c.exclude_group,c.begin_time,c.end_time,
     c.remarks,c.create_date,c.update_date,c.status
   </sql>
   <sql id="insertColumns">
-    id,name,coupon_type,face_value,delay_day,is_free,is_reuse,
+    id,name,type,face_value,delay_day,is_free,is_reuse,
     enough_money,discount,include_group,exclude_group,begin_time,end_time
     remarks,create_date,update_date,status
   </sql>
   <sql id="couponIf">
     <if test="id != null and id != ''">id=#{id},</if>
     <if test="name != null and name != ''">name=#{name},</if>
-    <if test="couponType != null">coupon_type=#{couponType},</if>
+    <if test="type != null">type=#{type},</if>
     <if test="faceValue != null and faceValue != ''">face_value=#{faceValue},</if>
     <if test="delayDay != null and delayDay != ''">delay_day=#{delayDay},</if>
     <if test="isFree != null and isFree != ''">is_free=#{isFree},</if>
@@ -37,7 +37,7 @@
       <include refid="columns"/>
     from
       <include refid="tableName"/>
-    AS p
+    AS c
   </sql>
 
   <sql id="couponWhere">
@@ -54,7 +54,6 @@
         </otherwise>
       </choose>
     </where>
-    ORDER BY order_by
   </sql>
 
   <sql id="couponUpdate">
@@ -91,7 +90,7 @@
     )
     VALUES
     (
-    #{id},#{name},#{couponType},#{faceValue},#{delayDay},#{isFree},#{isReuse},
+    #{id},#{name},#{type},#{faceValue},#{delayDay},#{isFree},#{isReuse},
     #{enoughMoney},#{discount},#{includeGroup},#{excludeGroup},#{beginTime},#{endTime},
     #{remarks},#{createDate},#{updateDate},#{status}
     )

@@ -29,4 +29,11 @@ public class PromotionController extends BaseController {
         return success(coupons);
     }
 
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/usable")
+    public ResponseEntity<Response> usableCoupon() {
+        List<CouponDto> coupons = promotionService.getUsableCouponAtOrderByUser();
+        return success(coupons);
+    }
+
 }

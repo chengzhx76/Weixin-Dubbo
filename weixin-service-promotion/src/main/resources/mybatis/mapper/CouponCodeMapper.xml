@@ -27,7 +27,7 @@
       <include refid="columns"/>
     from
       <include refid="tableName"/>
-    AS p
+    AS c
   </sql>
 
   <sql id="couponCodeWhere">
@@ -44,12 +44,11 @@
         </otherwise>
       </choose>
     </where>
-    ORDER BY order_by
   </sql>
 
   <sql id="couponCodeUpdate">
     <trim prefix="SET" suffixOverrides=",">
-      <include refid="couponIf"/>
+      <include refid="couponCodeIf"/>
     </trim>
   </sql>
 

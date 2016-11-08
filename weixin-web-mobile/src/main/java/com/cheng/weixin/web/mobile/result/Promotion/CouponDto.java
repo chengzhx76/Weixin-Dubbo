@@ -6,11 +6,13 @@ package com.cheng.weixin.web.mobile.result.Promotion;
  * Date: 2016/11/7
  */
 public class CouponDto {
+    private String couponId;
     private String title;
     private String faceValue;
     private String enoughMoney;
     private String beginTime;
     private String endTime;
+    private boolean usable;
 
     public CouponDto() {
     }
@@ -21,6 +23,14 @@ public class CouponDto {
         this.enoughMoney = enoughMoney;
         this.beginTime = beginTime;
         this.endTime = endTime;
+    }
+
+    public String getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(String couponId) {
+        this.couponId = couponId;
     }
 
     public String getTitle() {
@@ -61,5 +71,13 @@ public class CouponDto {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public boolean isUsable() {
+        return usable;
+    }
+
+    public void setUsable(boolean usable) {
+        this.usable = usable;
     }
 }

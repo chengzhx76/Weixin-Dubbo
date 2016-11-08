@@ -17,7 +17,7 @@ public class SubmitOrderInfo {
     private int availableCoupon;
     private String availableBalance;
     private String remark;
-    private String[] productImgs;
+    private List<String> productImgs;
     private int totalProductNums;
     private String totalProductPrice;
     private String freight;
@@ -106,11 +106,11 @@ public class SubmitOrderInfo {
         this.remark = remark;
     }
 
-    public String[] getProductImgs() {
+    public List<String> getProductImgs() {
         return productImgs;
     }
 
-    public void setProductImgs(String[] productImgs) {
+    public void setProductImgs(List<String> productImgs) {
         this.productImgs = productImgs;
     }
 

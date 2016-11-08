@@ -9,6 +9,7 @@ import com.cheng.weixin.rpc.user.enumType.BehaviorType;
  * Author: cheng
  * Date: 2016/6/3
  */
+@Deprecated
 public class Behavior extends DataEntity<Behavior> {
     private BehaviorType behaviorType;
     private String name;

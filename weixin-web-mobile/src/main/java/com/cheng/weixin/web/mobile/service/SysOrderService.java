@@ -12,8 +12,10 @@ import com.cheng.weixin.rpc.order.enumType.OrderType;
 import com.cheng.weixin.rpc.order.enumType.PayStatus;
 import com.cheng.weixin.rpc.order.enumType.PayWay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
+import com.cheng.weixin.rpc.promotion.entity.CouponCode;
+import com.cheng.weixin.rpc.promotion.enums.CouponType;
+import com.cheng.weixin.rpc.promotion.service.RpcCouponService;
 import com.cheng.weixin.rpc.user.entity.*;
-import com.cheng.weixin.rpc.user.enumType.BehaviorType;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.exception.BusinessException;
 import com.cheng.weixin.web.mobile.param.PaymentDto;
@@ -45,6 +47,8 @@ public class SysOrderService {
     private RpcCartService cartService;
     @Autowired
     private RpcProductService productService;
+    @Autowired
+    private RpcCouponService couponService;
 
     public SubmitOrderInfo payment(PaymentDto payment) {
 
@@ -100,8 +104,6 @@ public class SysOrderService {
         }
         submitOrder.setPays(orderPays);
 
-        // 优惠券
-
         // 余额
         Account account = userService.getAccount("1");
         submitOrder.setAvailableBalance(StringFormat.format(account.getBalance()));
@@ -117,18 +119,67 @@ public class SysOrderService {
 
         // 商品详情
         int totalProductNums = 0;
-        BigDecimal totalProductPrice = new BigDecimal(0);
-        List<ProductModel> productModels = cartService.getChooseProductInfo("1");
-        String[] productImgs = new String[productModels.size()];
-        for (int i=0; i<productModels.size(); i++) {
-            Product product = productService.getDefaultPictureById(productModels.get(i).getId());
-            productImgs[i] = product.getDefaultPicture().getPictureUrl();
-            totalProductNums+=productModels.get(i).getCount();
-            totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(new BigDecimal(productModels.get(i).getCount())));
+        BigDecimal totalProductPrice = BigDecimal.ZERO;
+        //List<ProductModel> productModels = cartService.getChooseProductInfo("1");
+        //String[] productImgs = new String[productModels.size()];
+        //for (int i=0; i<productModels.size(); i++) {
+        //    Product product = productService.getDefaultPictureById(productModels.get(i).getId());
+        //    productImgs[i] = product.getDefaultPicture().getPictureUrl();
+        //    totalProductNums+=productModels.get(i).getCount();
+        //    totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(productModels.get(i).getCount())));
+        //}
+
+        Set<String> productIds = cartService.getChooseProductIds("1");
+        //String[] productImgs = new String[productIds.size()];
+        List<String> productImgs = new ArrayList<>(productIds.size());
+        //for (int i=0; i<productIds.size(); i++) {
+        for (String productId : productIds) {
+            Product product = productService.getDefaultPictureById(productId);
+            if (product.getUnitsInStock() > 0) {
+                totalProductNums += cartService.getCounts("1", productId);
+                totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(totalProductNums)));
+                productImgs.add(product.getDefaultPicture().getPictureUrl());
+            }
         }
         submitOrder.setTotalProductNums(totalProductNums);
         submitOrder.setProductImgs(productImgs);
         submitOrder.setTotalProductPrice(StringFormat.format(totalProductPrice));
+
+        // 优惠券
+        List<CouponCode> couponCodes = couponService.getCouponCodeByUser("1");
+        int availableCoupon = 0;
+        for (CouponCode code : couponCodes) {
+            // 只有红包券才是满减券
+            if (CouponType.LUCKYMONEY.equals(code.getCoupon().getType())) {
+                if (totalProductPrice.compareTo(code.getCoupon().getEnoughMoney()) == 0
+                        || totalProductPrice.compareTo(code.getCoupon().getEnoughMoney()) == 1) {
+                    availableCoupon += 1;
+                }
+            }/* else {
+                // 是否包含该商品ID
+                if (code.getCoupon().getIncludeGroup()!=null && !"".equals(code.getCoupon().getIncludeGroup())) {
+                    List<String> includeIds = Arrays.asList(StringUtils.split(code.getCoupon().getIncludeGroup(), ","));
+                    for (String id : productIds) {
+                        if (includeIds.contains(id)) {
+                            availableCoupon += 1;
+                        }
+                    }
+                }
+                boolean notContain = true;
+                if (code.getCoupon().getExcludeGroup()!=null && !"".equals(code.getCoupon().getExcludeGroup())) {
+                    List<String> notIncludeIds = Arrays.asList(code.getCoupon().getExcludeGroup().split(","));
+                    for (String id : productIds) {
+                        if (notIncludeIds.contains(id)) {
+                            notContain = false;
+                        }
+                    }
+                }
+                if (notContain) {
+                    availableCoupon += 1;
+                }
+            }*/
+        }
+        submitOrder.setAvailableCoupon(availableCoupon);
 
         // 运费
         BigDecimal freight = new BigDecimal(5.00);
@@ -154,6 +205,7 @@ public class SysOrderService {
 
         return submitOrder;
     }
+
     /** 购买商品列表 **/
     public List<ProductList> getProductList() {
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
@@ -274,12 +326,6 @@ public class SysOrderService {
         orderService.addOrder(order);
 
         // 更新记录（积分记录、券记录、现金记录）
-        Behavior behavior = new Behavior();
-        behavior.setBehaviorType(BehaviorType.CASH);
-        behavior.setName("下单");
-        behavior.setOid(oid);
-        userService.addBehavior(behavior);
-
         // 积分记录
         BonusPointRecord bonusPoint = userService.getBonusPointRecord("1");
         BonusPointRecord bonusPointRecord = new BonusPointRecord();
@@ -292,20 +338,21 @@ public class SysOrderService {
             bonusPointRecord.setBeforeBonusPoints(0);
             bonusPointRecord.setAfterBonusPoints(10);
         }
-        bonusPointRecord.setBehaviorId(behavior.getId());
         bonusPointRecord.setTxResult("结果"); //TODO
         userService.addBonusPointRecord(bonusPointRecord);
 
-        // 券记录
-        //CouponRecord record  = userService.getCouponRecordByUser("1");
-        CouponRecord couponRecord = new CouponRecord();
-        //couponRecord.setId(record.getId());
-        couponRecord.setCouponCodeId("1");
-        couponRecord.setTxType("支出");
-        couponRecord.setBehaviorId(behavior.getId());
-        couponRecord.setTxResult("结果");
-        userService.addCouponRecord(couponRecord);
 
+        // 优惠券记录
+        if (payment.getTicketId()!=null && !"".equals(payment.getTicketId())) {
+            CouponRecord couponRecord = new CouponRecord();
+            couponRecord.setAccountId("1");
+            couponRecord.setCouponCodeId(payment.getTicketId());
+            couponRecord.setTxType("支出");
+            couponRecord.setTxResult("结果");
+            userService.addCouponRecord(couponRecord);
+
+            // TODO 更新为已用
+        }
         // 现金记录
         if (payment.getBalance()) {
             CashRecord cash = userService.getNewCashRecord("1");
@@ -323,7 +370,6 @@ public class SysOrderService {
             }
             cashRecord.setAfterBonusPoints(afterBonusPoints);
             cashRecord.setTxType("支出");
-            cashRecord.setBehaviorId(behavior.getId());
             cashRecord.setTxResult("结果");
             userService.addCashRecord(cashRecord);
         }
