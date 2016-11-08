@@ -8,7 +8,9 @@ public enum Status {
     NORMAL(1, "正常"),
     AUDIT(2, "审核"),
     LOCKED(3, "锁定"),
-    DELETE(4, "删除");
+    DELETE(4, "删除"),
+    ENABLE(5, "激活"),
+    UNENABLE(5, "未激活");
 
     public int code;
     public String name;

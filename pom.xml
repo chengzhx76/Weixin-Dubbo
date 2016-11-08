@@ -40,11 +40,12 @@
       <module>weixin-service-timer</module>
       <module>weixin-service-rabbitmq</module>
       <module>weixin-service-comment</module>
+      <module>weixin-service-promotion</module>
       <module>weixin-service-system</module>
       <module>weixin-service-message</module>
       <!--<module>weixin-web-manage</module>-->
       <module>weixin-web-mobile</module>
-      <module>weixin-service-promotion</module>
+
     </modules>
 
     <properties>

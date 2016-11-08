@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.promotion.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.promotion.enums.CouponType;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 public class Coupon extends DataEntity<Coupon> {
     private String name;
-    private String couponTypeId;
+    private CouponType type;
     private BigDecimal faceValue;
     private int delayDay;
     private boolean isFree;
@@ -24,6 +25,13 @@ public class Coupon extends DataEntity<Coupon> {
     private Date beginTime;
     private Date endTime;
 
+    public Coupon() {
+    }
+
+    public Coupon(String id) {
+        super.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -32,12 +40,12 @@ public class Coupon extends DataEntity<Coupon> {
         this.name = name;
     }
 
-    public String getCouponTypeId() {
-        return couponTypeId;
+    public CouponType getType() {
+        return type;
     }
 
-    public void setCouponTypeId(String couponTypeId) {
-        this.couponTypeId = couponTypeId;
+    public void setType(CouponType type) {
+        this.type = type;
     }
 
     public BigDecimal getFaceValue() {

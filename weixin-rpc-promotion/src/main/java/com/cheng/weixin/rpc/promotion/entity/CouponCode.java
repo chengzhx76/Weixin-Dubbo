@@ -13,6 +13,15 @@ public class CouponCode extends DataEntity<CouponCode> {
     private String accountId;
     private boolean isUsed;
 
+    private Coupon coupon;
+
+    public CouponCode() {
+    }
+
+    public CouponCode(String accountId) {
+        this.accountId = accountId;
+    }
+
     public String getCouponId() {
         return couponId;
     }
@@ -43,5 +52,13 @@ public class CouponCode extends DataEntity<CouponCode> {
 
     public void setUsed(boolean used) {
         isUsed = used;
+    }
+
+    public Coupon getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(Coupon coupon) {
+        this.coupon = coupon;
     }
 }
