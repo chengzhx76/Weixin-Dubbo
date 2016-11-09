@@ -23,14 +23,13 @@ public class SubmitOrderInfo {
     private String freight;
     private String couponRecord;
     private String totalPrice;
-
     private String timeId;
     private String payId;
-    private String conuponId;
     private Boolean isBalance;
-
     private String addrId;
     private Boolean since;
+    private String ticketId;
+    private String amount;
 
     private OrderDeliveryTime deliveryTime;
 
@@ -170,14 +169,6 @@ public class SubmitOrderInfo {
         this.payId = payId;
     }
 
-    public String getConuponId() {
-        return conuponId;
-    }
-
-    public void setConuponId(String conuponId) {
-        this.conuponId = conuponId;
-    }
-
     public Boolean getBalance() {
         return isBalance;
     }
@@ -208,5 +199,21 @@ public class SubmitOrderInfo {
 
     public void setDeliveryTime(OrderDeliveryTime deliveryTime) {
         this.deliveryTime = deliveryTime;
+    }
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 }

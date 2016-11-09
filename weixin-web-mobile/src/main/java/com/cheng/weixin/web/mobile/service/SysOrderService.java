@@ -192,17 +192,18 @@ public class SysOrderService {
         // 总得价格
         submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight)));
 
-        if (payment!=null && payment.getTimeId()!=null && "".equals(payment.getTimeId()))
-            submitOrder.setTimeId(payment.getTimeId());
-        if (payment!=null && payment.getPayId()!=null && "".equals(payment.getPayId()))
+        if (payment!=null && payment.getPayId()!=null && !"".equals(payment.getPayId()))
             submitOrder.setPayId(payment.getPayId());
-        if (payment!=null && payment.getConuponId()!=null && "".equals(payment.getConuponId()))
-            submitOrder.setConuponId(payment.getConuponId());
         if (payment!=null && payment.getBalance()!=null)
             submitOrder.setBalance(payment.getBalance());
-        if (payment!=null && payment.getRemark()!=null && "".equals(payment.getRemark()))
+        if (payment!=null && payment.getRemark()!=null && !"".equals(payment.getRemark()))
             submitOrder.setRemark(payment.getRemark());
-
+        if (payment!=null && payment.getTimeId()!=null && !"".equals(payment.getTimeId()))
+            submitOrder.setTimeId(payment.getTimeId());
+        if (payment!=null && payment.getTicketId()!=null && !"".equals(payment.getTicketId()))
+            submitOrder.setTicketId(payment.getTicketId());
+        if (payment!=null && payment.getAmount()!=null && !"".equals(payment.getAmount()))
+            submitOrder.setAmount(payment.getAmount());
         return submitOrder;
     }
 
@@ -305,7 +306,7 @@ public class SysOrderService {
 
         order.setProductTotalPrice(totalProductPrice); // 商品总金额
         order.setDiscount(BigDecimal.ZERO); // 优惠金额
-        order.setCouponReducePrice(BigDecimal.ZERO); // 券优惠
+        order.setCouponReducePrice(BigDecimal.valueOf(Double.valueOf(payment.getAmount()))); // 券优惠
         order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠
         // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
         order.setAmountPayable(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
@@ -350,6 +351,8 @@ public class SysOrderService {
             couponRecord.setTxType("支出");
             couponRecord.setTxResult("结果");
             userService.addCouponRecord(couponRecord);
+
+            // TODO 检测该券是否能使用
 
             // TODO 更新为已用
         }

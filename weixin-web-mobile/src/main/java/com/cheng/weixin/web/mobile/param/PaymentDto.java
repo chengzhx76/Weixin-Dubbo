@@ -12,12 +12,12 @@ public class PaymentDto {
     private String addrId;
     private String timeId;
     private String payId;
-    private String conuponId;
     private Boolean balance; // 是否使用了余额
     private String remark;
     private Boolean since; // 是否是自提
 
     private String ticketId; // 优惠券
+    private String amount; // 优惠券-金额
 
     public String getAddrId() {
         return addrId;
@@ -41,14 +41,6 @@ public class PaymentDto {
 
     public void setPayId(String payId) {
         this.payId = payId;
-    }
-
-    public String getConuponId() {
-        return conuponId;
-    }
-
-    public void setConuponId(String conuponId) {
-        this.conuponId = conuponId;
     }
 
     public Boolean getBalance() {
@@ -83,17 +75,25 @@ public class PaymentDto {
         this.ticketId = ticketId;
     }
 
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("addrId", addrId)
                 .append("timeId", timeId)
                 .append("payId", payId)
-                .append("conuponId", conuponId)
                 .append("balance", balance)
                 .append("remark", remark)
                 .append("since", since)
                 .append("ticketId", ticketId)
+                .append("amount", amount)
                 .toString();
     }
 }
