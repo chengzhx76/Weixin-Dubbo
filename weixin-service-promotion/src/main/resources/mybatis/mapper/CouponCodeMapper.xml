@@ -16,7 +16,7 @@
     <if test="couponId != null and name != ''">name=#{name},</if>
     <if test="code != null and couponTypeId != ''">coupon_type_id=#{couponTypeId},</if>
     <if test="accountId != null and accountId != ''">face_value=#{faceValue},</if>
-    <if test="isUsed != null and isUsed != ''">delay_day=#{delayDay},</if>
+    <if test="isUsed != null and isUsed != ''">is_used=#{isUsed},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null">create_date=#{createDate},</if>
     <if test="updateDate != null">update_date=#{updateDate},</if>
@@ -34,6 +34,9 @@
     <where>
       <if test="id != null and id != ''">
         id = #{id}
+      </if>
+      <if test="accountId != null and accountId != ''">
+        AND  account_id = #{accountId}
       </if>
       <choose>
         <when test="status != null">
