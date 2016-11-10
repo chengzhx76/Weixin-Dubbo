@@ -46,7 +46,7 @@ public class MaliciousRequestInterceptor extends HandlerInterceptorAdapter {
         String appKey = request.getParameter(appKeyName);
         String timestamp = request.getParameter(timestampName);
         if(StringUtils.isAnyBlank(timestamp, appKey)) {
-            throw new IllegalParameterException(StatusCode.BAD_REQUEST.msg());
+            throw new IllegalParameterException(StatusCode.BAD_REQUEST);
         }
 
         // 请求时间超过5分钟

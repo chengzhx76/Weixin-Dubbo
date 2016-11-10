@@ -16,4 +16,17 @@ public interface RpcCouponService {
      * @return
      */
     List<CouponCode> getCouponCodeByUser(String userId);
+
+    /**
+     * 获取优惠券信息
+     * @param id
+     * @return
+     */
+    CouponCode getCouponById(String id);
+
+    /**
+     * 更新优惠券信息
+     * @param id
+     */
+    void updateCouponUsedById(String id);
 }

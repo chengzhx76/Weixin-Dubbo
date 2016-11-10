@@ -16,22 +16,21 @@ public class SubmitOrderInfo {
     private List<OrderPay> pays;
     private int availableCoupon;
     private String availableBalance;
-    private String remark;
     private List<String> productImgs;
     private int totalProductNums;
     private String totalProductPrice;
     private String freight;
     private String couponRecord;
     private String totalPrice;
-    private String timeId;
-    private String payId;
-    private Boolean isBalance;
-    private String addrId;
     private Boolean since;
+    private String addrId;
     private String ticketId;
     private String amount;
-
-    private OrderDeliveryTime deliveryTime;
+    //private String timeId;
+    //private String payId;
+    //private Boolean isBalance;
+    //private String remark;
+    //private OrderDeliveryTime deliveryTime;
 
     public OrderPay getRecPay() {
         return recPay;
@@ -97,14 +96,6 @@ public class SubmitOrderInfo {
         this.availableBalance = availableBalance;
     }
 
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public List<String> getProductImgs() {
         return productImgs;
     }
@@ -152,7 +143,28 @@ public class SubmitOrderInfo {
     public void setTotalPrice(String totalPrice) {
         this.totalPrice = totalPrice;
     }
+    public String getAddrId() {
+        return addrId;
+    }
 
+    public void setAddrId(String addrId) {
+        this.addrId = addrId;
+    }
+
+    public Boolean getSince() {
+        return since;
+    }
+
+    public void setSince(Boolean since) {
+        this.since = since;
+    }
+    /*public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
     public String getTimeId() {
         return timeId;
     }
@@ -177,29 +189,13 @@ public class SubmitOrderInfo {
         isBalance = balance;
     }
 
-    public String getAddrId() {
-        return addrId;
-    }
-
-    public void setAddrId(String addrId) {
-        this.addrId = addrId;
-    }
-
-    public Boolean getSince() {
-        return since;
-    }
-
-    public void setSince(Boolean since) {
-        this.since = since;
-    }
-
     public OrderDeliveryTime getDeliveryTime() {
         return deliveryTime;
     }
 
     public void setDeliveryTime(OrderDeliveryTime deliveryTime) {
         this.deliveryTime = deliveryTime;
-    }
+    }*/
 
     public String getTicketId() {
         return ticketId;

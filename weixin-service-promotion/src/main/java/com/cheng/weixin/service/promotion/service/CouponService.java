@@ -24,7 +24,7 @@ public class CouponService implements RpcCouponService {
 
     @Override
     public List<CouponCode> getCouponCodeByUser(String userId) {
-        List<CouponCode> couponCodes = couponCodeDao.loadAll(new CouponCode(userId));
+        List<CouponCode> couponCodes = couponCodeDao.loadAll(new CouponCode(null, userId));
         for (CouponCode couponCode : couponCodes) {
             Coupon coupon = couponDao.load(new Coupon(couponCode.getId()));
             couponCode.setCoupon(coupon);
@@ -32,4 +32,20 @@ public class CouponService implements RpcCouponService {
         return couponCodes;
     }
 
+    @Override
+    public CouponCode getCouponById(String id) {
+        CouponCode couponCode = couponCodeDao.load(new CouponCode(id, null));
+        Coupon coupon = couponDao.load(new Coupon(couponCode.getId()));
+        couponCode.setCoupon(coupon);
+        return couponCode;
+    }
+
+    @Override
+    public void updateCouponUsedById(String id) {
+        CouponCode couponCode = new CouponCode();
+        couponCode.setId(id);
+        couponCode.setUsed(true);
+        couponCode.preUpdate();
+        couponCodeDao.update(couponCode);
+    }
 }

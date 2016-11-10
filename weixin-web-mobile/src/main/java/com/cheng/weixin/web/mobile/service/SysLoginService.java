@@ -107,7 +107,7 @@ public class SysLoginService {
     private void checkAccountIsExistByLoginName(String LoginName) {
         Account account = userService.getAccountByLoginName(LoginName);
         if (null != account) {
-            throw new IllegalParameterException(StatusCode.BAD_REQUEST.msg());
+            throw new IllegalParameterException(StatusCode.BAD_REQUEST);
         }
     }
 }

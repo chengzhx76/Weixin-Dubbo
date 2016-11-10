@@ -18,7 +18,7 @@ public class CouponCode extends DataEntity<CouponCode> {
     public CouponCode() {
     }
 
-    public CouponCode(String accountId) {
+    public CouponCode(String id, String accountId) {
         this.accountId = accountId;
     }
 

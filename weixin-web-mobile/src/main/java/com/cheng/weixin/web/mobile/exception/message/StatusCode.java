@@ -36,11 +36,16 @@ public enum StatusCode {
     /** 操作商品发生异常 **/
     PRODUCT_EXCEPTION(9000),
     /** 库存不足 **/
-    STOCK_SHORTAGE(9001);
+    STOCK_SHORTAGE(9001),
+
+    /** 订单不足 **/
+    ORDER_EXCEPTION(9100),
+    /** 优惠券异常 **/
+    COUPON_EXCEPTION(9100);
 
     private final Integer value;
 
-    private StatusCode(Integer value) {
+    StatusCode(Integer value) {
         this.value = value;
     }
     /**

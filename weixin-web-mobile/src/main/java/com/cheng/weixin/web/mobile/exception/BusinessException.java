@@ -4,10 +4,8 @@ package com.cheng.weixin.web.mobile.exception;
 import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 
 /**
- * @author ShenHuaJie
- * @version 2016年5月20日 下午3:19:19
+ * 业务异常
  */
-@SuppressWarnings("serial")
 public class BusinessException extends BaseException {
 	public BusinessException() {
 	}
