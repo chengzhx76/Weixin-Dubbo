@@ -114,8 +114,9 @@ public class SysOrderService {
         for (String productId : productIds) {
             Product product = productService.getDefaultPictureById(productId);
             if (product.getUnitsInStock() > 0) {
-                totalProductNums += cartService.getCounts("1", productId);
-                totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(totalProductNums)));
+                Long productNums = cartService.getCounts("1", productId);
+                totalProductNums += productNums;
+                totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(productNums)));
                 productImgs.add(product.getDefaultPicture().getPictureUrl());
             }
         }
@@ -160,15 +161,21 @@ public class SysOrderService {
         submitOrder.setAvailableCoupon(availableCoupon);
 
         // 运费
-        BigDecimal freight = new BigDecimal(5.00);
+        BigDecimal freight = BigDecimal.valueOf(2.00);
+        if (totalProductPrice.compareTo(BigDecimal.valueOf(5))==0 || totalProductPrice.compareTo(BigDecimal.valueOf(5))==1) {
+            freight = BigDecimal.ZERO;
+        }
         submitOrder.setFreight(StringFormat.format(freight));
 
         // 优惠券
-        BigDecimal couponRecord = new BigDecimal(0.00);
+        BigDecimal couponRecord = BigDecimal.ZERO;
+        if (payment.getAmount() !=null) {
+            //TODO 优惠金额
+        }
         submitOrder.setCouponRecord(StringFormat.format(couponRecord));
 
         // 总得价格
-        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight)));
+        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight).subtract(couponRecord)));
         return submitOrder;
     }
 
@@ -195,7 +202,7 @@ public class SysOrderService {
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         for (int i=0; i<productModels.size(); i++) {
             Product product = productService.getById(productModels.get(i).getId());
-            totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(new BigDecimal(productModels.get(i).getCount())));
+            totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(productModels.get(i).getCount())));
         }
         cartService.deletedChooseProduct("1");
 
@@ -248,21 +255,6 @@ public class SysOrderService {
         order.setPay(pay.getName());
         order.setOrderType(OrderType.NORMAL);
 
-        Account account = userService.getAccount("1");
-        // 是否是用余额支付
-        if(payment.getBalance()) {
-            BigDecimal balance = null;
-            if (account.getBalance().compareTo(totalProductPrice) == 1 || account.getBalance().compareTo(totalProductPrice) == 0) {
-                balance = account.getBalance().subtract(totalProductPrice);
-                order.setBalanceOffset(balance);
-            }else if (account.getBalance().compareTo(totalProductPrice) == -1) {
-                order.setBalanceOffset(account.getBalance());
-                balance = BigDecimal.ZERO;
-            }
-            account.setBalance(balance);
-        }
-        userService.updateAccount(account);
-
         // 计算运费
         if (totalProductPrice.compareTo(BigDecimal.valueOf(5L))==1 || totalProductPrice.compareTo(BigDecimal.valueOf(5L)) == 0) {
             order.setFreightPayable(BigDecimal.ZERO);
@@ -272,10 +264,27 @@ public class SysOrderService {
             order.setFreightReduce(BigDecimal.ZERO); // 运费优惠
         }
 
+        Account account = userService.getAccount("1");
+        // 是否是用余额支付
+        if(payment.getBalance()) {
+            BigDecimal balance = null;
+            BigDecimal totalPrice = totalProductPrice.add(order.getFreightPayable());
+            if (account.getBalance().compareTo(totalPrice) == 1 || account.getBalance().compareTo(totalPrice) == 0) {
+                balance = account.getBalance().subtract(totalPrice);
+                order.setBalanceOffset(balance);
+            }else if (account.getBalance().compareTo(totalPrice) == -1) {
+                order.setBalanceOffset(account.getBalance());
+                balance = BigDecimal.ZERO;
+            }
+            account.setBalance(balance);
+        }
+        userService.updateAccount(account);
+
         order.setProductTotalPrice(totalProductPrice); // 商品总金额
         order.setDiscount(BigDecimal.ZERO); // 优惠金额
 
         // 券优惠
+        BigDecimal couponReducePrice = BigDecimal.ZERO;
         if (payment.getTicketId()!=null && !"".equals(payment.getTicketId())) {
             CouponCode couponCode;
             try {
@@ -284,7 +293,7 @@ public class SysOrderService {
                 logger.error("优惠券不正确");
                 throw new OrderException(StatusCode.COUPON_EXCEPTION);
             }
-            order.setCouponReducePrice(couponCode.getCoupon().getFaceValue());
+            couponReducePrice = couponCode.getCoupon().getFaceValue();
             order.setCouponCode(couponCode.getCode());
 
             // 优惠券记录
@@ -296,8 +305,10 @@ public class SysOrderService {
             userService.addCouponRecord(couponRecord);
             couponService.updateCouponUsedById(couponCode.getId());
         }
+        order.setCouponReducePrice(couponReducePrice);
 
         order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠
+
         // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
         order.setAmountPayable(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
                 .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
