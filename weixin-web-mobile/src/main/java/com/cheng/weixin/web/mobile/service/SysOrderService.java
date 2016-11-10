@@ -191,8 +191,6 @@ public class SysOrderService {
 
     public void buy(PaymentDto payment, HttpServletRequest request) {
 
-logger.info("================> "+payment);
-
         BigDecimal totalProductPrice = new BigDecimal(0);
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         for (int i=0; i<productModels.size(); i++) {
