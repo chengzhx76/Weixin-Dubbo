@@ -168,14 +168,21 @@ public class SysOrderService {
         submitOrder.setFreight(StringFormat.format(freight));
 
         // 优惠券
-        BigDecimal couponRecord = BigDecimal.ZERO;
-        if (payment.getAmount() !=null) {
-            //TODO 优惠金额
+        BigDecimal couponReducePrice = BigDecimal.ZERO;
+        if (payment != null && payment.getTicketId() !=null && !"".equals(payment.getTicketId())) {
+            CouponCode couponCode;
+            try {
+                couponCode = couponService.getCouponById(payment.getTicketId());
+            }catch (Exception e) {
+                logger.error("优惠券不正确");
+                throw new OrderException(StatusCode.COUPON_EXCEPTION);
+            }
+            couponReducePrice = couponCode.getCoupon().getFaceValue();
         }
-        submitOrder.setCouponRecord(StringFormat.format(couponRecord));
+        submitOrder.setCouponRecord(StringFormat.format(couponReducePrice));
 
         // 总得价格
-        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight).subtract(couponRecord)));
+        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight).subtract(couponReducePrice)));
         return submitOrder;
     }
 

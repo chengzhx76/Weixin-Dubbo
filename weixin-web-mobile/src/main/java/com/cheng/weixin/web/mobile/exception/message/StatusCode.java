@@ -38,10 +38,10 @@ public enum StatusCode {
     /** 库存不足 **/
     STOCK_SHORTAGE(9001),
 
-    /** 订单不足 **/
+    /** 订单 **/
     ORDER_EXCEPTION(9100),
     /** 优惠券异常 **/
-    COUPON_EXCEPTION(9100);
+    COUPON_EXCEPTION(9101);
 
     private final Integer value;
 
