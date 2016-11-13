@@ -28,10 +28,16 @@ public interface RpcOrderService {
      */
     List<Pay> getAllPay();
     /**
-     * 获取所有的支付
+     * 获取支付
      * @return
      */
     Pay getPay(String id);
+
+    /**
+     * 获取推荐的支付
+     * @return
+     */
+    Pay getRecommendPay();
 
     /**
      * 获取所有的订单

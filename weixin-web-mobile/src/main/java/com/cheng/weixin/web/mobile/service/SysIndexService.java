@@ -93,6 +93,11 @@ public class SysIndexService {
             throw new ProductException(StatusCode.STOCK_SHORTAGE);
         }
         long count = cartService.addProductCount("1", productId);
+        if (product.getUnitsInStock() < count) {
+            cartService.subProductCount("1", productId);
+            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+        }
+
         // 金额
         BigDecimal totalPrice = totalPrice("1");
 

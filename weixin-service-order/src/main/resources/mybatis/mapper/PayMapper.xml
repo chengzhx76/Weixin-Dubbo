@@ -36,6 +36,9 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="recommend != null">
+        AND recommend = #{recommend}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}

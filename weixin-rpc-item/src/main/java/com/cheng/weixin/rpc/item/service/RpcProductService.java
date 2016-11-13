@@ -21,6 +21,14 @@ public interface RpcProductService {
     Product getById(String id);
 
     /**
+     * 更新商品库存信息
+     * @param id
+     * @param stock
+     * @param isBack 是否是后端
+     */
+    void updateStockById(String id, int stock, boolean isBack);
+
+    /**
      * 根据类型ID获取图片
      * @param typeId
      * @return

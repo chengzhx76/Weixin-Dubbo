@@ -24,6 +24,11 @@ public abstract class BaseEntity<T> implements Serializable {
     protected boolean isNewRecord = true;
 
     /**
+     * 更新时是否要要执行preUpdate()方法
+     */
+    protected boolean isUpdate = true;
+
+    /**
      * 插入前执行方法，子类实现
      */
     public abstract void preInsert();
@@ -56,6 +61,17 @@ public abstract class BaseEntity<T> implements Serializable {
      */
     public void setIsNewRecord(boolean isNewRecord) {
         this.isNewRecord = isNewRecord;
+    }
+
+    /**
+     * 更新时是否要要执行preUpdate()方法
+     */
+    public boolean isUpdate() {
+        return isUpdate;
+    }
+
+    public void setUpdate(boolean update) {
+        isUpdate = update;
     }
 
     @Override

@@ -11,6 +11,8 @@ import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.user.entity.DeliveryAddress;
 import com.cheng.weixin.rpc.user.entity.Member;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
+import com.cheng.weixin.web.mobile.exception.ProductException;
+import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.param.AddressDto;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
@@ -119,16 +121,21 @@ public class SysCartService {
         return shoppingCartInfo;
     }
 
-    public ProductCartInfo addProduct(String id) {
+    public ProductCartInfo addProduct(String productId) {
+        Product product = productService.getById(productId);
         // 获取该商品的数量
-        Long currentCount = cartService.addProductCount("1", id);
-        return chooseShoppingCartPrice("1", currentCount);
+        Long count = cartService.addProductCount("1", productId);
+        if (product.getUnitsInStock() < count) {
+            cartService.subProductCount("1", productId);
+            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+        }
+        return chooseShoppingCartPrice("1", count);
     }
 
     public ProductCartInfo subProduct(String id) {
         // 获取该商品的数量
-        Long currentCount = cartService.subProductCount("1", id);
-        return chooseShoppingCartPrice("1", currentCount);
+        Long count = cartService.subProductCount("1", id);
+        return chooseShoppingCartPrice("1", count);
     }
 
     public ProductCartInfo deleteProduct(String id) {
@@ -181,7 +188,7 @@ public class SysCartService {
      * @return
      */
     private ProductCartInfo chooseShoppingCartPrice(String userId, Long currentCount) {
-        BigDecimal totalPrice = new BigDecimal(0);
+        BigDecimal totalPrice = BigDecimal.ZERO;
         Set<String> productIds = cartService.getChooseProductIds(userId);
         for (String productId : productIds) {
             Product product = productService.getById(productId);

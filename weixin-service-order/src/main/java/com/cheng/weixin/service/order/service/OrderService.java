@@ -73,6 +73,13 @@ public class OrderService implements RpcOrderService {
     }
 
     @Override
+    public Pay getRecommendPay() {
+        Pay pay = new Pay();
+        pay.setRecommend(true);
+        return payDao.load(pay);
+    }
+
+    @Override
     public List<ArayacakAddress> getArayacakAddr(String countyId, String townId) {
         return arayacakAddressDao.loadAll(new ArayacakAddress(countyId, townId));
     }

@@ -32,6 +32,16 @@ public class ProductService implements RpcProductService {
     }
 
     @Override
+    public void updateStockById(String id, int stock, boolean isBack) {
+        Product product = new Product();
+        product.setId(id);
+        product.setUnitsInStock(stock);
+        product.setUpdate(isBack);
+        product.preUpdate();
+        productDao.update(product);
+    }
+
+    @Override
     public List<Product> getByTypeId(String typeId) {
         Product product = new Product();
         product.setTypeId(typeId);

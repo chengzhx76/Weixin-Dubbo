@@ -23,7 +23,7 @@
     <if test="isIndex != null and isIndex != ''">is_index=#{isIndex},</if>
     <if test="tag != null and tag != ''">tag=#{tag},</if>
     <if test="unitDesc != null and unitDesc != ''">unit_desc=#{unitDesc},</if>
-    <if test="unitsInStock != null and unitsInStock != ''">units_in_stock=#{unitsInStock},</if>
+    <if test="unitsInStock != null">units_in_stock=#{unitsInStock},</if>
     <if test="modifyAdminId != null and modifyAdminId != ''">modify_admin_id=#{modifyAdminId},</if>
     <if test="giveAway != null and giveAway != ''">give_away=#{giveAway},</if>
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
@@ -60,6 +60,14 @@
     </where>
   </sql>
 
+  <sql id="productWhereUpdate">
+    <where>
+      <if test="id != null and id != ''">
+        id = #{id}
+      </if>
+    </where>
+  </sql>
+
   <sql id="productUpdate">
     <trim prefix="SET" suffixOverrides=",">
       <include refid="productIf"/>
@@ -83,7 +91,7 @@
   <update id="update" parameterType="Product">
     UPDATE <include refid="tableName"/>
     <include refid="productUpdate"/>
-    <include refid="productWhere"/>
+    <include refid="productWhereUpdate"/>
   </update>
   <!-- 插入 -->
   <insert id="save" parameterType="Product">

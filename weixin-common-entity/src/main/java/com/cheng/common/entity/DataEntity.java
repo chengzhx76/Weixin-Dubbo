@@ -33,7 +33,9 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
      */
     @Override
     public void preUpdate() {
-        this.updateDate = new Date();
+        if (super.isUpdate) {
+            this.updateDate = new Date();
+        }
     }
 
     /**

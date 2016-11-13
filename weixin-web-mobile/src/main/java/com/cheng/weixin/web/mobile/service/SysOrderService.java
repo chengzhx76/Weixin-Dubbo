@@ -209,7 +209,9 @@ public class SysOrderService {
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         for (int i=0; i<productModels.size(); i++) {
             Product product = productService.getById(productModels.get(i).getId());
-            totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(productModels.get(i).getCount())));
+            int counts = productModels.get(i).getCount();
+            totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(counts)));
+            productService.updateStockById(product.getId(), product.getUnitsInStock()-counts, false);
         }
         cartService.deletedChooseProduct("1");
 
@@ -247,8 +249,14 @@ public class SysOrderService {
             order.setEmail(addr.getEmail());
             order.setSince(false);
         }
-
-        Pay pay = orderService.getPay(payment.getPayId());
+        String payId;
+        if (payment !=null && payment.getPayId()!=null && !"".equals(payment.getPayId())) {
+            payId = payment.getPayId();
+        }else {
+            Pay pay = orderService.getRecommendPay();
+            payId = pay.getId();
+        }
+        Pay pay = orderService.getPay(payId);
         if (PayWay.ONLINE.equals(pay.getPayWay())) {
             order.setPayStatus(PayStatus.NONPAYMENT);
             order.setFlowStatus(FlowStatus.UNPAID.getName());
