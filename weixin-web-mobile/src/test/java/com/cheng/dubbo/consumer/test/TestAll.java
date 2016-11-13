@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 
 /**
  * Desc:
@@ -53,6 +54,15 @@ public class TestAll {
         file.mkdir();
 
         System.out.println(usrHome);
+    }
+
+
+    public static void main(String[] args) {
+        BigDecimal afterBonusPoints = BigDecimal.valueOf(403.3);
+        System.out.println(afterBonusPoints.compareTo(BigDecimal.valueOf(-1L)));
+        if (afterBonusPoints.compareTo(BigDecimal.valueOf(-1L)) == -1) {
+            System.out.println("=======");
+        }
     }
 
 }

@@ -286,7 +286,7 @@ public class SysOrderService {
             BigDecimal totalPrice = totalProductPrice.add(order.getFreightPayable());
             if (account.getBalance().compareTo(totalPrice) == 1 || account.getBalance().compareTo(totalPrice) == 0) {
                 balance = account.getBalance().subtract(totalPrice);
-                order.setBalanceOffset(balance);
+                order.setBalanceOffset(totalPrice);
             }else if (account.getBalance().compareTo(totalPrice) == -1) {
                 order.setBalanceOffset(account.getBalance());
                 balance = BigDecimal.ZERO;
@@ -377,6 +377,7 @@ public class SysOrderService {
             userService.addCashRecord(cashRecord);
         }
     }
+
 
     public List<OrderList> getOrders() {
         List<OrderInfo> orderInfos = orderService.getOrderInfos("1");

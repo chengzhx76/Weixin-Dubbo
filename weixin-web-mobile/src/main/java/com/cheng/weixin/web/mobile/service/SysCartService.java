@@ -16,6 +16,7 @@ import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.param.AddressDto;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
+import com.cheng.weixin.web.mobile.result.cart.ProductInfoComparator;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -106,6 +108,7 @@ public class SysCartService {
                     productInfos.add(productInfo);
                 }
             }
+            Collections.sort(productInfos, new ProductInfoComparator());
             shoppingCartInfo.setProducts(productInfos);
             shoppingCartInfo.setDeliveryDate(new DateTime().plusDays(1).toString("MM月dd日"));
             shoppingCartInfo.setTotalPrice(StringFormat.format(totalPrice));
