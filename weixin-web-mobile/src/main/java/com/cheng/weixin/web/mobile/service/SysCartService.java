@@ -130,7 +130,7 @@ public class SysCartService {
         Long count = cartService.addProductCount("1", productId);
         if (product.getUnitsInStock() < count) {
             cartService.subProductCount("1", productId);
-            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+            throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
         return chooseShoppingCartPrice("1", count);
     }

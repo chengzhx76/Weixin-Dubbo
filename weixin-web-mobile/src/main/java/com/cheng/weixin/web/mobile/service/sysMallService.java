@@ -78,7 +78,7 @@ public class SysMallService {
     public MallBuy addProduct(String productId) {
         Product product = productService.getById(productId);
         if (product.getUnitsInStock()<=0) {
-            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+            throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
         long count = cartService.addProductCount("1", productId);
         // 金额

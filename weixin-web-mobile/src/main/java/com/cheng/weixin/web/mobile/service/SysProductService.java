@@ -98,7 +98,7 @@ public class SysProductService {
     public void buyProduct(String productId, Long count) {
         Product product = productService.getById(productId);
         if (product.getUnitsInStock() < count) {
-            throw new ProductException(StatusCode.STOCK_SHORTAGE);
+            throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
         cartService.addProduct("1", productId, count);
     }

@@ -10,8 +10,8 @@ import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
 import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.exception.BusinessException;
-import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
 import com.cheng.weixin.web.mobile.exception.LoginException;
+import com.cheng.weixin.web.mobile.exception.UserException;
 import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
@@ -39,7 +39,9 @@ public class SysLoginService {
      */
     public void sendRegMsgCode(String phone) {
 
-        checkAccountIsExistByLoginName(phone);
+        if (checkAccountIsExistByLoginName(phone)) {
+            throw new UserException(StatusCode.USER_EXIST);
+        }
 
         String userIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         int countByDay = smsService.getCountByDay(phone);
@@ -96,7 +98,7 @@ public class SysLoginService {
         String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);
         if ("PASSWDFAIL".equals(result) || "NOTUSER".equals(result)) {
-            throw new LoginException(StatusCode.LOGIN_FAIL.msg());
+            throw new LoginException(StatusCode.LOGIN_FAIL);
         }
     }
 
@@ -104,10 +106,12 @@ public class SysLoginService {
      * 检查该用户是否存在
      * @param LoginName 登录名
      */
-    private void checkAccountIsExistByLoginName(String LoginName) {
+    private boolean checkAccountIsExistByLoginName(String LoginName) {
         Account account = userService.getAccountByLoginName(LoginName);
         if (null != account) {
-            throw new IllegalParameterException(StatusCode.BAD_REQUEST);
+            return true;
+        } else {
+            return false;
         }
     }
 }

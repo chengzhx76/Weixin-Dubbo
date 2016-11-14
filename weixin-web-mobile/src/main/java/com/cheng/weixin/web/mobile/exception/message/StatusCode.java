@@ -33,15 +33,24 @@ public enum StatusCode {
     /** 500服务器出错 */
     INTERNAL_SERVER_ERROR(500),
 
+    /** 用户异常 **/
+    USER_EXCEPTION(9100),
+    /** 用户不存在 **/
+    USER_NOT_EXIST(9101),
+    USER_EXIST(9102),
+
     /** 操作商品发生异常 **/
-    PRODUCT_EXCEPTION(9000),
+    PRODUCT_EXCEPTION(9500),
     /** 库存不足 **/
-    STOCK_SHORTAGE(9001),
+    PRODUCT_STOCK_SHORTAGE(9501),
 
     /** 订单 **/
-    ORDER_EXCEPTION(9100),
+    ORDER_EXCEPTION(9600),
+
     /** 优惠券异常 **/
-    COUPON_EXCEPTION(9101);
+    COUPON_EXCEPTION(9700),
+    /** 优惠券不存在 **/
+    COUPON_NOT_EXIST(9701);
 
     private final Integer value;
 

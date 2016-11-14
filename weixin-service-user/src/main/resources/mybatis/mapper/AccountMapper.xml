@@ -44,6 +44,9 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="username != null and username != ''">
+        AND username = #{username}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
