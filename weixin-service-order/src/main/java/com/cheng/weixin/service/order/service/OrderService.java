@@ -1,6 +1,7 @@
 package com.cheng.weixin.service.order.service;
 
 import com.cheng.weixin.rpc.order.entity.*;
+import com.cheng.weixin.rpc.order.enumType.PayWay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.service.order.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class OrderService implements RpcOrderService {
     private TownDaoMapper townDao;
     @Autowired
     private ArayacakAddressDaoMapper arayacakAddressDao;
+    @Autowired
+    private FlowStatusDaoMapper flowStatusDao;
 
 
     @Override
@@ -92,5 +95,12 @@ public class OrderService implements RpcOrderService {
     @Override
     public ArayacakAddress getArayacakAddressById(String id) {
         return arayacakAddressDao.load(new ArayacakAddress(id));
+    }
+
+    @Override
+    public List<FlowStatus> getFlowStatusesByPayWay(PayWay payWay) {
+        FlowStatus status = new FlowStatus();
+        status.setPayWay(payWay);
+        return flowStatusDao.loadAll(status);
     }
 }

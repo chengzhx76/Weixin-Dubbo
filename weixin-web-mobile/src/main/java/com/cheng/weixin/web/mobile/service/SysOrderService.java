@@ -8,7 +8,6 @@ import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.order.entity.*;
-import com.cheng.weixin.rpc.order.enumType.FlowStatus;
 import com.cheng.weixin.rpc.order.enumType.OrderType;
 import com.cheng.weixin.rpc.order.enumType.PayStatus;
 import com.cheng.weixin.rpc.order.enumType.PayWay;
@@ -259,10 +258,12 @@ public class SysOrderService {
         Pay pay = orderService.getPay(payId);
         if (PayWay.ONLINE.equals(pay.getPayWay())) {
             order.setPayStatus(PayStatus.NONPAYMENT);
-            order.setFlowStatus(FlowStatus.UNPAID.getName());
+            List<FlowStatus> statuses = orderService.getFlowStatusesByPayWay(PayWay.ONLINE);
+            order.setFlowStatus(statuses.get(0).getId());
         } else if (PayWay.OFFLINE.equals(pay.getPayWay())) {
             order.setPayStatus(PayStatus.FREIGHTCOLLECT);
-            order.setFlowStatus(FlowStatus.COD.getName());
+            List<FlowStatus> statuses = orderService.getFlowStatusesByPayWay(PayWay.OFFLINE);
+            order.setFlowStatus(statuses.get(0).getId());
         }
 
         DeliveryTime time = orderService.getDeliveryTime(payment.getTimeId());

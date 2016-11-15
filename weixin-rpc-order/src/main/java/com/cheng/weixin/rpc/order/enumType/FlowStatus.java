@@ -5,6 +5,7 @@ package com.cheng.weixin.rpc.order.enumType;
  * Author: hp
  * Date: 2016/11/10
  */
+@Deprecated
 public enum FlowStatus {
     COD("货到付款"),
     UNPAID("未付款"),

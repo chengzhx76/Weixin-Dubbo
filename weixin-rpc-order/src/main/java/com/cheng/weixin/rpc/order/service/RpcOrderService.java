@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.order.service;
 
 import com.cheng.weixin.rpc.order.entity.*;
+import com.cheng.weixin.rpc.order.enumType.PayWay;
 
 import java.util.List;
 
@@ -78,4 +79,11 @@ public interface RpcOrderService {
      * @return
      */
     ArayacakAddress getArayacakAddressById(String id);
+
+    /**
+     * 根据支付方式获取不同的订单流程
+     * @param payWay
+     * @return
+     */
+    List<FlowStatus> getFlowStatusesByPayWay(PayWay payWay);
 }
