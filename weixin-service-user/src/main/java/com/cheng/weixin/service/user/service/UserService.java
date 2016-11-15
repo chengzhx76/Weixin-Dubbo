@@ -192,10 +192,7 @@ public class UserService implements RpcUserService {
     @Override
     public boolean isProductFocus(String userId, String productId) {
         ProductFocus focus = productFocusDao.load(new ProductFocus(userId, productId));
-        if (focus != null) {
-            return true;
-        }
-        return false;
+        return focus!=null;
     }
 
     @Override
