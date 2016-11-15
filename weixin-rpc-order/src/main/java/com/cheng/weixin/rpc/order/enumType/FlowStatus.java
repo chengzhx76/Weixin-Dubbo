@@ -11,7 +11,7 @@ public enum FlowStatus {
     PAID("已付款"),
     PICKING("拣货中"),
     DISTRIBUTION("配送中"),
-    DELIVER("配送中"),
+    DELIVER("派件中"),
     DELIVERED("已送达");
 
     private String name;
