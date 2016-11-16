@@ -261,7 +261,7 @@ public class SysOrderService {
             List<FlowStatus> statuses = orderService.getFlowStatusesByPayWay(PayWay.ONLINE);
             order.setFlowStatus(statuses.get(0).getId());
         } else if (PayWay.OFFLINE.equals(pay.getPayWay())) {
-            order.setPayStatus(PayStatus.FREIGHTCOLLECT);
+            order.setPayStatus(PayStatus.FREIGHT_COLLECT);
             List<FlowStatus> statuses = orderService.getFlowStatusesByPayWay(PayWay.OFFLINE);
             order.setFlowStatus(statuses.get(0).getId());
         }
