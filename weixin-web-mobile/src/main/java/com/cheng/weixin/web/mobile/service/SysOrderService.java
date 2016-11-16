@@ -392,22 +392,24 @@ public class SysOrderService {
 
             if (OrderStatus.WAIT_PAY.equals(order.getOrderStatus())) {
                 orderList.setOrderStatus(OrderStatus.WAIT_PAY.name());
-            }
-            if (OrderStatus.PAY_OUT_TIME.equals(order.getOrderStatus())) {
+            }else if (OrderStatus.PAY_OUT_TIME.equals(order.getOrderStatus())) {
                 orderList.setOrderStatus(OrderStatus.INVALID.name());
-            }
-            if (OrderStatus.REFUNDED.equals(order.getOrderStatus())
+            }else if (OrderStatus.REFUNDED.equals(order.getOrderStatus())
                     || OrderStatus.CANCELED.equals(order.getOrderStatus())
                     || OrderStatus.UNFINISHED.equals(order.getOrderStatus())) {
                 orderList.setOrderStatus(OrderStatus.COMMENT.name());
                 orderList.setCommentId(order.getCommentId());
+            }else if (OrderStatus.ONGOING.equals(order.getOrderStatus())
+                    || OrderStatus.WAIT_REFUND.equals(order.getOrderStatus())){
+                orderList.setOrderStatus(OrderStatus.ONGOING.name());
+            }else {
+                orderList.setOrderStatus(OrderStatus.FINISHED.name());
             }
 
             // 进行中的订单才会有下面的流程
             List<Status> statuses = new ArrayList<>();
             if (OrderStatus.WAIT_PAY.equals(order.getOrderStatus())
                     ||OrderStatus.ONGOING.equals(order.getOrderStatus())) {
-
                 List<FlowStatus> flowStatuses = orderService.getFlowStatusesByPayWay(order.getPayWay());
                 String[] activeStatuses = order.getFlowStatus().split("-");
                 for (FlowStatus flowStatus : flowStatuses) {
