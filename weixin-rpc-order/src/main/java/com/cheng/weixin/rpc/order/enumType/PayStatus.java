@@ -6,7 +6,17 @@ package com.cheng.weixin.rpc.order.enumType;
  * Date: 2016/6/6
  */
 public enum PayStatus {
-    FREIGHTCOLLECT,
-    NONPAYMENT,
-    PAID;
+    FREIGHT_COLLECT("到付"),
+    NONPAYMENT("未付款"),
+    PAID("已付款");
+
+    private String name;
+
+    PayStatus(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
