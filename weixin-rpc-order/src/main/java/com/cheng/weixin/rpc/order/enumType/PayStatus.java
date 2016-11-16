@@ -5,6 +5,7 @@ package com.cheng.weixin.rpc.order.enumType;
  * Author: cheng
  * Date: 2016/6/6
  */
+@Deprecated
 public enum PayStatus {
     FREIGHT_COLLECT("到付"),
     NONPAYMENT("未付款"),

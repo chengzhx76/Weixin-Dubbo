@@ -86,4 +86,11 @@ public interface RpcOrderService {
      * @return
      */
     List<FlowStatus> getFlowStatusesByPayWay(PayWay payWay);
+
+    /**
+     * 根据ID获取订单流程名字
+     * @param id
+     * @return
+     */
+    FlowStatus getFlowStatusesById(String id);
 }

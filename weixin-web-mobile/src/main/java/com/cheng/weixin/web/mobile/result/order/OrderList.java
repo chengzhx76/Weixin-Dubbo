@@ -1,5 +1,7 @@
 package com.cheng.weixin.web.mobile.result.order;
 
+import java.util.List;
+
 /**
  * Desc:
  * Author: hp
@@ -10,10 +12,11 @@ public class OrderList {
     private String date;
     private String orderNum;
     private String number;
-    private String[] status;
+    //private String[] status;
     private String totalPrice;
     private String orderStatus;
     private String commentId;
+    private List<Status> statuses;
 
     public String getCommentId() {
         return commentId;
@@ -55,13 +58,13 @@ public class OrderList {
         this.number = number;
     }
 
-    public String[] getStatus() {
-        return status;
-    }
-
-    public void setStatus(String[] status) {
-        this.status = status;
-    }
+    //public String[] getStatus() {
+    //    return status;
+    //}
+    //
+    //public void setStatus(String[] status) {
+    //    this.status = status;
+    //}
 
     public String getTotalPrice() {
         return totalPrice;
@@ -77,5 +80,13 @@ public class OrderList {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public List<Status> getStatuses() {
+        return statuses;
+    }
+
+    public void setStatuses(List<Status> statuses) {
+        this.statuses = statuses;
     }
 }

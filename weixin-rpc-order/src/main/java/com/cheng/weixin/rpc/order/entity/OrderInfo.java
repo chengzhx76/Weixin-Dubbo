@@ -1,8 +1,9 @@
 package com.cheng.weixin.rpc.order.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.order.enumType.OrderStatus;
 import com.cheng.weixin.rpc.order.enumType.OrderType;
-import com.cheng.weixin.rpc.order.enumType.PayStatus;
+import com.cheng.weixin.rpc.order.enumType.PayWay;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -32,7 +33,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String villageId;
     private String ip;
 
-    private PayStatus payStatus;
+    private PayWay payWay;
     private String flowStatus;
     private OrderType orderType;
     private BigDecimal freightReduce;
@@ -54,6 +55,8 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private boolean isFreeAccountLevel;
     private String commentId;
     private Boolean since; // 是否是自提
+
+    private OrderStatus orderStatus;
 
 
     public OrderInfo() {
@@ -217,12 +220,12 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.country = country;
     }
 
-    public PayStatus getPayStatus() {
-        return payStatus;
+    public PayWay getPayWay() {
+        return payWay;
     }
 
-    public void setPayStatus(PayStatus payStatus) {
-        this.payStatus = payStatus;
+    public void setPayWay(PayWay payWay) {
+        this.payWay = payWay;
     }
 
     public BigDecimal getBalanceOffset() {
@@ -383,5 +386,13 @@ public class OrderInfo extends DataEntity<OrderInfo> {
 
     public void setSince(Boolean since) {
         this.since = since;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

@@ -28,7 +28,7 @@
       <include refid="columns"/>
     from
       <include refid="tableName"/>
-    AS p
+    AS f
   </sql>
 
   <sql id="flowStatusWhere">

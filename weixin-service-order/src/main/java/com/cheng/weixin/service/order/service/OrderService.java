@@ -103,4 +103,11 @@ public class OrderService implements RpcOrderService {
         status.setPayWay(payWay);
         return flowStatusDao.loadAll(status);
     }
+
+    @Override
+    public FlowStatus getFlowStatusesById(String id) {
+        FlowStatus status = new FlowStatus();
+        status.setId(id);
+        return flowStatusDao.load(status);
+    }
 }

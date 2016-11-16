@@ -1,15 +1,14 @@
 package com.cheng.weixin.web.mobile.service;
 
 import com.cheng.weixin.common.utils.StringFormat;
-import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rpc.cart.model.ProductModel;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.rpc.order.entity.*;
+import com.cheng.weixin.rpc.order.enumType.OrderStatus;
 import com.cheng.weixin.rpc.order.enumType.OrderType;
-import com.cheng.weixin.rpc.order.enumType.PayStatus;
 import com.cheng.weixin.rpc.order.enumType.PayWay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.promotion.entity.CouponCode;
@@ -256,15 +255,14 @@ public class SysOrderService {
             payId = pay.getId();
         }
         Pay pay = orderService.getPay(payId);
+        order.setPayWay(pay.getPayWay());
+        List<FlowStatus> statuses = null;
         if (PayWay.ONLINE.equals(pay.getPayWay())) {
-            order.setPayStatus(PayStatus.NONPAYMENT);
-            List<FlowStatus> statuses = orderService.getFlowStatusesByPayWay(PayWay.ONLINE);
-            order.setFlowStatus(statuses.get(0).getId());
+            statuses = orderService.getFlowStatusesByPayWay(PayWay.ONLINE);
         } else if (PayWay.OFFLINE.equals(pay.getPayWay())) {
-            order.setPayStatus(PayStatus.FREIGHT_COLLECT);
-            List<FlowStatus> statuses = orderService.getFlowStatusesByPayWay(PayWay.OFFLINE);
-            order.setFlowStatus(statuses.get(0).getId());
+            statuses = orderService.getFlowStatusesByPayWay(PayWay.OFFLINE);
         }
+        order.setFlowStatus(statuses.get(0).getId());
 
         DeliveryTime time = orderService.getDeliveryTime(payment.getTimeId());
         order.setDeliveryTime(time.getName());
@@ -340,6 +338,7 @@ public class SysOrderService {
         order.setIp(SystemUtils.getRemoteAddr(request));
         order.setPayTime(new Date());
         order.setFreeAccountLevel(Boolean.FALSE);
+        order.setOrderStatus(OrderStatus.WAIT_PAY);
         orderService.addOrder(order);
 
         // 积分记录
@@ -386,24 +385,49 @@ public class SysOrderService {
         for (OrderInfo order : orderInfos) {
             OrderList orderList = new OrderList();
             orderList.setId(order.getId());
-            orderList.setDate(new DateTime(order.getCreateDate()).toString("dd-MM-yyyy HH:mm:ss"));
+            orderList.setDate(new DateTime(order.getCreateDate()).toString("yyyy-dd-MM HH:mm:ss"));
             orderList.setOrderNum(order.getOid());
             orderList.setNumber(order.getOrderDetails().size()+"");
-            orderList.setStatus(order.getFlowStatus().split("-"));
-            // 总金额 = 商品总金额 - 余额抵扣 - 优惠金额 + 应付运费
-            //orderList.setTotalPrice(StringFormat.format(
-            //        order.getProductTotalPrice().subtract(order.getBalanceOffset())
-            //        .subtract(order.getDiscount()).add(order.getFreightPayable())));
-
             orderList.setTotalPrice(StringFormat.format(order.getAmountPayable()));
-            String orderStatus = "";
-            if (PayStatus.NONPAYMENT.equals(order.getPayStatus())) {
-                orderStatus = "INVALID";
-            } else if (StringUtils.isBlank(order.getCommentId())) {
-                orderStatus = "WAITCOMMENT";
+
+            if (OrderStatus.WAIT_PAY.equals(order.getOrderStatus())) {
+                orderList.setOrderStatus(OrderStatus.WAIT_PAY.name());
+            }
+            if (OrderStatus.PAY_OUT_TIME.equals(order.getOrderStatus())) {
+                orderList.setOrderStatus(OrderStatus.INVALID.name());
+            }
+            if (OrderStatus.REFUNDED.equals(order.getOrderStatus())
+                    || OrderStatus.CANCELED.equals(order.getOrderStatus())
+                    || OrderStatus.UNFINISHED.equals(order.getOrderStatus())) {
+                orderList.setOrderStatus(OrderStatus.COMMENT.name());
                 orderList.setCommentId(order.getCommentId());
             }
-            orderList.setOrderStatus(orderStatus);
+
+            // 进行中的订单才会有下面的流程
+            List<Status> statuses = new ArrayList<>();
+            if (OrderStatus.WAIT_PAY.equals(order.getOrderStatus())
+                    ||OrderStatus.ONGOING.equals(order.getOrderStatus())) {
+
+                List<FlowStatus> flowStatuses = orderService.getFlowStatusesByPayWay(order.getPayWay());
+                String[] activeStatuses = order.getFlowStatus().split("-");
+                for (FlowStatus flowStatus : flowStatuses) {
+                    for (String statusId : activeStatuses) {
+                        if (statusId.equals(flowStatus.getId())) {
+                            statuses.add(new Status(flowStatus.getName(), true));
+                            continue;
+                        }
+                    }
+                    statuses.add(new Status(flowStatus.getName(), false));
+                }
+            }else {
+                String[] activeStatuses = order.getFlowStatus().split("-");
+                for (String statusId : activeStatuses) {
+                    FlowStatus flowStatus = orderService.getFlowStatusesById(statusId);
+                    statuses.add(new Status(flowStatus.getName(), true));
+                }
+            }
+
+            orderList.setStatuses(statuses);
             orders.add(orderList);
         }
         return orders;
@@ -426,19 +450,8 @@ public class SysOrderService {
         detail.setFreightPayable(StringFormat.format(orderInfo.getFreightPayable()));
         detail.setCouponReducePrice(StringFormat.format(orderInfo.getCouponReducePrice()));
         detail.setBalanceOffset(StringFormat.format(orderInfo.getBalanceOffset()));
-        // 总金额 = 商品总金额 - 余额抵扣 - 优惠金额 + 应付运费
-        //detail.setTotalPrice(StringFormat.format(
-        //        orderInfo.getProductTotalPrice().subtract(orderInfo.getBalanceOffset())
-        //        .subtract(orderInfo.getDiscount()).add(orderInfo.getFreightPayable())));
         detail.setTotalPrice(StringFormat.format(orderInfo.getAmountPayable()));
-        String orderStatus = "";
-        if (orderInfo.getPayStatus().equals(PayStatus.NONPAYMENT)) {
-            orderStatus = "INVALID";
-        } else if (StringUtils.isBlank(orderInfo.getCommentId())) {
-            orderStatus = "WAITCOMMENT";
-            detail.setCommentId(orderInfo.getCommentId());
-        }
-        detail.setOrderStatus(orderStatus);
+        detail.setOrderStatus(orderInfo.getOrderStatus().name());
         return detail;
     }
 
