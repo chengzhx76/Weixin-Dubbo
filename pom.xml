@@ -45,6 +45,9 @@
       <module>weixin-service-message</module>
       <!--<module>weixin-web-manage</module>-->
       <module>weixin-web-mobile</module>
+      <module>weixin-notify-pay</module>
+      <module>weixin-notify-pay</module>
+      <module>weixin-notify-pay</module>
 
     </modules>
 
