@@ -414,7 +414,8 @@ public class SysOrderService {
                 orderList.setOrderStatus(OrderStatus.INVALID.name());
             }else if (OrderStatus.REFUNDED.equals(order.getOrderStatus())
                     || OrderStatus.CANCELED.equals(order.getOrderStatus())
-                    || OrderStatus.UNFINISHED.equals(order.getOrderStatus())) {
+                    || OrderStatus.UNFINISHED.equals(order.getOrderStatus())
+                    || OrderStatus.COMMENT.equals(order.getOrderStatus())) {
                 orderList.setOrderStatus(OrderStatus.COMMENT.name());
             }else if (OrderStatus.ONGOING.equals(order.getOrderStatus())
                     || OrderStatus.WAIT_REFUND.equals(order.getOrderStatus())){
