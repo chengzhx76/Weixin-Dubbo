@@ -12,19 +12,9 @@ public class OrderList {
     private String date;
     private String orderNum;
     private String number;
-    //private String[] status;
     private String totalPrice;
     private String orderStatus;
-    private String commentId;
     private List<Status> statuses;
-
-    public String getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(String commentId) {
-        this.commentId = commentId;
-    }
 
     public String getId() {
         return id;
@@ -57,14 +47,6 @@ public class OrderList {
     public void setNumber(String number) {
         this.number = number;
     }
-
-    //public String[] getStatus() {
-    //    return status;
-    //}
-    //
-    //public void setStatus(String[] status) {
-    //    this.status = status;
-    //}
 
     public String getTotalPrice() {
         return totalPrice;

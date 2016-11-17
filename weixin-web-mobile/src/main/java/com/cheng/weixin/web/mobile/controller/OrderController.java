@@ -65,7 +65,7 @@ public class OrderController extends BaseController {
     @IgnoreSecurity
     @RequestMapping(value = "v1/detail")
     public ResponseEntity<Response> orderDetail() {
-        OrderDetail order = orderService.getOrderDetail();
+        Detail order = orderService.getOrderDetail();
         return success(order);
     }
 

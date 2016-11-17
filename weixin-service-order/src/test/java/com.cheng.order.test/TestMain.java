@@ -1,6 +1,5 @@
 package com.cheng.order.test;
 
-import com.cheng.weixin.rpc.order.entity.DeliveryTime;
 import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
@@ -26,8 +25,8 @@ public class TestMain {
 
     @Test
     public void test01() {
-        List<DeliveryTime> deliveryTimes = orderService.getAllDeliveryTime();
-        System.out.println(deliveryTimes);
+        //List<DeliveryTime> deliveryTimes = orderService.getAllDeliveryTime();
+        //System.out.println(deliveryTimes);
     }
 
     @Test

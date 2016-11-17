@@ -58,7 +58,7 @@ public interface RpcOrderService {
      * 保存订单
      * @param orderInfo
      */
-    void addOrder(OrderInfo orderInfo);
+    OrderInfo addOrder(OrderInfo orderInfo);
 
     /**
      * 获取全部镇自提地址 // 根据GPS获取自提地点->根据自提地点搜索地点的ID
@@ -93,4 +93,11 @@ public interface RpcOrderService {
      * @return
      */
     FlowStatus getFlowStatusesById(String id);
+
+    /**
+     * 保存商品详情
+     * @param detail
+     * @return
+     */
+    OrderProductDetail addOrderDetail(OrderProductDetail detail);
 }

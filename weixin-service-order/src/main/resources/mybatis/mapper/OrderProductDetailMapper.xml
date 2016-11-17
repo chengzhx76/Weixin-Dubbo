@@ -97,8 +97,8 @@
     )
     VALUES
     (
-    #{id},#{order_info_id},#{oid},#{name},#{quantity},#{subtotal},#{market_price},
-    #{sale_price},#{deal_price},#{discount_rate},#{is_comment},#{is_gift},
+    #{id},#{orderInfoId},#{oid},#{name},#{quantity},#{subtotal},#{marketPrice},
+    #{salePrice},#{dealPrice},#{discountRate},#{isComment},#{isGift},
     #{remarks},#{createDate},#{updateDate},#{status}
     )
   </insert>

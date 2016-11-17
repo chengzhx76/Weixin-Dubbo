@@ -9,7 +9,7 @@ import java.util.List;
  * Author: hp
  * Date: 2016/9/28
  */
-public class OrderDetail {
+public class Detail {
     private String id;
     private String status;
     private String oid;
@@ -28,7 +28,7 @@ public class OrderDetail {
 
     private String commentId;
 
-    private List<OrderProductDetail> details;
+    private List<ProductDetail> details;
 
     public String getCommentId() {
         return commentId;
@@ -150,11 +150,11 @@ public class OrderDetail {
         this.orderStatus = orderStatus;
     }
 
-    public List<OrderProductDetail> getDetails() {
+    public List<ProductDetail> getDetails() {
         return details;
     }
 
-    public void setDetails(List<OrderProductDetail> details) {
+    public void setDetails(List<ProductDetail> details) {
         this.details = details;
     }
 

@@ -65,9 +65,10 @@ public class OrderService implements RpcOrderService {
     }
 
     @Override
-    public void addOrder(OrderInfo orderInfo) {
+    public OrderInfo addOrder(OrderInfo orderInfo) {
         orderInfo.preInsert();
         orderInfoDao.save(orderInfo);
+        return orderInfo;
     }
 
     @Override
@@ -109,5 +110,12 @@ public class OrderService implements RpcOrderService {
         FlowStatus status = new FlowStatus();
         status.setId(id);
         return flowStatusDao.load(status);
+    }
+
+    @Override
+    public OrderProductDetail addOrderDetail(OrderProductDetail detail) {
+        detail.preInsert();
+        orderProductDetailDao.save(detail);
+        return detail;
     }
 }

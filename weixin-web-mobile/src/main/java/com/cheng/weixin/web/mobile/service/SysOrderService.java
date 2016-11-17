@@ -211,7 +211,6 @@ public class SysOrderService {
             totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(counts)));
             productService.updateStockById(product.getId(), product.getUnitsInStock()-counts, false);
         }
-        cartService.deletedChooseProduct("1");
 
         // 生成订单
         OrderInfo order = new OrderInfo();
@@ -258,8 +257,10 @@ public class SysOrderService {
         order.setPayWay(pay.getPayWay());
         List<FlowStatus> statuses = null;
         if (PayWay.ONLINE.equals(pay.getPayWay())) {
+            order.setOrderStatus(OrderStatus.WAIT_PAY);
             statuses = orderService.getFlowStatusesByPayWay(PayWay.ONLINE);
         } else if (PayWay.OFFLINE.equals(pay.getPayWay())) {
+            order.setOrderStatus(OrderStatus.ONGOING);
             statuses = orderService.getFlowStatusesByPayWay(PayWay.OFFLINE);
         }
         order.setFlowStatus(statuses.get(0).getId());
@@ -338,8 +339,25 @@ public class SysOrderService {
         order.setIp(SystemUtils.getRemoteAddr(request));
         order.setPayTime(new Date());
         order.setFreeAccountLevel(Boolean.FALSE);
-        order.setOrderStatus(OrderStatus.WAIT_PAY);
-        orderService.addOrder(order);
+        OrderInfo info = orderService.addOrder(order);
+
+        for (ProductModel productModel : productModels) {
+            Product product = productService.getById(productModel.getId());
+            OrderProductDetail detail = new OrderProductDetail();
+            detail.setOrderInfoId(info.getId());
+            detail.setOid(info.getOid());
+            detail.setName(product.getName());
+            detail.setQuantity(productModel.getCount());
+            detail.setSubtotal(product.getSalePrice().multiply(BigDecimal.valueOf(productModel.getCount())));
+            detail.setMarketPrice(product.getMarketPrice());
+            detail.setSalePrice(product.getSalePrice());
+            detail.setDealPrice(product.getSalePrice());
+            detail.setDiscountRate(1D);
+            detail.setComment(false);
+            detail.setGift(false);
+            orderService.addOrderDetail(detail);
+        }
+        cartService.deletedChooseProduct("1");
 
         // 积分记录
         BonusPointRecord bonusPoint = userService.getBonusPointRecord("1");
@@ -398,7 +416,6 @@ public class SysOrderService {
                     || OrderStatus.CANCELED.equals(order.getOrderStatus())
                     || OrderStatus.UNFINISHED.equals(order.getOrderStatus())) {
                 orderList.setOrderStatus(OrderStatus.COMMENT.name());
-                orderList.setCommentId(order.getCommentId());
             }else if (OrderStatus.ONGOING.equals(order.getOrderStatus())
                     || OrderStatus.WAIT_REFUND.equals(order.getOrderStatus())){
                 orderList.setOrderStatus(OrderStatus.ONGOING.name());
@@ -413,13 +430,15 @@ public class SysOrderService {
                 List<FlowStatus> flowStatuses = orderService.getFlowStatusesByPayWay(order.getPayWay());
                 String[] activeStatuses = order.getFlowStatus().split("-");
                 for (FlowStatus flowStatus : flowStatuses) {
+                    boolean flag = false;
                     for (String statusId : activeStatuses) {
                         if (statusId.equals(flowStatus.getId())) {
                             statuses.add(new Status(flowStatus.getName(), true));
-                            continue;
+                            flag = true;
                         }
                     }
-                    statuses.add(new Status(flowStatus.getName(), false));
+                    if (!flag)
+                        statuses.add(new Status(flowStatus.getName(), false));
                 }
             }else {
                 String[] activeStatuses = order.getFlowStatus().split("-");
@@ -435,8 +454,8 @@ public class SysOrderService {
         return orders;
     }
 
-    public OrderDetail getOrderDetail() {
-        OrderDetail detail = new OrderDetail();
+    public Detail getOrderDetail() {
+        Detail detail = new Detail();
         OrderInfo orderInfo = orderService.getOrderDetail("1700b55803cc44dfa08bac0028bee46f");
         detail.setId(orderInfo.getId());
         String[] flowStatus = orderInfo.getFlowStatus().split("-");

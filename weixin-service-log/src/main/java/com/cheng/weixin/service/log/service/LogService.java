@@ -40,11 +40,11 @@ public class LogService implements RpcLogService {
 
         public class SaveLogThread implements Runnable {
             private Log log;
-            //        private Object handler;
+            //private Object handler;
             private Exception ex;
             public SaveLogThread(Log log, /*Object handler,*/ Exception ex) {
                 this.log = log;
-//            this.handler = handler;
+                //this.handler = handler;
                 this.ex = ex;
             }
             @Override
