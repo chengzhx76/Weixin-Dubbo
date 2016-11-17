@@ -106,9 +106,7 @@ public class SysOrderService {
         int totalProductNums = 0;
         BigDecimal totalProductPrice = BigDecimal.ZERO;
         Set<String> productIds = cartService.getChooseProductIds("1");
-        //String[] productImgs = new String[productIds.size()];
         List<String> productImgs = new ArrayList<>(productIds.size());
-        //for (int i=0; i<productIds.size(); i++) {
         for (String productId : productIds) {
             Product product = productService.getDefaultPictureById(productId);
             if (product.getUnitsInStock() > 0) {
@@ -321,7 +319,6 @@ public class SysOrderService {
             couponService.updateCouponUsedById(couponCode.getId());
         }
         order.setCouponReducePrice(couponReducePrice);
-
         order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠
 
         // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
