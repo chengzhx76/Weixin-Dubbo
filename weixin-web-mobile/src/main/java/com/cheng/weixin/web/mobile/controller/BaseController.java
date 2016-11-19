@@ -96,7 +96,6 @@ public abstract class BaseController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response> exceptionHandler(HttpServletRequest request, HttpServletResponse response, Exception ex) throws IOException {
-        logger.error("发生异常==> ", ex);
         Meta meta = new Meta();
         if (ex instanceof BaseException) {
             ((BaseException) ex).handler(meta);
@@ -107,7 +106,7 @@ public abstract class BaseController {
             meta.setCode(StatusCode.INTERNAL_SERVER_ERROR.value());
             meta.setMsg(StatusCode.INTERNAL_SERVER_ERROR.msg());
         }
-
+        logger.error("发生异常==> {}", meta.getMsg(), ex);
         return ResponseEntity.ok(new Response(meta.getCode(), meta.isSuccess(), meta.getMsg(), null));
     }
 }

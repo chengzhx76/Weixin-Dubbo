@@ -18,6 +18,6 @@ public interface OrderInfoDaoMapper extends BaseDaoMapper<OrderInfo> {
      * @param orderInfo
      * @return
      */
-    List<OrderInfo> loadByUserId(OrderInfo orderInfo);
+    List<OrderInfo> loadByUserIdOrderByCreateDate(OrderInfo orderInfo);
 
 }

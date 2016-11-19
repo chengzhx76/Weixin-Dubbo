@@ -49,7 +49,7 @@ public class OrderService implements RpcOrderService {
 
     @Override
     public List<OrderInfo> getOrderInfos(String userId) {
-        List<OrderInfo> orderInfos = orderInfoDao.loadByUserId(new OrderInfo(userId));
+        List<OrderInfo> orderInfos = orderInfoDao.loadByUserIdOrderByCreateDate(new OrderInfo(userId));
         for (OrderInfo order : orderInfos) {
             List<OrderProductDetail> orderProductDetails = orderProductDetailDao.loadByOrder(new OrderProductDetail(order.getId()));
             order.setOrderDetails(orderProductDetails);

@@ -199,9 +199,8 @@ public class SysOrderService {
         return productLists;
     }
 
-    public void buy(PaymentDto payment, HttpServletRequest request) {
-
-        BigDecimal totalProductPrice = new BigDecimal(0);
+    public BuyInfo buy(PaymentDto payment, HttpServletRequest request) {
+        BigDecimal totalProductPrice = BigDecimal.ZERO;
         List<ProductModel> productModels = cartService.getChooseProductInfo("1");
         for (int i=0; i<productModels.size(); i++) {
             Product product = productService.getById(productModels.get(i).getId());
@@ -391,6 +390,11 @@ public class SysOrderService {
             cashRecord.setTxResult("结果");
             userService.addCashRecord(cashRecord);
         }
+
+        BuyInfo buyInfo = new BuyInfo();
+        buyInfo.setOrderNum(oid);
+        buyInfo.setDeliveryDate(order.getDeliveryTime());
+        return buyInfo;
     }
 
 
