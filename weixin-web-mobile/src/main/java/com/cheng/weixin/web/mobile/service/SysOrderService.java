@@ -315,14 +315,13 @@ public class SysOrderService {
             // TODO 去删除该优惠券
         }
         order.setCouponReducePrice(couponReducePrice);
-        order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠
+        order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠 //TODO 积分等级优惠政策
+
+        // TODO 增加优惠前的金额 商品总额 + 运费
 
         // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
         order.setAmountPayable(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
                 .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
-        // 已付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠 - 余额抵扣(下面扣得)
-        BigDecimal amountPaid = order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
-                                .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
 
         // 积分金额 = 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
         BigDecimal pointAmount = totalProductPrice.subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
@@ -365,10 +364,20 @@ public class SysOrderService {
         }
         userService.updateAccount(account);
 
+        BigDecimal amountPaid = BigDecimal.ZERO;
         if (payment.getBalance()) { // 是否是用余额支付
-            amountPaid = amountPaid.subtract(order.getBalanceOffset());
+            amountPaid = order.getBalanceOffset();
         }
         order.setAmountPaid(amountPaid);
+
+        // 余额没抵扣完的 跑到等待用户支付页面
+        boolean isPay = false;
+        BigDecimal surplusAmount = order.getAmountPayable().subtract(order.getAmountPaid()); // 余额抵扣完还需支付的金额
+        if (surplusAmount.compareTo(BigDecimal.ZERO) == 1) {
+            if (PayWay.ONLINE.equals(pay.getPayWay())) {
+                isPay = true;
+            }
+        }
 
         order.setRemarkCustomer(payment.getRemark());
         order.setIp(SystemUtils.getRemoteAddr(request));
@@ -444,6 +453,9 @@ public class SysOrderService {
         BuyInfo buyInfo = new BuyInfo();
         buyInfo.setOrderNum(oid);
         buyInfo.setDeliveryDate(order.getDeliveryTime());
+        buyInfo.setSurplusAmount(StringFormat.format(surplusAmount));
+        buyInfo.setPay(isPay);
+        buyInfo.setPayName(pay.getName());
         return buyInfo;
     }
 
