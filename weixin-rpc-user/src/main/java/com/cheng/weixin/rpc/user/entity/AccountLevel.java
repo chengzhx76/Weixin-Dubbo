@@ -10,19 +10,29 @@ import com.cheng.common.entity.DataEntity;
  */
 public class AccountLevel extends DataEntity<AccountLevel> {
     private int accountId;
+    private int level;
     private String name;
     private int needRonusPoint;
-    private int pointEveryLevel;
+    private int nextLevelNeedPoint;
+    @Deprecated
     private double reductPercent;
     private String consumeScale;
     private int freeFrequency;
-    private boolean isEnable;
+    private Boolean isEnable;
 
     public AccountLevel() {
     }
 
     public AccountLevel(boolean isEnable) {
         this.isEnable = isEnable;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public int getAccountId() {
@@ -49,12 +59,12 @@ public class AccountLevel extends DataEntity<AccountLevel> {
         this.name = name;
     }
 
-    public int getPointEveryLevel() {
-        return pointEveryLevel;
+    public int getNextLevelNeedPoint() {
+        return nextLevelNeedPoint;
     }
 
-    public void setPointEveryLevel(int pointEveryLevel) {
-        this.pointEveryLevel = pointEveryLevel;
+    public void setNextLevelNeedPoint(int nextLevelNeedPoint) {
+        this.nextLevelNeedPoint = nextLevelNeedPoint;
     }
 
     public int getFreeFrequency() {
@@ -65,11 +75,11 @@ public class AccountLevel extends DataEntity<AccountLevel> {
         this.freeFrequency = freeFrequency;
     }
 
-    public boolean isEnable() {
+    public Boolean getEnable() {
         return isEnable;
     }
 
-    public void setEnable(boolean enable) {
+    public void setEnable(Boolean enable) {
         isEnable = enable;
     }
 

@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.user.enumType.TXType;
 
 import java.math.BigDecimal;
 
@@ -15,7 +16,7 @@ public class CashRecord extends DataEntity<CashRecord> {
     private BigDecimal txMoney;
     private BigDecimal frozenMoney;
     private BigDecimal afterBonusPoints;
-    private String txType;
+    private TXType txType;
     private String behaviorId;
     private String txResult;
 
@@ -66,11 +67,11 @@ public class CashRecord extends DataEntity<CashRecord> {
         this.afterBonusPoints = afterBonusPoints;
     }
 
-    public String getTxType() {
+    public TXType getTxType() {
         return txType;
     }
 
-    public void setTxType(String txType) {
+    public void setTxType(TXType txType) {
         this.txType = txType;
     }
 

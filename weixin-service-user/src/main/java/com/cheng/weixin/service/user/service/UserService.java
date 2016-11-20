@@ -7,12 +7,14 @@ import com.cheng.weixin.rpc.user.enumType.Sex;
 import com.cheng.weixin.rpc.user.enumType.SourceFrom;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.service.user.dao.*;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,14 +64,17 @@ public class UserService implements RpcUserService {
             throw new IllegalArgumentException("当前用户"+phone+"已存在");
         }
 
-        AccountLevel accountLevel = accountLevelDao.load(new AccountLevel(true));
+        AccountLevel level = new AccountLevel();
+        level.setLevel(1);
+        level.setEnable(true);
 
+        AccountLevel accountLevel = accountLevelDao.load(level);
         Account account = new Account();
         account.setUsername(phone);
         account.setPassword(password);
         account.setAccountLevelId(accountLevel.getId());
         account.setBalance(new BigDecimal(0));
-        account.setBonusPointUpgrade(accountLevel.getPointEveryLevel());
+        account.setBonusPointUpgrade(accountLevel.getNextLevelNeedPoint());
         account.setBonusPointUsable(0);
         account.setCredit(Credit.WELL);
         account.setEmployee(false);
@@ -130,6 +135,13 @@ public class UserService implements RpcUserService {
     }
 
     @Override
+    public Account getAccountByUsername(String username) {
+        Account account = new Account();
+        account.setUsername(username);
+        return accountDao.load(account);
+    }
+
+    @Override
     public void updateAccount(Account account) {
         account.preUpdate();
         accountDao.update(account);
@@ -143,7 +155,16 @@ public class UserService implements RpcUserService {
 
     @Override
     public BonusPointRecord getBonusPointRecord(String userId) {
-        return bonusPointRecordDao.loadByUserId(new BonusPointRecord(userId));
+        return bonusPointRecordDao.loadNewByUSerId(new BonusPointRecord(userId));
+    }
+
+    @Override
+    public List<BonusPointRecord> getByUSerIdAndCurrentMonth(String userId) {
+        Date currentMonth = DateTime.now().dayOfMonth().withMinimumValue().hourOfDay().withMinimumValue().millisOfDay().withMinimumValue().toDate();
+        BonusPointRecord bonusPointRecord = new BonusPointRecord();
+        bonusPointRecord.setAccountId(userId);
+        bonusPointRecord.setCreateDate(currentMonth);
+        return bonusPointRecordDao.loadByUSerIdAndCurrentMonth(bonusPointRecord);
     }
 
     @Override
@@ -198,5 +219,20 @@ public class UserService implements RpcUserService {
     @Override
     public Member getMemberById(String userId) {
         return memberDao.load(new Member(userId));
+    }
+
+    @Override
+    public AccountLevel getAccountLevelById(String id) {
+        AccountLevel level = new AccountLevel();
+        level.setId(id);
+        return accountLevelDao.load(level);
+    }
+
+    @Override
+    public AccountLevel getAccountLevelByLevel(int level) {
+        AccountLevel accountLevel = new AccountLevel();
+        accountLevel.setLevel(level);
+        accountLevel.setEnable(true);
+        return accountLevelDao.load(accountLevel);
     }
 }

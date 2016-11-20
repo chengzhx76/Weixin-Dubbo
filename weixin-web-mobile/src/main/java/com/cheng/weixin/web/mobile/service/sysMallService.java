@@ -8,17 +8,14 @@ import com.cheng.weixin.rpc.item.entity.ProductType;
 import com.cheng.weixin.rpc.item.service.RpcProductService;
 import com.cheng.weixin.web.mobile.exception.ProductException;
 import com.cheng.weixin.web.mobile.exception.message.StatusCode;
-import com.cheng.weixin.web.mobile.result.mall.Mall;
-import com.cheng.weixin.web.mobile.result.mall.MallBuy;
 import com.cheng.weixin.web.mobile.result.mall.ProductCategory;
 import com.cheng.weixin.web.mobile.result.mall.Products;
+import com.cheng.weixin.web.mobile.security.LocalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Desc: 商城
@@ -46,9 +43,9 @@ public class SysMallService {
     }
 
     // TODO 登陆后查看该商品已买了多少
-    public Mall getMallProduct(String cid) {
+    public List<Products> getMallProduct(String cid) {
         List<Product> products = productService.getByTypeId(cid);
-        Mall mall = new Mall();
+        //Mall mall = new Mall();
         List<Products> mallProducts = new ArrayList<>();
         for (Product product : products) {
             Products mProduct = new Products();
@@ -64,9 +61,9 @@ public class SysMallService {
             mProduct.setWidth(picture.getWidth());
             mallProducts.add(mProduct);
         }
-        mall.setProducts(mallProducts);
-        mall.setTotalPrice(StringFormat.format(totalPrice("1")));
-        return mall;
+        //mall.setProducts(mallProducts);
+        //mall.setTotalPrice(StringFormat.format(totalPrice(LocalUser.getUser().getUserId())));
+        return mallProducts;
     }
 
 
@@ -75,53 +72,33 @@ public class SysMallService {
      * @param productId
      * @return
      */
-    public MallBuy addProduct(String productId) {
+    public long addProduct(String productId) {
         Product product = productService.getById(productId);
         if (product.getUnitsInStock()<=0) {
             throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
-        long count = cartService.addProductCount("1", productId);
+        long count = cartService.addProductCount(LocalUser.getUser().getUserId(), productId);
         // 金额
-        BigDecimal totalPrice = totalPrice("1");
+        //BigDecimal totalPrice = totalPrice("1");
 
-        MallBuy buy = new MallBuy();
-        buy.setCount(count);
-        buy.setTotalPrice(totalPrice);
-        return buy;
+        //MallBuy buy = new MallBuy();
+        //buy.setCount(count);
+        //buy.setTotalPrice(totalPrice);
+        return count;
     }
     /**
      * 减少商品
      * @param productId
      * @return
      */
-    public MallBuy subProduct(String productId) {
-        long count = cartService.subProductCount("1", productId);
+    public long subProduct(String productId) {
+        long count = cartService.subProductCount(LocalUser.getUser().getUserId(), productId);
         // 金额
-        BigDecimal totalPrice = totalPrice("1");
-
-        MallBuy buy = new MallBuy();
-        buy.setCount(count);
-        buy.setTotalPrice(totalPrice);
-        return buy;
-    }
-
-    /**
-     * 购物车商品的总价格
-     * @param userId
-     * @return
-     */
-    private BigDecimal totalPrice(String userId) {
-        Set<String> productIds =  cartService.getChooseProductIds(userId);
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (String productId : productIds) {
-            Product product = productService.getById(productId);
-            if (product.getUnitsInStock() > 0) {
-                // 根据Feild获取values 在乘以 单价 = total
-                Long counts = cartService.getCounts(userId, productId);
-                totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(counts)));
-            }
-        }
-        return totalPrice;
+        //BigDecimal totalPrice = totalPrice("1");
+        //MallBuy buy = new MallBuy();
+        //buy.setCount(count);
+        //buy.setTotalPrice(totalPrice);
+        return count;
     }
 
 }

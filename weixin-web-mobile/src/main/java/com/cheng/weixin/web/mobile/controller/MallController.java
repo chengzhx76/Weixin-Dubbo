@@ -2,9 +2,8 @@ package com.cheng.weixin.web.mobile.controller;
 
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.ProductDto;
-import com.cheng.weixin.web.mobile.result.mall.Mall;
-import com.cheng.weixin.web.mobile.result.mall.MallBuy;
 import com.cheng.weixin.web.mobile.result.mall.ProductCategory;
+import com.cheng.weixin.web.mobile.result.mall.Products;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.SysMallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,22 +37,23 @@ public class MallController extends BaseController {
     @RequestMapping(value = "v1/products")
     public ResponseEntity<Response> product(HttpServletRequest request) {
         ProductCategory category = (ProductCategory) getDto(request, ProductCategory.class);
-        Mall mallProducts = mallService.getMallProduct(category.getId());
-        return success(mallProducts);
+        List<Products> products = mallService.getMallProduct(category.getId());
+        return success(products);
     }
+
     @IgnoreSecurity
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        MallBuy buy = mallService.addProduct(productDto.getProductId());
-        return success(buy);
+        long counts = mallService.addProduct(productDto.getProductId());
+        return success(counts);
     }
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        MallBuy buy = mallService.subProduct(productDto.getProductId());
-        return success(buy);
+        long counts = mallService.subProduct(productDto.getProductId());
+        return success(counts);
     }
 }

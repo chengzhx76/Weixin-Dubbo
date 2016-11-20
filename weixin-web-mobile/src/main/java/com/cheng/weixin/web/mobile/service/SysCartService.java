@@ -18,6 +18,7 @@ import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfo;
 import com.cheng.weixin.web.mobile.result.cart.ProductInfoComparator;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
+import com.cheng.weixin.web.mobile.security.LocalUser;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +51,7 @@ public class SysCartService {
 
     public ShoppingCartInfo getShoppingCart(AddressDto address) {
 
-        ShoppingCart shoppingCart = cartService.getShoppingCart("1");
+        ShoppingCart shoppingCart = cartService.getShoppingCart(LocalUser.getUser().getUserId());
         List<CartInfo> cartInfos = shoppingCart.getCartInfos();
 
         ShoppingCartInfo shoppingCartInfo = new ShoppingCartInfo();
@@ -58,12 +59,12 @@ public class SysCartService {
         if (address.getId() != null && !"".equals(address.getId())) {
             if (address.getSince()) {
                 ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(address.getId());
-                Member member = userService.getMemberById("1");
+                Member member = userService.getMemberById(LocalUser.getUser().getUserId());
                 shoppingCartInfo.setMobile(member.getMobile());
                 shoppingCartInfo.setAddress(arayacakAddress.getAddress());
                 shoppingCartInfo.setSince(true);
             }else {
-                DeliveryAddress addr = userService.getDeliveryAddress(address.getId(), "1");
+                DeliveryAddress addr = userService.getDeliveryAddress(address.getId(), LocalUser.getUser().getUserId());
                 shoppingCartInfo.setConsignee(addr.getConsignee());
                 shoppingCartInfo.setMobile(addr.getMobile());
                 shoppingCartInfo.setAddress(addr.getAddress());
@@ -71,7 +72,7 @@ public class SysCartService {
             }
             shoppingCartInfo.setAddrId(address.getId());
         }else {
-            DeliveryAddress addr = userService.getDefaultAddress("1");
+            DeliveryAddress addr = userService.getDefaultAddress(LocalUser.getUser().getUserId());
             shoppingCartInfo.setConsignee(addr.getConsignee());
             shoppingCartInfo.setMobile(addr.getMobile());
             shoppingCartInfo.setAddress(addr.getAddress());
@@ -96,7 +97,7 @@ public class SysCartService {
                     if (product.getUnitsInStock()>0) {
                         hasNum++;
                     }else {
-                        cartService.changeUnchooseStatus("1", product.getId());
+                        cartService.changeUnchooseStatus(LocalUser.getUser().getUserId(), product.getId());
                     }
                     productInfo.setSalePrice(StringFormat.format(salePrice));
                     productInfo.setMarketPrice(StringFormat.format(product.getMarketPrice()));
@@ -127,62 +128,60 @@ public class SysCartService {
     public ProductCartInfo addProduct(String productId) {
         Product product = productService.getById(productId);
         // 获取该商品的数量
-        Long count = cartService.addProductCount("1", productId);
+        Long count = cartService.addProductCount(LocalUser.getUser().getUserId(), productId);
         if (product.getUnitsInStock() < count) {
-            cartService.subProductCount("1", productId);
+            cartService.subProductCount(LocalUser.getUser().getUserId(), productId);
             throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
-        return chooseShoppingCartPrice("1", count);
+        return chooseShoppingCartPrice(LocalUser.getUser().getUserId(), count);
     }
 
     public ProductCartInfo subProduct(String id) {
         // 获取该商品的数量
-        Long count = cartService.subProductCount("1", id);
-        return chooseShoppingCartPrice("1", count);
+        Long count = cartService.subProductCount(LocalUser.getUser().getUserId(), id);
+        return chooseShoppingCartPrice(LocalUser.getUser().getUserId(), count);
     }
 
     public ProductCartInfo deleteProduct(String id) {
-        cartService.deleteProduct("1", id);
-        return chooseShoppingCartPrice("1", null);
+        cartService.deleteProduct(LocalUser.getUser().getUserId(), id);
+        return chooseShoppingCartPrice(LocalUser.getUser().getUserId(), null);
     }
 
     public ProductCartInfo changeStatus(String productId) {
-        boolean isChoose = cartService.changeStatus("1", productId);
-        ProductCartInfo productCart = chooseShoppingCartPrice("1", null);
+        boolean isChoose = cartService.changeStatus(LocalUser.getUser().getUserId(), productId);
+        ProductCartInfo productCart = chooseShoppingCartPrice(LocalUser.getUser().getUserId(), null);
         productCart.setChoose(isChoose);
         return productCart;
     }
 
     public ProductCartInfo chooseAllProduct() {
-        cartService.chooseAllProduct("1");
-        return chooseShoppingCartPrice("1", null);
+        cartService.chooseAllProduct(LocalUser.getUser().getUserId());
+        return chooseShoppingCartPrice(LocalUser.getUser().getUserId(), null);
     }
 
     public ProductCartInfo unChooseAllProduct() {
-        cartService.unchooseAllProduct("1");
-        return chooseShoppingCartPrice("1", null);
+        cartService.unchooseAllProduct(LocalUser.getUser().getUserId());
+        return chooseShoppingCartPrice(LocalUser.getUser().getUserId(), null);
     }
 
 
-/*    public ProductCartInfo batchAddProduct(String userId, List<ProductDto> products) {
-        for (ProductDto product : products) {
-            cartService.addProduct(userId, product.getProductId(), product.getCount());
-        }
-
-        // 购物车已选择的商品的总价格
-        BigDecimal totalPrice = new BigDecimal(0);
-        Set<String> productIds = cartService.getChooseProductIds(userId);
+    /**
+     * 购物车商品的总价格
+     * @return
+     */
+    public String getTotalPrice() {
+        Set<String> productIds =  cartService.getChooseProductIds(LocalUser.getUser().getUserId());
+        BigDecimal totalPrice = BigDecimal.ZERO;
         for (String productId : productIds) {
-            Long count = cartService.getCounts(userId, productId);
             Product product = productService.getById(productId);
-            totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(count)));
+            if (product.getUnitsInStock() > 0) {
+                // 根据Feild获取values 在乘以 单价 = total
+                Long counts = cartService.getCounts(LocalUser.getUser().getUserId(), productId);
+                totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(counts)));
+            }
         }
-        ProductCartInfo productCart = new ProductCartInfo();
-        productCart.setCount(0);
-        productCart.setTotalPrice(StringFormat.format(totalPrice));
-        productCart.setFreight("2");
-        return productCart;
-    }*/
+        return StringFormat.format(totalPrice);
+    }
 
     /**
      * 购物车已选择的商品的总价格(不包含无货的)

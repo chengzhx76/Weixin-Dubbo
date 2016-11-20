@@ -12,10 +12,12 @@ public class UserDetail {
     private String avatar;
     private String nickname;
     private String username;
-    private String accountLevel;
+    private int accountLevel;
     private int bonusPointRecord;
+    private int bonusPointUpgrade;
     private String balance;
     private String couponRecord;
+    private int currentMonthBonusPoint;
 
     public String getId() {
         return id;
@@ -49,11 +51,11 @@ public class UserDetail {
         this.username = username;
     }
 
-    public String getAccountLevel() {
+    public int getAccountLevel() {
         return accountLevel;
     }
 
-    public void setAccountLevel(String accountLevel) {
+    public void setAccountLevel(int accountLevel) {
         this.accountLevel = accountLevel;
     }
 
@@ -79,6 +81,22 @@ public class UserDetail {
 
     public void setCouponRecord(String couponRecord) {
         this.couponRecord = couponRecord;
+    }
+
+    public int getCurrentMonthBonusPoint() {
+        return currentMonthBonusPoint;
+    }
+
+    public void setCurrentMonthBonusPoint(int currentMonthBonusPoint) {
+        this.currentMonthBonusPoint = currentMonthBonusPoint;
+    }
+
+    public int getBonusPointUpgrade() {
+        return bonusPointUpgrade;
+    }
+
+    public void setBonusPointUpgrade(int bonusPointUpgrade) {
+        this.bonusPointUpgrade = bonusPointUpgrade;
     }
 
     @Override

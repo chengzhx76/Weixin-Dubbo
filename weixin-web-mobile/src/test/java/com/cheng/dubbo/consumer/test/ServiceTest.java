@@ -35,7 +35,7 @@ public class ServiceTest {
     // ===========================ORDER============================== //
     @Test
     public void test01() {
-        Index index = indexService.getIndexInfo("1");
+        Index index = indexService.getIndexInfo();
         System.out.println(JSON.toJSONString(index));
     }
 

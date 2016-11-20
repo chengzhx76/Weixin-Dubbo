@@ -33,7 +33,6 @@ public class ProductController extends BaseController {
     }
 
     /** 购买商品 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/buy")
     public ResponseEntity<Response> buyProduct(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
@@ -42,7 +41,6 @@ public class ProductController extends BaseController {
     }
 
     /** 收藏/取消收藏 商品 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/focus")
     public ResponseEntity<Response> addProductFocus(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);

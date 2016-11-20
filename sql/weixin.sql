@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 120.27.53.171--wx
+Source Server         : 120.27.53.171-wx
 Source Server Version : 50173
 Source Host           : 120.27.53.171:3306
 Source Database       : weixin
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-11-17 17:45:36
+Date: 2016-11-20 01:56:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,7 +43,7 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('1', 'http://wx.aqd123.com/moblie/static/images/product/zm.jpg', 'Cheng', '1', 'WELL', '18600536683', '123456', '0', '0', '786.9', '0', '127.0.0.1', 'NO', '--', '2016-09-20 10:03:47', '2016-11-17 16:45:00', 'NORMAL');
+INSERT INTO `account` VALUES ('1', 'http://wx.aqd123.com/shop/images/avatar.jpg', 'Cheng', '1', 'WELL', '18600536683', '123456', '165', '35', '656.5', '0', '127.0.0.1', 'NO', '--', '2016-09-20 10:03:47', '2016-11-20 01:55:59', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for account_level
@@ -51,9 +51,10 @@ INSERT INTO `account` VALUES ('1', 'http://wx.aqd123.com/moblie/static/images/pr
 DROP TABLE IF EXISTS `account_level`;
 CREATE TABLE `account_level` (
   `id` varchar(255) NOT NULL,
+  `level` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `need_ronus_point` int(11) DEFAULT NULL,
-  `point_every_level` int(11) DEFAULT NULL,
+  `next_level_need_point` int(11) DEFAULT NULL,
   `reduct_percent` double DEFAULT NULL,
   `consume_scale` varchar(255) DEFAULT NULL,
   `free_frequency` int(11) DEFAULT NULL,
@@ -68,8 +69,8 @@ CREATE TABLE `account_level` (
 -- ----------------------------
 -- Records of account_level
 -- ----------------------------
-INSERT INTO `account_level` VALUES ('1', '一级', '0', '0', '1', '100:1', '0', '1', '初始化帐户级别', '2016-07-12 16:36:04', '2016-07-12 16:36:08', 'NORMAL');
-INSERT INTO `account_level` VALUES ('2', '二级', '200', '400', '0.97', null, null, null, null, null, null, null);
+INSERT INTO `account_level` VALUES ('1', '1', '一级', '0', '200', '1', '1000:1', '0', '1', '初始化帐户级别', '2016-07-12 16:36:04', '2016-07-12 16:36:08', 'NORMAL');
+INSERT INTO `account_level` VALUES ('2', '2', '二级', '200', '600', '1', '100:1', '1', '1', '二级账户', '2016-11-19 21:42:16', '2016-11-19 21:42:19', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for ad
@@ -164,7 +165,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'cheng', '5cdefe986d7fa0d363930c4062b776bd30a33a3cec47a34291a8bd27', '程', '18600536683', '/img/logo.jpg', '1.95.240.33', '2016-10-30 21:50:09', '0:0:0:0:0:0:0:1', '2016-10-25 14:22:48', '备注', '2016-01-28 15:47:10', '2016-10-30 21:50:09', 'NORMAL');
+INSERT INTO `admin` VALUES ('1', 'cheng', '5cdefe986d7fa0d363930c4062b776bd30a33a3cec47a34291a8bd27', '程', '18600536683', '/img/logo.jpg', '1.95.97.65', '2016-11-17 23:17:55', '1.95.240.33', '2016-10-30 21:50:09', '备注', '2016-01-28 15:47:10', '2016-11-17 23:17:55', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for admin_role
@@ -301,77 +302,8 @@ CREATE TABLE `bonus_point_record` (
 -- ----------------------------
 -- Records of bonus_point_record
 -- ----------------------------
-INSERT INTO `bonus_point_record` VALUES ('d8009517998e4f1993e141989e92ca48', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:21:13', '2016-10-13 11:21:13', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('3012e0c14a3245dcaa34e8ad036379c1', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:30:19', '2016-10-13 11:30:19', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('5f72e1faf728454692a05e415ead2ad5', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:32:52', '2016-10-13 11:32:52', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('b52d4dccce1d4d36967efe212f349209', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-13 11:43:15', '2016-10-13 11:43:15', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('eddc0c8fa81e4f77b18340991b1288e5', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-10-17 15:34:54', '2016-10-17 15:34:54', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8d003f8828fc478c81713c67eed28eb6', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:27:07', '2016-11-06 00:27:07', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('69213f81bcff4b4a8d1960430421c54c', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:31:06', '2016-11-06 00:31:06', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('6dc4e93523aa498380d18278b0ab6ece', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:32:32', '2016-11-06 00:32:32', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('ed575989962b4896acafc1bdc39bb212', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:35:18', '2016-11-06 00:35:18', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('46bceeae3e48486d8bf4a1f975a8bfbc', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:36:34', '2016-11-06 00:36:34', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8a47b48f9de648409325274dfe52ffa1', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:36:53', '2016-11-06 00:36:53', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('cc926e578bcf425eb78cf11161d7d6b9', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:39:09', '2016-11-06 00:39:09', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('5cbce7ba4bfb4d50bffea02c3fdbd31c', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 00:45:20', '2016-11-06 00:45:20', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('af315ae02c654d2eac59429e5ea7948d', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 17:47:03', '2016-11-06 17:47:03', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('2c662303be074b70b6056b23405e963a', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 17:49:41', '2016-11-06 17:49:41', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('ed567ccb8fcd4544a9e51957a8f21f67', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 17:51:33', '2016-11-06 17:51:33', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('80856733ef6545ccbf2d2cac1a40a665', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 17:56:49', '2016-11-06 17:56:49', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('17fd05e63d3c4b85b04b288511f535b0', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 17:58:24', '2016-11-06 17:58:24', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('4db266c4bd194190affdcda30f2dce9a', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 17:58:37', '2016-11-06 17:58:37', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('164824022be545eb9f40a5059fe8d793', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 18:04:27', '2016-11-06 18:04:27', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8f7573c6c2db44e08a2564197f397d55', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 18:16:30', '2016-11-06 18:16:30', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('947dc714f43d4f7a9f4f584bdd5dea42', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 18:16:51', '2016-11-06 18:16:51', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('ea287e5daa2f47f0bf414b31502dfccf', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 18:24:53', '2016-11-06 18:24:53', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('c24c820453e745c483ceffdf428acd4f', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 18:25:11', '2016-11-06 18:25:11', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('627e10db4c344cd98c85d156519e8555', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 18:25:46', '2016-11-06 18:25:46', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('4c035e681b8c47e3b9b427a52c728334', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 22:01:23', '2016-11-06 22:01:23', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('36ba1fa2b31343b58529a8eebdb7b3da', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-06 22:01:27', '2016-11-06 22:01:27', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('6c659db5ca3343aaaef659fee602c52d', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-09 07:48:40', '2016-11-09 07:48:40', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8fbaa6c8f5dd41108d0b99d833d8b1cd', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-09 07:48:40', '2016-11-09 07:48:40', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('50843e06f9a54602b9e9f01edcc8c185', null, '0', '10', '10', '10', '0', null, '结果', '--', '2016-11-09 22:05:09', '2016-11-09 22:05:09', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('ed4f1cb1b0af4a069415b4f97b9d9a96', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:20:07', '2016-11-10 21:20:07', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('31de8a07c17a4adfbe947aaad1f57631', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:21:41', '2016-11-10 21:21:41', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('ca71291e38c24303853d5784770e1b3b', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:22:29', '2016-11-10 21:22:29', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('e8500be63bcd4cd4a7a59a0b6bfe7440', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:22:46', '2016-11-10 21:22:46', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('3e0ac9b09121463fb684b9288bc80748', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:23:23', '2016-11-10 21:23:23', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('f4a1633e8f8e41baaa8e3f830d12ba05', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:23:42', '2016-11-10 21:23:42', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8b5f31f0475b4c049b53fc9d4aeca9d9', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:24:18', '2016-11-10 21:24:18', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('5c1a0dfaac1e4fc0b8ade2e5e7c76cc9', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:24:40', '2016-11-10 21:24:40', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('19a44c18b83a4e5b894615375b9c2490', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 21:25:03', '2016-11-10 21:25:03', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('bbc949090d19454e982e2882df597052', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-10 22:58:37', '2016-11-10 22:58:37', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8e5723794a5b4b2bbadba8a85dae12c0', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-11 00:25:26', '2016-11-11 00:25:26', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('e0bf8e2f8c6f4d069c8d4828cb28f0bb', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-11 01:30:21', '2016-11-11 01:30:21', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('eed96fab2e3a4504bcc28414971870bc', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-11 01:31:12', '2016-11-11 01:31:12', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('cb0db2dd4eed4755a8d756fee10f859c', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-11 01:37:41', '2016-11-11 01:37:41', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('2f0faec56ae44338a99cc08518669844', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-11 10:57:27', '2016-11-11 10:57:27', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('e8c163ebd0c9453aab91faf06e16d7f3', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-11 13:11:27', '2016-11-11 13:11:27', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('e92cec4cc514403a8c8bb0bff747c912', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-11 13:50:54', '2016-11-11 13:50:54', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('c38216e9751a4b53916bdc0180dc7fac', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 14:28:40', '2016-11-12 14:28:40', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('d1f11b9f6a114a9b9ea8826e5d1aac51', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 21:53:07', '2016-11-12 21:53:07', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('281c880b2925409187d70ea4d2189e03', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 21:56:57', '2016-11-12 21:56:57', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('bc88e6150e344d66adec2382e5f15eee', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 22:13:34', '2016-11-12 22:13:34', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('39ad78066a1e497695cd5f3a053e9030', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 22:24:11', '2016-11-12 22:24:11', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('bdaa1b1c38af47c79b5e05cc227631d6', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 22:26:24', '2016-11-12 22:26:24', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8d83f9a2077843c191eda91b19a53894', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 22:38:26', '2016-11-12 22:38:26', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('9351b73668e14295b2d18c8d17ce0bf5', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-12 23:40:15', '2016-11-12 23:40:15', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('c1f5909f3bcb4e6784e9d68e93f74035', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 10:32:26', '2016-11-13 10:32:26', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('fb83de216c42437c8f43fa768cfcca1b', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 18:58:39', '2016-11-13 18:58:39', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8806fcea774e43e4af9fd32f2c1f5295', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 19:00:25', '2016-11-13 19:00:25', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8b196899ad8a40b8a1b865581d1d038f', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 20:59:56', '2016-11-13 20:59:56', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('f57c2ea99a6a43048bd651c56d46b2fb', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 21:03:40', '2016-11-13 21:03:40', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('e581f328ead643babf274f1424586553', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 21:10:13', '2016-11-13 21:10:13', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('2d6e92d8893047bb974f1057878fcd57', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 21:12:03', '2016-11-13 21:12:03', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('d09c3a958ad54a1abcfddd558c23b351', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-13 21:24:15', '2016-11-13 21:24:15', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('0ddea42e9af546bcbecbd66109e609ac', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-14 17:24:49', '2016-11-14 17:24:49', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('8e0cdcab78364597b98287de0241f804', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-16 17:51:50', '2016-11-16 17:51:50', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('3e9db90fc19c4b69ac129c07325d2722', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-17 14:52:13', '2016-11-17 14:52:13', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('d9c2512c6f16441c8112de2182b63aba', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-17 16:08:14', '2016-11-17 16:08:14', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('cfb65b21c8954e25a4debfe07b1244db', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-17 16:09:14', '2016-11-17 16:09:14', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('dcb6387021504ad9b12824e9fab3cbbb', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-17 16:09:55', '2016-11-17 16:09:55', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('78ae6f4c6d69413e8a5775fb7634a1d1', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-17 16:23:51', '2016-11-17 16:23:51', 'NORMAL');
-INSERT INTO `bonus_point_record` VALUES ('9d26a09c2b1541bf859b098a0495d180', null, '0', '10', '10', '10', '0', null, '下单获取10积分', '--', '2016-11-17 16:45:00', '2016-11-17 16:45:00', 'NORMAL');
+INSERT INTO `bonus_point_record` VALUES ('a0f16ad31bd84777a8e97171ff7bbde6', '1', '0', '30', '30', '30', 'EARNING', null, '下单获取30积分', '--', '2016-11-20 01:55:12', '2016-11-20 01:55:12', 'NORMAL');
+INSERT INTO `bonus_point_record` VALUES ('6dd686c97a414e86a29382a656ca8328', '1', '30', '5', '5', '35', 'EARNING', null, '下单获取5积分', '--', '2016-11-20 01:55:59', '2016-11-20 01:55:59', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for cash_record
@@ -397,37 +329,61 @@ CREATE TABLE `cash_record` (
 -- ----------------------------
 -- Records of cash_record
 -- ----------------------------
-INSERT INTO `cash_record` VALUES ('1', '1', '0', '111', '111', '20000', '111', '1', '1', '--', '2016-10-13 11:31:24', '2016-10-13 11:31:29', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('2766d2c54c0d4cc6bf05a5c34e244437', '1', '14904.5', '994.7', null, '13909.8', '支出', null, '结果', '--', '2016-11-09 07:48:40', '2016-11-09 07:48:40', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('c3f30f722c0141e2b13ca147962b87ad', '1', '13909.8', '986.2', null, '12923.6', '支出', null, '结果', '--', '2016-11-09 07:48:40', '2016-11-09 07:48:40', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('c32e7b1be4ae437d8ac0d1d472232db7', '1', '13909.8', '977.2', null, '12932.6', '支出', null, '结果', '--', '2016-11-09 22:05:09', '2016-11-09 22:05:09', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('bfd56e9858aa4fe18d5226230e7f6c70', '1', '12932.6', '953.2', null, '11979.4', '支出', null, '结果', '--', '2016-11-11 00:25:26', '2016-11-11 00:25:26', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('9e0d6a4080e64e428be95ee28a997fd9', '1', '11979.4', '920.2', null, '11059.2', '支出', null, '结果', '--', '2016-11-11 01:30:22', '2016-11-11 01:30:22', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('1528868fb8d5442ebfa640a0eaac3df1', '1', '11059.2', '914.7', null, '10144.5', '支出', null, '结果', '--', '2016-11-11 01:31:12', '2016-11-11 01:31:12', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('b09d3a7f4e2f41aaa85ea805a0da72f8', '1', '10144.5', '909.7', null, '9234.8', '支出', null, '结果', '--', '2016-11-11 01:37:41', '2016-11-11 01:37:41', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('3351dadc0a974125a276ab84d9106a4d', '1', '9234.8', '903.2', null, '8331.6', '支出', null, '结果', '--', '2016-11-11 10:57:27', '2016-11-11 10:57:27', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('6595bada9879424db6d898da7673462a', '1', '8331.6', '899.2', null, '7432.4', '支出', null, '结果', '--', '2016-11-11 13:11:27', '2016-11-11 13:11:27', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('5807d4c61f804ee6aee777459f30cbd4', '1', '20000', '1034.7', null, '18965.3', '支出', null, '结果', '--', '2016-11-06 18:16:31', '2016-11-06 18:16:31', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('db2ab49acf9c47d1b45130934b0ae84a', '1', '18965.3', '1027.2', null, '17938.1', '支出', null, '结果', '--', '2016-11-06 18:16:51', '2016-11-06 18:16:51', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('c5a23033c9b9426abea46844e336f8e1', '1', '17938.1', '1019.2', null, '16918.9', '支出', null, '结果', '--', '2016-11-06 18:24:53', '2016-11-06 18:24:53', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('122b22e0b2944bc59474a2d622bd67f9', '1', '16918.9', '1011.2', null, '15907.7', '支出', null, '结果', '--', '2016-11-06 18:25:11', '2016-11-06 18:25:11', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('490124417b994882b34c7dc8585d442c', '1', '15907.7', '1003.2', null, '14904.5', '支出', null, '结果', '--', '2016-11-06 18:25:46', '2016-11-06 18:25:46', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('0d126e8b69e244eb928eaec3f8e2ec78', '1', '7432.4', '896.2', null, '6536.2', '支出', null, '结果', '--', '2016-11-11 13:50:54', '2016-11-11 13:50:54', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('2d87b35236774dbab24a88af9f3c2e10', '1', '6536.2', '891.2', null, '5645.0', '支出', null, '结果', '--', '2016-11-12 14:28:40', '2016-11-12 14:28:40', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('6830a64eacc440bb891c6abe57bfdcfe', '1', '5645.0', '884.5', null, '4760.5', '支出', null, '结果', '--', '2016-11-12 21:53:07', '2016-11-12 21:53:07', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('3815ed39162d4feea1b99bea300c993c', '1', '4760.5', '881.3', null, '3879.2', '支出', null, '结果', '--', '2016-11-12 21:56:57', '2016-11-12 21:56:57', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('f9887dbe9ea14a2c87d09b91a8a1cc88', '1', '3879.2', '878.1', null, '3001.1', '支出', null, '结果', '--', '2016-11-12 22:13:34', '2016-11-12 22:13:34', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('af9a5e56f54b4091a8b9014c5111e68e', '1', '3001.1', '870.6', null, '2130.5', '支出', null, '结果', '--', '2016-11-12 22:24:11', '2016-11-12 22:24:11', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('0a64434113c84f83a60e09c03f55f9cf', '1', '2130.5', '865.6', null, '1264.9', '支出', null, '结果', '--', '2016-11-12 22:26:24', '2016-11-12 22:26:24', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('057b9576f9864a659967c333dcfd1458', '1', '1264.9', '861.6', null, '403.3', '支出', null, '结果', '--', '2016-11-12 23:40:15', '2016-11-12 23:40:15', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('71a7294200e445ed91e943940d437868', '1', '403.3', '5.0', null, '398.3', '支出', null, '结果', '--', '2016-11-13 21:24:15', '2016-11-13 21:24:15', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('c8e9a5461296438d977052f076386196', '1', '398.3', '5.5', null, '392.8', '支出', null, '结果', '--', '2016-11-14 17:24:49', '2016-11-14 17:24:49', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('cd6d80f3301946f0bf784206923dbe7b', '1', '392.8', '4.0', null, '388.8', '支出', null, '结果', '--', '2016-11-16 17:51:50', '2016-11-16 17:51:50', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('a009df4469fc49e2bae5a66c5cd6eb0f', '1', '388.8', '4.0', null, '384.8', '支出', null, '结果', '--', '2016-11-17 14:52:14', '2016-11-17 14:52:14', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('9b3536e6ca0f46029c602d2a5e1e8124', '1', '384.8', '4.0', null, '380.8', '支出', null, '结果', '--', '2016-11-17 16:09:14', '2016-11-17 16:09:14', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('4c62b3a221034da3bf4c6110eae225bb', '1', '380.8', '3.5', null, '377.3', '支出', null, '结果', '--', '2016-11-17 16:09:55', '2016-11-17 16:09:55', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('cabfd473107f41f9b60970474395c8b4', '1', '377.3', '3.0', null, '374.3', '支出', null, '结果', '--', '2016-11-17 16:23:51', '2016-11-17 16:23:51', 'NORMAL');
-INSERT INTO `cash_record` VALUES ('27f73a82ca2d40efb06b5c51f8a201bb', '1', '374.3', '4.5', null, '369.8', '支出', null, '结果', '--', '2016-11-17 16:45:00', '2016-11-17 16:45:00', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('1', '1', '0', '111', '111', '20000', 'EXPENSE', '1', '1', '--', '2016-10-13 11:31:24', '2016-10-13 11:31:29', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('2766d2c54c0d4cc6bf05a5c34e244437', '1', '14904.5', '994.7', null, '13909.8', 'EXPENSE', null, '结果', '--', '2016-11-09 07:48:40', '2016-11-09 07:48:40', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('c3f30f722c0141e2b13ca147962b87ad', '1', '13909.8', '986.2', null, '12923.6', 'EXPENSE', null, '结果', '--', '2016-11-09 07:48:40', '2016-11-09 07:48:40', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('c32e7b1be4ae437d8ac0d1d472232db7', '1', '13909.8', '977.2', null, '12932.6', 'EXPENSE', null, '结果', '--', '2016-11-09 22:05:09', '2016-11-09 22:05:09', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('bfd56e9858aa4fe18d5226230e7f6c70', '1', '12932.6', '953.2', null, '11979.4', 'EXPENSE', null, '结果', '--', '2016-11-11 00:25:26', '2016-11-11 00:25:26', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('9e0d6a4080e64e428be95ee28a997fd9', '1', '11979.4', '920.2', null, '11059.2', 'EXPENSE', null, '结果', '--', '2016-11-11 01:30:22', '2016-11-11 01:30:22', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('1528868fb8d5442ebfa640a0eaac3df1', '1', '11059.2', '914.7', null, '10144.5', 'EXPENSE', null, '结果', '--', '2016-11-11 01:31:12', '2016-11-11 01:31:12', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('b09d3a7f4e2f41aaa85ea805a0da72f8', '1', '10144.5', '909.7', null, '9234.8', 'EXPENSE', null, '结果', '--', '2016-11-11 01:37:41', '2016-11-11 01:37:41', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('3351dadc0a974125a276ab84d9106a4d', '1', '9234.8', '903.2', null, '8331.6', 'EXPENSE', null, '结果', '--', '2016-11-11 10:57:27', '2016-11-11 10:57:27', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('6595bada9879424db6d898da7673462a', '1', '8331.6', '899.2', null, '7432.4', 'EXPENSE', null, '结果', '--', '2016-11-11 13:11:27', '2016-11-11 13:11:27', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('5807d4c61f804ee6aee777459f30cbd4', '1', '20000', '1034.7', null, '18965.3', 'EXPENSE', null, '结果', '--', '2016-11-06 18:16:31', '2016-11-06 18:16:31', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('db2ab49acf9c47d1b45130934b0ae84a', '1', '18965.3', '1027.2', null, '17938.1', 'EXPENSE', null, '结果', '--', '2016-11-06 18:16:51', '2016-11-06 18:16:51', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('c5a23033c9b9426abea46844e336f8e1', '1', '17938.1', '1019.2', null, '16918.9', 'EXPENSE', null, '结果', '--', '2016-11-06 18:24:53', '2016-11-06 18:24:53', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('122b22e0b2944bc59474a2d622bd67f9', '1', '16918.9', '1011.2', null, '15907.7', 'EXPENSE', null, '结果', '--', '2016-11-06 18:25:11', '2016-11-06 18:25:11', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('490124417b994882b34c7dc8585d442c', '1', '15907.7', '1003.2', null, '14904.5', 'EXPENSE', null, '结果', '--', '2016-11-06 18:25:46', '2016-11-06 18:25:46', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('0d126e8b69e244eb928eaec3f8e2ec78', '1', '7432.4', '896.2', null, '6536.2', 'EXPENSE', null, '结果', '--', '2016-11-11 13:50:54', '2016-11-11 13:50:54', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('2d87b35236774dbab24a88af9f3c2e10', '1', '6536.2', '891.2', null, '5645.0', 'EXPENSE', null, '结果', '--', '2016-11-12 14:28:40', '2016-11-12 14:28:40', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('6830a64eacc440bb891c6abe57bfdcfe', '1', '5645.0', '884.5', null, '4760.5', 'EXPENSE', null, '结果', '--', '2016-11-12 21:53:07', '2016-11-12 21:53:07', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('3815ed39162d4feea1b99bea300c993c', '1', '4760.5', '881.3', null, '3879.2', 'EXPENSE', null, '结果', '--', '2016-11-12 21:56:57', '2016-11-12 21:56:57', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('f9887dbe9ea14a2c87d09b91a8a1cc88', '1', '3879.2', '878.1', null, '3001.1', 'EXPENSE', null, '结果', '--', '2016-11-12 22:13:34', '2016-11-12 22:13:34', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('af9a5e56f54b4091a8b9014c5111e68e', '1', '3001.1', '870.6', null, '2130.5', 'EXPENSE', null, '结果', '--', '2016-11-12 22:24:11', '2016-11-12 22:24:11', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('0a64434113c84f83a60e09c03f55f9cf', '1', '2130.5', '865.6', null, '1264.9', 'EXPENSE', null, '结果', '--', '2016-11-12 22:26:24', '2016-11-12 22:26:24', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('057b9576f9864a659967c333dcfd1458', '1', '1264.9', '861.6', null, '403.3', 'EXPENSE', null, '结果', '--', '2016-11-12 23:40:15', '2016-11-12 23:40:15', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('71a7294200e445ed91e943940d437868', '1', '403.3', '5.0', null, '398.3', 'EXPENSE', null, '结果', '--', '2016-11-13 21:24:15', '2016-11-13 21:24:15', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('c8e9a5461296438d977052f076386196', '1', '398.3', '5.5', null, '392.8', 'EXPENSE', null, '结果', '--', '2016-11-14 17:24:49', '2016-11-14 17:24:49', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('cd6d80f3301946f0bf784206923dbe7b', '1', '392.8', '4.0', null, '388.8', 'EXPENSE', null, '结果', '--', '2016-11-16 17:51:50', '2016-11-16 17:51:50', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('a009df4469fc49e2bae5a66c5cd6eb0f', '1', '388.8', '4.0', null, '384.8', 'EXPENSE', null, '结果', '--', '2016-11-17 14:52:14', '2016-11-17 14:52:14', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('9b3536e6ca0f46029c602d2a5e1e8124', '1', '384.8', '4.0', null, '380.8', 'EXPENSE', null, '结果', '--', '2016-11-17 16:09:14', '2016-11-17 16:09:14', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('4c62b3a221034da3bf4c6110eae225bb', '1', '380.8', '3.5', null, '377.3', 'EXPENSE', null, '结果', '--', '2016-11-17 16:09:55', '2016-11-17 16:09:55', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('cabfd473107f41f9b60970474395c8b4', '1', '377.3', '3.0', null, '374.3', 'EXPENSE', null, '结果', '--', '2016-11-17 16:23:51', '2016-11-17 16:23:51', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('27f73a82ca2d40efb06b5c51f8a201bb', '1', '374.3', '4.5', null, '369.8', 'EXPENSE', null, '结果', '--', '2016-11-17 16:45:00', '2016-11-17 16:45:00', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('1092410df27343118c456af9bb0f3865', '1', '369.8', '8.5', null, '361.3', 'EXPENSE', null, '结果', '--', '2016-11-17 23:32:29', '2016-11-17 23:32:29', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('dcceb4f4db734715aeaa07450b422097', '1', '361.3', '3.5', null, '357.8', 'EXPENSE', null, '结果', '--', '2016-11-18 20:48:20', '2016-11-18 20:48:20', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('e85bd1de5b3741e5bdbbf3c3e4f2b581', '1', '357.8', '3.5', null, '354.3', 'EXPENSE', null, '结果', '--', '2016-11-18 20:59:17', '2016-11-18 20:59:17', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('e5a82c5c5ad84eaf866f3cddd8410b1e', '1', '354.3', '5.0', null, '349.3', 'EXPENSE', null, '结果', '--', '2016-11-18 22:40:56', '2016-11-18 22:40:56', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('8b7da8a7a707497792e5e4a1a9aaf748', '1', '349.3', '5.0', null, '344.3', 'EXPENSE', null, '结果', '--', '2016-11-18 22:43:46', '2016-11-18 22:43:46', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('e60f80f4ef394f4cb10f199254af8209', '1', '344.3', '41.0', null, '303.3', 'EXPENSE', null, '结果', '--', '2016-11-18 22:46:41', '2016-11-18 22:46:41', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('6dd0ee70f42542ab9c5f189be07e28f8', '1', '303.3', '3.0', null, '300.3', 'EXPENSE', null, '结果', '--', '2016-11-18 23:56:39', '2016-11-18 23:56:39', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('cc3eb6209c8f4f168c1ae602222aa945', '1', '300.3', '3.5', null, '296.8', 'EXPENSE', null, '结果', '--', '2016-11-19 00:02:08', '2016-11-19 00:02:08', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('1c3fc888c16a4f06a5c7ac4c33387e11', '1', '296.8', '2.5', null, '294.3', 'EXPENSE', null, '结果', '--', '2016-11-19 00:13:20', '2016-11-19 00:13:20', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('e640d2bcbfdf4ec79eceaaece92d8207', '1', '294.3', '2.5', null, '291.8', 'EXPENSE', null, '结果', '--', '2016-11-19 00:14:19', '2016-11-19 00:14:19', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('0707791360674b72bc55cec506d94fc8', '1', '291.8', '3.0', null, '288.8', 'EXPENSE', null, '结果', '--', '2016-11-19 00:31:25', '2016-11-19 00:31:25', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('65f65e26beab4e3780d2fe7d413ff55b', '1', '288.8', '4.0', null, '284.8', 'EXPENSE', null, '结果', '--', '2016-11-19 00:52:45', '2016-11-19 00:52:45', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('fb52abef72d44a61bbbd056ef10890e8', '1', '284.8', '3.0', null, '281.8', 'EXPENSE', null, '结果', '--', '2016-11-19 02:36:35', '2016-11-19 02:36:35', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('c3c69e10e1f3467fae839432e302c703', '1', '281.8', '4.0', null, '277.8', 'EXPENSE', null, '结果', '--', '2016-11-19 03:27:17', '2016-11-19 03:27:17', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('d9baf4686ad54af497b14ea9cd8e7de4', '1', '277.8', '4.0', null, '273.8', 'EXPENSE', null, '结果', '--', '2016-11-19 10:26:47', '2016-11-19 10:26:47', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('7757fe24018643efb90afb0e54724568', '1', '273.8', '5.5', null, '268.3', 'EXPENSE', null, '结果', '--', '2016-11-19 16:10:51', '2016-11-19 16:10:51', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('0b85d7d18e9c4a3ca9eebc18fb965b1c', '1', '268.3', '2', null, '266.3', 'EXPENSE', null, '下单花费2元', '--', '2016-11-19 23:29:56', '2016-11-19 23:29:56', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('6e7106570b474a1f986f477cb28328bb', '1', '266.3', '3.0', null, '263.3', 'EXPENSE', null, '下单花费3.0元', '--', '2016-11-19 23:33:13', '2016-11-19 23:33:13', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('ccdfdf1711404fc3a96caa5294c94b52', '1', '263.3', '3.0', null, '260.3', 'EXPENSE', null, '下单花费3.0元', '--', '2016-11-20 01:40:50', '2016-11-20 01:40:50', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('0657bcbde6f048a896d297218933619f', '1', '260.3', '4.0', null, '256.3', 'EXPENSE', null, '下单花费4.0元', '--', '2016-11-20 01:41:35', '2016-11-20 01:41:35', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('55c2793fad9145b9be3fc369759d6031', '1', '256.3', '3.0', null, '253.3', 'EXPENSE', null, '下单花费3.0元', '--', '2016-11-20 01:46:12', '2016-11-20 01:46:12', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('f8800901b861499d89eae6da96b433d2', '1', '253.3', '6.0', null, '247.3', 'EXPENSE', null, '下单花费6.0元', '--', '2016-11-20 01:50:07', '2016-11-20 01:50:07', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('ab7f323ebf114bc099091908db051120', '1', '247.3', '5.0', null, '242.3', 'EXPENSE', null, '下单花费5.0元', '--', '2016-11-20 01:55:12', '2016-11-20 01:55:12', 'NORMAL');
+INSERT INTO `cash_record` VALUES ('b35453036d1e41e386a36fd4f50aa734', '1', '242.3', '2.5', null, '239.8', 'EXPENSE', null, '下单花费2.5元', '--', '2016-11-20 01:55:59', '2016-11-20 01:55:59', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for city
@@ -542,7 +498,7 @@ CREATE TABLE `coupon_code` (
 -- ----------------------------
 -- Records of coupon_code
 -- ----------------------------
-INSERT INTO `coupon_code` VALUES ('1', '1', '123456789', '1', '1', '--', '2016-11-08 13:47:52', '2016-11-13 19:00:25', 'NORMAL');
+INSERT INTO `coupon_code` VALUES ('1', '1', '123456789', '1', '1', '--', '2016-11-08 13:47:52', '2016-11-19 23:01:29', 'NORMAL');
 INSERT INTO `coupon_code` VALUES ('2', '2', 'wwwwwqwdqdwq', '1', '1', '--', '2016-11-08 13:53:32', '2016-11-12 22:38:26', 'NORMAL');
 
 -- ----------------------------
@@ -631,6 +587,14 @@ INSERT INTO `coupon_record` VALUES ('90660e6b2e434263abf874288b584c8d', '1', '1'
 INSERT INTO `coupon_record` VALUES ('75a46fc492f24e1ea2919e497717596f', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-12 22:24:11', '2016-11-12 22:24:11', 'NORMAL');
 INSERT INTO `coupon_record` VALUES ('3c095de2c80c4718bb6f3e75d3a6126b', '1', '2', '支出', null, '消费一张优惠券金额为5.0', '--', '2016-11-12 22:38:26', '2016-11-12 22:38:26', 'NORMAL');
 INSERT INTO `coupon_record` VALUES ('6255e19309bc4195930e269b4d40aca1', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-13 19:00:25', '2016-11-13 19:00:25', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('c945afc5274d4869b275da0cf390bcd0', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-17 23:32:29', '2016-11-17 23:32:29', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('085c2ab2b8604a3082b622c8669f3bea', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-18 22:40:56', '2016-11-18 22:40:56', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('ee451138462040638cba3102c8053672', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-18 22:46:41', '2016-11-18 22:46:41', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('a49c6a9e12124538bc22647156e009a7', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-19 22:36:07', '2016-11-19 22:36:07', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('638104e449014aa8ba66cc6ad3ecc81e', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-19 22:44:56', '2016-11-19 22:44:56', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('75acaf057d634862ad77bc0820ff0494', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-19 22:53:40', '2016-11-19 22:53:40', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('5ea1ed4e78704fe3a449d34a9d11dc79', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-19 22:56:04', '2016-11-19 22:56:04', 'NORMAL');
+INSERT INTO `coupon_record` VALUES ('cbd21b3061ad46bcbd358ae7d7119060', '1', '1', '支出', null, '消费一张优惠券金额为0.5', '--', '2016-11-19 23:01:29', '2016-11-19 23:01:29', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for delivery_address
@@ -898,11 +862,32 @@ CREATE TABLE `order_info` (
 -- ----------------------------
 -- Records of order_info
 -- ----------------------------
+INSERT INTO `order_info` VALUES ('85d95e8ad5fd4d06908b2a86e4869635', '1', '21412883', null, '8.5', '6', '-2.5', null, '18600536683', '黄楼村南头', '今天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '2', '0', '9', '0', '', null, null, null, '2016-11-17 23:32:29', null, null, '123456789', '1', '7', '0', '0', null, '1', 'ONGOING', '--', '2016-11-17 23:32:29', '2016-11-17 23:32:29', 'NORMAL', 'OFFLINE');
+INSERT INTO `order_info` VALUES ('e33fd89cec9c4a478061905c72a77c2a', '1', '64782083', null, '3.5', '3.5', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '2', '0', '', '274200', '05308911051', null, '2016-11-18 20:48:20', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-18 20:48:20', '2016-11-18 20:48:20', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('482cdf60d033421887776d53a3951c8a', '1', '25258853', null, '3.5', '3.5', '0', null, '1860000001', '孙寺', '今天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '2', '0', '', '274200', '05308911051', null, '2016-11-18 20:59:17', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-18 20:59:17', '2016-11-18 20:59:17', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('45a02081f5d9402f9d4ad3a6f09c3284', '1', '80995325', null, '5', '2.5', '-2.5', null, '1860000001', '孙寺', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '2', '0', '5', '0', '', '274200', '05308911051', null, '2016-11-18 22:40:56', null, null, '123456789', '1', '7', '0', '0', null, '0', 'ONGOING', '--', '2016-11-18 22:40:56', '2016-11-18 22:40:56', 'NORMAL', 'OFFLINE');
 INSERT INTO `order_info` VALUES ('4c99fe3abd04494f8c954e47699dc1c1', '1', '17337896', null, '3.5', '3.5', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '0', '2', '2', '0', '啦啦啦啦', '274200', '05308911051', null, '2016-11-17 16:09:55', null, null, null, '0', '7-8-9-10-14', '0', '0', null, '0', 'CANCELED', '--', '2016-11-17 16:09:55', '2016-11-17 16:09:55', 'NORMAL', 'OFFLINE');
 INSERT INTO `order_info` VALUES ('7d46579c57d0416883f5d6110a379d71', '1', '16750448', null, '3', '3', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-17 16:22:31', null, null, null, '0', '1-2-3-4-5-6', '0', '0', null, '0', 'ONGOING', '--', '2016-11-17 16:22:35', '2016-11-17 16:22:35', 'NORMAL', 'ONLINE');
 INSERT INTO `order_info` VALUES ('a6b44a08954449748d1301307245cce9', '1', '31428461', null, '3', '3', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-17 16:39:42', null, null, null, '0', '7-8-9-10-11', '0', '0', null, '0', 'ONGOING', '--', '2016-11-17 16:39:42', '2016-11-17 16:39:42', 'NORMAL', 'OFFLINE');
 INSERT INTO `order_info` VALUES ('6aedb6ec7fd04b0582b031ca5a805741', '1', '49042121', null, '3.5', '3.5', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '2', '0', '', '274200', '05308911051', null, '2016-11-17 16:42:14', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-17 16:42:21', '2016-11-17 16:42:21', 'NORMAL', 'ONLINE');
 INSERT INTO `order_info` VALUES ('3f5f34dd86934d3bb54526fd54797623', '1', '49127573', null, '4.5', '4.5', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '支付宝', null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '', '274200', '05308911051', null, '2016-11-17 16:45:00', null, null, null, '0', '1-12', '0', '0', null, '0', 'PAY_OUT_TIME', '--', '2016-11-17 16:45:00', '2016-11-17 16:45:00', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('d98a386254174cda916b1bb1a3d1482a', '1', '83842084', null, '3', '3', '0', null, '18600536683', '批发街中间路北', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '好好', null, null, null, '2016-11-19 02:36:35', null, null, null, '0', '7', '0', '0', null, '1', 'ONGOING', '--', '2016-11-19 02:36:35', '2016-11-19 02:36:35', 'NORMAL', 'OFFLINE');
+INSERT INTO `order_info` VALUES ('b9b80453330d47de9e46d6d4b214bb8c', '1', '11138972', null, '4', '4', '0', null, '1860000001', '孙寺', '今天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '0', '2', '2', '0', '', '274200', '05308911051', null, '2016-11-19 03:27:17', null, null, null, '0', '7', '0', '0', null, '0', 'ONGOING', '--', '2016-11-19 03:27:17', '2016-11-19 03:27:17', 'NORMAL', 'OFFLINE');
+INSERT INTO `order_info` VALUES ('d4425781b0ca4c6e9346dafc393680b2', '1', '85170198', null, '4', '4', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '0', '2', '2', '0', '哈哈哈', '274200', '05308911051', null, '2016-11-19 10:26:47', null, null, null, '0', '7', '0', '0', null, '0', 'ONGOING', '--', '2016-11-19 10:26:47', '2016-11-19 10:26:47', 'NORMAL', 'OFFLINE');
+INSERT INTO `order_info` VALUES ('a206e56d221e48f9ac2dfa3962bc205c', '1', '12160075', null, '5.5', '5.5', '0', null, '13900000001', '单县', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '4', '0', '', '274200', '05308600000', null, '2016-11-19 16:10:50', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-19 16:10:50', '2016-11-19 16:10:50', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('1291b2839a6a497e94712898096735aa', '1', '64069245', null, null, '9.5', '9.5', null, '1860000001', '孙寺', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '2', '0', '12', '0', '', '274200', '05308911051', null, '2016-11-19 22:44:56', null, null, '123456789', '1', '7', '0', '0', null, '0', 'ONGOING', '--', '2016-11-19 22:44:56', '2016-11-19 22:44:56', 'NORMAL', 'OFFLINE');
+INSERT INTO `order_info` VALUES ('8937b98f34e04b7db51efb3d57959d39', '1', '29890799', null, null, '1.5', '1.5', null, '1860000001', '孙寺', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '0', '2', '0', '0', '', '274200', '05308911051', null, '2016-11-19 23:01:29', null, null, '123456789', '1', '7', '0', '0', null, '0', 'ONGOING', '--', '2016-11-19 23:01:29', '2016-11-19 23:01:29', 'NORMAL', 'OFFLINE');
+INSERT INTO `order_info` VALUES ('c6a9c149ec44451db9f996fcc9e4a94b', '1', '61227246', null, '3', '3', '0', null, '13900000001', '单县', '今天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308600000', null, '2016-11-19 23:27:59', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-19 23:27:59', '2016-11-19 23:27:59', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('0c56f895c9d848e2959f752b2f96715c', '1', '24056918', null, '2', '2', '0', null, '13900000001', '单县', '今天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '0', '0', '', '274200', '05308600000', null, '2016-11-19 23:29:56', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-19 23:29:56', '2016-11-19 23:29:56', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('d094a069c7ac4e49abb6c4c73a5bc930', '1', '23566398', null, null, '3', '3', null, '1860000001', '孙寺', '今天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-19 23:32:00', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-19 23:32:00', '2016-11-19 23:32:00', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('3bec7ca539424dfc8caf9657836b8986', '1', '64618776', null, '3', '3', '0', null, '1860000001', '孙寺', '今天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-19 23:33:13', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-19 23:33:13', '2016-11-19 23:33:13', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('623aaba6a86b4c7bbd86aa85b913652f', '1', '19080203', null, null, '3', '3', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-20 01:25:39', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-20 01:25:39', '2016-11-20 01:25:39', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('178e6c112ecd496cacbe32026caaa55c', '1', '34822068', null, '3', '3', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-20 01:40:49', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-20 01:40:49', '2016-11-20 01:40:49', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('a8174dcb61294624b3acfdfbaca92c87', '1', '01202488', null, '4', '4', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '2', '0', '', '274200', '05308911051', null, '2016-11-20 01:41:35', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-20 01:41:35', '2016-11-20 01:41:35', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('a1db15212e904057b6e6de3aeddefd62', '1', '03597319', null, '3', '3', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '货到付款', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-20 01:46:12', null, null, null, '0', '7', '0', '0', null, '0', 'ONGOING', '--', '2016-11-20 01:46:12', '2016-11-20 01:46:12', 'NORMAL', 'OFFLINE');
+INSERT INTO `order_info` VALUES ('e8171363dfa64af4b4ad55c7da387da3', '1', '26838468', null, '6', '4', '-2', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '2', '0', '6', '0', '', '274200', '05308911051', null, '2016-11-20 01:50:07', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-20 01:50:07', '2016-11-20 01:50:07', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('01e3573a1b304e91a758482a7561eea7', '1', '57824378', null, '5', '5', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '3', '0', '', '274200', '05308911051', null, '2016-11-20 01:55:12', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-20 01:55:12', '2016-11-20 01:55:12', 'NORMAL', 'ONLINE');
+INSERT INTO `order_info` VALUES ('a7db5d010d68444d84847d12f561062a', '1', '21789281', null, '2.5', '2.5', '0', null, '1860000001', '孙寺', '明天10:00-18:00', '微信', null, null, null, null, null, null, 'NORMAL', '0', '2', '1', '0', '', '274200', '05308911051', null, '2016-11-20 01:55:59', null, null, null, '0', '1', '0', '0', null, '0', 'WAIT_PAY', '--', '2016-11-20 01:55:59', '2016-11-20 01:55:59', 'NORMAL', 'ONLINE');
 
 -- ----------------------------
 -- Table structure for order_product_detail
@@ -939,6 +924,60 @@ INSERT INTO `order_product_detail` VALUES ('beaea4be2f3d4e6e997bf63011bea660', n
 INSERT INTO `order_product_detail` VALUES ('32479169be9340a9a61e92f654033375', null, '16750448', '大馍', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-17 16:23:50', '2016-11-17 16:23:50', 'NORMAL');
 INSERT INTO `order_product_detail` VALUES ('5fbc2b26ddb343f1bd841ec65a08e545', '3f5f34dd86934d3bb54526fd54797623', '49127573', '大馍', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-17 16:45:00', '2016-11-17 16:45:00', 'NORMAL');
 INSERT INTO `order_product_detail` VALUES ('b92eefafcb2041b398112f5a1a044e3e', '3f5f34dd86934d3bb54526fd54797623', '49127573', '花卷', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-17 16:45:00', '2016-11-17 16:45:00', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('da9363611080419f97e6d35ff2ed17e4', '85d95e8ad5fd4d06908b2a86e4869635', '21412883', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-17 23:32:29', '2016-11-17 23:32:29', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('fe6c44109bca4d31ab89469737022c5a', '85d95e8ad5fd4d06908b2a86e4869635', '21412883', '花卷', '16', '8', '1', '1', '1', '1', '0', '0', '--', '2016-11-17 23:32:29', '2016-11-17 23:32:29', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('13478b8cab2a40d286312abb63926cd0', 'e33fd89cec9c4a478061905c72a77c2a', '64782083', '大馍', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 20:48:20', '2016-11-18 20:48:20', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('00861e411ac64cbd8da55baf54bac6e7', '482cdf60d033421887776d53a3951c8a', '25258853', '花卷', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 20:59:17', '2016-11-18 20:59:17', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('430d51765d01492881f619abac1a3c7f', '45a02081f5d9402f9d4ad3a6f09c3284', '80995325', '大馍', '10', '5', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 22:40:56', '2016-11-18 22:40:56', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('5fa2ac5903b54719b45d3856741a6e8c', 'a551579396324483a59779a5695cbf0e', '26534794', '花卷', '4', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 22:43:46', '2016-11-18 22:43:46', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('66e75e75d2c240d1a624a3ffe5cee345', 'a551579396324483a59779a5695cbf0e', '26534794', '大馍', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 22:43:46', '2016-11-18 22:43:46', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('726022ffa9574654ae5521fc5ab89282', '12d8cbc264f84030bcd87caeae629de2', '58853726', '吃的', '41', '41', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 22:46:41', '2016-11-18 22:46:41', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('cd27eed67fe34402930dcba45c73c759', 'e41f285deea045fa97fc103c6a5dd891', '62168951', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 23:56:39', '2016-11-18 23:56:39', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('a44b0516997c497784c37b3b0058f302', 'e41f285deea045fa97fc103c6a5dd891', '62168951', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-18 23:56:39', '2016-11-18 23:56:39', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('3de2d367feb647dd8eaf065608bac489', '3eded5cf32ef420e8c52b21b11512451', '48781431', '花卷', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:02:08', '2016-11-19 00:02:08', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('01bb9701e25249eab6b6eb4789ce6634', '3eded5cf32ef420e8c52b21b11512451', '48781431', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:02:08', '2016-11-19 00:02:08', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('1dbdc19588224b14a75dfa1df76d4f79', '232209c6626a4e7099356fafc0670f89', '40130898', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:06:18', '2016-11-19 00:06:18', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('aec9615495a848e8a3dc624ae42a2707', 'bd9c718f941d4f0198f2d1cfa47bfe4f', '01185033', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:13:20', '2016-11-19 00:13:20', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('f6b6070550a74769832836398e451557', '815fa2a70eb140b78c8dadc66a9be164', '82293845', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:14:19', '2016-11-19 00:14:19', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('192a86c5748a4e7993947420e167eef3', '61d0b45564ab4c148d5a66f63639e02c', '97628461', '花卷', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:23:25', '2016-11-19 00:23:25', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('5328626f5a634b0fabd09117d4d5b05e', '3073752bb03d4355b4e8476268b8b514', '36820844', '花卷', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:30:46', '2016-11-19 00:30:46', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('289ca303edf3477883981126559f28f6', '68371cc47ff54986a39f7ae7f06370f2', '46867928', '大馍', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:31:25', '2016-11-19 00:31:25', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('3a61e8136d6245eb9ccce345fb73f931', '84debacf2a1645c49f15387f20e5741b', '81688512', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:50:26', '2016-11-19 00:50:26', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('6c47a533530a40c5a472a73a85578ed2', '84debacf2a1645c49f15387f20e5741b', '81688512', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:50:26', '2016-11-19 00:50:26', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('c38846bd1fbb4b81a2c6b636bba09b08', '9c92748255d443958be2362e2f3c2870', '20315397', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:52:45', '2016-11-19 00:52:45', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('54bd4cfa00224bac8936650d49183c1d', '9c92748255d443958be2362e2f3c2870', '20315397', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:52:45', '2016-11-19 00:52:45', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('ef2f4f42dbf442669d0aa7edb4b22b70', '9c92748255d443958be2362e2f3c2870', '20315397', '吃的', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 00:52:45', '2016-11-19 00:52:45', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('6954bde2912444ae89a00edddf9f01e0', 'd98a386254174cda916b1bb1a3d1482a', '83842084', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 02:36:35', '2016-11-19 02:36:35', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('1cf0b5af792f4eacbb5ba5500c227a10', 'd98a386254174cda916b1bb1a3d1482a', '83842084', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 02:36:35', '2016-11-19 02:36:35', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('d2c5e05b908b4463994d3ef96d250921', 'b9b80453330d47de9e46d6d4b214bb8c', '11138972', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 03:27:17', '2016-11-19 03:27:17', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('7bdc5e1eda444aa893a9921d7aeb7cf1', 'b9b80453330d47de9e46d6d4b214bb8c', '11138972', '花卷', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 03:27:17', '2016-11-19 03:27:17', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('8031cfed0619416ea98d567fb75600b3', 'd4425781b0ca4c6e9346dafc393680b2', '85170198', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 10:26:47', '2016-11-19 10:26:47', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('09188439b0c045aeac8e5aa6b164f496', 'd4425781b0ca4c6e9346dafc393680b2', '85170198', '大馍', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 10:26:47', '2016-11-19 10:26:47', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('940842765e5d46fa86f0efe57b084ca3', 'a206e56d221e48f9ac2dfa3962bc205c', '12160075', '大馍', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 16:10:50', '2016-11-19 16:10:50', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('b5af110aad6c46159aa3d9fba234dafa', 'a206e56d221e48f9ac2dfa3962bc205c', '12160075', '花卷', '4', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 16:10:50', '2016-11-19 16:10:50', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('e20ea1ae05d142818d738c00cf1ebd86', '1291b2839a6a497e94712898096735aa', '64069245', '花卷', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 22:44:56', '2016-11-19 22:44:56', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('e185012372cf4dbdb0a7a99a8cd7767f', '1291b2839a6a497e94712898096735aa', '64069245', '吃的', '8', '8', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 22:44:56', '2016-11-19 22:44:56', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('e030c7aef71a4ecfb32b78c790d5330a', '1291b2839a6a497e94712898096735aa', '64069245', '大馍', '6', '3', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 22:44:56', '2016-11-19 22:44:56', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('e0cda93d8e404ebe90c6d48af452c7e1', 'c6a9c149ec44451db9f996fcc9e4a94b', '61227246', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 23:27:59', '2016-11-19 23:27:59', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('8e5e30c904144e59a014ef86123a31f9', 'c6a9c149ec44451db9f996fcc9e4a94b', '61227246', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 23:27:59', '2016-11-19 23:27:59', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('bb132b8b30404788a2f84560339bafbe', 'd094a069c7ac4e49abb6c4c73a5bc930', '23566398', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 23:32:00', '2016-11-19 23:32:00', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('eb25002a85e14cb39ba9db21428882d8', 'd094a069c7ac4e49abb6c4c73a5bc930', '23566398', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 23:32:00', '2016-11-19 23:32:00', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('b735930d79914dbab0332a82003c6557', '3bec7ca539424dfc8caf9657836b8986', '64618776', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 23:33:13', '2016-11-19 23:33:13', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('846e863986794202a0087be4da5211fa', '3bec7ca539424dfc8caf9657836b8986', '64618776', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-19 23:33:13', '2016-11-19 23:33:13', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('0141b89437a447ff9166f763bbda2d6f', '623aaba6a86b4c7bbd86aa85b913652f', '19080203', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:25:39', '2016-11-20 01:25:39', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('8b05ce84cfe04e0ebb710d5fed160a3b', '623aaba6a86b4c7bbd86aa85b913652f', '19080203', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:25:39', '2016-11-20 01:25:39', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('808c7f74fc9e4546b31d9febc405399b', '178e6c112ecd496cacbe32026caaa55c', '34822068', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:40:49', '2016-11-20 01:40:49', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('3fe7ae003502484e8680de7f678a762c', '178e6c112ecd496cacbe32026caaa55c', '34822068', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:40:49', '2016-11-20 01:40:49', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('7a36faded4454050a3f37d09c52ed51d', 'a8174dcb61294624b3acfdfbaca92c87', '01202488', '大馍', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:41:35', '2016-11-20 01:41:35', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('c46fb9558fc04afba262ca6f3bef6840', 'a8174dcb61294624b3acfdfbaca92c87', '01202488', '花卷', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:41:35', '2016-11-20 01:41:35', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('f583ba584ffd4cf8b2ce99ca92048ab0', 'a1db15212e904057b6e6de3aeddefd62', '03597319', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:46:12', '2016-11-20 01:46:12', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('00e2940bf0bb4da69c40ea95bcf42d8d', 'a1db15212e904057b6e6de3aeddefd62', '03597319', '大馍', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:46:12', '2016-11-20 01:46:12', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('8ef382d336304bb8ac55ee869a07858c', 'e8171363dfa64af4b4ad55c7da387da3', '26838468', '吃的', '4', '4', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:50:07', '2016-11-20 01:50:07', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('9d87e7014bd64e11abb8b504a37b2d30', 'e8171363dfa64af4b4ad55c7da387da3', '26838468', '大馍', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:50:07', '2016-11-20 01:50:07', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('cc5108e4ad2842c2a7c3fa4ab17652b4', 'e8171363dfa64af4b4ad55c7da387da3', '26838468', '花卷', '2', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:50:07', '2016-11-20 01:50:07', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('28b557135983463f8602c15544e14373', '01e3573a1b304e91a758482a7561eea7', '57824378', '大馍', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:55:12', '2016-11-20 01:55:12', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('307fc1aa44fb4302aecb3bcc1c034a7c', '01e3573a1b304e91a758482a7561eea7', '57824378', '花卷', '3', '2', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:55:12', '2016-11-20 01:55:12', 'NORMAL');
+INSERT INTO `order_product_detail` VALUES ('586065dd8d1e4019ae1ecb1320ff3b2d', 'a7db5d010d68444d84847d12f561062a', '21789281', '花卷', '1', '1', '1', '1', '1', '1', '0', '0', '--', '2016-11-20 01:55:59', '2016-11-20 01:55:59', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for order_return
@@ -1113,10 +1152,10 @@ CREATE TABLE `product` (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES ('1', '大馍', '0.5', '0.5', '001', '馍', '1', '1', '1', '1', '99903', '推荐', '5', '0.25g/个', '好吃的', '2016-06-29 10:11:16', '2016-11-13 19:00:25', 'NORMAL');
-INSERT INTO `product` VALUES ('2', '花卷', '0.5', '0.5', '002', '卷子', '1', '1', '1', '1', '99914', '推荐', '5', '0.25g/个', '好吃的', '2016-06-29 16:38:03', '2016-11-13 19:00:25', 'NORMAL');
+INSERT INTO `product` VALUES ('1', '大馍', '0.5', '0.5', '001', '馍', '1', '1', '1', '1', '99848', '推荐', '5', '0.25g/个', '好吃的', '2016-06-29 10:11:16', '2016-11-13 19:00:25', 'NORMAL');
+INSERT INTO `product` VALUES ('2', '花卷', '0.5', '0.5', '002', '卷子', '1', '1', '1', '1', '99852', '推荐', '5', '0.25g/个', '好吃的', '2016-06-29 16:38:03', '2016-11-13 19:00:25', 'NORMAL');
 INSERT INTO `product` VALUES ('3', '糖包', '0.6', '0.6', '003', '糖包', '1', '1', '1', '1', '0', '推荐', '5', '0.25g/个', '好吃的', '2016-06-29 16:38:57', '2016-11-13 18:58:39', 'NORMAL');
-INSERT INTO `product` VALUES ('4', '吃的', '1.0', '1.0', '004', '好吃的', '2', '1', '0', '1', '41', '特别', '5', '0.25g/个', '好', '2016-10-30 17:54:17', '2016-11-13 19:00:25', 'NORMAL');
+INSERT INTO `product` VALUES ('4', '吃的', '1.0', '1.0', '004', '好吃的', '2', '1', '0', '1', '59', '特别', '5', '0.25g/个', '好', '2016-10-30 17:54:17', '2016-11-13 19:00:25', 'NORMAL');
 
 -- ----------------------------
 -- Table structure for product_focus

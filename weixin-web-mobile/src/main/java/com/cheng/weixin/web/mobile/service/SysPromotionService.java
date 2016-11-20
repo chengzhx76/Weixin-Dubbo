@@ -8,6 +8,7 @@ import com.cheng.weixin.rpc.promotion.entity.CouponCode;
 import com.cheng.weixin.rpc.promotion.enums.CouponType;
 import com.cheng.weixin.rpc.promotion.service.RpcCouponService;
 import com.cheng.weixin.web.mobile.result.Promotion.CouponDto;
+import com.cheng.weixin.web.mobile.security.LocalUser;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,9 +51,9 @@ public class SysPromotionService {
     }
 
     public List<CouponDto> getUsableCouponAtOrderByUser() {
-        List<CouponCode> couponCodes = couponService.getCouponCodeByUser("1");
+        List<CouponCode> couponCodes = couponService.getCouponCodeByUser(LocalUser.getUser().getUserId());
         BigDecimal productTotalPrice = BigDecimal.ZERO;
-        Set<String> productIds = cartService.getChooseProductIds("1");
+        Set<String> productIds = cartService.getChooseProductIds(LocalUser.getUser().getUserId());
         for (String productId : productIds) {
             Product product = productService.getById(productId);
             if (product.getUnitsInStock() > 0) {

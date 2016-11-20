@@ -7,6 +7,7 @@ import java.util.List;
  * Author: hp
  * Date: 2016/9/9
  */
+@Deprecated
 public class Mall {
     private List<Products> products;
     private String totalPrice;

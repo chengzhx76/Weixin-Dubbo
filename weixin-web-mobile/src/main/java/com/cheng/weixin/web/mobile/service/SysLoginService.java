@@ -15,6 +15,7 @@ import com.cheng.weixin.web.mobile.exception.UserException;
 import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
+import com.cheng.weixin.web.mobile.security.TokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,8 @@ public class SysLoginService {
     private RpcSmsService smsService;
     @Autowired
     private RpcUserService userService;
+    @Autowired
+    private TokenManager tokenManager;
 
     /**
      * 发送验证码
@@ -66,19 +69,19 @@ public class SysLoginService {
      */
     public boolean checkCode(String phone, String code) {
         SmsHistory smsHistory = smsService.getInfoByPhoneAndType(phone, MsgType.VALIDATE);
-        if (code.equals(smsHistory.getValidate())) {
-            return true;
-        }
-        return false;
+        return code.equals(smsHistory.getValidate());
     }
 
     /**
      * 保存注册信息
      * @param regDto
+     * @return
      */
-    public void saveAccess(RegDto regDto) {
+    public String saveAccess(RegDto regDto) {
         String userIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
-        userService.saveAccess(regDto.getPhone(),regDto.getPassword(), regDto.getNickname(),userIp);
+        userService.saveAccess(regDto.getPhone(), regDto.getPassword(), regDto.getNickname(), userIp);
+        return tokenManager.createToken(regDto.getPhone());
+
     }
     /**
      * 用户登录

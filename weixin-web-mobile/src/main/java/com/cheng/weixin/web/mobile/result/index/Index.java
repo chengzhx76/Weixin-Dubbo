@@ -1,8 +1,5 @@
 package com.cheng.weixin.web.mobile.result.index;
 
-import com.cheng.weixin.common.utils.StringFormat;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,7 +11,7 @@ public class Index {
     private List<IndexAd> ads;
     private List<IndexNotice> notices;
     private List<IndexProduct> products;
-    private String totalPrice;
+    //private String totalPrice;
 
     public List<IndexAd> getAds() {
         return ads;
@@ -41,11 +38,11 @@ public class Index {
         this.products = products;
     }
 
-    public String getTotalPirce() {
-        return totalPrice;
-    }
-
-    public void setTotalPirce(BigDecimal totalPrice) {
-        this.totalPrice = StringFormat.format(totalPrice);
-    }
+    //public String getTotalPirce() {
+    //    return totalPrice;
+    //}
+    //
+    //public void setTotalPirce(BigDecimal totalPrice) {
+    //    this.totalPrice = StringFormat.format(totalPrice);
+    //}
 }

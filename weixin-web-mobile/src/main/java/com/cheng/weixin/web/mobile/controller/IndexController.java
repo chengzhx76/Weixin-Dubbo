@@ -5,7 +5,6 @@ import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.index.Index;
-import com.cheng.weixin.web.mobile.result.index.IndexBuy;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.SysIndexService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class IndexController extends BaseController {
     @IgnoreSecurity
     @RequestMapping(value = "v1/index")
     public ResponseEntity<Response> index(HttpServletRequest request) {
-        Index index = sysIndexService.getIndexInfo("1");
+        Index index = sysIndexService.getIndexInfo();
         return success(index);
     }
 
@@ -44,16 +43,16 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        IndexBuy indexBuy = sysIndexService.addProduct(productDto.getProductId());
-        return success(indexBuy);
+        long counts = sysIndexService.addProduct(productDto.getProductId());
+        return success(counts);
     }
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
-        IndexBuy indexBuy = sysIndexService.subProduct(productDto.getProductId());
-        return success(indexBuy);
+        long counts = sysIndexService.subProduct(productDto.getProductId());
+        return success(counts);
     }
 
 }

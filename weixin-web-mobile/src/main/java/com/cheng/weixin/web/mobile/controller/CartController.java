@@ -5,7 +5,6 @@ import com.cheng.weixin.web.mobile.param.AddressDto;
 import com.cheng.weixin.web.mobile.param.ProductDto;
 import com.cheng.weixin.web.mobile.result.cart.ProductCartInfo;
 import com.cheng.weixin.web.mobile.result.cart.ShoppingCartInfo;
-import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
 import com.cheng.weixin.web.mobile.service.SysCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,6 @@ public class CartController extends BaseController {
     private SysCartService sysCartService;
 
     /** 购物车信息 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/info")
     public ResponseEntity<Response> info(HttpServletRequest request) {
         AddressDto address = (AddressDto) getDto(request, AddressDto.class);
@@ -34,7 +32,6 @@ public class CartController extends BaseController {
         return success(shoppingCartInfo);
     }
     /** 增加购物车的商品 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
@@ -43,7 +40,6 @@ public class CartController extends BaseController {
     }
 
     /** 减少购物车的商品 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
@@ -52,7 +48,6 @@ public class CartController extends BaseController {
     }
 
     /** 删除购物车的商品 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/delete")
     public ResponseEntity<Response> delete(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
@@ -61,7 +56,6 @@ public class CartController extends BaseController {
     }
 
     /** 改变选择状态 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/change")
     public ResponseEntity<Response> changeStatus(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
@@ -70,7 +64,6 @@ public class CartController extends BaseController {
     }
 
     /** 选择所有 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/chooseAll")
     public ResponseEntity<Response> allChoose() {
         ProductCartInfo productCart = sysCartService.chooseAllProduct();
@@ -78,10 +71,16 @@ public class CartController extends BaseController {
     }
 
     /** 取消选择所有 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/unChoose")
     public ResponseEntity<Response> unChoose() {
         ProductCartInfo productCart = sysCartService.unChooseAllProduct();
         return success(productCart);
+    }
+
+    /** 总价格 **/
+    @RequestMapping(value = "v1/price/total")
+    public ResponseEntity<Response> totalPrice() {
+        String totalPrice = sysCartService.getTotalPrice();
+        return success(totalPrice);
     }
 }

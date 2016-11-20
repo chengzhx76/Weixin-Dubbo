@@ -23,7 +23,6 @@
     <if test="txType != null and txType != ''">tx_type=#{txType},</if>
     <if test="behaviorId != null and behaviorId != ''">behavior_id=#{behaviorId},</if>
     <if test="txResult != null and txResult != ''">tx_result=#{txResult},</if>
-
     <if test="remarks != null and remarks != ''">remarks=#{remarks},</if>
     <if test="createDate != null and createDate != ''">create_date=#{createDate},</if>
     <if test="updateDate != null and updateDate != ''">update_date=#{updateDate},</if>
@@ -42,7 +41,7 @@
         id = #{id}
       </if>
       <if test="accountId != null and accountId != ''">
-        account_id = #{accountId}
+        AND account_id = #{accountId}
       </if>
       <choose>
         <when test="status != null and status !=''">
@@ -68,9 +67,18 @@
     <include refid="bonusPointRecordWhere"/>
   </select>
 
-  <select id="loadByUserId" parameterType="BonusPointRecord" resultType="BonusPointRecord">
+  <select id="loadNewByUSerId" parameterType="BonusPointRecord" resultType="BonusPointRecord">
     <include refid="bonusPointRecordSelector"/>
     <include refid="bonusPointRecordWhere"/>
+    ORDER BY create_date DESC LIMIT 1
+  </select>
+
+  <select id="loadByUSerIdAndCurrentMonth" parameterType="BonusPointRecord" resultType="BonusPointRecord">
+    <include refid="bonusPointRecordSelector"/>
+    <include refid="bonusPointRecordWhere"/>
+    <if test="createDate != null">
+      AND create_date &gt; #{createDate}
+    </if>
   </select>
 
   <!-- 获取全部 -->

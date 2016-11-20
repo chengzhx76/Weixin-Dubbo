@@ -2,10 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			 xmlns:context="http://www.springframework.org/schema/context"
+			 xmlns:aop="http://www.springframework.org/schema/aop"
 			 xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 打开Spring的Annotation支持 -->
 	<context:annotation-config />
@@ -16,6 +19,11 @@
 	</context:component-scan>
 
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:globalconf.properties,classpath:system.properties"/>
+
+	<!-- Token 认证管理器 交由redis管理token -->
+	<bean id="tokenManager" class="com.cheng.weixin.web.mobile.security.impl.RedisTokenManager">
+		<property name="seconds" value="3600"/>
+	</bean>
 
 	<import resource="classpath:spring/spring-dubbo-consumer.xml"/>
 </beans>

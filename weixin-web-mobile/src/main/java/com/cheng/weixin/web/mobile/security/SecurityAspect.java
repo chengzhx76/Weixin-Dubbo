@@ -46,7 +46,7 @@ public class SecurityAspect {
         String token = ServletUtils.getRequest().getParameter(tokenName);
         // 检查 token 有效性
         if (!tokenManager.checkToken(token)) {
-            throw new TokenException(StatusCode.UNAUTHORIZED.msg());
+            throw new TokenException(StatusCode.UNAUTHORIZED);
         }
         // 调用目标方法
         return pjp.proceed();

@@ -27,7 +27,6 @@ public class OrderController extends BaseController {
     private SysOrderService orderService;
 
     /** 购买 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/payment")
     public ResponseEntity<Response> payment(HttpServletRequest request) {
         PaymentDto payment = (PaymentDto) getDto(request, PaymentDto.class);
@@ -36,7 +35,6 @@ public class OrderController extends BaseController {
     }
 
     /** 购买商品列表 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/product/list")
     public ResponseEntity<Response> productList() {
         List<ProductList> list = orderService.getProductList();
@@ -44,7 +42,6 @@ public class OrderController extends BaseController {
     }
 
     /** 提交订单 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/buy")
     public ResponseEntity<Response> submitBuy(HttpServletRequest request) {
         PaymentDto payment = (PaymentDto) getDto(request, PaymentDto.class);
@@ -54,7 +51,6 @@ public class OrderController extends BaseController {
 
 
     /** 订单列表 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/orders")
     public ResponseEntity<Response> orders() {
         List<OrderList> orders = orderService.getOrders();
@@ -62,7 +58,6 @@ public class OrderController extends BaseController {
     }
 
     /** 订单详情 **/
-    @IgnoreSecurity
     @RequestMapping(value = "v1/detail")
     public ResponseEntity<Response> orderDetail() {
         Detail order = orderService.getOrderDetail();

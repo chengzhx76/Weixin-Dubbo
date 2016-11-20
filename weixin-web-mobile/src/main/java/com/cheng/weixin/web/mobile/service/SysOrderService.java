@@ -15,12 +15,14 @@ import com.cheng.weixin.rpc.promotion.entity.CouponCode;
 import com.cheng.weixin.rpc.promotion.enums.CouponType;
 import com.cheng.weixin.rpc.promotion.service.RpcCouponService;
 import com.cheng.weixin.rpc.user.entity.*;
+import com.cheng.weixin.rpc.user.enumType.TXType;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
 import com.cheng.weixin.web.mobile.exception.BusinessException;
 import com.cheng.weixin.web.mobile.exception.OrderException;
 import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.param.PaymentDto;
 import com.cheng.weixin.web.mobile.result.order.*;
+import com.cheng.weixin.web.mobile.security.LocalUser;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -57,12 +59,12 @@ public class SysOrderService {
         if (payment!=null && payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
             if (payment.getSince()) {
                 ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(payment.getAddrId());
-                Member member = userService.getMemberById("1");
+                Member member = userService.getMemberById(LocalUser.getUser().getUserId());
                 submitOrder.setMobile(member.getMobile());
                 submitOrder.setAddress(arayacakAddress.getAddress());
                 submitOrder.setSince(true);
             }else {
-                DeliveryAddress addr = userService.getDeliveryAddress(payment.getAddrId(), "1");
+                DeliveryAddress addr = userService.getDeliveryAddress(payment.getAddrId(), LocalUser.getUser().getUserId());
                 submitOrder.setConsignee(addr.getConsignee());
                 submitOrder.setMobile(addr.getMobile());
                 submitOrder.setAddress(addr.getAddress());
@@ -70,7 +72,7 @@ public class SysOrderService {
             }
             submitOrder.setAddrId(payment.getAddrId());
         }else {
-            DeliveryAddress addr = userService.getDefaultAddress("1");
+            DeliveryAddress addr = userService.getDefaultAddress(LocalUser.getUser().getUserId());
             submitOrder.setConsignee(addr.getConsignee());
             submitOrder.setMobile(addr.getMobile());
             submitOrder.setAddress(addr.getAddress());
@@ -99,18 +101,18 @@ public class SysOrderService {
         submitOrder.setPays(orderPays);
 
         // 余额
-        Account account = userService.getAccount("1");
+        Account account = userService.getAccount(LocalUser.getUser().getUserId());
         submitOrder.setAvailableBalance(StringFormat.format(account.getBalance()));
 
         // 商品详情
         int totalProductNums = 0;
         BigDecimal totalProductPrice = BigDecimal.ZERO;
-        Set<String> productIds = cartService.getChooseProductIds("1");
+        Set<String> productIds = cartService.getChooseProductIds(LocalUser.getUser().getUserId());
         List<String> productImgs = new ArrayList<>(productIds.size());
         for (String productId : productIds) {
             Product product = productService.getDefaultPictureById(productId);
             if (product.getUnitsInStock() > 0) {
-                Long productNums = cartService.getCounts("1", productId);
+                Long productNums = cartService.getCounts(LocalUser.getUser().getUserId(), productId);
                 totalProductNums += productNums;
                 totalProductPrice = totalProductPrice.add(product.getSalePrice().multiply(BigDecimal.valueOf(productNums)));
                 productImgs.add(product.getDefaultPicture().getPictureUrl());
@@ -121,7 +123,7 @@ public class SysOrderService {
         submitOrder.setTotalProductPrice(StringFormat.format(totalProductPrice));
 
         // 优惠券
-        List<CouponCode> couponCodes = couponService.getCouponCodeByUser("1");
+        List<CouponCode> couponCodes = couponService.getCouponCodeByUser(LocalUser.getUser().getUserId());
         int availableCoupon = 0;
         for (CouponCode code : couponCodes) {
             // 只有红包券才是满减券
@@ -184,7 +186,7 @@ public class SysOrderService {
 
     /** 购买商品列表 **/
     public List<ProductList> getProductList() {
-        List<ProductModel> productModels = cartService.getChooseProductInfo("1");
+        List<ProductModel> productModels = cartService.getChooseProductInfo(LocalUser.getUser().getUserId());
         List<ProductList> productLists = new ArrayList<>();
         for (ProductModel model : productModels) {
             ProductList productList = new ProductList();
@@ -201,7 +203,7 @@ public class SysOrderService {
 
     public BuyInfo buy(PaymentDto payment, HttpServletRequest request) {
         BigDecimal totalProductPrice = BigDecimal.ZERO;
-        List<ProductModel> productModels = cartService.getChooseProductInfo("1");
+        List<ProductModel> productModels = cartService.getChooseProductInfo(LocalUser.getUser().getUserId());
         for (int i=0; i<productModels.size(); i++) {
             Product product = productService.getById(productModels.get(i).getId());
             int counts = productModels.get(i).getCount();
@@ -213,17 +215,17 @@ public class SysOrderService {
         OrderInfo order = new OrderInfo();
         String oid = RandomStringUtils.randomNumeric(8); //TODO
         order.setOid(oid);
-        order.setAccountId("1");
+        order.setAccountId(LocalUser.getUser().getUserId());
         // 配送地址
         if (payment!=null && payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
             if (payment.getSince()) {
                 ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(payment.getAddrId());
-                Member member = userService.getMemberById("1");
+                Member member = userService.getMemberById(LocalUser.getUser().getUserId());
                 order.setMobile(member.getMobile());
                 order.setAddress(arayacakAddress.getAddress());
                 order.setSince(true);
             }else {
-                DeliveryAddress addr = userService.getDeliveryAddress(payment.getAddrId(), "1");
+                DeliveryAddress addr = userService.getDeliveryAddress(payment.getAddrId(), LocalUser.getUser().getUserId());
                 order.setMobile(addr.getMobile());
                 order.setVillageId(addr.getVillageId());
                 order.setAddress(addr.getAddress());
@@ -233,7 +235,7 @@ public class SysOrderService {
                 order.setSince(false);
             }
         }else {
-            DeliveryAddress addr = userService.getDefaultAddress("1");
+            DeliveryAddress addr = userService.getDefaultAddress(LocalUser.getUser().getUserId());
             order.setConsignee(addr.getConsignee());
             order.setMobile(addr.getMobile());
             order.setVillageId(addr.getVillageId());
@@ -275,23 +277,6 @@ public class SysOrderService {
             order.setFreightPayable(BigDecimal.valueOf(2L)); // 应付运费
             order.setFreightReduce(BigDecimal.ZERO); // 运费优惠
         }
-
-        Account account = userService.getAccount("1");
-        // 是否是用余额支付
-        if(payment.getBalance()) {
-            BigDecimal balance = null;
-            BigDecimal totalPrice = totalProductPrice.add(order.getFreightPayable());
-            if (account.getBalance().compareTo(totalPrice) == 1 || account.getBalance().compareTo(totalPrice) == 0) {
-                balance = account.getBalance().subtract(totalPrice);
-                order.setBalanceOffset(totalPrice);
-            }else if (account.getBalance().compareTo(totalPrice) == -1) {
-                order.setBalanceOffset(account.getBalance());
-                balance = BigDecimal.ZERO;
-            }
-            account.setBalance(balance);
-        }
-        userService.updateAccount(account);
-
         order.setProductTotalPrice(totalProductPrice); // 商品总金额
         order.setDiscount(BigDecimal.ZERO); // 优惠金额
 
@@ -310,12 +295,14 @@ public class SysOrderService {
 
             // 优惠券记录
             CouponRecord couponRecord = new CouponRecord();
-            couponRecord.setAccountId("1");
+            couponRecord.setAccountId(LocalUser.getUser().getUserId());
             couponRecord.setCouponCodeId(couponCode.getId());
             couponRecord.setTxType("支出");
             couponRecord.setTxResult("消费一张优惠券金额为"+ StringFormat.format(couponCode.getCoupon().getFaceValue()));
             userService.addCouponRecord(couponRecord);
             couponService.updateCouponUsedById(couponCode.getId());
+
+            // TODO 去删除该优惠券
         }
         order.setCouponReducePrice(couponReducePrice);
         order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠
@@ -323,9 +310,42 @@ public class SysOrderService {
         // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
         order.setAmountPayable(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
                 .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
-        // 已付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠 - 余额抵扣
+        // 已付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠 - 余额抵扣(下面扣得)
         BigDecimal amountPaid = order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
                                 .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
+
+        // 积分金额 = 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
+        BigDecimal pointAmount = totalProductPrice.subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
+        int bonusPoints = pointAmount.multiply(BigDecimal.TEN).intValue(); // 1毛=1积分
+
+        // 账户更新
+        Account account = userService.getAccount(LocalUser.getUser().getUserId());
+        // 是否是用余额支付
+        if(payment.getBalance()) {
+            BigDecimal balance = null;
+            BigDecimal totalPrice = totalProductPrice.add(order.getFreightPayable());
+            if (account.getBalance().compareTo(totalPrice) == 1 || account.getBalance().compareTo(totalPrice) == 0) {
+                balance = account.getBalance().subtract(totalPrice);
+                order.setBalanceOffset(totalPrice);
+            }else if (account.getBalance().compareTo(totalPrice) == -1) {
+                order.setBalanceOffset(account.getBalance());
+                balance = BigDecimal.ZERO;
+            }
+            account.setBalance(balance);
+        }
+        account.setBonusPointUsable(account.getBonusPointUsable()+bonusPoints);
+
+        if (account.getBonusPointUpgrade()-bonusPoints > 0) {
+            account.setBonusPointUpgrade(account.getBonusPointUpgrade()-bonusPoints);
+        }else {
+            AccountLevel level = userService.getAccountLevelById(account.getAccountLevelId());
+            AccountLevel accountLevel = userService.getAccountLevelByLevel(level.getLevel()+1); // 升一级
+            int residuePoint = Math.abs(account.getBonusPointUpgrade() - bonusPoints);
+            account.setBonusPointUpgrade(accountLevel.getNextLevelNeedPoint() - residuePoint);
+            account.setAccountLevelId(accountLevel.getId());
+        }
+        userService.updateAccount(account);
+
         if (payment.getBalance()) { // 是否是用余额支付
             amountPaid = amountPaid.subtract(order.getBalanceOffset());
         }
@@ -353,32 +373,35 @@ public class SysOrderService {
             detail.setGift(false);
             orderService.addOrderDetail(detail);
         }
-        cartService.deletedChooseProduct("1");
+        cartService.deletedChooseProduct(LocalUser.getUser().getUserId());
 
         // 积分记录
-        BonusPointRecord bonusPoint = userService.getBonusPointRecord("1");
+        BonusPointRecord bonusPoint = userService.getBonusPointRecord(LocalUser.getUser().getUserId());
+
         BonusPointRecord bonusPointRecord = new BonusPointRecord();
-        bonusPointRecord.setTxBonusPoints(10);// TODO 本次订单获取的积分
-        bonusPointRecord.setFrozenBonusPoints(10);
+        bonusPointRecord.setAccountId(LocalUser.getUser().getUserId());
+        bonusPointRecord.setTxBonusPoints(bonusPoints);
+        bonusPointRecord.setFrozenBonusPoints(bonusPoints);
         if (bonusPoint != null) {
             bonusPointRecord.setBeforeBonusPoints(bonusPoint.getAfterBonusPoints());
-            bonusPointRecord.setAfterBonusPoints(bonusPoint.getAfterBonusPoints()+10);
+            bonusPointRecord.setAfterBonusPoints(bonusPoint.getAfterBonusPoints()+bonusPoints);
         }else {
             bonusPointRecord.setBeforeBonusPoints(0);
-            bonusPointRecord.setAfterBonusPoints(10);
+            bonusPointRecord.setAfterBonusPoints(bonusPoints);
         }
-        bonusPointRecord.setTxResult("下单获取10积分");
+        bonusPointRecord.setTxResult("下单获取"+bonusPoints+"积分");
+        bonusPointRecord.setTxType(TXType.EARNING);
         userService.addBonusPointRecord(bonusPointRecord);
 
         // 现金记录
         if (payment.getBalance()) {
-            CashRecord cash = userService.getNewCashRecord("1");
+            CashRecord cash = userService.getNewCashRecord(LocalUser.getUser().getUserId());
             if (cash == null) {
                 throw new BusinessException("请先充值");
             }
 
             CashRecord cashRecord = new CashRecord();
-            cashRecord.setAccountId("1");
+            cashRecord.setAccountId(LocalUser.getUser().getUserId());
             cashRecord.setTxMoney(order.getBalanceOffset());
             cashRecord.setBeforeMoney(cash.getAfterBonusPoints());
             BigDecimal afterBonusPoints = cash.getAfterBonusPoints().subtract(order.getBalanceOffset());
@@ -386,11 +409,10 @@ public class SysOrderService {
                 throw new BusinessException("余额不足");
             }
             cashRecord.setAfterBonusPoints(afterBonusPoints);
-            cashRecord.setTxType("支出");
-            cashRecord.setTxResult("结果");
+            cashRecord.setTxType(TXType.EXPENSE);
+            cashRecord.setTxResult("下单花费"+order.getBalanceOffset()+"元");
             userService.addCashRecord(cashRecord);
         }
-
         BuyInfo buyInfo = new BuyInfo();
         buyInfo.setOrderNum(oid);
         buyInfo.setDeliveryDate(order.getDeliveryTime());
@@ -399,7 +421,7 @@ public class SysOrderService {
 
 
     public List<OrderList> getOrders() {
-        List<OrderInfo> orderInfos = orderService.getOrderInfos("1");
+        List<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId());
         List<OrderList> orders = new ArrayList<>();
         for (OrderInfo order : orderInfos) {
             OrderList orderList = new OrderList();

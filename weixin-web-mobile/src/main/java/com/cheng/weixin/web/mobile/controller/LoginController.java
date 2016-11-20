@@ -4,6 +4,9 @@ import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.LoginDto;
 import com.cheng.weixin.web.mobile.param.RegDto;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
+import com.cheng.weixin.web.mobile.security.LocalUser;
+import com.cheng.weixin.web.mobile.security.TokenManager;
+import com.cheng.weixin.web.mobile.security.User;
 import com.cheng.weixin.web.mobile.service.SysLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController extends BaseController {
     @Autowired
     private SysLoginService sysLoginService;
+    @Autowired
+    private TokenManager tokenManager;
     /** 发送验证码 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/sendMsgCode")
@@ -29,6 +34,7 @@ public class LoginController extends BaseController {
         sysLoginService.sendRegMsgCode(userDto.getPhone());
         return success();
     }
+
     /** 验证验证码 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/checkCode")
@@ -46,12 +52,6 @@ public class LoginController extends BaseController {
         return success();
     }
 
-
-    //@RequestMapping(value = "v1/login1")
-    //public ResponseEntity<Response> login1() {
-    //    return failure();
-    //}
-
     /** 登陆 **/
     @IgnoreSecurity
     @RequestMapping(value = "v1/login")
@@ -61,4 +61,17 @@ public class LoginController extends BaseController {
         return success();
     }
 
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/token")
+    public ResponseEntity<Response> setToken(HttpServletRequest request) {
+        String token = tokenManager.createToken("18600536683");
+        return success(token);
+    }
+
+
+    @RequestMapping(value = "v1/user")
+    public ResponseEntity<Response> getUserInfoByToken(HttpServletRequest request) {
+        User user = LocalUser.getUser();
+        return success(user);
+    }
 }

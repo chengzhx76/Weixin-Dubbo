@@ -9,6 +9,7 @@ import java.math.BigDecimal;
  * Author: 光灿
  * Date: 2016/7/1
  */
+@Deprecated
 public class IndexBuy {
     private Long count;
     private String price;

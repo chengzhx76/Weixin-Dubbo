@@ -1,6 +1,7 @@
 package com.cheng.weixin.rpc.user.entity;
 
 import com.cheng.common.entity.DataEntity;
+import com.cheng.weixin.rpc.user.enumType.TXType;
 
 /**
  * Desc: 积分记录  记录积分的收支情况
@@ -13,7 +14,7 @@ public class BonusPointRecord extends DataEntity<BonusPointRecord> {
     private int txBonusPoints;
     private int frozenBonusPoints;
     private int afterBonusPoints;
-    private int txType;
+    private TXType txType;
     private String behaviorId;
     private String txResult;
 
@@ -64,11 +65,11 @@ public class BonusPointRecord extends DataEntity<BonusPointRecord> {
         this.afterBonusPoints = afterBonusPoints;
     }
 
-    public int getTxType() {
+    public TXType getTxType() {
         return txType;
     }
 
-    public void setTxType(int txType) {
+    public void setTxType(TXType txType) {
         this.txType = txType;
     }
 

@@ -8,14 +8,16 @@ import com.cheng.weixin.rpc.system.entity.Notice;
 import com.cheng.weixin.rpc.system.service.RpcSystemService;
 import com.cheng.weixin.web.mobile.exception.ProductException;
 import com.cheng.weixin.web.mobile.exception.message.StatusCode;
-import com.cheng.weixin.web.mobile.result.index.*;
+import com.cheng.weixin.web.mobile.result.index.Index;
+import com.cheng.weixin.web.mobile.result.index.IndexAd;
+import com.cheng.weixin.web.mobile.result.index.IndexNotice;
+import com.cheng.weixin.web.mobile.result.index.IndexProduct;
+import com.cheng.weixin.web.mobile.security.LocalUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Desc:
@@ -31,7 +33,7 @@ public class SysIndexService {
     @Autowired
     private RpcSystemService systemService;
 
-    public Index getIndexInfo(String userId) {
+    public Index getIndexInfo() {
         // 图片
         List<IndexAd> indexads = new ArrayList<>();
         List<Ad> ads = systemService.getIndexAds();
@@ -71,13 +73,13 @@ public class SysIndexService {
         }
 
         // 金额
-        BigDecimal totalPrice = totalPrice(userId);
+        //BigDecimal totalPrice = totalPrice(LocalUser.getUser().getUserId());
 
         Index index = new Index();
         index.setAds(indexads);
         index.setNotices(indexNotices);
         index.setProducts(indexProducts);
-        index.setTotalPirce(totalPrice);
+        //index.setTotalPirce(totalPrice);
 
         return index;
     }
@@ -87,39 +89,39 @@ public class SysIndexService {
      * @param productId
      * @return
      */
-    public IndexBuy addProduct(String productId) {
+    public long addProduct(String productId) {
         Product product = productService.getById(productId);
         if (product.getUnitsInStock()<=0) {
             throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
-        long count = cartService.addProductCount("1", productId);
+        long count = cartService.addProductCount(LocalUser.getUser().getUserId(), productId);
         if (product.getUnitsInStock() < count) {
-            cartService.subProductCount("1", productId);
+            cartService.subProductCount(LocalUser.getUser().getUserId(), productId);
             throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
 
         // 金额
-        BigDecimal totalPrice = totalPrice("1");
+        //BigDecimal totalPrice = totalPrice(LocalUser.getUser().getUserId());
 
-        IndexBuy indexBuy = new IndexBuy();
-        indexBuy.setCount(count);
-        indexBuy.setPrice(totalPrice);
-        return indexBuy;
+        //IndexBuy indexBuy = new IndexBuy();
+        //indexBuy.setCount(count);
+        //indexBuy.setPrice(totalPrice);
+        return count;
     }
     /**
      * 减少商品
      * @param productId
      * @return
      */
-    public IndexBuy subProduct(String productId) {
-        long count = cartService.subProductCount("1", productId);
+    public long subProduct(String productId) {
+        long count = cartService.subProductCount(LocalUser.getUser().getUserId(), productId);
         // 金额
-        BigDecimal totalPrice = totalPrice("1");
+        //BigDecimal totalPrice = totalPrice(LocalUser.getUser().getUserId());
 
-        IndexBuy indexBuy = new IndexBuy();
-        indexBuy.setCount(count);
-        indexBuy.setPrice(totalPrice);
-        return indexBuy;
+        //IndexBuy indexBuy = new IndexBuy();
+        //indexBuy.setCount(count);
+        //indexBuy.setPrice(totalPrice);
+        return count;
     }
 
     /**
@@ -127,7 +129,7 @@ public class SysIndexService {
      * @param userId
      * @return
      */
-    private BigDecimal totalPrice(String userId) {
+/*    private BigDecimal totalPrice(String userId) {
         Set<String> productIds =  cartService.getChooseProductIds(userId);
         BigDecimal totalPrice = new BigDecimal(0);
         for (String productId : productIds) {
@@ -139,6 +141,6 @@ public class SysIndexService {
             }
         }
         return totalPrice;
-    }
+    }*/
 
 }

@@ -15,6 +15,7 @@ import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.result.comment.ProductComment;
 import com.cheng.weixin.web.mobile.result.product.ProductDetail;
 import com.cheng.weixin.web.mobile.result.product.ProductPic;
+import com.cheng.weixin.web.mobile.security.LocalUser;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class SysProductService {
     public ProductDetail getDetail(String productId) {
         Product product = productService.getById(productId);
         List<Picture> pictures = productService.getShowPictureByProductId(productId);
-        boolean isFocus = userService.isProductFocus("1", productId);
+        boolean isFocus = userService.isProductFocus(LocalUser.getUser().getUserId(), productId);
 
         ProductDetail detail = new ProductDetail();
         detail.setProductId(product.getId());
@@ -63,8 +64,8 @@ public class SysProductService {
         detail.setMarketPrice(StringFormat.format(product.getMarketPrice()));
         detail.setGiveAway(product.getGiveAway());
         detail.setFocus(isFocus);
-        if (cartService.exists("1", productId)) {
-            Long count = cartService.getCounts("1", productId);
+        if (cartService.exists(LocalUser.getUser().getUserId(), productId)) {
+            Long count = cartService.getCounts(LocalUser.getUser().getUserId(), productId);
             detail.setCount(count+"");
             BigDecimal totalPrice = BigDecimal.valueOf(count).multiply(product.getSalePrice());
             detail.setTotalPrice(StringFormat.format(totalPrice));
@@ -100,15 +101,15 @@ public class SysProductService {
         if (product.getUnitsInStock() < count) {
             throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
-        cartService.addProduct("1", productId, count);
+        cartService.addProduct(LocalUser.getUser().getUserId(), productId, count);
     }
 
     public boolean focus(String productId) {
-        boolean isFocus = userService.isProductFocus("1", productId);
+        boolean isFocus = userService.isProductFocus(LocalUser.getUser().getUserId(), productId);
         if (isFocus) {
-            userService.deleteProductFocus("1", productId);
+            userService.deleteProductFocus(LocalUser.getUser().getUserId(), productId);
         }else {
-            userService.addProductFocus("1", productId);
+            userService.addProductFocus(LocalUser.getUser().getUserId(), productId);
         }
         return !isFocus;
     }

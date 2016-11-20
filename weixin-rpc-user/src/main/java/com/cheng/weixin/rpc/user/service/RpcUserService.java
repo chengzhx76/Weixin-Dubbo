@@ -69,6 +69,13 @@ public interface RpcUserService {
     Account getAccount(String userId);
 
     /**
+     * 获取账户信息根据登录名
+     * @param username
+     * @return
+     */
+    Account getAccountByUsername(String username);
+
+    /**
      * 更新帐户
      * @param account
      */
@@ -85,6 +92,13 @@ public interface RpcUserService {
      * @param userId
      */
     BonusPointRecord getBonusPointRecord(String userId);
+
+    /**
+     * 获取当前月获取的积分记录
+     * @param userId
+     * @return
+     */
+    List<BonusPointRecord> getByUSerIdAndCurrentMonth(String userId);
 
     /**
      * 保存积分
@@ -144,5 +158,19 @@ public interface RpcUserService {
      * @return
      */
     Member getMemberById(String userId);
+
+    /**
+     * 根据ID获取级别信息
+     * @param id
+     * @return
+     */
+    AccountLevel getAccountLevelById(String id);
+
+    /**
+     * 根据级别获取级别信息
+     * @param level
+     * @return
+     */
+    AccountLevel getAccountLevelByLevel(int level);
 
 }
