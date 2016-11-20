@@ -39,7 +39,7 @@ public class IndexController extends BaseController {
         return success(index);
     }
 
-    @IgnoreSecurity
+    //@IgnoreSecurity
     @RequestMapping(value = "v1/add")
     public ResponseEntity<Response> add(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);
@@ -47,7 +47,7 @@ public class IndexController extends BaseController {
         return success(counts);
     }
 
-    @IgnoreSecurity
+    //@IgnoreSecurity
     @RequestMapping(value = "v1/sub")
     public ResponseEntity<Response> sub(HttpServletRequest request) {
         ProductDto productDto = (ProductDto) getDto(request, ProductDto.class);

@@ -35,6 +35,12 @@
       <if test="id != null and id != ''">
         id = #{id}
       </if>
+      <if test="type != null">
+        AND type = #{type}
+      </if>
+      <if test="isEnable != null">
+        AND is_enable = #{isEnable}
+      </if>
       <choose>
         <when test="status != null and status !=''">
           AND status = #{status}
@@ -60,7 +66,7 @@
     <include refid="smsTemplateWhere"/>
   </select>
   <!-- 获取全部信息 -->
-  <select id="loadAll" resultType="SmsTemplate">
+  <select id="loadAll" resultType="SmsTemplate" parameterType="SmsTemplate">
     <include refid="smsTemplateSelector"/>
     <include refid="smsTemplateWhere"/>
   </select>
@@ -87,12 +93,12 @@
 
   <!-- ============================================================ -->
     <!-- 获取激活的注册模板 -->
-    <select id="loadRegTemp" resultType="SmsTemplate">
+<!--    <select id="loadRegTemp" resultType="SmsTemplate">
     <include refid="smsTemplateSelector"/>
     <include refid="smsTemplateWhere"/>
     AND type = 'VALIDATE'
     AND is_enable = 1
-  </select>
+  </select>-->
 
 </mapper>
 

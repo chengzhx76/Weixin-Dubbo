@@ -1,9 +1,9 @@
 package com.cheng.weixin.rpc.message.service;
 
 
+import com.cheng.weixin.rabbitmq.enums.MsgType;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.message.entity.SmsHistory;
-import com.cheng.weixin.rpc.message.enums.MsgType;
 
 /**
  * Desc: 短信服务
@@ -40,9 +40,9 @@ public interface RpcSmsService {
 
     /**
      * 发送通知短信
-     * @param msgData
+     * @param smsModel
      */
-    void sendNotice(String msgData);
+    void sendNotice(SmsModel smsModel);
 
     /**
      * 发送活动短信

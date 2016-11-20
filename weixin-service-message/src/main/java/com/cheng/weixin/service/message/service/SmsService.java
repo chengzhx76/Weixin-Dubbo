@@ -2,10 +2,10 @@ package com.cheng.weixin.service.message.service;
 
 import com.cheng.weixin.common.security.CodecUtil;
 import com.cheng.weixin.common.utils.StringUtils;
+import com.cheng.weixin.rabbitmq.enums.MsgType;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.message.entity.SmsHistory;
 import com.cheng.weixin.rpc.message.entity.SmsTemplate;
-import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.service.message.dao.SmsHistoryDaoMapper;
 import com.cheng.weixin.service.message.dao.SmsTemplateDaoMapper;
@@ -61,9 +61,10 @@ public class SmsService implements RpcSmsService {
             return;
         }
 
-        SmsTemplate smsTemplate = smsTemplateDao.loadRegTemp();
+        SmsTemplate validateTemplate = smsTemplateDao.load(new SmsTemplate(MsgType.VALIDATE));
         String code = CodecUtil.createRandomNum(4);
-        String content = StringUtils.replace(StringUtils.replace(smsTemplate.getContent(), "[MSGCODE]", code), "[TIMEOUT]", smsTemplate.getTimeout()+"");
+        String content = StringUtils.replace(StringUtils.replace(validateTemplate.getContent(), "[MSGCODE]", code),
+                "[TIMEOUT]", validateTemplate.getTimeout()+"");
 
         // 发送短信 开始
         logger.info("开始发送短信===> "+content);
@@ -74,7 +75,7 @@ public class SmsService implements RpcSmsService {
         history.setUserIp(smsModel.getUserIp());
         history.setContent(content);
         history.setSender("system");
-        history.setTimeout(smsTemplate.getTimeout());
+        history.setTimeout(validateTemplate.getTimeout());
         history.setType(MsgType.VALIDATE);
         history.setValidate(code);
         history.preInsert();
@@ -90,8 +91,25 @@ public class SmsService implements RpcSmsService {
     }
 
     @Override
-    public void sendNotice(String msgData) {
-        logger.info("==================> "+msgData);
+    public void sendNotice(SmsModel smsModel) {
+        logger.info("==================> "+smsModel);
+
+        SmsTemplate cashConsumeTemplate = smsTemplateDao.load(new SmsTemplate(MsgType.NOTICE_CASH_COMSUME));
+        String content = StringUtils.replace(StringUtils.replace(cashConsumeTemplate.getContent(), "[DATE]",
+                DateTime.now().toString("MM月dd日hh时mm分")), "[AMOUNT]", smsModel.getContent());
+
+        // 发送短信 开始
+        logger.info("开始发送短信===> "+content);
+
+        // 保存短息历史纪录
+        SmsHistory history = new SmsHistory();
+        history.setPhone(smsModel.getPhone());
+        history.setUserIp(smsModel.getUserIp());
+        history.setContent(content);
+        history.setSender("system");
+        history.setType(MsgType.NOTICE_CASH_COMSUME);
+        history.preInsert();
+        smsHistoryDao.save(history);
     }
 
     @Override

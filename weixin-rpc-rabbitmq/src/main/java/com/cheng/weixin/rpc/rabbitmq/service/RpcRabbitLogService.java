@@ -6,6 +6,7 @@ package com.cheng.weixin.rpc.rabbitmq.service;
  * Date: 2016/4/25 0025
  */
 public interface RpcRabbitLogService {
+    String LOG = "WEIXIN-LOG";
     /**
      * 保存日志
      *

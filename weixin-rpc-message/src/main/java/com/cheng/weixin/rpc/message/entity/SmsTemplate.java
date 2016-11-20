@@ -1,7 +1,7 @@
 package com.cheng.weixin.rpc.message.entity;
 
 import com.cheng.common.entity.DataEntity;
-import com.cheng.weixin.rpc.message.enums.MsgType;
+import com.cheng.weixin.rabbitmq.enums.MsgType;
 
 /**
  * Desc: 短信模版
@@ -13,6 +13,14 @@ public class SmsTemplate extends DataEntity<SmsTemplate> {
     private String content;
     private int timeout;
     private boolean isEnable;
+
+    public SmsTemplate() {
+    }
+
+    public SmsTemplate(MsgType type) {
+        this.type = type;
+        this.isEnable = true;
+    }
 
     public int getTimeout() {
         return timeout;

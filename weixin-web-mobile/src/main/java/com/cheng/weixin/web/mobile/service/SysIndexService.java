@@ -13,6 +13,8 @@ import com.cheng.weixin.web.mobile.result.index.IndexAd;
 import com.cheng.weixin.web.mobile.result.index.IndexNotice;
 import com.cheng.weixin.web.mobile.result.index.IndexProduct;
 import com.cheng.weixin.web.mobile.security.LocalUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,7 @@ import java.util.List;
  */
 @Service("sysIndexService")
 public class SysIndexService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private RpcCartService cartService;
     @Autowired

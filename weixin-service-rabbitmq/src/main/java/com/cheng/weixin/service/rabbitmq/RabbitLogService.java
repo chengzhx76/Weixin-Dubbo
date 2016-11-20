@@ -17,7 +17,7 @@ public class RabbitLogService implements RpcRabbitLogService {
 
     @Override
     public void saveLogs(Object obj) {
-        rabbitLogTemplate.convertAndSend("WEIXIN-LOG", obj);
+        rabbitLogTemplate.convertAndSend(LOG, obj);
     }
 
 }

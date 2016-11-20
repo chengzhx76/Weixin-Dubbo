@@ -2,9 +2,9 @@ package com.cheng.weixin.web.mobile.service;
 
 import com.cheng.weixin.common.utils.ServletUtils;
 import com.cheng.weixin.common.utils.SystemUtils;
+import com.cheng.weixin.rabbitmq.enums.MsgType;
 import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.message.entity.SmsHistory;
-import com.cheng.weixin.rpc.message.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
 import com.cheng.weixin.rpc.user.entity.Account;
@@ -97,12 +97,13 @@ public class SysLoginService {
     //    }
     //    return new Login(false, "");
     //}
-    public void login(LoginDto loginDto) {
+    public String login(LoginDto loginDto) {
         String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);
         if ("PASSWDFAIL".equals(result) || "NOTUSER".equals(result)) {
             throw new LoginException(StatusCode.LOGIN_FAIL);
         }
+        return tokenManager.createToken(loginDto.getUsername());
     }
 
     /**
@@ -111,10 +112,6 @@ public class SysLoginService {
      */
     private boolean checkAccountIsExistByLoginName(String LoginName) {
         Account account = userService.getAccountByLoginName(LoginName);
-        if (null != account) {
-            return true;
-        } else {
-            return false;
-        }
+        return null != account;
     }
 }

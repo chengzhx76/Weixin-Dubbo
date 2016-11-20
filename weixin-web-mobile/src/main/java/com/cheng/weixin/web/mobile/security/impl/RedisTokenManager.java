@@ -1,6 +1,7 @@
 package com.cheng.weixin.web.mobile.security.impl;
 
 import com.cheng.weixin.common.security.CodecUtil;
+import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.rpc.redis.service.RpcRedisService;
 import com.cheng.weixin.rpc.user.entity.Account;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
@@ -44,6 +45,7 @@ public class RedisTokenManager implements TokenManager {
 
     @Override
     public boolean checkToken(String token) {
+        if (StringUtils.isBlank(token)) return false;
         boolean result = redisService.exists(token);
         if(result) {
             if (seconds != 0) {
@@ -52,6 +54,7 @@ public class RedisTokenManager implements TokenManager {
             String loginName = (String) redisService.get(token);
             Account account = userService.getAccountByLoginName(loginName);
             LocalUser.setUser(new User(account.getId(), account.getUsername(), token));
+            logger.info("User已放入==============>" + LocalUser.getUser());
         }
         return result;
     }

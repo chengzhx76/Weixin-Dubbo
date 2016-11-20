@@ -57,20 +57,20 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "v1/login")
     public ResponseEntity<Response> login(HttpServletRequest request) {
         LoginDto loginDto = (LoginDto) getDto(request, LoginDto.class);
-        sysLoginService.login(loginDto);
-        return success();
+        String token = sysLoginService.login(loginDto);
+        return success(token);
     }
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/token")
-    public ResponseEntity<Response> setToken(HttpServletRequest request) {
+    public ResponseEntity<Response> setToken() {
         String token = tokenManager.createToken("18600536683");
         return success(token);
     }
 
 
     @RequestMapping(value = "v1/user")
-    public ResponseEntity<Response> getUserInfoByToken(HttpServletRequest request) {
+    public ResponseEntity<Response> getUserInfoByToken() {
         User user = LocalUser.getUser();
         return success(user);
     }

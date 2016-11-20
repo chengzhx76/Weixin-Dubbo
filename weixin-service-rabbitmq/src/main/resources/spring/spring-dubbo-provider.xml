@@ -15,7 +15,9 @@
 
   <dubbo:provider registry="zk1" protocol="mydubbo"/>
 
-  <dubbo:service interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitLogService" ref="rabbitLogService" version="1.0"/>
-  <dubbo:service interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService" ref="rabbitSmsService" version="1.0"/>
+  <dubbo:service interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitLogService"
+                 ref="rabbitLogService" version="1.0"/>
+  <dubbo:service interface="com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService"
+                 ref="rabbitSmsService" version="1.0"/>
 
 </beans>

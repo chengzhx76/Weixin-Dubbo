@@ -2,6 +2,8 @@ package com.cheng.weixin.web.mobile.service;
 
 import com.cheng.weixin.common.utils.StringFormat;
 import com.cheng.weixin.common.utils.SystemUtils;
+import com.cheng.weixin.rabbitmq.enums.MsgType;
+import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.cart.model.ProductModel;
 import com.cheng.weixin.rpc.cart.service.RpcCartService;
 import com.cheng.weixin.rpc.item.entity.Product;
@@ -14,6 +16,7 @@ import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.rpc.promotion.entity.CouponCode;
 import com.cheng.weixin.rpc.promotion.enums.CouponType;
 import com.cheng.weixin.rpc.promotion.service.RpcCouponService;
+import com.cheng.weixin.rpc.rabbitmq.service.RpcRabbitSmsService;
 import com.cheng.weixin.rpc.user.entity.*;
 import com.cheng.weixin.rpc.user.enumType.TXType;
 import com.cheng.weixin.rpc.user.service.RpcUserService;
@@ -52,6 +55,8 @@ public class SysOrderService {
     private RpcProductService productService;
     @Autowired
     private RpcCouponService couponService;
+    @Autowired
+    private RpcRabbitSmsService rabbitService;
 
     public SubmitOrderInfo payment(PaymentDto payment) {
 
@@ -202,6 +207,7 @@ public class SysOrderService {
     }
 
     public BuyInfo buy(PaymentDto payment, HttpServletRequest request) {
+        // 商品总金额
         BigDecimal totalProductPrice = BigDecimal.ZERO;
         List<ProductModel> productModels = cartService.getChooseProductInfo(LocalUser.getUser().getUserId());
         for (int i=0; i<productModels.size(); i++) {
@@ -211,11 +217,12 @@ public class SysOrderService {
             productService.updateStockById(product.getId(), product.getUnitsInStock()-counts, false);
         }
 
-        // 生成订单
+        // 生成订单号
         OrderInfo order = new OrderInfo();
         String oid = RandomStringUtils.randomNumeric(8); //TODO
         order.setOid(oid);
         order.setAccountId(LocalUser.getUser().getUserId());
+
         // 配送地址
         if (payment!=null && payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
             if (payment.getSince()) {
@@ -245,6 +252,8 @@ public class SysOrderService {
             order.setEmail(addr.getEmail());
             order.setSince(false);
         }
+
+        // 支付工具
         String payId;
         if (payment !=null && payment.getPayId()!=null && !"".equals(payment.getPayId())) {
             payId = payment.getPayId();
@@ -264,6 +273,7 @@ public class SysOrderService {
         }
         order.setFlowStatus(statuses.get(0).getId());
 
+        // 送货时间
         DeliveryTime time = orderService.getDeliveryTime(payment.getTimeId());
         order.setDeliveryTime(time.getName());
         order.setPay(pay.getName());
@@ -320,6 +330,7 @@ public class SysOrderService {
 
         // 账户更新
         Account account = userService.getAccount(LocalUser.getUser().getUserId());
+
         // 是否是用余额支付
         if(payment.getBalance()) {
             BigDecimal balance = null;
@@ -327,14 +338,22 @@ public class SysOrderService {
             if (account.getBalance().compareTo(totalPrice) == 1 || account.getBalance().compareTo(totalPrice) == 0) {
                 balance = account.getBalance().subtract(totalPrice);
                 order.setBalanceOffset(totalPrice);
+                // 线上支付 如果全部用余额支付的则状态改为进行中，物流状态改为已付款
+                if (PayWay.ONLINE.equals(pay.getPayWay())) {
+                    order.setOrderStatus(OrderStatus.ONGOING);
+                    statuses = orderService.getFlowStatusesByPayWay(PayWay.ONLINE);
+                    order.setFlowStatus(order.getFlowStatus()+"-"+statuses.get(0).getNextStatusId());
+                }
+                //else if (PayWay.OFFLINE.equals(pay.getPayWay())) {}
             }else if (account.getBalance().compareTo(totalPrice) == -1) {
                 order.setBalanceOffset(account.getBalance());
                 balance = BigDecimal.ZERO;
             }
             account.setBalance(balance);
         }
-        account.setBonusPointUsable(account.getBonusPointUsable()+bonusPoints);
 
+        // 积分信息更新
+        account.setBonusPointUsable(account.getBonusPointUsable()+bonusPoints);
         if (account.getBonusPointUpgrade()-bonusPoints > 0) {
             account.setBonusPointUpgrade(account.getBonusPointUpgrade()-bonusPoints);
         }else {
@@ -357,6 +376,7 @@ public class SysOrderService {
         order.setFreeAccountLevel(Boolean.FALSE);
         OrderInfo info = orderService.addOrder(order);
 
+        // 该订单下的详细商品信息
         for (ProductModel productModel : productModels) {
             Product product = productService.getById(productModel.getId());
             OrderProductDetail detail = new OrderProductDetail();
@@ -377,7 +397,6 @@ public class SysOrderService {
 
         // 积分记录
         BonusPointRecord bonusPoint = userService.getBonusPointRecord(LocalUser.getUser().getUserId());
-
         BonusPointRecord bonusPointRecord = new BonusPointRecord();
         bonusPointRecord.setAccountId(LocalUser.getUser().getUserId());
         bonusPointRecord.setTxBonusPoints(bonusPoints);
@@ -410,8 +429,17 @@ public class SysOrderService {
             }
             cashRecord.setAfterBonusPoints(afterBonusPoints);
             cashRecord.setTxType(TXType.EXPENSE);
-            cashRecord.setTxResult("下单花费"+order.getBalanceOffset()+"元");
+            cashRecord.setTxResult("下单花费"+StringFormat.format(order.getBalanceOffset())+"元");
             userService.addCashRecord(cashRecord);
+
+            // 短信通知用户
+            SmsModel smsModel = new SmsModel(); // TODO 加上和优惠券的一起通知
+            smsModel.setUserIp(SystemUtils.getRemoteAddr(request));
+            smsModel.setPhone(account.getUsername());
+            smsModel.setContent(StringFormat.format(order.getBalanceOffset()));
+            smsModel.setDate(new Date());
+            smsModel.setType(MsgType.NOTICE_CASH_COMSUME);
+            rabbitService.sendCashNotify(smsModel);
         }
         BuyInfo buyInfo = new BuyInfo();
         buyInfo.setOrderNum(oid);

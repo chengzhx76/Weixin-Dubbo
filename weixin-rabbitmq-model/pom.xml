@@ -11,5 +11,11 @@
 
   <artifactId>weixin-rabbitmq-model</artifactId>
 
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>weixin-common</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>
