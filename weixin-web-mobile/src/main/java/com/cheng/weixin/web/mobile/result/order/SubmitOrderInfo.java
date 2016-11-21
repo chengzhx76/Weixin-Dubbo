@@ -20,7 +20,7 @@ public class SubmitOrderInfo {
     private int totalProductNums;
     private String totalProductPrice;
     private String freight;
-    private String couponRecord;
+    private String couponAmount;
     private String totalPrice;
     private Boolean since;
     private String addrId;
@@ -128,12 +128,12 @@ public class SubmitOrderInfo {
         this.freight = freight;
     }
 
-    public String getCouponRecord() {
-        return couponRecord;
+    public String getCouponAmount() {
+        return couponAmount;
     }
 
-    public void setCouponRecord(String couponRecord) {
-        this.couponRecord = couponRecord;
+    public void setCouponAmount(String couponAmount) {
+        this.couponAmount = couponAmount;
     }
 
     public String getTotalPrice() {

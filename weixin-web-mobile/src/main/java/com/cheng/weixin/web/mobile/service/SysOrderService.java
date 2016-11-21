@@ -171,7 +171,7 @@ public class SysOrderService {
         submitOrder.setFreight(StringFormat.format(freight));
 
         // 优惠券
-        BigDecimal couponReducePrice = BigDecimal.ZERO;
+        BigDecimal couponAmount = BigDecimal.ZERO;
         if (payment != null && payment.getTicketId() !=null && !"".equals(payment.getTicketId())) {
             CouponCode couponCode;
             try {
@@ -180,12 +180,12 @@ public class SysOrderService {
                 logger.error("优惠券不正确");
                 throw new OrderException(StatusCode.COUPON_EXCEPTION);
             }
-            couponReducePrice = couponCode.getCoupon().getFaceValue();
+            couponAmount = couponCode.getCoupon().getFaceValue();
         }
-        submitOrder.setCouponRecord(StringFormat.format(couponReducePrice));
+        submitOrder.setCouponAmount(StringFormat.format(couponAmount));
 
         // 总得价格
-        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight).subtract(couponReducePrice)));
+        submitOrder.setTotalPrice(StringFormat.format(totalProductPrice.add(freight).subtract(couponAmount)));
         return submitOrder;
     }
 
@@ -280,12 +280,12 @@ public class SysOrderService {
         order.setOrderType(OrderType.NORMAL);
 
         // 计算运费
-        if (totalProductPrice.compareTo(BigDecimal.valueOf(5L))==1 || totalProductPrice.compareTo(BigDecimal.valueOf(5L)) == 0) {
-            order.setFreightPayable(BigDecimal.ZERO);
+        order.setFreightPayable(BigDecimal.valueOf(2L)); // 应付运费 // TODO 应从库里取
+        if (totalProductPrice.compareTo(BigDecimal.valueOf(5L))==1
+                || totalProductPrice.compareTo(BigDecimal.valueOf(5L)) == 0) { // TODO 应从库里取
             order.setFreightReduce(BigDecimal.valueOf(2L));
         } else {
-            order.setFreightPayable(BigDecimal.valueOf(2L)); // 应付运费
-            order.setFreightReduce(BigDecimal.ZERO); // 运费优惠
+            order.setFreightReduce(BigDecimal.ZERO);
         }
         order.setProductTotalPrice(totalProductPrice); // 商品总金额
         order.setDiscount(BigDecimal.ZERO); // 优惠金额
@@ -317,14 +317,13 @@ public class SysOrderService {
         order.setCouponReducePrice(couponReducePrice);
         order.setBonusPointReducePrice(BigDecimal.ZERO); // 积分优惠 //TODO 积分等级优惠政策
 
-        // TODO 增加优惠前的金额 商品总额 + 运费
-
-        // 应付金额 = 应付运费 - 运费优惠 + 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
-        order.setAmountPayable(order.getFreightPayable().subtract(order.getFreightReduce()).add(totalProductPrice)
+        // 应付金额 = 商品总金额 + 应付运费 - 运费优惠 - 优惠金额 - 券优惠 - 积分优惠
+        order.setAmountPayable(totalProductPrice.add(order.getFreightPayable()).subtract(order.getFreightReduce())
                 .subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice()));
 
         // 积分金额 = 商品总金额 - 优惠金额 - 券优惠 - 积分优惠
-        BigDecimal pointAmount = totalProductPrice.subtract(order.getDiscount()).subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
+        BigDecimal pointAmount = totalProductPrice.subtract(order.getDiscount())
+                .subtract(order.getCouponReducePrice()).subtract(order.getBonusPointReducePrice());
         int bonusPoints = pointAmount.multiply(BigDecimal.TEN).intValue(); // 1毛=1积分
 
         // 账户更新
@@ -333,7 +332,7 @@ public class SysOrderService {
         // 是否是用余额支付
         if(payment.getBalance()) {
             BigDecimal balance = null;
-            BigDecimal totalPrice = totalProductPrice.add(order.getFreightPayable());
+            BigDecimal totalPrice = totalProductPrice.add(order.getFreightPayable()).subtract(order.getFreightReduce());
             if (account.getBalance().compareTo(totalPrice) == 1 || account.getBalance().compareTo(totalPrice) == 0) {
                 balance = account.getBalance().subtract(totalPrice);
                 order.setBalanceOffset(totalPrice);

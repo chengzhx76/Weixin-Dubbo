@@ -54,7 +54,7 @@ public class RedisTokenManager implements TokenManager {
             String loginName = (String) redisService.get(token);
             Account account = userService.getAccountByLoginName(loginName);
             LocalUser.setUser(new User(account.getId(), account.getUsername(), token));
-            logger.info("User已放入==============>" + LocalUser.getUser());
+            //logger.info("User已放入==============>" + LocalUser.getUser());
         }
         return result;
     }
