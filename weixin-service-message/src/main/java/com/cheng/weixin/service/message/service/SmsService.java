@@ -96,7 +96,7 @@ public class SmsService implements RpcSmsService {
 
         SmsTemplate cashConsumeTemplate = smsTemplateDao.load(new SmsTemplate(MsgType.NOTICE_CASH_COMSUME));
         String content = StringUtils.replace(StringUtils.replace(cashConsumeTemplate.getContent(), "[DATE]",
-                DateTime.now().toString("MM月dd日hh时mm分")), "[AMOUNT]", smsModel.getContent());
+                DateTime.now().toString("MM月dd日HH时mm分")), "[AMOUNT]", smsModel.getContent());
 
         // 发送短信 开始
         logger.info("开始发送短信===> "+content);
