@@ -10,6 +10,7 @@ public class BuyInfo {
     private String deliveryDate;
     private String surplusAmount;
     private Boolean isPay;
+    private Boolean isOffline;
 
     private String payName; // 临时
 
@@ -51,5 +52,13 @@ public class BuyInfo {
 
     public void setPayName(String payName) {
         this.payName = payName;
+    }
+
+    public Boolean getOffline() {
+        return isOffline;
+    }
+
+    public void setOffline(Boolean offline) {
+        isOffline = offline;
     }
 }

@@ -370,7 +370,7 @@ public class SysOrderService {
         }
         order.setAmountPaid(amountPaid);
 
-        // 余额没抵扣完的 跑到等待用户支付页面
+        // 余额没抵扣完的 走到等待用户支付页面
         boolean isPay = false;
         BigDecimal surplusAmount = order.getAmountPayable().subtract(order.getAmountPaid()); // 余额抵扣完还需支付的金额
         if (surplusAmount.compareTo(BigDecimal.ZERO) == 1) {
@@ -456,9 +456,9 @@ public class SysOrderService {
         buyInfo.setSurplusAmount(StringFormat.format(surplusAmount));
         buyInfo.setPay(isPay);
         buyInfo.setPayName(pay.getName());
+        buyInfo.setOffline(PayWay.OFFLINE.equals(pay.getPayWay()));
         return buyInfo;
     }
-
 
     public List<OrderList> getOrders() {
         List<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId());
