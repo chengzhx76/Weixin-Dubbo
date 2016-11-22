@@ -60,6 +60,11 @@ public class LoginController extends BaseController {
         String token = sysLoginService.login(loginDto);
         return success(token);
     }
+    /** 检查Token是否超时 **/
+    @RequestMapping(value = "v1/checkToken")
+    public ResponseEntity<Response> checkToken() {
+        return success();
+    }
 
     @IgnoreSecurity
     @RequestMapping(value = "v1/token")
