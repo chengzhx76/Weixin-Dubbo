@@ -158,7 +158,12 @@ public interface RpcUserService {
      * @return
      */
     Member getMemberById(String userId);
-
+    /**
+     * 获取会员信息
+     * @param userId
+     * @return
+     */
+    Member getMemberByAccountId(String userId);
     /**
      * 根据ID获取级别信息
      * @param id

@@ -64,7 +64,7 @@ public class SysOrderService {
         if (payment!=null && payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
             if (payment.getSince()) {
                 ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(payment.getAddrId());
-                Member member = userService.getMemberById(LocalUser.getUser().getUserId());
+                Member member = userService.getMemberByAccountId(LocalUser.getUser().getUserId());
                 submitOrder.setMobile(member.getMobile());
                 submitOrder.setAddress(arayacakAddress.getAddress());
                 submitOrder.setSince(true);
@@ -227,7 +227,7 @@ public class SysOrderService {
         if (payment!=null && payment.getAddrId() != null && !"".equals(payment.getAddrId())) {
             if (payment.getSince()) {
                 ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(payment.getAddrId());
-                Member member = userService.getMemberById(LocalUser.getUser().getUserId());
+                Member member = userService.getMemberByAccountId(LocalUser.getUser().getUserId());
                 order.setMobile(member.getMobile());
                 order.setAddress(arayacakAddress.getAddress());
                 order.setSince(true);

@@ -222,6 +222,13 @@ public class UserService implements RpcUserService {
     }
 
     @Override
+    public Member getMemberByAccountId(String userId) {
+        Member member = new Member();
+        member.setAccountId(userId);
+        return memberDao.load(member);
+    }
+
+    @Override
     public AccountLevel getAccountLevelById(String id) {
         AccountLevel level = new AccountLevel();
         level.setId(id);

@@ -59,7 +59,7 @@ public class SysCartService {
         if (address.getId() != null && !"".equals(address.getId())) {
             if (address.getSince()) {
                 ArayacakAddress arayacakAddress = orderService.getArayacakAddressById(address.getId());
-                Member member = userService.getMemberById(LocalUser.getUser().getUserId());
+                Member member = userService.getMemberByAccountId(LocalUser.getUser().getUserId());
                 shoppingCartInfo.setMobile(member.getMobile());
                 shoppingCartInfo.setAddress(arayacakAddress.getAddress());
                 shoppingCartInfo.setSince(true);
