@@ -48,8 +48,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "v1/register")
     public ResponseEntity<Response> register(HttpServletRequest request) {
         RegDto reg = (RegDto) getDto(request, RegDto.class);
-        sysLoginService.saveAccess(reg);
-        return success();
+        return success(sysLoginService.saveAccess(reg));
     }
 
     /** 登陆 **/

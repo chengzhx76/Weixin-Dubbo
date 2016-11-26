@@ -65,19 +65,23 @@ public class SysCartService {
                 shoppingCartInfo.setSince(true);
             }else {
                 DeliveryAddress addr = userService.getDeliveryAddress(address.getId(), LocalUser.getUser().getUserId());
-                shoppingCartInfo.setConsignee(addr.getConsignee());
-                shoppingCartInfo.setMobile(addr.getMobile());
-                shoppingCartInfo.setAddress(addr.getAddress());
-                shoppingCartInfo.setSince(false);
+                if (addr != null) {
+                    shoppingCartInfo.setConsignee(addr.getConsignee());
+                    shoppingCartInfo.setMobile(addr.getMobile());
+                    shoppingCartInfo.setAddress(addr.getAddress());
+                    shoppingCartInfo.setSince(false);
+                }
             }
             shoppingCartInfo.setAddrId(address.getId());
         }else {
             DeliveryAddress addr = userService.getDefaultAddress(LocalUser.getUser().getUserId());
-            shoppingCartInfo.setConsignee(addr.getConsignee());
-            shoppingCartInfo.setMobile(addr.getMobile());
-            shoppingCartInfo.setAddress(addr.getAddress());
-            shoppingCartInfo.setSince(false);
-            shoppingCartInfo.setAddrId(addr.getId());
+            if (addr != null) {
+                shoppingCartInfo.setConsignee(addr.getConsignee());
+                shoppingCartInfo.setMobile(addr.getMobile());
+                shoppingCartInfo.setAddress(addr.getAddress());
+                shoppingCartInfo.setSince(false);
+                shoppingCartInfo.setAddrId(addr.getId());
+            }
         }
 
         if (null != cartInfos && !cartInfos.isEmpty()) {

@@ -69,6 +69,9 @@ public class SysLoginService {
      */
     public boolean checkCode(String phone, String code) {
         SmsHistory smsHistory = smsService.getInfoByPhoneAndType(phone, MsgType.VALIDATE);
+        if (smsHistory == null) {
+            throw new LoginException(StatusCode.PHONE_NOT_EXIST);
+        }
         return code.equals(smsHistory.getValidate());
     }
 
@@ -78,6 +81,9 @@ public class SysLoginService {
      * @return
      */
     public String saveAccess(RegDto regDto) {
+        if (!checkCode(regDto.getPhone(), regDto.getValidate())) {
+            throw new LoginException(StatusCode.USER_VALIDATE_ERROR);
+        }
         String userIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         userService.saveAccess(regDto.getPhone(), regDto.getPassword(), regDto.getNickname(), userIp);
         return tokenManager.createToken(regDto.getPhone());
@@ -87,16 +93,6 @@ public class SysLoginService {
      * 用户登录
      * @param loginDto
      */
-    //public Login login(LoginDto loginDto) {
-    //    String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
-    //    String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);
-    //    if ("PASSWDFAIL".equals(result) || "NOTUSER".equals(result)) {
-    //        return new Login(false, "");
-    //    }else if ("SUCCESS".equals(result)) {
-    //        return new Login(true, CodecUtil.createUUID());
-    //    }
-    //    return new Login(false, "");
-    //}
     public String login(LoginDto loginDto) {
         String loginIp = SystemUtils.getRemoteAddr(ServletUtils.getRequest());
         String result = userService.validateLogin(loginDto.getUsername(), loginDto.getPassword(), loginIp);

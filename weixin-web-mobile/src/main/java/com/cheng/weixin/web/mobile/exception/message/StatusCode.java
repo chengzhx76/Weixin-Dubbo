@@ -37,7 +37,12 @@ public enum StatusCode {
     USER_EXCEPTION(9100),
     /** 用户不存在 **/
     USER_NOT_EXIST(9101),
+    /** 用户存在 **/
     USER_EXIST(9102),
+    /** 验证码错误 **/
+    USER_VALIDATE_ERROR(9103),
+    /** 手机号不存在 **/
+    PHONE_NOT_EXIST(9104),
 
     /** 操作商品发生异常 **/
     PRODUCT_EXCEPTION(9500),

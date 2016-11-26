@@ -13,7 +13,6 @@ import java.util.Date;
 public class Member extends DataEntity<Member> {
     private String accountId;
     private String name;
-    private String nickname;
     private String employer;
     private String mobile;
     private String address;
@@ -41,14 +40,6 @@ public class Member extends DataEntity<Member> {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getName() {

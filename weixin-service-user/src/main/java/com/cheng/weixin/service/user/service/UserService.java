@@ -72,6 +72,7 @@ public class UserService implements RpcUserService {
         Account account = new Account();
         account.setUsername(phone);
         account.setPassword(password);
+        account.setNickname(nickname);
         account.setAccountLevelId(accountLevel.getId());
         account.setBalance(new BigDecimal(0));
         account.setBonusPointUpgrade(accountLevel.getNextLevelNeedPoint());
@@ -85,7 +86,6 @@ public class UserService implements RpcUserService {
 
         Member member = new Member();
         member.setAccountId(account.getId());
-        member.setNickname(nickname);
         member.setMobile(phone);
         member.setSex(Sex.UNKNOW);
         member.preInsert();
