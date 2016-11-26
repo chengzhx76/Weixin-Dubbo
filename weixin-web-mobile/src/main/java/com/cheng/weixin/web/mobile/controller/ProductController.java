@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * Desc: 商品
@@ -45,5 +47,24 @@ public class ProductController extends BaseController {
     public ResponseEntity<Response> addProductFocus(HttpServletRequest request) {
         ProductDto product = (ProductDto) getDto(request, ProductDto.class);
         return success(productService.focus(product.getProductId()));
+    }
+
+    /** 检查库存 **/
+    @Deprecated
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/stock")
+    public ResponseEntity<Response> checkStock(HttpServletRequest request) {
+        ProductDto product = (ProductDto) getDto(request, ProductDto.class);
+        productService.chackStock(product.getProductId());
+        return success();
+    }
+
+    /** 批量购买商品 **/
+    @Deprecated
+    @RequestMapping(value = "v1/batch/add")
+    public ResponseEntity<Response> batchAdd(HttpServletRequest request) throws UnsupportedEncodingException {
+        List<ProductDto> products = (List<ProductDto>) getDto(request, ProductDto.class);
+        productService.batchAdd(products);
+        return success();
     }
 }

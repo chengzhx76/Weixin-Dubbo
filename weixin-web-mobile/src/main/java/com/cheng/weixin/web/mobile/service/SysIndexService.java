@@ -75,14 +75,10 @@ public class SysIndexService {
             indexProducts.add(indexProduct);
         }
 
-        // 金额
-        //BigDecimal totalPrice = totalPrice(LocalUser.getUser().getUserId());
-
         Index index = new Index();
         index.setAds(indexads);
         index.setNotices(indexNotices);
         index.setProducts(indexProducts);
-        //index.setTotalPirce(totalPrice);
 
         return index;
     }
@@ -102,13 +98,6 @@ public class SysIndexService {
             cartService.subProductCount(LocalUser.getUser().getUserId(), productId);
             throw new ProductException(StatusCode.PRODUCT_STOCK_SHORTAGE);
         }
-
-        // 金额
-        //BigDecimal totalPrice = totalPrice(LocalUser.getUser().getUserId());
-
-        //IndexBuy indexBuy = new IndexBuy();
-        //indexBuy.setCount(count);
-        //indexBuy.setPrice(totalPrice);
         return count;
     }
     /**
@@ -118,32 +107,7 @@ public class SysIndexService {
      */
     public long subProduct(String productId) {
         long count = cartService.subProductCount(LocalUser.getUser().getUserId(), productId);
-        // 金额
-        //BigDecimal totalPrice = totalPrice(LocalUser.getUser().getUserId());
-
-        //IndexBuy indexBuy = new IndexBuy();
-        //indexBuy.setCount(count);
-        //indexBuy.setPrice(totalPrice);
         return count;
     }
-
-    /**
-     * 购物车商品的总价格
-     * @param userId
-     * @return
-     */
-/*    private BigDecimal totalPrice(String userId) {
-        Set<String> productIds =  cartService.getChooseProductIds(userId);
-        BigDecimal totalPrice = new BigDecimal(0);
-        for (String productId : productIds) {
-            Product product = productService.getById(productId);
-            if (product.getUnitsInStock() > 0) {
-                // 根据Feild获取values 在乘以 单价 = total
-                Long counts = cartService.getCounts(userId, productId);
-                totalPrice = totalPrice.add(product.getSalePrice().multiply(new BigDecimal(counts)));
-            }
-        }
-        return totalPrice;
-    }*/
 
 }

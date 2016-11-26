@@ -164,7 +164,6 @@ public class SysCartService {
         return chooseShoppingCartPrice(LocalUser.getUser().getUserId(), null);
     }
 
-
     /**
      * 购物车商品的总价格
      * @return

@@ -85,7 +85,7 @@
 
   <!-- Token 认证管理器 交由redis管理token -->
   <bean id="tokenManager" class="com.cheng.weixin.web.mobile.security.impl.RedisTokenManager">
-      <property name="seconds" value="3600"/>
+    <property name="seconds" value="3600"/>
   </bean>
   <!-- Token 认证拦截器 -->
   <bean id="securityAspect" class="com.cheng.weixin.web.mobile.security.SecurityAspect">

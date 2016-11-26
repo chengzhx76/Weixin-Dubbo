@@ -1,11 +1,14 @@
 package com.cheng.dubbo.consumer.test;
 
 import com.cheng.weixin.common.security.Digests;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Desc:
@@ -54,6 +57,19 @@ public class TestAll {
         file.mkdir();
 
         System.out.println(usrHome);
+    }
+
+    @Test
+    public void test06() throws IOException {
+        //CustomObjectMapper mapper = new CustomObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
+
+        String str = "[{\"productId\":1,\"count\":10},{\"productId\":2,\"count\":5}]";
+
+        List<Object> myObjects = mapper.readValue(str, mapper.getTypeFactory().constructCollectionType(List.class, Object.class));
+
+        System.out.println(myObjects);
+
     }
 
 

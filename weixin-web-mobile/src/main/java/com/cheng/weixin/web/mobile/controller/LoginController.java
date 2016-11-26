@@ -61,13 +61,15 @@ public class LoginController extends BaseController {
         return success(token);
     }
     /** 检查Token是否超时 **/
-    @RequestMapping(value = "v1/checkToken")
-    public ResponseEntity<Response> checkToken() {
-        return success();
+    @IgnoreSecurity
+    @RequestMapping(value = "v1/token")
+    public ResponseEntity<Response> checkToken(HttpServletRequest request) {
+        String token = request.getParameter("token");
+        return success(tokenManager.checkToken(token));
     }
 
     @IgnoreSecurity
-    @RequestMapping(value = "v1/token")
+    @RequestMapping(value = "v1/setToken")
     public ResponseEntity<Response> setToken() {
         String token = tokenManager.createToken("18600536683");
         return success(token);

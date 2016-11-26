@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 
 /**
  * Desc: 商品
@@ -50,4 +51,13 @@ public class ProductDto {
         System.out.println(data + " == "+ecode);
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ProductDto{");
+        sb.append("productId='").append(productId).append('\'');
+        sb.append(", count=").append(count);
+        sb.append(", productIds=").append(productIds == null ? "null" : Arrays.asList(productIds).toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -1,5 +1,6 @@
 package com.cheng.weixin.web.mobile.controller;
 
+import com.cheng.weixin.common.utils.StringUtils;
 import com.cheng.weixin.web.mobile.exception.BaseException;
 import com.cheng.weixin.web.mobile.exception.IllegalParameterException;
 import com.cheng.weixin.web.mobile.exception.message.StatusCode;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.util.List;
 
 /**
  * Desc: 基础Controller
@@ -33,6 +35,9 @@ public abstract class BaseController {
         try {
             String param = request.getParameter("param");
             param = URLDecoder.decode(param, "UTF-8");
+            if (StringUtils.startsWith(param, "[") && StringUtils.endsWith(param, "]")) {
+                return objectMapper.readValue(param, objectMapper.getTypeFactory().constructCollectionType(List.class, clazz));
+            }
             return objectMapper.fromJsonString(param, clazz);
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,4 +114,5 @@ public abstract class BaseController {
         logger.error("发生异常==> {}", meta.getMsg(), ex);
         return ResponseEntity.ok(new Response(meta.getCode(), meta.isSuccess(), meta.getMsg(), null));
     }
+
 }
