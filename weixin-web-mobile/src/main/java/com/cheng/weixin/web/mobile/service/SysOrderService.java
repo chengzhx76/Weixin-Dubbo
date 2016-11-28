@@ -31,6 +31,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -461,7 +462,7 @@ public class SysOrderService {
         return buyInfo;
     }
 
-    public List<OrderList> getOrders(int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException {
+    public Page<OrderList> getOrders(int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException {
         Page<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId(), pageNum, pageSize);
         List<OrderList> orders = new ArrayList<>();
         for (OrderInfo order : orderInfos.getList()) {
@@ -516,7 +517,10 @@ public class SysOrderService {
             orderList.setStatuses(statuses);
             orders.add(orderList);
         }
-        return orders;
+        Page<OrderList> orderInfoPage = new Page<>();
+        BeanUtils.copyProperties(orderInfoPage, orderInfos);
+        orderInfoPage.setList(orders);
+        return orderInfoPage;
     }
 
     public Detail getOrderDetail() {

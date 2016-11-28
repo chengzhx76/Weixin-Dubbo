@@ -1,5 +1,6 @@
 package com.cheng.weixin.web.mobile.controller;
 
+import com.cheng.weixin.common.model.Page;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.AddressDto;
 import com.cheng.weixin.web.mobile.param.PaymentDto;
@@ -54,7 +55,7 @@ public class OrderController extends BaseController {
     /** 订单列表 **/
     @RequestMapping(value = "v1/orders")
     public ResponseEntity<Response> orders() throws InvocationTargetException, IllegalAccessException {
-        List<OrderList> orders = orderService.getOrders(1, 10);
+        Page<OrderList> orders = orderService.getOrders(1, 10);
         return success(orders);
     }
 
