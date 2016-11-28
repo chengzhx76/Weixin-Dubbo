@@ -1,12 +1,17 @@
 package com.cheng.weixin.service.order.service;
 
+import com.cheng.weixin.common.model.Page;
 import com.cheng.weixin.rpc.order.entity.*;
 import com.cheng.weixin.rpc.order.enumType.PayWay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
 import com.cheng.weixin.service.order.dao.*;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -48,13 +53,18 @@ public class OrderService implements RpcOrderService {
     }
 
     @Override
-    public List<OrderInfo> getOrderInfos(String userId) {
+    public Page<OrderInfo> getOrderInfos(String userId, int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException {
+        PageHelper.startPage(pageNum, pageSize);
         List<OrderInfo> orderInfos = orderInfoDao.loadByUserIdOrderByCreateDate(new OrderInfo(userId));
         for (OrderInfo order : orderInfos) {
             List<OrderProductDetail> orderProductDetails = orderProductDetailDao.loadByOrder(new OrderProductDetail(order.getId()));
             order.setOrderDetails(orderProductDetails);
         }
-        return orderInfos;
+        PageInfo<OrderInfo> orderInfoPageInfo = new PageInfo<>(orderInfos);
+        Page<OrderInfo> orderInfoPage = new Page<>();
+        BeanUtils.copyProperties(orderInfoPage, orderInfoPageInfo);
+        orderInfoPage.setList(orderInfos);
+        return orderInfoPage;
     }
 
     @Override

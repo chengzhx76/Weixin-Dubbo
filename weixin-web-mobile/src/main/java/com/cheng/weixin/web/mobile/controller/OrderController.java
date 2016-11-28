@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -52,8 +53,8 @@ public class OrderController extends BaseController {
 
     /** 订单列表 **/
     @RequestMapping(value = "v1/orders")
-    public ResponseEntity<Response> orders() {
-        List<OrderList> orders = orderService.getOrders();
+    public ResponseEntity<Response> orders() throws InvocationTargetException, IllegalAccessException {
+        List<OrderList> orders = orderService.getOrders(1, 10);
         return success(orders);
     }
 

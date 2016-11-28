@@ -1,5 +1,6 @@
 package com.cheng.weixin.web.mobile.service;
 
+import com.cheng.weixin.common.model.Page;
 import com.cheng.weixin.common.utils.StringFormat;
 import com.cheng.weixin.common.utils.SystemUtils;
 import com.cheng.weixin.rabbitmq.enums.MsgType;
@@ -34,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -459,10 +461,10 @@ public class SysOrderService {
         return buyInfo;
     }
 
-    public List<OrderList> getOrders() {
-        List<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId());
+    public List<OrderList> getOrders(int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException {
+        Page<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId(), pageNum, pageSize);
         List<OrderList> orders = new ArrayList<>();
-        for (OrderInfo order : orderInfos) {
+        for (OrderInfo order : orderInfos.getList()) {
             OrderList orderList = new OrderList();
             orderList.setId(order.getId());
             orderList.setDate(new DateTime(order.getCreateDate()).toString("yyyy-dd-MM HH:mm:ss"));
