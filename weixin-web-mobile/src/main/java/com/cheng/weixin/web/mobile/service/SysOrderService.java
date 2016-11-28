@@ -27,6 +27,7 @@ import com.cheng.weixin.web.mobile.exception.message.StatusCode;
 import com.cheng.weixin.web.mobile.param.PaymentDto;
 import com.cheng.weixin.web.mobile.result.order.*;
 import com.cheng.weixin.web.mobile.security.LocalUser;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -463,7 +464,7 @@ public class SysOrderService {
     }
 
     public Page<OrderList> getOrders(int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException {
-        Page<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId(), pageNum, pageSize);
+        PageInfo<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId(), pageNum, pageSize);
         List<OrderList> orders = new ArrayList<>();
         for (OrderInfo order : orderInfos.getList()) {
             OrderList orderList = new OrderList();

@@ -1,8 +1,8 @@
 package com.cheng.weixin.rpc.order.service;
 
-import com.cheng.weixin.common.model.Page;
 import com.cheng.weixin.rpc.order.entity.*;
 import com.cheng.weixin.rpc.order.enumType.PayWay;
+import com.github.pagehelper.PageInfo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -47,7 +47,7 @@ public interface RpcOrderService {
      * @param userId
      * @return
      */
-    Page<OrderInfo> getOrderInfos(String userId, int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException;
+    PageInfo<OrderInfo> getOrderInfos(String userId, int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException;
 
     /**
      * 获取订单详情

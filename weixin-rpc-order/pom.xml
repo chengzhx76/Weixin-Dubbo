@@ -16,6 +16,10 @@
       <groupId>com.cheng</groupId>
       <artifactId>weixin-common-entity</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
