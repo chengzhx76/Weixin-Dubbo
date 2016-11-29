@@ -3,6 +3,7 @@ package com.cheng.order.test;
 import com.cheng.weixin.rpc.order.entity.OrderInfo;
 import com.cheng.weixin.rpc.order.entity.Pay;
 import com.cheng.weixin.rpc.order.service.RpcOrderService;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
@@ -36,8 +38,8 @@ public class TestMain {
     }
 
     @Test
-    public void test03() {
-        List<OrderInfo> data = orderService.getOrderInfos("1");
+    public void test03() throws InvocationTargetException, IllegalAccessException {
+        PageInfo<OrderInfo> data = orderService.getOrderInfos("1", 1, 10);
         System.out.println(data);
     }
 

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.lang.reflect.InvocationTargetException;
+
 /**
  * Desc:
  * Author: hp
@@ -49,8 +51,8 @@ public class ServiceTest {
     //    orderService.submitOrder();
     //}
     @Test
-    public void test04() {
-        System.out.println(orderService.getOrders());
+    public void test04() throws InvocationTargetException, IllegalAccessException {
+        System.out.println(orderService.getOrders(1, 10));
     }
     @Test
     public void test05() {
