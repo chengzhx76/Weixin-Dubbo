@@ -464,7 +464,7 @@ public class SysOrderService {
     }
 
     public Page<OrderList> getOrders(int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException {
-        PageInfo<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId(), pageNum, pageSize);
+        PageInfo<OrderInfo> orderInfos = orderService.getOrderInfos("1", pageNum, pageSize);
         List<OrderList> orders = new ArrayList<>();
         for (OrderInfo order : orderInfos.getList()) {
             OrderList orderList = new OrderList();
@@ -519,7 +519,7 @@ public class SysOrderService {
             orders.add(orderList);
         }
         Page<OrderList> orderInfoPage = new Page<>();
-        BeanUtils.copyProperties(orderInfoPage, orderInfos);
+        BeanUtils.copyProperties(orderInfos, orderInfoPage);
         orderInfoPage.setList(orders);
         return orderInfoPage;
     }
