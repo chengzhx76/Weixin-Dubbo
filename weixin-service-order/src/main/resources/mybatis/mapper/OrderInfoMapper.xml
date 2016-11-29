@@ -6,7 +6,7 @@
   <sql id="columns">
     o.id,o.account_id,o.oid,o.relate_oid,o.amount_payable,o.amount_paid,o.consignee,o.mobile,o.address,o.delivery_time,o.pay,o.arayacak_address,
     o.arayacak_delivery_time,o.province,o.city,o.country,o.order_type,o.freight_reduce,o.freight_payable,o.bonus_point_reduce_price,o.product_total_price,o.discount,
-    o.balance_offset,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.coupon_code,o.coupon_reduce_price,o.flow_status,o.is_free_account_level,o.comment_id,o.since,o.order_status
+    o.balance_offset,o.remark_customer,o.post_code,o.telephone,o.email,o.pay_time,o.exchange_oid,o.coupon_code,o.coupon_reduce_price,o.flow_status,o.is_free_account_level,o.comment_id,o.since,o.order_status,
     o.remarks,o.create_date,o.update_date,o.status
   </sql>
   <sql id="insertColumns">
@@ -102,9 +102,10 @@
     <include refid="orderInfoWhere"/>
   </select>
   <!-- 获取全部 -->
-  <select id="loadByUserId" resultType="OrderInfo">
+  <select id="loadByUserIdOrderByCreateDate" resultType="OrderInfo">
     <include refid="orderInfoSelector"/>
     <include refid="orderInfoWhere"/>
+    ORDER BY create_date DESC
   </select>
 
   <!-- 更新 -->
