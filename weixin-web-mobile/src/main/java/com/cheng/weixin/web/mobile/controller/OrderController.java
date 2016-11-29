@@ -3,6 +3,7 @@ package com.cheng.weixin.web.mobile.controller;
 import com.cheng.weixin.common.model.Page;
 import com.cheng.weixin.web.mobile.model.Response;
 import com.cheng.weixin.web.mobile.param.AddressDto;
+import com.cheng.weixin.web.mobile.param.PageDto;
 import com.cheng.weixin.web.mobile.param.PaymentDto;
 import com.cheng.weixin.web.mobile.result.order.*;
 import com.cheng.weixin.web.mobile.security.IgnoreSecurity;
@@ -54,8 +55,9 @@ public class OrderController extends BaseController {
 
     /** 订单列表 **/
     @RequestMapping(value = "v1/orders")
-    public ResponseEntity<Response> orders() throws InvocationTargetException, IllegalAccessException {
-        Page<OrderList> orders = orderService.getOrders(1, 10);
+    public ResponseEntity<Response> orders(HttpServletRequest request) throws InvocationTargetException, IllegalAccessException {
+        PageDto page = (PageDto) getDto(request, PageDto.class);
+        Page<OrderList> orders = orderService.getOrders(page.getPageNum(), page.getPageSize());
         return success(orders);
     }
 
