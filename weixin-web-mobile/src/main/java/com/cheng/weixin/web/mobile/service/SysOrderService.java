@@ -238,7 +238,7 @@ public class SysOrderService {
             }else {
                 DeliveryAddress addr = userService.getDeliveryAddress(payment.getAddrId(), LocalUser.getUser().getUserId());
                 order.setMobile(addr.getMobile());
-                order.setVillageId(addr.getVillageId());
+                order.setVillage(addr.getVillageId()); // TODO 改成名字
                 order.setAddress(addr.getAddress());
                 order.setPostCode(addr.getPostCode());
                 order.setTelephone(addr.getTelephone());
@@ -249,7 +249,7 @@ public class SysOrderService {
             DeliveryAddress addr = userService.getDefaultAddress(LocalUser.getUser().getUserId());
             order.setConsignee(addr.getConsignee());
             order.setMobile(addr.getMobile());
-            order.setVillageId(addr.getVillageId());
+            order.setVillage(addr.getVillageId());
             order.setAddress(addr.getAddress());
             order.setPostCode(addr.getPostCode());
             order.setTelephone(addr.getTelephone());

@@ -30,7 +30,7 @@ public class OrderInfo extends DataEntity<OrderInfo> {
     private String province;
     private String city;
     private String country;
-    private String villageId;
+    private String village;
     private String ip;
 
     private PayWay payWay;
@@ -66,8 +66,12 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.accountId = accountId;
     }
 
-    public String getVillageId() {
-        return villageId;
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
     }
 
     public String getIp() {
@@ -78,9 +82,6 @@ public class OrderInfo extends DataEntity<OrderInfo> {
         this.ip = ip;
     }
 
-    public void setVillageId(String villageId) {
-        this.villageId = villageId;
-    }
 
     public String getOid() {
         return oid;
