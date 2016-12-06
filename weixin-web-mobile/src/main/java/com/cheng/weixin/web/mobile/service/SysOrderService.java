@@ -464,7 +464,7 @@ public class SysOrderService {
     }
 
     public Page<OrderList> getOrders(int pageNum, int pageSize) throws InvocationTargetException, IllegalAccessException {
-        PageInfo<OrderInfo> orderInfos = orderService.getOrderInfos("1", pageNum, pageSize);
+        PageInfo<OrderInfo> orderInfos = orderService.getOrderInfos(LocalUser.getUser().getUserId(), pageNum, pageSize);
         List<OrderList> orders = new ArrayList<>();
         for (OrderInfo order : orderInfos.getList()) {
             OrderList orderList = new OrderList();
@@ -514,7 +514,6 @@ public class SysOrderService {
                     statuses.add(new Status(flowStatus.getName(), true));
                 }
             }
-
             orderList.setStatuses(statuses);
             orders.add(orderList);
         }
