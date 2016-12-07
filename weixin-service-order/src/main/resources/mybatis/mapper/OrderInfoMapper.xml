@@ -12,7 +12,7 @@
   <sql id="insertColumns">
     id,account_id,oid,relate_oid,amount_payable,amount_paid,consignee,mobile,address,delivery_time,pay,arayacak_address,
     arayacak_delivery_time,province,city,country,village,order_type,freight_reduce,freight_payable,product_total_price,discount,remark_customer,balance_offset,
-    post_code,telephone,email,pay_time,pay_way,exchange_oid,coupon_code,coupon_reduce_price,flow_status,bonus_point_reduce_price,is_free_account_level,comment_id,since,order_status
+    post_code,telephone,email,pay_time,pay_way,exchange_oid,coupon_code,coupon_reduce_price,flow_status,bonus_point_reduce_price,is_free_account_level,comment_id,since,order_status,
     remarks,create_date,update_date,status
   </sql>
   <sql id="orderInfoIf">
