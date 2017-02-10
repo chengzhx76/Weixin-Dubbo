@@ -11,8 +11,6 @@ public class TestDemo {
 
     public static void main(String[] args) {
         System.out.println(System.currentTimeMillis());
-
-
         Date date = new Date(1485619200000L);
         System.out.println(date);
     }
