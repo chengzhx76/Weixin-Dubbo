@@ -2,7 +2,7 @@ package com.cheng.test;
 
 import com.cheng.weixin.rabbitmq.model.SmsModel;
 import com.cheng.weixin.rpc.message.entity.SmsHistory;
-import com.cheng.weixin.rpc.message.enums.MsgType;
+import com.cheng.weixin.rabbitmq.enums.MsgType;
 import com.cheng.weixin.rpc.message.service.RpcSmsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -13,8 +13,8 @@
 	<!-- 支持注解 -->
 	<mvc:annotation-driven />
 
-  <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
-  <mvc:default-servlet-handler />
+  	<!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
+  	<mvc:default-servlet-handler />
 
 	<!--<mvc:resources mapping="/resources/**" location="/static/" cache-period="31536000"/>-->
 	<mvc:resources mapping="/resources/**" location="/static/"/>
