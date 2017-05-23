@@ -210,6 +210,7 @@ public class SysOrderService {
         return productLists;
     }
 
+    // 各自在各自Service生成
     public BuyInfo buy(PaymentDto payment, HttpServletRequest request) {
         // 商品总金额
         BigDecimal totalProductPrice = BigDecimal.ZERO;
