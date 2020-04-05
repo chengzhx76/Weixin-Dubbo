@@ -127,6 +127,9 @@ daemonize yes
 
 // 添加密码 
 requirepass passwd 
+
+// 注释掉 可以远程访问
+bind127.0.0.1
   
 // 修改端口 
 port 6677 
