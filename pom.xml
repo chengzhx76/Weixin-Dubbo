@@ -59,7 +59,7 @@
       <shiro-spring.version>1.2.3</shiro-spring.version>
       <aspectj.version>1.8.6</aspectj.version>
       <ehcache.version>2.9.0</ehcache.version>
-      <amqp-client.version>3.4.1</amqp-client.version>
+      <amqp-client.version>4.8.0</amqp-client.version>
 
       <spring-data-redis.version>1.6.1.RELEASE</spring-data-redis.version>
       <jedis.version>2.7.3</jedis.version>
