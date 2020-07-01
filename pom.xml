@@ -85,7 +85,7 @@
       <guava.version>18.0</guava.version>
       <pagehelper.version>4.0.1</pagehelper.version>
       <joda-time.version>2.7</joda-time.version>
-      <quartz.version>2.2.1</quartz.version>
+      <quartz.version>2.3.2</quartz.version>
       <spring.version>4.2.3.RELEASE</spring.version>
       <spring-rabbit.version>1.4.0.RELEASE</spring-rabbit.version>
       <mybatis.version>3.2.7</mybatis.version>
