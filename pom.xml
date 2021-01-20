@@ -77,7 +77,7 @@
       <dom4j.version>1.6.1</dom4j.version>
       <xstream.version>1.4.7</xstream.version>
       <fastjson.version>1.1.41</fastjson.version>
-      <jackson.version>2.3.2</jackson.version>
+      <jackson.version>2.12.1</jackson.version>
       <commons-lang3.version>3.3.2</commons-lang3.version>
       <commons-codec.version>1.9</commons-codec.version>
       <commons-io.version>2.4</commons-io.version>
