@@ -80,7 +80,7 @@
       <jackson.version>2.3.2</jackson.version>
       <commons-lang3.version>3.3.2</commons-lang3.version>
       <commons-codec.version>1.9</commons-codec.version>
-      <commons-io.version>2.4</commons-io.version>
+      <commons-io.version>2.7</commons-io.version>
       <commons-beanutils.version>1.8.3</commons-beanutils.version>
       <guava.version>18.0</guava.version>
       <pagehelper.version>4.0.1</pagehelper.version>
