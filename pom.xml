@@ -63,7 +63,7 @@
 
       <spring-data-redis.version>1.6.1.RELEASE</spring-data-redis.version>
       <jedis.version>2.7.3</jedis.version>
-      <dubbo.version>2.5.3</dubbo.version>
+      <dubbo.version>2.6.12</dubbo.version>
       <zkclient.version>0.4</zkclient.version>
 
       <servlet.version>3.1.0</servlet.version>
